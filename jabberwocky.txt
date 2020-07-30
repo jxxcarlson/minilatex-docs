@@ -1,5 +1,5 @@
 Jabberwocky
-by Lewis Carroll
+A poem by Lewis Carroll
 
 Twas brillig, and the slithy toves
 Did gyre and gimble in the wabe;
