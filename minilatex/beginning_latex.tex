@@ -1,0 +1,118 @@
+\title{Beginning LaTeX}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+
+As an aid to writing your first LaTeX, documents, please follow the directions below.
+
+\begin{enumerate}
+
+\item Click the \blue{Source} button in the footer.
+
+\item Compare the source text (left) and the rendered text (right).  Note how source text on on the left is rendered on the right.  Do this item by item.  For example, looking at \italic{this item}, you see how to construct a numbered list.  You also see how to make italic text.
+
+\item Copy the source text and paste into into a new document.  Try modifying the source text.  See how the rendered text changes.
+
+\item Add  your own text to the copied document.
+
+\end{enumerate}
+
+NOTE re (3) above: To make a new document you will have to have set up an account.  You can do this at \href{https://minilatex.lamdera.app}{minilatex.lamdera.app}.  It is perfeclty OK to have two tabs open on minilatex, e.g, one where you are signed as guest, the other where you are signed in as you.
+
+This document is meant to help get you started, not to be comprehensive.  Please note also that there are many excellent online resources for learning LaTeX, among which is \href{https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference}{math.meta.stackexchange.com/}. Highly recommended!
+
+\section{Basic Math Formulas}
+
+Below is some text + math formulas. Note how they are written.  Then modify them.  Then make some formulas of your own.
+
+We will begin with simple algebra. You will also learn to do cross-references: a pair of simultaneous equations \eqref{two-equations} and the quadratic formula \eqref{quadratic}.  In the next section, we will show how to do theorems, e.g, Theorem \eqref{thm-primes}
+
+Superscripts: $a^2 + b^2 = c^2$.
+
+Subscripts: $a_1 + a_2 + \cdots + a_n$. \italic{Notice how we made the dots.}
+
+Greek letters: $A = \pi r^2$
+
+Square roots: $d = \sqrt{x^2 + y^2}$.
+
+The same thing, display math mode:
+
+$$
+d = \sqrt{x^2 + y^2}
+$$
+
+An integral and a fraction:
+
+$$
+\int_0^1 x^n dx = \frac{1}{n+1}
+$$
+
+A derivative:
+
+$$
+   \frac{d}{dx} x^n = n x^{n-1}
+$$
+
+Partial derivatives:
+
+$$
+\frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2}  = 0
+$$
+
+A numbered equation:
+
+\begin{equation}
+\label{quadratic}
+x = \frac{- b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation}
+
+Simultaneous equations:
+
+\begin{align}
+\label{two-equations}
+2x + 3y &= 1 \\
+4x - 7y &= 2 \\
+\end{align}
+
+Matrices:
+
+$$
+A =
+\begin{bmatrix}
+2 & 1 \\
+1 & 2 \\
+\end{bmatrix}
+$$
+
+Different typefaces: $\mathcal{A}:{\bf u} \not= \mathbb{S}:{\frak g} - y$
+
+Arrows: $A \to B$
+
+In the preceding line, you used the arrow symbol.  For a list of symbols, please see
+\href{https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols}{this list}.  For example, there you will find the symbols for set operations, e.g., $A \subset B \cap C$ and $x \not\in E$.
+
+\section{MiniLaTeX versus LaTeX}
+
+MiniLaTeX is for the most part a subset of LaTeX.  However, there are a few differences and addtions.  In LaTeX, one uses \bs{sl} for italic or "slanted" text.  In MiniLaTeX, one uses \bs{italic}.   In LaTeX, one uses \bs{emph} for boldface text.  In MiniLaTeX, one uses \bs{strong}.
+
+Among the additions are: \blue{blue text}, \red{red text}, \highlight{highlighted text} and \strike{strikethrough text}.  These are all available in LaTeX packages.
+
+When a MiniLaTeX document is exported to LaTeX, it is translated into  standard LaTeX.
+
+\section{Environments}
+
+\begin{theorem}
+\label{thm-primes}
+There are infnitely many primes $p \equiv 1 \mathop{mod}\ 4$.
+\end{theorem}
+
+\begin{verbatim}
+This
+   will
+      appear
+   exactly as written
+\end{verbatim}

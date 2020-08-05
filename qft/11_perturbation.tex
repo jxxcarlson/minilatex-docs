@@ -1,0 +1,323 @@
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\begin{mathmacro}
+\newcommand{\bra}[0]{\langle}
+\newcommand{\ket}[0]{\rangle}
+\newcommand{\caF}[0]{\mathcal{F}}
+\newcommand{\caA}[0]{\mathcal{A}}
+\newcommand{\boR}[0]{\bf{R}}
+\newcommand{\sett}[2]{\{#1\ |\ #2 \}}
+\newcommand{\set}[1]{\{#1\}}
+\end{mathmacro}
+
+\setcounter{section}{11}
+
+
+\section{Time-dependent perturbation theory}
+
+\innertableofcontents
+
+Consider a quantum system governed by a Hamiltonian $H = H_0 + \lambda V(t)$, where $H_0$ is independent of time, $\lambda$ is a small parameter, and $V(t)$ is a time-dependent potential.  Assume further that the system with $\lambda = 0$ is understood in the sense that it has a complete set of energy states $\alpha$.  This is the \italic{unperturbed system}. The harmonic oscillator and the hydrogen atom are good examples.  We would like to answer questions like \italic{"What is the probability that after time $t,$ a system that starts in state $\alpha$ finds itself in state $\beta$?"}
+
+\subsection{Picard-Dyson series}
+
+If $H$ depends on $t$, then we can proceed as follows.
+Write the  evolution equation as
+
+\begin{equation}
+\frac{dU}{dt} =AU
+\end{equation}
+
+with $A = -(i/\hbar)H$.  Apply the  fundamental theorem of calculus to obtain the integral equation
+
+\begin{equation}
+\label{uintegralequation}
+U(t) = 1 + \int_0^t dt_1 A(t_1)U(t_1)
+\end{equation}
+
+Replace $U(t_1)$ on the right-hand side of this expression by \eqref{uintegralequation}with $t_1$ in place of $t$ and $t_2$ in place of $t_1$ to obtain
+
+\begin{equation}
+U(t) = 1 + \int_0^t dt_1 A(t_1)
++ \int_0^t  \int_0^{t_1}   dt_1dt_2 A(t_1) A(t_2)U(t_2)
+\end{equation}
+
+Continuing in this manner, one obtains an infinite series
+
+\begin{equation}
+\label{picardseries}
+U(t) = 1 + \sum \int_0^1 \int_0^{t_1}\cdots \int_0^{t_{n-1}} dt_1 \cdots dt_n A(t_1) \cdots A(t_n)
+\end{equation}
+
+This was the method invented by Picard to solve systems of first order ODE's with variable coefficients.  The terms of the sum are the so-called  \italic{iterated integrals} studied by Chen.  In the case of operators on Hilibert space, \eqref{picardseries} is known as the \term{Dyson series}.  Note that the domain of integration of the $n$-th term is the $n$-simplex $\sigma_{n}(t) = \sett{(t_1, \ldots, t_n)}{ 1 > t_1 > \cdots > t_n}$. Thus we can write the series as
+
+\begin{equation}
+\label{picardseriessigma}
+U(t) = 1 + \sum \int_{\sigma_n(t)} dt_1 \cdots dt_n A(t_1) \cdots A(t_n)
+\end{equation}
+
+
+\subsection{Time ordering}
+
+Define the \term{time ordering} operator $T$ on vectors $(t_1, \ldots, t_n)$ as follows:
+$T(t_1, \ldots, t_n) = T(t_{\sigma(1)}, \ldots t_{\sigma(n)})$, where $\sigma$ is a permutation such that $t_{\sigma(1)} > t_{\sigma(2)} > \cdots t_{\sigma(n)}$.  Observe that the $n$-cube $[0,t]^n$ is composed of $n!$ simplices of dimension $n$, exactly one of which is statisfies $t > t_1 > t_2 \cdots > t_n$.  Consequently , we can write \eqref{picardseriessigma} as
+
+\begin{equation}
+\label{propagator_series}
+U(t) = 1 + \sum \frac{1}{n!}\int_{[0,t]^n} dt_1 \cdots dt_n T[A(t_1) \cdots A(t_n)]
+\end{equation}
+
+This is very much like an exponential series.  Out of respect, one defines the \term{time-ordered exponential},
+
+\begin{equation}
+U(t) = T\exp\left( \int_0^T A(t)dt \right)
+\end{equation}
+
+Bear in mind that the preceding line is a definition.
+
+\subsection{Moving frames and interaction picture}
+
+Let us consider now the time evolution of a system with Hamiltonian $H = H_0 + V(t)$.  We view the potential $V(t)$ as "perturbing" the system defined by $H_0$.  As an example, $V(t)$ my be a pulse of short duration.  To understand such a system, let $\psi_S(t)$ be a solution of $i\hbar \dot \psi = H\psi$ with initial condition $\psi_S(0)$. This solution is said to represent the  \italic{"Schroedinger picture"} of the system.  In order to simplify the equations, we shall make a time-dependent unitary change of frame. Let
+
+\begin{equation}
+\label{interactionstatevector}
+\psi_I(t) = U_0^{-1}\psi_S(t),
+\end{equation}
+
+where $U_0$ is the propagator for $H_0$.  Then $\psi_I(t)$ is the state vector at time $t$  in the \italic{"interaction picture"}.   To find the equation of motion for $\psi_I(t)$, differentiate \eqref{interactionstatevector} to obtain
+
+\begin{equation}
+i\hbar\frac{d\psi_I}{dt} = -i\hbar U_0^{-1}\frac{dU_0}{dt}\, U_0^{-1} \psi_S+ i\hbar U_0^{-1} \frac{d\psi_S}{dt}
+\end{equation}
+
+Apply the Schroedinger equations for $U_0$ and $\psi_S$:
+
+\begin{equation}
+i\hbar\frac{d\psi_I}{dt} =   -U_0^{-1}(H_0U_0) (U_0^{-1} \psi_S )+ U_0^{-1} (H\psi_S)
+\end{equation}
+
+Insert a resolution of the identity $U_0U_0^{-1} = 1$ in the second term:
+
+\begin{equation}
+i\hbar\frac{d\psi_I}{dt} =   -( U_0^{-1} H_0U_0 ) U_0^{-1} \psi_S + (U_0^{-1} HU_0 ) U_0^{-1}\psi_S
+\end{equation}
+
+Collect terms and apply the definition of $\psi_I$:
+
+\begin{equation}
+i\hbar\frac{d\psi_I}{dt} =  U_0^{-1}(-H_0 + H)U_0\psi_I = (U_0^{-1}VU_0)\psi_I
+\end{equation}
+
+Thus
+
+\begin{equation}
+\label{interactionequation}
+i\hbar\frac{d\psi_I}{dt} =  V_I\psi_I
+\end{equation}
+
+where $V_I$ is the potential in the interaction frame:
+
+\begin{equation}
+V_I = U_0^{-1} V U_0
+\end{equation}
+
+If the Hamiltonian for the unperturbed system does not depend on time, then the interaction potential can be written as
+
+\begin{equation}
+V_I(t) = e^{(it/\hbar)H_0} V(t) e^{(-it/\hbar)H_0}
+\end{equation}
+
+The "interaction potential" is related to the given potential through the same moving frame that was used to define the interaction state vector.
+Note that the interaction equation \eqref{interactionequation} has there same form as the Schroedinger equation for $\psi(t)$, but with a simpler Hamiltonian.  Thus it has its own propagator, $U_I(t)$, also given by a Dyson series:
+
+\begin{equation}
+\label{interactionseries}
+U_I(t) = 1 + \sum \left(\frac{-i}{\phantom{-}\hbar}\right)^n \int_0^t \int_0^{t_1}\cdots \int_0^{t_{n-1}} dt_1 \cdots dt_n V(t_1) \cdots V(t_n)
+\end{equation}
+
+
+Consider the propagators $U$, $U_0$, and $U_I$ for the Hamiltonians $H$, $H_0$, and $V$, respectively. We claim that
+
+\begin{equation}
+U(t) = U_0(t)U_I(t).
+\end{equation}
+
+To see that this is so, compute derivatives:
+
+\begin{align}
+i\hbar \frac{d}{dt}(U_0U_I) &= \frac{dU_0}{dt} U_I + U_0\frac{dU_I}{dt} \\
+&= (H_0U_0)U_I + U_0 (V_I U_I) \\
+&= (H_0U_0)U_I + (U_0 V_I U_0^{-1})( U_0 U_I) \\
+&=  H_0(U_0U_I) + V( U_0 U_I) \\
+&= H(U_0U_I)
+\end{align}
+
+
+
+\subsection{Transition probabilities}
+
+Let $i$ and $f$ denote eigenstates of $H_0$, and consider the perturbed system with Hamiltonian $H = H_0 + V(t)$.  We seek the probability amplitude  let $\caA(i \to f, t)$ for a transition from an initial state $i$ at time zero to a final state  $f$ at time $t$.  According the theory developed above, this amplitude is a matrix element of the propagator:
+
+\begin{equation}
+\caA(i \to f, t) = \bra f | U(t) | i \ket
+\end{equation}
+
+Since $U(t) = U_0(t)U_I(t)$, we have
+
+\begin{align}
+\caA(i \to f, t) &= \bra f | U_0(t)U_I(t) | i \ket \\
+&= \bra U_0(t)^\dagger f | U_I(t) | i \ket \\
+&= e^{-i\omega_ft}\bra f | U_I(t) | i \ket
+\end{align}
+
+where $\omega_f \hbar = E_f$.
+Using the interaction series \eqref{interactionseries}, we find a first order expression for the transition amplitude:
+
+\begin{equation}
+\caA(i \to f, t)^{(1)} = (-i/\hbar) e^{-i\omega_ft} \int_0^t dt_1\,  \bra f | V_I(t_1) | i \ket
+\end{equation}
+
+Since $V_I(t) = U_0(t)^{-1}V(t)U_0(t)$, and $U_0(t) = \exp(-iH_0t/\hbar)$, we have
+
+\begin{equation}
+\label{firstorderperturbationintegral}
+\caA^{(1)}(i \to f, t)= (-i/\hbar) e^{-i\omega_ft} \int_0^t dt_1\,  e^{i(\omega_f - \omega_i)t_1}\bra f |  V(t_1)  | i \ket
+\end{equation}
+
+Higher order terms in the perturbation series are given by
+
+\begin{equation}
+\caA^{(n)}(i \to f, t )= (-i/\hbar)^n e^{-i\omega_ft} \int_{\sigma_n(t)} dt_{(n)}\,  \bra f | V_I(t_1) \cdots  V_I(t_n) | i \ket
+\end{equation}
+
+Insert resolutions of the identity to rewrite this as
+
+\begin{equation}
+ (-i/\hbar)^n e^{-i\omega_ft} \sum \int_{\sigma_n(t)} dt_{(n)}\,
+\bra f | V_I(t_1) | k_1 \ket \bra k_1 | V_I(t_2) | k_2 \ket\cdots  \bra k_n | V_I(t_n) | i \ket
+\end{equation}
+
+Define the \term{Bohr vector} by
+
+\begin{equation}
+B(k) = (\omega_f - \omega(k_1), \omega(k_1) - \omega(k_2), \ldots , \omega(k_n) - \omega_i)
+\end{equation}
+
+and let $t = (t_1, \ldots, t_n)$. Then the $n$-th term above can be written as
+
+\begin{equation}
+\label{amplitudedyson}
+ (-i/\hbar)^n e^{-i\omega_ft} \sum \int_{\sigma_n(t)} dt_{(n)}\,
+e^{iB\cdot t} V_{fk_1}V_{k_1k_2} \cdots V_{k_{n-1},k_n} V_{k_ni }
+\end{equation}
+
+where
+
+\begin{equation}
+V_{k_ik_j} = \bra k_i | V | k_j \ket
+\end{equation}
+
+Note the general form of the $n$-th term: a sum over all "processes" $(k_1, \ldots , k_n)$ of integrals over the standard $n$-simplex.  The integrand is a project of matrix elements of the potential and a function from the simplex to the complex numbers of absolute value one given by $t \mapsto e^{iB\cdot t}$, where $B$ is the Bohr vector.  We say "processes" because $(k_1, \ldots , k_n)$ represents one of the $n$-step sequence of state transitions which lead from state $i$ to state $f$.
+
+As en exercise in using the general formula, we find the second-order term in the perturbation expansion, we find that
+
+\begin{equation}
+\caA^{(2)}(i \to f, t) = (-i/\hbar)^2 e^{-i\omega_f t}\sum_k\int_{\sigma_2(t)} dt_{(2)}
+e^{  i(\omega_f - \omega_k) t_1 + i( \omega_k - \omega_i )t_2  }  V_{fk}V_{ki}
+\end{equation}
+
+\begin{remark}
+The quantities $\caA^{(n)}(i \to f, t)$ are probability amplitudes and so are dimensionless.  Let us verify this in \eqref{amplitudedyson}.  An expression like $\omega t$ is dimensionless since $\omega$ has dimension $T^{-1}$.  An action $\hbar$ has dimension $ET$, so the factor $(-i/\hbar)$ has dimension $E^{-n}T^{-n}$.  The expression $ V_{fk_1}V_{k_1k_2} \cdots V_{k_{n-1},k_n} V_{k_ni } $ is a product of energies and so has dimension $E^n$.  The volume element $dt_{(n)} = dt_1\cdots dt_n$ has dimension $T^n$.  Putting all this together, we see that the expression \eqref{amplitudedyson} is dimensionless.
+\end{remark}
+
+\subsection{Harmonic oscillator}
+
+Let us compute this in the case of a harmonic oscillator with a time-dependent forcing term:
+
+\begin{equation}
+H = \frac{\hat p^2}{2m} + \frac{m\omega^2 x^2}{2} + V(x,t),
+\end{equation}
+
+where $V(x,t) = -f(t)x$. Viewed as a classical system, thefso ttttttttttttt force associated to the potential for $t$ fixed is
+$-\partial V(x,y)/\partial t = f(t)$.  Thus $V(x,t)$ is the potential for a force that depends only on time.  Write the Hamiltonian in terms of creation and annihilation operators:
+
+\begin{equation}
+\label{transitionamplitude1}
+H = h\omega(a^\dagger a + 1/2) - f(t)\left( \frac{\hbar}{2m\omega}\right)^{1/2} (a^\dagger + a)
+\end{equation}
+
+Then \eqref{firstorderperturbationintegral}, yields the following expression for the transition amplitude
+
+\begin{equation}
+\caA^{(1)}(j \to k, t) = \frac{ie^{-ik\omega t}}{\sqrt{2m\hbar \omega}}\bra k | a^\dagger + a | j \ket \int_0^t f(t_1)e^{i\omega (k-j) t_1} dt_1
+\end{equation}
+
+Note that $\bra k | a^\dagger + a | j \ket = \sqrt{j+1}$ if $k = j +1$, that $\bra k | a^\dagger + a | j \ket = \sqrt{j}$ if $k = j -1$, and is zero otherwise. We will see momentarily that other transitions are given by higher order terms in the Dyson series.  Note also the general form of the amplitude. It is a product of factors (a) \italic{a phase}, (b) italic{a real constant}, (c) italic{a matrix element}, (d) \italic{an integral}.
+
+Set $k  = j+1$ and choose $f(t)$ to be a rectangular pulse of height $g$ supported on the interval $[0,\tau]$.  Then
+
+\begin{equation}
+\caA^{(1)}(j \to j+1, t) =ie^{-i(j+1)\omega t} \left(\frac{j+1}{2m\hbar \omega}\right)^{1/2} \int_0^t f(t_1)e^{i\omega  t_1} dt_1
+\end{equation}
+
+Let us compute the transition amplitude for  $t \ge \tau$.
+The integral is
+
+\begin{equation}
+\int_0^\tau e^{i\omega t_1}f(t_1) dt_1 = ge^{i\omega \tau/2}\frac{ \sin \omega \tau/2}{\omega/2}
+\end{equation}
+
+so that
+
+\begin{equation}
+\caA^{(1)}(j \to j+1, t\ge \tau) =
+ig e^{-i(j+  1/2)\omega\tau}  \left(\frac{j+1}{m\hbar \omega}\right)^{1/2}\frac{ \sin \omega \tau/2}{\omega/2}
+\end{equation}
+
+\begin{remark}
+The constant $g$ has dimension $XT^{-1}$ and one checks that $\caA^{(1)}$ is dimensionless.
+\end{remark}
+
+The associated probability is given by the absolute square of the amplitude:
+
+\begin{equation}
+\caP^{(1)}(j \to j+1, t\ge \tau) =
+4g^2  \left(\frac{j+1}{m\hbar \omega}\right)\frac{ \sin^2 \omega \tau/2}{\omega^2}
+\end{equation}
+
+\subheading{Discussion}
+
+
+\begin{enumerate}
+\item The first order term in the perturbation series captures at most two transitions: $| j \ket \to | j + 1 \ket$ and  $| j \ket \to | j- 1 \ket$.  For transitions $| j \ket \to | j + \ell \ket$, one must include terms at least to order $|\ell|$.
+%
+\item Consider the transition  $| j \ket \to | j + \ell \ket$.  The first term that contributes to the amplitude is $\caA^{(\ell)}$.  However, terms $\caA^{(\ell')}$ with $\ell' > \ell$ can also contribute.  For example, the process $|0\ket \to |1\ket \to|0\ket$ contributes to $\caA(0 \to 1, t)$.
+%of
+\item The transition probability is very small when the pulse width $\tau$ is very small.  The probability varies sinusoidally, reaching its first maximum when $\tau = \pi\omega$.  Thus the most economical way of exciting a harmonic oscillator with paramater $\omega$ is to send pulses which have duration $\pi/\omega$.
+\end{enumerate}
+
+
+
+\begin{quote}
+The simplest approach and still one of the most common techniques is known as pump–probe spectroscopy. In this method, two or more optical pulses with variable time delay between them are used to investigate the processes happening during a chemical reaction. The first pulse (pump) initiates the reaction, by breaking a bond or exciting one of the reactants. The second pulse (probe) is then used to interrogate the progress of the reaction a certain period of time after initiation. As the reaction progresses, the response of the reacting system to the probe pulse will change. By continually scanning the time delay between pump and probe pulses and observing the response, workers can reconstruct the progress of the reaction as a function of time.
+\end{quote}
+
+
+\subsection{References}
+
+\begin{thebibliography}
+
+\bibitem{HI}\href{http://hitoshi.berkeley.edu/221a/timedependent.pdf}{Hitoshi}
+
+\bibitem{DN}\href{http://www.physics.drexel.edu/~bob/Chapters/time_dep_pt.pdf}{Drexel notes}
+
+\bibitem{CN}\href{http://www.tcm.phy.cam.ac.uk/~bds10/aqp/handout_dep.pdf}{Cambridge notes}
+
+\bibitem{CNS}\href{http://www.tcm.phy.cam.ac.uk/~bds10/aqp/lec18.pdf}{Slides}
+
+
+\bibitem{MSU}\href{http://www.pa.msu.edu/~mmoore/TDPT.pdf}{Time-dependent perturbation theory, MSU Notes}
+
+\bibitem{PN}\href{http://web.mst.edu/~parris/QuantumTwo/Class_Notes/TDPT.pdf}{Paris notes}
+
+\end{thebibliography}
