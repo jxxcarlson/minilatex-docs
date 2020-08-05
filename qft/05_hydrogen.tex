@@ -1,0 +1,199 @@
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\setcounter{section}{5}
+
+
+
+
+\section{Hydrogen Atom}
+
+\innertableofcontents
+
+In this section we give a first analysis of the hydrogen atom which leads from the Schroedinger equation for a wave function assumed to be radially symmetric to a computation of the radius and binding energy.  This is followed by some comments on spectroscopy.
+
+\subsection{Radial symmetry}
+
+
+
+Let us consider the case in which the wave function $\psi(x,y,z)$ only depends on the radius, that is,
+$\psi(x,y,z) = \psi(r)$.  To study such wavefunctions,
+we must write the Schroedinger equation
+
+\begin{equation}
+-\frac{\hbar^2 }{2m} \nabla^2 \psi  + V\psi = E\psi
+\end{equation}
+
+in terms of $r$.  To this, end, observe that
+
+\begin{equation}
+\frac{\partial r}{\partial x} = \frac{x}{r}
+\end{equation}
+
+After some work we find that
+
+\begin{equation}
+\frac{\partial^2\psi}{ \partial x^2}
+ = \frac{ x^2 }{ r^2 }\frac{ d^2\psi }{ dr^2 }
+   + \frac{1}{r}\frac{d\psi}{dr} - \frac{ x^2 }{ r^3 }\frac{d\psi}{dr}
+\end{equation}
+
+Adding these relations for $x$, $y$, and $z$, we find that
+
+\begin{equation}
+\nabla^2 \psi = \frac{ d^2\psi  }{ dr^2 }+ \frac{2}{r}\frac{d\psi}{dr} ,
+\end{equation}
+
+which can be rewritten as
+
+\begin{equation}
+\nabla^2 \psi = \frac{1}{r}\frac{ d^2 }{ dr^2 }r\psi
+\end{equation}
+
+Introduce $u(r) = r\psi(r)$.  Then Schroedinger's equation can be written
+
+\begin{equation}
+-\frac{\hbar^2}{2m} \frac{ d^2u }{ dr^2 } + V(r)u(r) = Eu(r)
+\end{equation}
+
+\subsection{Bohr radius and binding energy}
+
+In the case of an electron moving in a central potential, we
+have the Coulomb potential
+
+\begin{equation}
+V(r) = -\frac{q^2}{4\pi \epsilon_0 r}
+\end{equation}
+
+where $\epsilon_0 = 8.854\times 10^{-12}$ F/m is the permittivity of the vacuum.footnote:[One farad is the capacitance of a pair of plates for which the potential difference is one volt when loaded with one Coulomb of electrical charge.  A volt is Newton-meter per Coulomb, that is , has the units of Joules per Coulomb.  Working it out, one finds that $e^2$ is of unit Joule-meter.  Then $V = e^2/r$ has the units of Joules, which is correct for  potential energy.  Let us introduce the quantity
+
+\begin{equation}
+e^2 = \frac{q^2}{4\pi\epsilon_0}
+\end{equation}
+
+so that the law for the potential reads more simply as
+
+\begin{equation}
+V(r) = -\frac{e^2}{r}
+\end{equation}
+
+When $q = 1.6\times10^{-19}$ C is the change on the electron,
+
+\begin{equation}
+e^2 = 2.3\times10^{-28}
+\end{equation}
+
+Thus Schroedinger's equation takes the form
+
+\begin{equation}
+-\frac{\hbar^2}{2m} \frac{ d^2u }{ dr^2 } - \frac{e^2}{r}u(r) = Eu(r)
+\end{equation}
+
+For bound states, the energy is negative, so we introduce $B = -E$, the \term{binding energy}, and write
+
+\begin{equation}
+\frac{\hbar^2}{2m} \frac{ d^2u }{ dr^2 } + \frac{e^2}{r}u(r) = Bu(r)
+\end{equation}
+
+The binding energy is the energy needed to free the electron from the nucleus, i.e., to ionize the atom.
+
+
+As a trial solution, we take one that vanishes at the origin and decays exponentially, say
+
+\begin{equation}
+u(r) = re^{-\alpha r}
+\end{equation}
+
+Then Schroedinger's equation becomes
+
+\begin{equation}
+\frac{\hbar^2}{2m}\left(  \alpha^2 r e^{-\alpha 4} - 2\alpha e^{-\alpha r} \right) + e^2 (e^{ -\alpha r }) = Bre^{-\alpha r}
+\end{equation}
+
+Equality in the preceding expression can hold if and only if
+the coefficients of  $e^{-\alpha r}$ and  $re^{-\alpha r}$
+on the left and right hand sides are the same.  For the coefficients of $e^{-\alpha r}$, we find that
+
+\begin{equation}
+\alpha = \frac{ me^2 }{ \hbar^2 }
+\end{equation}
+The inverse of this quantity,
+
+\begin{equation}
+a_0= \frac{ \hbar^2 }{ me^2 }  = 0.527\times 10^{-10}\;m,
+\end{equation}
+
+is the \term{Bohr radius}.  To calculate the probability that the electron be found within one Bohr radius, we note that the normalized wave function is $\psi(r) = \sqrt{2\alpha}e^{-\alpha r}$.  That is,
+
+\begin{equation}
+\int_0^\infty \psi(r)^2 dr = 1
+\end{equation}
+
+Then
+
+\begin{equation}
+\int_0^{1/\alpha} \psi(r)^2 dr = 1 - \frac{1}{e^2} = 0.865
+\end{equation}
+
+There is an 86% chance at any moment that the electron be found within one Bohr radius of the nucleus.  For two Bohr radii, the probability rises to 98%, and for three, to 99.8%.  The hydrogen atom is unlike a classical particle -- it is not like a billiard ball, but rather has a "fuzzy" radius.  One Bohr radius or two, or whatever multiple of $a_0$ suits your tastes and needs.
+
+For the coefficient of $re^{-\alpha r}$, we find
+
+\begin{equation}
+B = \frac{ me^4 }{ 2\hbar^2 }
+\end{equation}
+
+One finds that
+
+\begin{equation}
+B = 2.2\times 10^{-19}\;\text{Joules} = 13.7\;\text{eV}
+\end{equation}
+
+This is the binding energy in Bohr's model, that is, the minimum energy needed to separate the electron in the hydrogen atom from the nucleus.
+
+\subsection{Emission of photons and spectrum}
+
+
+The ground state energy of the electron in a hydrogen atom is given by
+
+\begin{equation}
+U = -\frac{me^4 }{ 2\hbar^2 } = -\frac{13.7}{n^2}\;\text{eV}
+\end{equation}
+
+As we shall see in a later section, the energy of the $n$-th state is
+
+\begin{equation}
+E_n = -\frac{U}{n^2} = -\frac{13.7}{n^2}\;\text{eV}
+\end{equation}
+
+Thus the energy of the photon released when the electron drops from the $n$-th state to the $m$-th state is
+
+\begin{equation}
+\Delta E = 13.7\left(\frac{1}{m^2} - \frac{1}{n^2}\right)
+\end{equation}
+
+For example, if $m = 1$ and $n = 2$, then $\Delta E = 13.7(1-1/4) = 10.3\;\text{eV}$.  Using the Einstein-Planck relation $H = h\nu$ we find that $\nu = 2.5\times 10^{15} Hz$  The wavelength and frequency of light are related by  $c = \lambda \nu$, where $c$ is the velocity of light.  We find the wavelength to be $\lambda = 1.2\times 10^{-7}\;\text{meter}  =120\;\text{nm}$. To put this in context, red and blue light have wavelengths of 650 nm and 475 nm, respectively, while ultraviolet light ranges from 10 to 400 nm.
+
+Bohr's theory of the hydrogen atom resolved a puzzle that had befuddled the spectroscopists for years -- why id the frequencies (hence associated energies) of spectral lines fall into such odd patterns, e.g., a constant times a reciprocal of a difference of reciprocals of squares.  The table below lists a few of the energy levels, differences thereof, and wavelengths associated to these differences.  The wavelengths are organized into series -- Lyman, Ballmer, Paschen -- after names of the spectroscopists who discovered them.  Energies are given in electron volts and wavelengths in nanometers.
+
+\begin{indent}
+\strong{Table 1}
+\begin{tabular}{ |c|c|c|c|c| }
+n &   E  & (n,1) & (n,2) & (n,3)  \\
+1 & -13.70 &   -   &    -   &   -     \\
+2 & - 3.43 & 10.27 &   -    &   -   \\
+3 & - 1.52 & 12.17 & 1.9   &    -   \\
+4 & - 0.50 & 12.84 & 2.56  & 0.666  \\
+\end{tabular}
+\end{indent}
+
+
+\begin{indent}
+\strong{Table 2}
+\begin{tabular}{ |c|c|c|c| }
+Lyman & Ballmer & Paschen   \\
+n & 1,n &   2,n    & 3,n    \\
+2 & 122 &    -      &   -     \\
+3 & 103 &   656    &   -     \\
+4 &  97 &   486    & 1876   \\
+\end{tabular}
+\end{indent}

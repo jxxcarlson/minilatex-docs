@@ -1,0 +1,628 @@
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\setcounter{section}{16}
+
+
+\begin{mathmacro}
+\newcommand{\ZZ}[0]{\mathbb{Z}}
+\newcommand{\CC}[0]{\mathbb{C}}
+\newcommand{\UU}[0]{\mathbb{U}}
+\newcommand{\FFF}[0]{\mathcal{F}}
+\newcommand{\WW}[0]{\mathbb{W}}
+\newcommand{\bra}[0]{\langle}
+\newcommand{\ket}[0]{\rangle}
+\newcommand{\set}[1]{\{#1\}}
+\end{mathmacro}
+
+
+ \section{Discrete  Fourier  transform}
+
+ \innertableofcontents
+
+Consider  complex-valued  functions  of  the  integers,
+$q: \ZZ  \longrightarrow \CC $ ,  which  are  periodic  of  period   $N$ .   Thus   $q(n + N) = q(n)$ .   We  write  function  values  as   $q(n)$  or   $q_n$ .  Periodic  functions  of  period   $N$  may  be   identified  with  functions  on   $\ZZ/N$ ,  the  integers  modulo   $N$ .  Let
+  $\UU_n = \set{ e^{2\pi i k/N}}$  denote  the  multiplicative  group  of   $N$  -th  roots  of  unity.
+ Via  the  natural  identification   $\ZZ/N \cong \UU_n $ ,    $\ZZ/N$  models  the   $N$  -division  points   of  the  unit  circle.
+
+
+
+Define  an  inner  product  on  the  space  of  functions  from   $\ZZ/N$  to   $\CC$  by
+
+
+
+\begin{equation}
+\label{fft_ip}
+\langle q, q' \rangle
+  =
+\frac{1}{N}\sum_{n \in \ZZ/N} q(n)\bar q'(n)
+\end{equation}
+
+
+We  often  omit  the  set  over  which  the  sum  is  taken,  since   $\ZZ/N$  is  understood.
+
+
+
+Let   $\delta_k(n) = \delta_{kn}$ .   These  functions  constitute  an  orthogonal  basis  of   $L^2(S)$ ,  where   $||\delta_k||^2 = 1/N$ .   Consider  also  the  functions
+
+
+
+\begin{equation}
+u_k(n) = e^{2\pi i kn/N}
+\end{equation}
+
+
+The  inner  product  of   $u_k$  and   $u_\ell$  is  the  sum
+
+
+
+\begin{equation}
+\bra u_k, u_\ell \ket
+ =
+\frac{1}{N}\sum_k e^{2\pi k(n-\ell)/N}
+\end{equation}
+
+
+By  the  following  result,   $\bra u_k, u_\ell \ket = \delta_{k, \ell}$ ,  so  that  the   $u_k$  form  an  orthonormal  basis.
+
+
+
+\begin{lemma}
+Let   $m$  and   $N$  be  integers.  Then
+ $$
+\frac{1}{N}\sum_k e^{2\pi km/N} = \delta_{m,0}
+$$
+\end{lemma}
+
+
+ \strong{Proof.} If   $m = 0$ ,  the  result  is  clear.   If   $m \ne 0$ ,  then  by  the  formula  for  the  geometric  series,
+
+
+
+\begin{equation}
+\sum_k e^{2i\pi km/N} = \frac{e^{2\pi im} - 1}{e^{2\pi im/N} - 1} =0,
+\end{equation}
+
+
+ \strong{Q.E.D.}
+
+Define  the  Fourier  transform   $\FFF(q)$  to  be  the  function
+
+
+
+\begin{equation}
+Q(k) = \frac{1}{\sqrt N} \sum_n q(n)e^{-2\pi i nk/N}
+\end{equation}
+
+
+and  define  the  inverse  Fourier  transform   $\FFF^{-1}(Q)$  to  be  the  function
+
+
+
+\begin{equation}
+q(n) = \frac{1}{\sqrt N} \sum_k Q(k)e^{2\pi i nk/N}
+\end{equation}
+
+
+Then  by  the  lemma  above,
+
+
+
+\begin{align}
+\FFF^{-1}\FFF(q)(n) &=
+\frac{1}{N} \sum_k \sum_m q(m) e^{2\pi ik(n - m)/N} \\
+&=
+\frac{1}{N} \sum_m q(m) \sum_k  e^{2\pi ik(n - m)/N} \\
+&= \sum_m q(m)\delta_{nm} \\
+&= q(n)
+\end{align}
+
+
+One  shows  that   $\FFF\FFF^{-1}(q)(n) = q(n)$  in  the  same  way.
+
+
+
+ \subsection{Discrete  Klein-Gordon  Equation}
+
+In  the  section  on  the  classical  string,  we  considered
+ a  chain  of  masses,  aka  the  1-D  crystal,  with  boundary  conditions   $q(0,t) = q(N+1,t) = 0$  for  all   $t$ .   Let  us  reconsider  this  system  with  periodic
+ boundary  conditions  on   $N$  masses.   We  also  add  a  "pinning"  term  to  the  Lagrangian:
+
+
+
+\begin{equation}
+\label{crystallagrangian}
+L = \frac{m}{2} \sum_n \dot q(n)^2
+- \frac{\kappa}{2}\sum_n [q(n+1) - q(n)]^2
+- \frac{s}{2}\sum_n q(n)^2,
+\end{equation}
+
+
+where  the  constants   $m$ ,   $\kappa$ ,  and   $s$  are  positive.
+ The  dependence  on   $t$  is  omitted  in  order  not  to  overflow  the  page  with  extraneous  symbols.
+ The  new  term  contributes  a  restoring  force  of  strength   $s \ge 0$  which  acts  to  pull  each  atom  to  its  equilibrium  position,  i.e.,  to  "pin"  it  to  that  position.   Let  us  rescale  the  equation,  replacing   $q(n)$  by   $(\sqrt m)q(m)$ .   Set   $\omega^2 = \kappa/m$ ,  and  set   $\sigma^2 = s/m$ .   The  rescaled  Lagrangian  is
+
+
+
+\begin{equation}
+\label{crystallagrangian2}
+L = \sum_n \dot q(n)^2
+- \frac{\omega}{2}\sum_n [q(n+1) - q(n)]^2
+- \frac{\mu}{2}\sum_n q(n)^2,
+\end{equation}
+
+
+The  equation  of  motion  is  then
+
+
+
+\begin{equation}
+\label{discrete-wave-equation}
+\ddot q(n) = \omega^2[q(n+1) - 2q(n) + q(n-1)] - \mu^2(n) = 0
+\end{equation}
+
+
+The  term  in  brackets  is   $(\Delta^2 q)(n)$ ,  where   $\Delta^2$  is  the  discrete  second  derivative  operator.   It  can  be  factored  as   $\Delta^2 = \Delta_+\Delta_-$ ,  where   $(\Delta_+q)_n = q_{n+1} - q_n$  and
+  $(\Delta_-q)_n = q_{n} - q_{n-1}$ .   Thus  we  have
+
+
+
+\begin{equation}
+\label{discrete-wave-equation2}
+\ddot q(n) = \omega^2 (\Delta^2 q)(n) - \mu^2 q(n) = 0,
+\end{equation}
+
+
+or,  more  succinctly,
+
+
+
+\begin{equation}
+\label{discrete-kgeq}
+\ddot q - \omega_0^2 \Delta^2 q + \mu^2 q = 0,
+\end{equation}
+
+
+This
+ is  the  discrete  version  of  the  Klein-Gordon  equation   \eqref{kgeq} discussed  in  the  appendix  below.
+
+
+
+Let  us  solve   \eqref{discrete-kgeq} using  the  discrete  Fourier  transform.   To  this  end,  consider  the  shift  operators,  defined  by   $(S_{\pm}q)(n) = q(n\pm 1)$ .   Then   $(\Delta_+ q)(n)= [(S_+ - 1 )q](n)$  and    $(\Delta_- q)(n)= [(1 - S_-)q](n)$  Now
+
+
+
+\begin{align}
+(\FFF S_+q)(k) &= \sum_n  ( S_+ q )(n) e^{-2\pi i kn/N} \\
+&= \frac{1}{\sqrt N} \sum_n q(n+1) e^{-2\pi i kn/N} \\
+&= \frac{1}{\sqrt N} \sum_n q(n) e^{-2\pi i k(n-1)/N} \\
+&= e^{2\pi i k/N} \frac{1}{\sqrt N}  \sum_n q(n) e^{-2\pi kn/N } \\
+&=  e^{2\pi i k/N} (\FFF q)(k)
+\end{align}
+
+
+Thus
+
+
+
+\begin{equation}
+\FFF S_+ = \lambda_+\FFF,
+\end{equation}
+
+
+where   the  function   $\lambda_+$  is  defined  by   $\lambda_+(k) =  e^{ 2\pi ik/N}$ .   A  similar  computation  shows  that
+
+
+
+\begin{equation}
+\FFF S_- = \lambda_-\FFF,
+\end{equation}
+
+
+where   the  function   $\lambda_-$  is  defined  by   $\lambda_-(k) =  e^{- 2\pi ik/N}$ .
+
+
+
+Using  the  factorization
+
+
+
+\begin{equation}
+-\Delta^2 = - \Delta_+\Delta_- =  (S_+ - 1)(S_-  -  1),
+\end{equation}
+
+
+we  find  that
+
+
+
+\begin{equation}
+\label{ft-dl}
+\FFF(-\Delta^2) = (\lambda_+ - 1)(\lambda_- -1)\FFF =  \lambda^2\FFF,
+\end{equation}
+
+
+for  a  function   $\lambda(k)$  which  we  now  describe.   The  expression
+  $(\lambda_+ - 1)(\lambda_- -1)(k)$  evaluates  to
+ Since
+
+
+
+\begin{equation}
+(e^{2\pi i k/N} - 1)(e^{-2\pi i k/N} - 1) = 2(1 - \cos2\pi k/N),
+\end{equation}
+
+
+so  that
+
+
+
+\begin{equation}
+\lambda^2(k)  = 4(\sin^2 \pi k/N)
+\end{equation}
+
+
+We  can  now  compute  the  Fourier  transform  of  the  equation  of  motion   \eqref{discrete-wave-equation}:
+
+
+
+\begin{equation}
+\FFF\ddot q - \omega_0^2 \FFF \Delta^2 q + \mu^2 \FFF q = 0
+\end{equation}
+
+
+Write   $Q(k,t)$  for  the  Fourier  transform  of   $q(n,t)$ .   Then
+ Use   \eqref{ft-dl} and  the  fact  that  the  Fourier  transform  commutes  with  differentiation  with  respect  to   $t$ ,  to  obtain
+
+
+
+\begin{equation}
+\ddot Q + \omega_0^2 \lambda^2 Q + \mu^2 Q = 0
+\end{equation}
+
+
+Set
+
+
+
+\begin{equation}
+\omega_k = 2\omega_0 \sin  \frac{\pi k}{N}
+\end{equation}
+
+
+Then  the  Fourier  transform  of  the  equation  of  motion  becomes
+
+
+
+\begin{equation}
+\label{eq-mo-uncoupled}
+\ddot Q(k,t) +  (\omega_k^2 + \mu^2) Q(k,t) = 0,
+\end{equation}
+
+
+This  system  of  ODE's  is   \italic{uncoupled} --  a  reflection  of  the  fact  that  the  Fourier  transform  of   $-\Delta^2$  is  a  multiplication  operator.   Solutions  of   \eqref{eq-mo-uncoupled},  that  is,  Fourier  coefficients  of  the  solution,  are  linear  combinations  of  the  two  functions
+
+
+
+\begin{equation}
+Q^\pm(k,t) = e^{\pm i\Omega_kt},
+\end{equation}
+
+
+where   $\Omega_k^2 = \omega_k^2 + \mu^2$ .   Thus  we  have  the  mode  expansions
+
+
+
+\begin{equation}
+q_n^+ (t) =  \sum_k Q^+ (k,t) e^{2\pi i kn/N}
+= \sum_k A_k^+ e^{2\pi i kn/N + i\omega_k t }
+\end{equation}
+
+
+and
+
+
+
+\begin{equation}
+q_n^-(t) =  \sum_k Q^- (k,t) e^{2\pi i kn/N}  =
+ \sum_k A_k^- e^{2\pi i kn/N - i\omega_k t }
+\end{equation}
+
+
+The  two  solutions  represent  traveling  waves  on  the  ring  of  atoms,  the  first  moving  counterclockwise,  the  second  moving  clockwise.   The  general  mode  expanstion  is
+
+
+
+\begin{equation}
+q_n^-(t)   =
+ \sum_k A_k^+ e^{2\pi i kn/N + i\omega_k t }
+ + \sum_k A_k^- e^{2\pi i kn/N - i\omega_k t }
+\end{equation}
+
+
+.Remark
+ If   $q(n,t)$  is  real,  then   $q(n,t) =q(n,t)^*$  and  so
+
+
+
+\begin{align}
+\sum_k Q(k,t) e^{2\pi i kn/N } &=  \sum_k  Q(k,t)^* e^{-2\pi i kn/N } \\
+ &=  \sum_k Q^*(-k, t) e^{2\pi i kn/N }
+\end{align}
+
+
+Therefore  one  has  the  relation
+
+
+
+\begin{equation}
+Q(-k,t) = Q^*(k,t)
+\end{equation}
+
+
+ \subsection{Lagrangian  and  Hamiltonian}
+
+Let us write  the  Lagrangian   \eqref{crystallagrangian} in  terms  of  the  Fourier  transform.   To  this  end,  make  the  substitutions
+
+
+
+\begin{equation}
+q(n,t) = \sum_k Q(k,t) e^{2\pi i nk/N}
+\end{equation}
+
+
+For  the  kinetic  energy  term,
+ we  have
+
+
+
+\begin{align}
+\sum_n \dot q(n,t)^2 &=
+\small{\frac{1}{N}} \sum_{n,k , \ell} \dot Q(k,t) \dot Q(\ell,t)
+e^{2\pi i nk/N + 2\pi i n\ell/N} \\
+&= \small{\frac{1}{N}} \sum_{r , k+\ell = r,n} \dot Q(k,t) \dot Q(\ell,t)
+e^{2\pi i n(k + \ell)/N } \\
+&= \sum_{k} \dot Q(k,t) \dot Q(-k,t)
+\end{align}
+
+
+In  passing  from  the  first  to  the  second  line,  we  re-order  the  sum,  and  in  passing  from  the  second  to  the  third,  we  apply  the  lemma.
+
+
+
+The  argument  for  the  potential  is  similar.   Use  the  identity
+
+
+
+\begin{equation}
+q(n+1,t) - q(n,t) = ((S_+ - 1)q)(n,t),
+\end{equation}
+
+
+where   $S_+$  is  the  shift  operator,  to  rewrite  the  Fourier  transform  of  the  sum
+
+
+
+\begin{equation}
+\frac{\omega^2}{2}\sum_n (q(n+1) - q(n))^2
+\end{equation}
+
+
+as
+
+
+
+\begin{equation}
+\frac{\omega^2}{2N} \sum_{n,k,\ell}
+(e^{-2\pi i k/N} - 1)
+(e^{-2\pi i \ell/N} - 1)
+Q(k) Q(\ell)  e^{2\pi i k n/N + 2\pi i \ell n/N}
+\end{equation}
+
+
+Changing  the  order  of  summation,  one  has
+
+
+
+\begin{equation}
+\frac{\omega^2}{2N} \sum_{r, k + \ell = r, n}
+(e^{-2\pi i k/N} - 1)
+(e^{-2\pi i \ell/N} - 1)
+Q(k) Q(\ell)  e^{2\pi i n(k + \ell) /N}
+\end{equation}
+
+
+The  sum  over   $k + \ell = r$  is  zero  if   $r \ne 0$  and  is   $N$  otherwise.   Therefore  the  sum  reduces  to
+
+
+
+\begin{equation}
+\frac{\omega^2}{2N}\sum_{k}
+(e^{-2\pi i k/N} - 1)
+(e^{2\pi i k/N} - 1)
+Q(k) Q(-k)
+\end{equation}
+
+
+and  then  to
+
+
+
+\begin{equation}
+\frac{\omega^2}{2} \sum_{k}
+\omega_k^2
+Q_k Q_{-k}
+\end{equation}
+
+
+where   $\omega_k = 2\omega_0\sin \pi k/N$  as  above.   Applying  the  by-now-standard  argument  to  the  last  term  in  the  given  Lagrangian,  we  obtain  its  Fourier  transform:
+
+
+
+\begin{equation}
+\tilde L = \frac{1}{2}\sum_k \dot Q(k) \dot Q(-k)
+-  \frac{1}{2}\sum_k (\omega_k^2)Q(k)Q(-k)
+\end{equation}
+
+
+The  canonical  momentum  is
+
+
+
+\begin{equation}
+\Pi(k) = \frac{\partial \tilde L}{\partial \dot Q(k)} = \dot Q(-k)
+\end{equation}
+
+
+Thus  we  can  rewrite  the  Lagrangian  as
+
+
+
+\begin{equation}
+\tilde L = \frac{1}{2} \sum_k \Pi(k)\Pi(-k)
+-  \frac{1}{2}\sum_k (\omega_k^2) Q(k) Q(-k),
+\end{equation}
+
+
+To  make  the  connection  with  an  assembly  of  independent  harmonic  oscillators  more  evident,  set
+
+
+
+\begin{equation}
+\Omega_k^2 = \frac{1}{m}\omega_k^2 = \frac{4\kappa}{m}\sin^2 \frac{\pi k}{N}.
+\end{equation}
+
+
+and   set   $s = \sigma^2/m$ .
+
+
+
+Then
+
+
+
+\begin{equation}
+\tilde L = \frac{1}{2} \sum_k \Pi (k) \Pi (-k)
+-  \frac{1}{2} \sum_k (\omega_k^2 )Q(k) Q(-k),
+\end{equation}
+
+
+With  the  Lagrangian  in  this  form,  we  can  find  the  Hamiltonian  via  a  Legendre  transform:
+
+
+
+\begin{equation}
+H = \sum_k \Pi(k)\dot Q(k) - \tilde L
+\end{equation}
+
+
+By  the  definition  of  canonical  momentum,
+
+
+
+\begin{align}
+\sum_k \Pi(k)\dot Q(k) &= \sum_k \dot Q(-k)\dot Q(k) \\
+&=\sum_k \Pi(k)\Pi(-k)
+\end{align}
+
+
+Then
+
+
+
+\begin{equation}
+H = \frac{1}{2} \sum_k \Pi(k) \Pi (-k)
++  \frac{1}{2} \sum_k  (\omega_k^2) Q(k) Q(-k),
+\end{equation}
+
+
+ \subsection{Appendix:  Klein-Gordon  equation}
+
+Consider  the  Energy-Momentum  relation  discussed  in  the  section  on  special  relativity:
+
+
+
+\begin{equation}
+E^2 = p^2 c^2 + m^2 c^4
+\end{equation}
+
+
+In  the  system  of  natural  units  where   $\hbar = 1$  and   $c = 1$ ,  this  reads
+
+
+
+\begin{equation}
+\label{kg-energy-momentum-relation}
+E^2 = p^2 + m^2
+\end{equation}
+
+
+Recall  the  dictionary  used  to  translate  relations  of  this  kind  from  classical  mechanics  to  quantum  mechanics:  replace   $E$  by  the  operator   $i\partial/\partial t$  and  replace   $p$  by   $-i\nabla$ .   If  we  do  this,  then  we  find  the  operator  identity
+
+
+
+\begin{equation}
+\frac{\partial^2}{ \partial t^2} = \nabla^2 - m^2
+\end{equation}
+
+
+Apply  this  identity  to  a  test  function  and  rewrite  as
+
+
+
+\begin{equation}
+\label{kgeq}
+\frac{\partial^2 \psi}{ \partial t^2} - \nabla^2\psi + m^2\psi = 0.
+\end{equation}
+
+
+This  is  the   \term{Klein-Gordon} equation,  the  continuous  version  of   \eqref{discrete-kgeq} discussed  above.   It  has  plane  wave  solutions  of  the
+ form
+
+
+
+\begin{equation}
+\psi(x,t) = e^{i(kx \pm \omega t)}.
+\end{equation}
+
+
+Substitute  into  the  equation  and  cancel  common  factors  to  obtain  the
+ dispersion  relation
+
+
+
+\begin{equation}
+\label{kg-dispersion}
+\omega^2(k) = k^2 + m^2
+\end{equation}
+
+
+Notice  that   \eqref{kg-dispersion} is  essentially  the  Fourier  transform  of  the  energy  momentm  relation   \eqref{kg-energy-momentum-relation}
+
+ \subsection{Wave  velocity}
+
+If  the  mass  term   $m$  is  zero,  then  the  Klein-Gordon  equation  is  a  wave  equation  with  propagation  velocity   $c = 1$ .   Recall  that  for  wave  motion,  there  are  two  notions  of  velocity.   The   \italic{phase  velocity}  $v_{phase} = \omega/k$  and  the   \italic{group  velocity}  $v_{group} = d\omega/dk$ .   For  the  Klein-Gordon  equation
+
+
+
+\begin{equation}
+v_{phase} = \frac{\omega}{k} = \left(1 + \frac{m^2}{ k^2} \right)^{1/2}
+\end{equation}
+
+
+This  quantity  is  greater  than  the  speed  of  light   $c = 1$  whenever  the  mass  is  positive.   We  shall  discuss  this  apparent  paradox  in  a  moment.   The  group  velocity
+ is
+
+
+
+\begin{equation}
+v_{group} = \frac{d\omega}{dk} = \frac{k}{\omega} = \left(1 + \frac{m^2}{ k^2} \right)^{-1/2},
+\end{equation}
+
+
+which  is  always  less  than  or  equal  to   $c =1$ .   About  the  paradox:   there  isn't  one,  because  a  particle  is  a  localized  wave  packet,  and  these  travel  with  the  group  velocity.
+
+
+
+
+
+\end{document}

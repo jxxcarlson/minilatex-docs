@@ -1,0 +1,219 @@
+
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\begin{mathmacro}
+\newcommand{\bra}[0]{\langle}
+\newcommand{\ket}[0]{\rangle}
+\newcommand{\caF}[0]{\mathcal{F}}
+\newcommand{\caA}[0]{\mathcal{A}}
+\newcommand{\boR}[0]{\bf{R}}
+\newcommand{\bor}[0]{\bf{r}}
+\newcommand{\boL}[0]{\bf{L}}
+\newcommand{\sett}[2]{\{#1\ |\ #2 \}}
+\newcommand{\set}[1]{\{#1\}}
+
+\end{mathmacro}
+
+\setcounter{section}{12}
+
+\section{N-Particle Systems: Bosons and Fermions}
+
+\innertableofcontents
+
+So far our quantum mechanical universe has been a rather lonely one -- generally just a single particle.  We now take up the study of many-particle systems, in which we learn once again how powerful is the influence of symmetry. (Viva Emmy Noether!)
+
+\subsection{Distinguishable particles}
+
+We begin with two particles, one of mass $m_1$, the other of mass $m_2$.  In classical mechanics each is located by a position vector $\bor_i$.  In quantum mechanics, the system is described by a wave function $\psi(\bor_1, \bor_2)$ governed by a Hamiltonian operator
+which of the general form
+
+\begin{equation}
+H = \frac{\hat p_1^2 }{2m_1}
+    + \frac{\hat p_2^2 }{2m_2}
+ + V(\bor_1, \bor_2)
+\end{equation}
+
+In the space of functions $\psi(\bor_1 , \bor_2 )$, the space of sums of products $\psi_1(\bor_1 )\psi_2(\bor_2)$ is dense.  Now suppose that $H$ can be written as sum of Hamiltonians  $H_1 + H_2$ where $H_i$ depends only on $\bor_i$.  For example, we may take the free-particle Hamiltonian where $V(\bor_1, \bor_2)$ above is identically zero,  Or we may take $V(\bor_1, \bor_2) = U(\bor_1) + U(\bor_2)$, in which case the particles interact with an external field, but not with each other.
+
+
+Now let $\set{\psi_a({\bf r}_1 )}$ and $\set{\psi_b(({\bf r}_2 )}$ be complete orthonomal sets of states for the two Hamiltonians.  Then $\set{ \psi_a(\({\bf r}_1) \psi_b(\({\bf r}_2) }$ is a complete orthormal basis for the Hilbert space of functions $\psi(\bor_1, \bor_2)$. The basis functions are joint eigenfunctions for the two Hamiltonians. If the states of the individual Hamiltonians are non degenerate, then the same will be true of the sum of Hamiltonians: the state with quantum numbers $a, b$ is non degenerate.
+
+\subsection{Identical particles: bosons and fermions}
+
+The preceding discussion assumes that we can tell the particles apart, so that it makes sense to say that particle 1 is in state $a$ and particle 2 is in state $b$.  In this case, we view $a, b$ as an ordered pair.  But it may be that the particles are identical.  If this is the case, both $\psi_a(\bor_1)\psi_b(\bor_2)$ and $\psi_a(\bor_2)\psi_b(\bor_1)$ belong to state $a, b$.  We should view the label as a set, not an ordered pair.
+
+To better understand the space of states $a, b$, consider the \term{exchange operator} $P$. It acts on coordinates by $P(\bor_1, \bor_2) = (\bor_2, \bor_1)$ and on functions by $(Pf)(\bor_1, \bor_2) = f(\bor_2,\bor_1)$, that is, $Pf = f\circ P$.  Since $P^2 = 1$, the spectrum of $P$ is $\set{\pm1}$. Since $P$ commutes with the Hamiltonian, the space of states $a, b$, decomposes as an orthogonal direct sum of eigenspaces of $P$.  The eigenvectors are
+
+\begin{equation}
+\label{boson}
+\psi^+_{a,b}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_b(\bor_2) + \psi_a(\bor_2)\psi_b(\bor_1))
+\end{equation}
+
+for the $+1$ eigenspace and
+
+\begin{equation}
+\label{fermion}
+\psi^-_{a,b}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_b(\bor_2) - \psi_a(\bor_2)\psi_b(\bor_1))
+\end{equation}
+
+for the $-1$ eigenspace.  The first are called \term{bosons}, the second \term{fermions}.  Electron and protons are fermions. Photons and the Higgs particle are bosons.  A composite particle made of an odd number fermions is a fermion, while a composite made of an even number is a boson.
+
+Bosons and fermions have markedly different properties.  Consider, for example, the wave function for a fermion in state $a, a$:
+
+\begin{equation}
+\psi^-_{a,a}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_a(\bor_2) - \psi_a(\bor_2)\psi_a(\bor_1)) = 0
+\end{equation}
+
+It is zero, that is, it is not a state.  Said in other words,
+
+\begin{equation}
+\text{Two fermions cannot occupy the same state.}
+\end{equation}
+
+This is the \term{Pauli exclusion principle} in the context of two-particle systems.
+
+\subsection{Many particles}
+
+Consider now a system of $N$ identical particles. and let $P_{ij}$ be the operator that permutes the $i$-th and $j$-th coordinates.  The $P_{ij}$ commute with the Hamiltonian (but not necessarily with one another).  One has a representation of the symmetric group $S_N$ on the space of functions $\psi(\bor_1, \ldots, \bor_N)$ which commutes with the Hamiltonian and therefore decomposes the space of states into joint eigenstates $\psi_{E,\rho}$, where $E$ is the energy and $\rho$ is an irreducible representation of $S_N$.  Thus there is a potentially very complicated description of the exchange degeneracies of an $N$-particle system.  However, Nature has been kind.  There are only two one-dimensional representations of the symmetric group -- the trivial representation and the sign representation -- and these are the only representations of the symmetric group one wave functions that occur in Nature.  This is a separate law of physics, independent of and with the same standing as the Schroedinger equation.  The representation -- trivial or sign -- that a wave function belongs to is a conserved quantity.  Thus, once a fermion, always a fermion, and likewise for bosons.
+
+Wave functions that transform according to the trivial representation are wave functions of bosons.  To write out the wave function, let and element $\sigma$ of the permutation group act by permuting the coordinates.  If $f$ is a function of those coordinates, then $\sigma f = f\circ \sigma$.  The bosonic wave functions are then
+
+\begin{equation}
+ \psi^+(\bor_1, \ldots , \bor_N)
+=
+\frac{1}{N!} \sum_{\sigma \in S_N} \sigma \psi
+\end{equation}
+
+Wave functions that transform according to the sign representation are wave functions of fermions.  They can be written as
+
+\begin{equation}
+ \psi^-(\bor_1, \ldots , \bor_N)
+=
+\frac{1}{N!} \sum_{\sigma \in S_N} \text{sign}(\sigma)\sigma \psi,
+\end{equation}
+
+where the sign of a permutation is $-1$ if it is a product of an an odd number of transpositions and $+1$ if it it is product of an even number.
+
+
+NOTE: The fact that there are only two one-dimensional representations of the symmetric group follows from the fact that its abelianization is the  a cyclic group of order two.  Every one-dimensional representation factors through the abelianization.  A representation $\phi: C_2 \longrightarrow \mathbb{C}^*$ of the cyclic group of order two is determined by the value  $u$ of $\phi(g)$, where $g$ generates $C_2$.  Since $g^2 = 1$,
+$u^2 = 1$ as well.  Thus $u \in \set{ +1, -1}$.
+
+
+
+
+
+\subsection{Periodic Table}
+
+The Pauli Exclusion Principle has profound implications, among which is the construction of the periodic table of elements.   To review very quickly, the Hamiltonian for in spherical coordinates has the form
+
+\begin{equation}
+H = - \frac{ \hbar^2 }{2mr}\frac{ \partial^2 }{ \partial r^2 } r + \frac{{\bf L}^2}{ 2mr^ 2 }  + V(r)
+\end{equation}
+
+where $\boL$ is the angular momentum operator.  The square of the angular momentum operator $\boL^2$ commutes with the Hamiltonian and has eigenvalues $\ell(\ell + 1)$, where $\ell \ge 0$ is an integer.  The angular momentum operator $L_z$ commutes with both $\boL^2$ and the Hamiltonian, and has eigenvalues which are integers $m$ with $|m| < \ell$. Thus the states of Hamiltonian are $\psi){n\ell m}$, where the eigenvalues of the Hamiltonian are $E_n$. Setting $\psi_{n\ell m}  = Y^m_\ell(\theta, \phi)u(r)/r$, one obtains the radial equation
+
+\begin{equation}
+- \frac{\hbar^2}{2m} \frac{ d^2 u}{ dr^2 }
+   + \frac{ \hbar^2 } { 2m } \frac{\ell(\ell + 1)}{ r^2 } u + V(r)u = E_n u
+\end{equation}
+
+from which the energies $E_n$ can be determined.  It turns out that $\ell < n$.  They are of the form $-B/n^2$ for a positive constant $B$, the binding energy.  Now suppose we want to build an atom where the nucleus has charge $Z$.  We add an electron with energy $E_1$ and quantum numbers $1,0,0$, The lowest energy solution would be to keep adding electrons at energy $E_1$.  However, electrons are fermions, so we cannot add one with state $1,0,0$.  Because of the inequalities $|m| \le \ell < n$, It seems that the next electron will have state $E_2$ and quantum number $(2,0,0)$. However, electrons have one other quantum number -- the intrinsic spin -- which is $\pm1/2$.  Thus we can add another electron with quantum numbers $1,0,0)$, so long as we add it with spin opposite to the spin of the electron that is already in place.  If $Z = 2$, we are done and have just built a helium atom, which has two electrons with oppositely oriented spin in the lowest orbital.  Continuing this process, always adding an electron in the next highest energy state when forced to do so by the Exclusion Principle, we gradually construct the periodic table.  One subtlety is that we have completely ignored inter-electron interactions.  These become significant when $Z$ is large -- for example, inner electrons screen the nuclear charge and therefore diminish the effective Coulomb force for other electrons, altering somewhat the calculations. The table below illustrates how these ideas dictate the first three rows of the periodic table. In the fourth row things become more complicated.  See \href{http://hyperphysics.phy-astr.gsu.edu/hbase/chemical/eleorb.html}{Hyperphysics} for more details.
+
+\begin{verbatim}
+name | n | l | m | N | elements |
+1s | 1 | 0 | 0 | 2 | H, He |
+2s | 2 | 0 | 0 | 2 | Li, Be |
+2p | 2 | 1 | -1, 0, +1 | 6 | B, C, N, O, F, Ne |
+3s | 3 | 0 | 0 | 2 | Na, Mg |
+3p | 3 | 1 | -1, 0, +1 | 6 | Al, Si, P, S, Cl, Ar |
+\end{verbatim}
+
+\subsection{Exchange forces}
+
+Consider first a system of two distinguishable particles with wave function $\psi_a(x_1)\psi_b(x_2)$, where $\psi_a$ and $\psi_b$ are normalized.  That is, the first particle is in state $a$ and the second in state $b$.  We ask: what is the expected value of the square of their separation?  Now
+
+\begin{equation}
+\bra (x_1 - x_2)^2 \ket
+  = \bra x_1^2 \ket
+ + \bra x_2^2 \ket
+ - 2 \bra x_1 \ket\bra x_1 \ket,
+\end{equation}
+
+so our problem is reduced to the computation of these simpler expectations.  For the first, we have
+
+\begin{align}
+\bra x_1^2 \ket
+&= \int\kern-4pt\int x_1^2 |\psi_a(x_1)\psi_b(x_2)|^2 dx_1 dx_2 \\
+&= \int |\psi_a(x_1)|^2 dx_1 \int |\psi_b(x_2)|^2  dx_2\\
+&= \int x_1^2 |\psi_a(x_1)|^2 dx_1 \\
+&= \bra x^2 \ket_a,
+\end{align}
+
+the expectation of $x^2$ for state $a$.  (We omit the limits of integration, which are $\pm \infty$.
+Likewise, $\bra x_2^2 \ket = \bra x^2 \ket_b$.  For the cross term, we have
+
+\begin{align}
+\bra x_1x_2 \ket &= \int\kern-4pt\int x_1x_2 |\psi_a(x_1)|^2 |\psi_a(x_2)|^2 dx_1 dx_2 \\
+&= \bra x \ket_a \bra x \ket_b
+\end{align}
+
+Thus we have
+
+\begin{equation}
+\bra (x_1 - x_2)^2 \ket = \bra x^2 \ket_a +  \bra x^2 \ket_b - 2 \bra x \ket_a \bra x \ket_b .
+\end{equation}
+
+Introducing the standard deviation $\sigma_a^2 = \bra x^2 \ket - (\bra x \ket)^2$, we have
+
+\begin{equation}
+\bra (x_1 - x_2)^2 \ket = (\bra x \ket_a - \bra x \ket_b)^2 + \sigma_a^2 + \sigma_b^2
+\end{equation}
+
+Let us call the quantity on the left $\bra (x_1 - x_2)^2 \ket_{dist}$.
+Nothing too exciting yet, bit we need this result as a standard of comparison for the behavior of the mean-squared separation for bosons and fermions.  To this end, we compute the analogous quantities
+$\bra (x_1 - x_2)^2 \ket_{Bose}$ and $\bra (x_1 - x_2)^2 \ket_{Fermi}$
+
+From equation  \eqref{boson} we find that bosons satisfy
+
+\begin{equation}
+|\psi(x_1,x_2)|^2 = \frac{1}{2}\left[   |\psi_a(x_1)|^2  |\psi_b(x_2)|^2
++ |\psi_b(x_1)|^2  |\psi_a(x_2)|^2 \\
++ \psi_a(x_1)\psi_b(x_1)^*\psi_b(x_2)\psi_a(x_2)^* \\
++ \psi_b(x_1)\psi_a(x_1)^*\psi_a(x_2)\psi_b(x_2)^* \right]
+\end{equation}
+
+Calculating expectations with this formula, and taking into account that $\psi_a$ and $\psi_b$ are orthogonal, we obtain
+
+\begin{equation}
+\bra (x_1 - x_2)^2 \ket_{Bose} = \bra (x_1 - x_2)^2 \ket_{Dist} - 2|\bra\psi_a x | \psi_b \ket|^2
+\end{equation}
+
+For fermions we have
+
+\begin{equation}
+\bra (x_1 - x_2)^2 \ket_{Fermi} = \bra (x_1 - x_2)^2 \ket_{Dist} + 2|\bra\psi_a | x | \psi_b \ket|^2
+\end{equation}
+
+Thus bosons tend to find themselves in closer proximity than do distinguishable particles.  By contrast, fermions hold themselves further apart.  This effect, sometimes called the  \term{exchange force} , is not a real force since it is not derived from a potential.  It is purely an effect of symmetry and the fact that particles are described by wave functions.  Note also that for the "exchange force" to operate, the integral
+
+\begin{equation}
+\bra\psi_a | x | \psi_b \ket = \int^\infty_{-\infty} x\psi_a(x)^*\psi_b(x)\, dx
+\end{equation}
+
+must be nonzero.  In other words, there must be an overlap between the wave functions of the two particles.  The exchange force is a very short range force.  It comes into play, for example, in the formation of white dwarfs and neutron stars. (See \href{http://physics.ucsd.edu/students/courses/fall2009/physics130b/IdentParts.pdf}{J. Broida's notes} on identical particles).
+
+
+
+
+\subsection{References}
+
+\begin{thebibliography}
+
+\bibitem{Broida} \href{http://physics.ucsd.edu/students/courses/fall2009/physics130b/IdentParts.pdf}{Identical particles}
+
+\bibitem{Hyperphysics} \href{http://hyperphysics.phy-astr.gsu.edu/hbase/chemical/eleorb.html}{Periodic table and quantum numbers}
+
+\bibitem{YT} \href{http://yufeizhao.com/papers/youngtab-hcmr.pdf}{Representations of the permutation group and Young tableaux}
+
+
+\end{thebibliography}

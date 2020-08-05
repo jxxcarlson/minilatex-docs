@@ -1,0 +1,368 @@
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\begin{mathmacro}
+\newcommand{\bop}[0]{\bf{p}}
+\newcommand{\boF}[0]{\bf{F}}
+\newcommand{\bor}[0]{\bf{r}}
+\newcommand{\bov}[0]{\bf{v}}
+\end{mathmacro}
+
+\setcounter{section}{4}
+
+
+\section{Bound States}
+
+\innertableofcontents{2.}
+
+So far we have consider the Schroedinger equation for a free particle:
+
+\begin{equation}
+  i\hbar \frac{\partial \psi}{\partial t}
+    =
+  -\frac{ \hbar^2 }{2m}\frac{ \partial^2 \psi}{ \partial x^2 }
+\end{equation}
+
+Let us reconsider the right-hand side so as to account for particles "bound" by a force.  Recall that the plane wave $\psi(x,t) = \exp i(kx - \omega t)$  is an eigenvector of the operator
+
+\begin{equation}
+  \hat p = -i\hbar \frac{\partial}{\partial x}
+\end{equation}
+
+Indeed, $\hat p \psi = \hbar  k\psi = p\psi$, where we have used the de Broglie relation.  This computation justifies the terminology: the operator $\hat p$ has as eigenvectors the plane waves of momentum $p$, and the corresponding eigenvalue is the momentum.
+
+
+The operator on the right-hand side of the Schroedinger equation can be written in terms of the momentum operator:
+
+\begin{equation}
+    -\frac{ \hbar^2 }{2m}\frac{ \partial^2 }{ \partial x^2 }
+ = \frac{\hat p^2}{2m}
+\end{equation}
+
+Thus the right-hand side is the classical kinetic energy, $K.E. = p^2/2m$ with the momentum operator in place of the momentum.
+
+Or task is now to find the the general form of the right-hand side. To this end, we review the notions of potential energy and Hamiltonian function from classical mechanics.
+
+\subsection{Potential and Force}
+
+Consider a particle moving under the influence of a force $\boF = - \nabla V$ where  $V$ is a function -- the potential of the force.  It is well-defined up to addition of a constant..  For example, take the one-dimensional universe  represented by the $y$ axis, where $y = 0$ corresponds to ground level.  Consider a body of mass $m$ subject the for force associated with the potential $V(y) = mgy$.  The higher the body of above ground level, the greater the potential  The associated force, $F = -mg$, is directed downwards, as is the force of gravity in every day life.
+
+What kind of quantity is the potential $V(y)$?  Since $F = -V'(y)$, and since $F$ is of dimension $\text{kg-m/sec}^2$, $V$ must be of dimension $\text{kg-m}^2/\text{sec}^2$.  That is, it has the same dimension as the kinetic energy $(1/2)mb^2$.  Consequently $V$
+\italic{is} an energy: the \term{potential energy}.
+It is the energy that a body has by virtue of its position.
+
+Consider now the quantity
+
+\begin{equation}
+  E = \frac{1}{2}mv^2 + V
+\end{equation}
+
+In our example,
+
+\begin{equation}
+  E(t) = \frac{1}{2}m\left(\frac{dy}{dt}(t)\right)^2 + V(y(t))
+\end{equation}
+
+Let us see how this quantity changes with $t$:
+
+\begin{equation}
+  \frac{dE}{dt} = m\frac{dy}{dt}\frac{ d^2y }{ dt^2 }+ V'(y(t))\frac{dy}{dt}
+\end{equation}
+
+We can rewrite this as
+
+\begin{equation}
+  \frac{dE}{dt}
+   = \frac{dy}{dt}\left(m\frac{ d^2y }{ dt^2 }+ V'(y(t))\right)
+    = \frac{dy}{dt}\left(ma - F\right)  = 0
+\end{equation}
+
+Thus the total energy $E$ is a \term{conserved quantity}: it does not vary
+as $t$ varies.
+
+Conservation of energy makes it easy to solve physics problems without solving differential equations.  Consider, for example, a 10 kg stone held at rest 10 meters above the ground.  The acceleration of gravity at sea level is about 9.8 $\text{m/sec}^2$.  Thus its potential energy is about 98 Joules.  If the stone is dropped, potential energy is transformed into kinetic energy -- energy of position is transformed into energy of motion. When the stone reaches the ground, the potential energy is zero and the kinetic energy is 98 Joules.  Thus the velocity is $\sqrt{9.8}$ = 3.13 m/sec.
+
+\subsection{Harmonic Oscillator}
+
+As a further example of a system govenred by a potiential, consider the classical mass-spring system.  It consists of a mass $m$ and spring with force law $F(x) = - kx$, where $k$ is the spring constant: larger in value for stiffer springs.  The differential equation $F = ma$ reads
+
+\begin{equation}
+m\ddot x + kx = 0
+\end{equation}
+
+This equation has complex solutions
+
+\begin{equation}
+  x(t) = e^{\pm i\omega t},
+\end{equation}
+
+or real solutions
+
+\begin{equation}
+  x(t) = A\cos \omega t + B \sin \omega t,
+\end{equation}
+
+where
+
+\begin{equation}
+\omega = \sqrt{\frac{k}{m}}
+\end{equation}
+
+The force is derived from a potential $V(x) = (1/2)kx^2$, and the total energy is
+
+\begin{equation}
+E = K.E. + P.E. = \frac{1}{2}m\dot x^2 + \frac{1}{2}kx^2
+\end{equation}
+
+If one takes $x(t) = A\sin \omega t$, one sees that as the phase $\omega t$ increases, there is periodic exchange of kinetic and potential energy.  When $t = 0$, the kinetic energy is at its maximum; when the phase is $\pi/2$, the roles are reversed.  And so on.
+
+
+\begin{remark}
+We shall generally write the Hamiltonian as
+\[
+H  = \frac{p^2}{2m} + \frac{m\omega^2 }{2 } x^2
+\]
+\end{remark}
+
+
+\subsection{Phase space and the Hamiltonian}
+
+The \term{phase space} of a mechanical system of one dimension is the set of all possible pairs (position, momentum), that is, it is the set of all pairs
+$(x,p)$.  For higher-dimensional universes, take $x$ and $p$ to be vectors.  Phase space is natural in many ways.  For one, it is the space of all possible sets of initial data for Newton's Law of Motion.  For another, observe that a trajectory $t \mapsto x(t)$ defines a path $t \mapsto (x(t), p(t)$ in phase space, where $p(t) = m\dot x(t)$.  Not all paths in phase space correspond to physical motional of a particle.  To see this in the proper light, we recast Newton's equation as $\dot p = F = -\nabla V$.  We also have $\dot x = p/m$.   A path in phase space which satisfies these two first order differential equations corresponds to a solution of Newtons' equation and vice versa.   Now consider the function on phase space given by
+
+\begin{equation}
+H(x, p) = \frac{p^2}{2m} + V(x)
+\end{equation}
+
+When $x$ and $p$ are vectors, $p^2$ is the square of the norm.  This is the \term{Hamiltonian function}.  Let us calculate its derivative \italic{along a trajectory} -- that is, along the path associated to the physical motion of a particle.  By the chain rule,
+
+\begin{equation}
+\frac{dH}{dt} = \frac{p}{m} \dot p + \nabla V\cdot \dot x
+\end{equation}
+
+Applying Newton's law and the definition $p = m\dot x $, we
+obtain
+
+\begin{equation}
+\frac{dH}{dt} = -\frac{p}{m} \nabla V + \nabla V\cdot \frac{p}{m} = 0
+\end{equation}
+
+Consequently \italic{physical trajectories lie on the level surface the Hamiltonian function}.  This is a restatement of the principle of conservation of energy.
+
+We can say still more.  The velocity vector field of a path in phase space is given by $(\dot x, \dot p)$.  If this is the path of a physical trajectory, then in addition      $(\dot x, \dot p) = (p/m, -\nabla V)$.  The right hand side is a function of the point $(x,p)$ and therefore defines a vector field $\mathcal{H}$.
+
+NB: The physical trajectories are the flow lines of the Hamiltonian vector field $\mathcal{H}$.
+
+
+\subsection{General form}
+
+We now return to quetion of the general form of Schrödinger's equation. For  a free particle, the right-hand side is  the operator corresponding to kinetic energy.
+For a particle subject to a potential, there should be an additional operator.  The simplest choice is the multiplication operator associated to the potential, that is, the operator that maps $\psi$ to $V\psi$.  Thus our candidate equation is
+
+\begin{equation}
+  i\hbar \frac{\partial \psi}{\partial t}
+    =
+  -\frac{ \hbar^2 }{2m}\frac{ \partial^2 \psi}{ \partial x^2 }
+   + V\psi
+\end{equation}
+
+We can write this in more general form as
+
+\begin{equation}
+  i\hbar \frac{\partial \psi}{\partial t}
+    =
+  H\psi
+\end{equation}
+
+where $H$ is the \term{Hamiltonian operator}.
+
+In this example, we see the general rule for writing down the Hamiltonian of a quantum system corresponding to classical one.
+
+\begin{enumerate}
+\item Replace the components $p_k$ of the momentum $\bop$ by the the corresponding operators $-i\hbar \partial/\partial x_k$.
+
+\item View any function of the coordinates as a multiplication operator.
+\end{enumerate}
+
+\subsection{The Rectangular Potential Well}
+
+
+\image{http://psurl.s3.amazonaws.com/images/jc/rectangular-well-7cea.jpg}{Rectangular well}{width: 250, float: right}
+Let us set ourselves the task of understanding one-dimensional quantum systems with simple potential functions.  The simplest of all -- almost too simple -- is the system with constant potential.  However, once we understand this case, we can successfully study the case the rectangular well, where the potential function is as in the figure below.  One may think of it as an idealization of a system in which the potential function is smooth but has very steep walls -- a kind of flat-bottomed canyon carved out of a flat plateau.  Once we understand the rectangular well with walls of finite height, we will consider the still-further idealized case in which the walls are of infinite height.
+
+
+\subheading{Walls of finite height}
+
+Consider a particle subject to a potential $V(x)$ as in the figure. On the interval $[-L/2, L/2]$, $V(x) = 0$.  Outside this interval, the potential takes a constant value $V_0$.  This is the case of a particle "in a potential well."  To solve it, we first solve the Schrödinger equation for a constant potential: $V(x) = V_0$ for all $x$.  To this end, we separate variables, taking $\psi(x,t) = \phi(x)\upsilon(t)$,  We find that
+
+\begin{equation}
+i\hbar \phi(x)\dot\upsilon(t) = -\frac{\hbar^2}{2m}\phi''(x)\upsilon(t) + V(x)\phi(x)\upsilon(t)
+\end{equation}
+
+Dividing by $\phi(x)\upsilon(t)$, we obtain
+
+\begin{equation}
+i\hbar \frac{\dot\upsilon(t)}{\upsilon(t)} = -\frac{\hbar^2}{2m}\frac{\phi''(x)}{\phi(x)} + V(x)
+\end{equation}
+
+Since the left and right-hand sides depend on different variables, they must both be constant, say equal to a constant $E$.  For the function of time, we have a first order differential equation
+
+\begin{equation}
+i\hbar \dot\upsilon(t) = E\upsilon(t)
+\end{equation}
+
+with constant coefficients.  Its solutions are multiples of
+
+\begin{equation}
+\upsilon(t) = e^{-i(E/\hbar)t}
+\end{equation}
+
+For the the function of position, we have the second order
+differential equation
+
+\begin{equation}
+ -\frac{\hbar^2}{2m}\phi''(x)+ V(x)\phi(x) = E\phi(x).
+\end{equation}
+
+In our case, $V(x) \equiv V_0$, so  the equation has constant coefficients,
+
+\begin{equation}
+ \frac{\hbar^2}{2m}\phi''(x) = (V_0-E)\phi(x),
+\end{equation}
+
+and can be solved explicitly with real or complex exponentials.  If $E < V_0$, then the expression on the right of the differential equation is positive and $\phi(x)$ is of the form  $e^{\pm kx}$ with
+
+\begin{equation}
+k = \frac{\sqrt{2m(V_0-E)}}{\hbar}
+\end{equation}
+
+If $E > V_0$, then the expression on the right of the differential equation is negative, and  $\phi(x)$ has the form $e^{\pm i kx}$ with
+
+\begin{equation}
+k = \frac{\sqrt{2m(E-V_0)}}{\hbar}
+\end{equation}
+
+
+\image{http://psurl.s3.amazonaws.com/images/jc/bound-state-rectangular-well-ecca.jpg}{Even solution}{width: 250, float: right}
+Let us return the case of the rectangular well and consider the case in which $E < V_0$.   A solution to Schrödinger's equation consists of three parts: a sum of exponentials in the left-most and right-most regions, and a sum of sines and cosines in the middle region.  For physical reasons, the absolute value of the wave function cannot increase without bound as $x$ tends to $\pm \infty$.  Thus the pieces must consist of an increasing exponential on the left, a trigonometric function in the middle, and a decreasing exponential on the right.
+
+We can make a further simplification.  Let $\Pi$ be the \term{parity operator}. Thus $\Pi\phi(x) = \phi(-x)$.  A function is even if it
+is an eigenfunction of $\Pi$ with eigenvalue $+1$.  A function is odd if it is an eigenvector with eigenvalue $-1$.
+Let
+
+\begin{equation}
+   [ A,B ]  = AB - BA
+\end{equation}
+
+be the commutator of operators.  One finds that
+$ [\Pi, d/dx ] = 0$ and also that
+$ [ \Pi , V ]  = 0$.  From this it follows that
+$  [  \Pi, H ] = 0  $,
+so that the even and odd components of a solution are also solutions. Let us concentrate on an even solution.  The assumption of even parity means that the middle solution is a cosine.  Thus the solution we seek has the form
+
+\begin{equation}
+\phi(x) = [Ae^{k'x} , B\cos kx , A e^{-k'x}]
+\end{equation}
+
+where the listed expressions give the function on the interval $(-\infty, -L2]$, $[-L/2, L/2]$, and $[L/2, \infty]$, respectively, and
+where
+
+\begin{equation}
+k = \frac{\sqrt{2mE}}{\hbar}, \qquad k' = \frac{\sqrt{2m(V_0-E)}}{\hbar}
+\end{equation}
+
+The constants must be chosen so that function values and values of derivatives match at $x = \pm L/2$.
+
+\subsection{Matching solutions}
+
+\image{http://psurl.s3.amazonaws.com/images/jc/bound-state-energies-71cf.jpg}{Matching solutions}{width: 350, align: center}
+
+The equations for matching solutions at the discontinuities of the potential at $x = -L/2$
+
+\begin{equation}
+Ae^{-k'L/2} = B\cos kL/2
+\end{equation}
+
+from which we obtain
+
+\begin{equation}
+\frac{A}{B} = \frac{\cos kL/2}{ e^{-k'L/2} }
+\end{equation}
+
+For the derivative, we have
+
+\begin{equation}
+Ak'e^{-k'L/2} = Bk\sin kL/2 ,
+\end{equation}
+
+from which we obtain
+
+\begin{equation}
+\frac{A}{B} = \frac{k\sin kL/2}{ k'e^{-k'L/2} }
+\end{equation}
+
+Comparing the two expressions for $A/B$, we find that
+
+\begin{equation}
+  k \tan kL/2 = k'
+\end{equation}
+
+Multiply by $L/2$ and set $kL/2  = v$, $k'L/2 = u$ to obtain
+
+\begin{equation}
+  v \tan v = u.
+\end{equation}
+
+Now observe that $k^2 + k'^2 = 2mV_0/\hbar^2$, so that $u^2 + v^2 = u_0^2$, with $u_0^2 = mV_0L^2/2\hbar^2$.  Thus
+\eqref{bound-state-equation} has solutions corresponding the points where the graphs of the functions $v \mapsto v\tan v$ and $v \mapsto \sqrt{u_0^2 -v^2}$ meet.  Since the graph of the latter is a quarter-circle, there are only finitely many solutions.
+
+\subsection{Quantum weirdness}
+
+The rectangular well, despite its simplicity, is rich in quantum weirdness.
+
+\begin{enumerate}
+\item The energy states for $E < V_0$ are \italic{finite in number}.  This is unlike the classical situation.
+%
+\item The lowest energy state is nonzero -- look at the graph!
+%
+\item Consider a simple example of a classical particle of total energy $5$ trapped in a well of potential zero with walls at potential 10.  Inside the well, the particle has total energy 5.  Outside the well, it would have to kinetic energy $-5$ by virtue of conservation of energy.  But kinetic energy is always positive or zero. Conclusion: the classical particle cannot be outside the well.  But a quantum particle \emph{can be} outside the wall -- the most likely very close to it.
+\end{enumerate}
+
+\subsection{Infinite well}
+
+Consider now a sequence of potentials where $L$ is fixed and $V_0$ tends to infinity: the well become deeper and deeper. To see what happens to solutions to the Schroedinger equation, let us suppose that we fix $B = 1$ in the expression \eqref{well-pieces}. Using \eqref{a-over-b}, we see that $B \longrightarrow 0$ as $V_0$ and hence $k'$ tend to infinity.  Thus, in the limit of infinitely high walls, the wave function $\psi(x,t)$ vanishes at the end points of the interval for all $t$.
+
+To understand this infinite well, it is convenient to set the endpoint of the interval at $x = 0$ and $x = L$.  Functions $\phi(x)$ which satisfy both the differential equation and the boundary conditions are of the form $\sin kx$, where $kL = n\pi$ for some positive integer $n$. Thus
+
+\begin{equation}
+  k = \frac{n\pi}{L}.
+\end{equation}
+
+From \eqref{kkprime} we obtain
+
+\begin{equation}
+  E_n = \frac{ n^2 \pi^2 \hbar^2 }{ 2mL^2 }
+\end{equation}
+
+Once again the energy states of the particle in the potential well are quantized.  This time, however, there are infinitely many states whose energy varies quadratically with the quantum number $n$.
+
+\subheading{Example}
+
+Let us find the ground state energy of an electron trapped in a potential well of width $L = 10^{-10}$ meter, about the size of an atom. The mass of an electron is $m_e = 9.1\times 10^{-31}$ kg, so we find that $E_1 = 6\times 10^{-18}$ Joules.  Such an energy is better understood in terms of electron volts.  One electron volt is the kinetic energy imparted to an electron when it is accelerated across a potential difference of 1 volt.  In one Joule, there are $6.24 \times 10^{18}$ electron volts.  Thus the energy of the ground state is about 37.5 electron volts.  For an arbitrary state, we have
+
+\begin{equation}
+E_n = 37.5n^2
+\end{equation}
+Now consider what happens when an electron in state $n$ emits a photon and falls to the ground state.  The energy of the photon will be the difference $E_n - E_1$, that is, $37.5(n^2 - 1)$ electron volts.
+For example, if the electron falls from state $n = 2$ to state $n = 1$, it
+will emit a photon of $112.5$ electron volts or   Let us find the wavelength of the light.
+According the Einstein-Planck relation, the frequency of the light corresponding to this photon is $E = h\nu$. The wavelength and frequency are related by $\nu\lambda = c$, where $c$ is the velocity of light.  Thus
+
+\begin{equation}
+  E = \frac{hc}{\lambda}.
+\end{equation}
+According to this relation, an energy of 112.5 electron volts corresponds to a wavelength of 11 nm.  This is a very energetic photon, corresponding to a wavelength in the extreme ultraviolet region,  Photons with a wavelength greater than about 30 nm interact mostly with the valence, or outer electrons of an atom.  At less than 10 nm, the interaction is primarily with the inner) electrons of an atom, or even the nucleus.
+
+\subsection{Effective width}
+
+
+See \href{http://hyperphysics.phy-astr.gsu.edu/hbase/quantum/pfbox.html}{hyperphysics}

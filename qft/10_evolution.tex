@@ -1,0 +1,213 @@
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\begin{mathmacro}
+\newcommand{\bra}[0]{\langle}
+\newcommand{\ket}[0]{\rangle}
+\newcommand{\caF}[0]{\mathcal{F}}
+\newcommand{\bbR}[0]{\bf{R}}
+\newcommand{\set}[1]{\{#1\}}
+\end{mathmacro}
+
+\setcounter{section}{10}
+
+\section{Evolution and Propagation}
+
+\innertableofcontents
+
+Consider a wave function $\psi(x,t)$.  If we fix $t$ and let $x$ vary, the result is an element $\psi(t)$ of $L^2(\bbR)$ or, more generally $L^2(\text{configuration space})$.  Thus the evolution of our system in time is given by a function $t \mapsto \psi(t)$.  The dynamics of this path in Hilbert space is governed by an ordinary differential equation ,
+
+\begin{equation}
+\label{schreq}
+i\hbar\frac{d\psi}{dt} = H\psi,
+\end{equation}
+
+Now consider bases of orthogonal normalized states $\set{\psi_k(t_1)}$ and $\set{\psi_k(t_0)}$ at times $t_1$ and $t_0$, with $t_1 > t_0$.  There is a unique linear transformation $U(t_1,t_0)$ such that $\psi_k(t_1) = U(t_1,t_0)\psi_k(t_0)$ for all $k$.  It must be unitary because the bases are orthonormal.  This family of transformations is called the \term{propagator}.  The propagator satisfies various identities, e.g., the composition law
+
+\begin{equation}
+U(t_2, t_0) = U(t_2, t_1)U(t_1, t_0)
+\end{equation}
+
+as well as $U(t,t) = 1$, $U(t_1,t_2) = U(t_2,t_1)^{-1}$.
+
+Let us write $U(t) = U(t,0)$ for convenience, and let us suppose given states $\alpha$ and $\beta$.  The probability that the system finds itself in state $\beta$ after time $t$ is given by the matrix element
+
+\begin{equation}
+\bra \beta | U(t) | \alpha \ket
+\end{equation}
+
+This is just the kind of information we need for comparison with experiment.
+
+The propagator, like the family of state vectors $\psi(t)$, satisfies a differential equation -- essentially a Schroedinger equation for operators.  To find it, differentiate the  equation $\psi(t) = U(t)\psi(0)$ to obtain
+
+\begin{equation}
+i\hbar \frac{d\psi}{dt} = i\hbar \frac{dU}{dt}\psi(0)
+\end{equation}
+
+Substitute \eqref{schreq} to obtain
+
+\begin{equation}
+i\hbar \frac{dU}{dt}\psi(0)  = H\psi(t)
+\end{equation}
+
+Applying $\psi(t) = U(t)\psi(0)$ again, we find that
+
+\begin{equation}
+i\hbar \frac{dU}{dt}\psi(0) = HU\psi(0)
+\end{equation}
+
+If this is to hold for arbitrary $\psi(0)$, then
+
+\begin{equation}
+\label{uevolutionode}
+\frac{dU}{dt} = -\frac{i}{\hbar}HU
+\end{equation}
+
+If $H$ does not depend on time, the preceding  ODE has an immediate solution, namely
+
+
+\begin{equation}
+U(t) = e^{-i(t/\hbar) H}
+\end{equation}
+
+Think of $H$ as a big matrix, and of the expression on the right as a big matrix exponential.
+
+
+
+
+
+
+\subsection{Free particle propagator}
+
+
+Let us find the free-particle propagator. To begin, let $\phi(x) = \psi(x,0)$ be the the wave function at time $t = 0$.  Write it as a Fourier integral,
+
+\begin{equation}
+\psi(x,0) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty a(p) e^{ipx} dp
+\end{equation}
+
+where $a(p) = \hat\phi(p)$.
+The free-particle evolution operator is
+
+\begin{equation}
+e^{-(it/\hbar)H} = e^{-i\hat p^2/2m\hbar}
+\end{equation}
+
+We proceed with $\hbar = 1$ then rescale afterwards.
+The wave function at time $t$ is
+
+\begin{align}
+\psi(x,t) &= U(t)\phi(x) \\
+&= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty a(p) U(t)e^{ipx} dp\\
+&= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty a(p) e^{-i p^2t/2m} e^{ipx} dp \\
+\end{align}
+
+Substitute the Fourier transform
+
+\begin{equation}
+a(p) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \phi(x') e^{-ipx'} dx'
+\end{equation}
+
+into the preceding equation to obtain
+
+\begin{equation}
+\psi(x,t) = \frac{1}{2\pi} \int_{-\infty}^\infty  \left[  \int_{-\infty}^\infty \phi(x') e^{-ipx'} dx'\right] e^{ipx}  e^{ -ip^2t/2m } dp
+\end{equation}
+
+Interchange the order of integration:
+
+\begin{equation}
+\psi(x,t) = \int_{-\infty}^\infty  \left[ \frac{1}{2\pi}  \int_{-\infty}^\infty e^{ipx} e^{ -ip^2t/2m \hbar} e^{-ipx'} dp \right] \phi(x')  dx'
+\end{equation}
+
+The expression in brackets has the general form $G(x-x',t)$, so that we can write the preceding equation in terms of a convolution integral:
+
+\begin{equation}
+\psi(x,t) = \int_{-\infty}^\infty G(x-x', t)\phi(x') dx'\\
+\end{equation}
+
+where
+
+\begin{equation}
+\label{gffp}
+G(x-x',t) = \frac{1}{2\pi}  \int_{-\infty}^\infty   \exp\left(ip(x-x')  -\frac{ip^2t}{2m \hbar} \right) dp
+\end{equation}
+
+The convolution kernel $G(x-x',t)$ is called the \term{Green's function}, and the formula above is simply convolution of the initial state with the Green's function:
+
+\begin{equation}
+\psi(x,t) = G_t*\psi(x,0)
+\end{equation}
+
+where $G_t(x) = G(x;t)$
+
+The integrand in \eqref{gffp}is an exponential of a quadratic polynomial in $p$, and so the integral is a Gaussian.  Recall that
+
+\begin{equation}
+\int_{-\infty}^\infty e^{ -ax^2 + bx}  = \left(\frac{\pi}{a}\right)^{1/2} e^{ b^2/4a}
+\end{equation}
+
+Comparing, we find that
+
+\begin{equation}
+\label{freeparticlegreen1} G(x,x';t) = \left(\frac{m}{2\pi i t}\right)^{1/2} e^{ im(x-x')^2/2t}
+\end{equation}
+
+
+Let us now recover the formula for the Green's function for $\hbar \ne 1$.  Write the coordinates in the preceding equation as    $\tilde x$ and $\tilde t$, then define a change of variables by $\tilde t = \alpha t$, $\tilde x = \beta x$.  In the $x',t'$.  In the $\tilde t, \tilde x$ system, the Schroedinger equation reads
+
+\begin{equation}
+i\hbar\alpha\frac{\partial \psi}{\partial \tilde t} = -\frac{\hbar^2 \beta^2}{2m}\, \frac{\partial^2 \psi}{\partial \tilde x^2}
+\end{equation}
+
+Require $\hbar \alpha = \hbar^2\beta^2$.
+Choose $\alpha = \hbar$, $\beta = 1$ so as to eliminate the $\hbar$'s for the Schroedinger equation in the $\tilde t, \tilde x$ coordinate system.  Write out \eqref{freeparticlegreen1} with $\tilde x$ and $\tilde t$ in place of $x$ and $t$.  Then make the substitutions to the substitutions $\tilde t = \hbar t$, $\tilde x = x$ to obtain
+
+\begin{align}
+G(x-x',t) &= \widetilde G\left(x-x', t\hbar \right) \\
+&= \left( \frac{m}{2\pi \hbar i t} \right)^{1/2} e^{ im(x-x')^2/2\hbar t}
+\end{align}
+
+\subsection{Discussion}
+
+Below are graphs of the real part of the free-particle propagator for time $t = 1, 2, 4,16$.
+
+
+\image{http://noteimages.s3.amazonaws.com/jim_images/propagator-t=1-63c8.png}{t=1}{align: center, width: 250}
+
+\image{http://noteimages.s3.amazonaws.com/jim_images/propagator-t=2-6feb.png}{t = 2}{align: center, width: 250}
+
+\image{http://noteimages.s3.amazonaws.com/jim_images/propagator-t=4-a035.png}{t = 4}{align: center, width: 250}
+
+\image{http://noteimages.s3.amazonaws.com/jim_images/propagator-t=16-e5ae.png}{t=16}{align: center, width: 250}
+
+\begin{verbatim}
+# Jupyter code
+%matplotlib inline
+#
+import matplotlib.pyplot as plt
+import numpy as np
+#
+x = np.linspace(0, 6*np.pi, 500)
+t=4
+plt.plot(x, np.cos(x**2/t)/np.sqrt(t))
+plt.title('Free particle propagator, t=4');
+\end{verbatim}
+
+
+\subsection{References}
+
+\href{https://en.wikipedia.org/wiki/Convolution}{Convolution} (Wikipedia)
+
+\href{http://www.physics.rutgers.edu/~steves/501/Lectures_Final/Lec06_Propagator.pdf}{Free particle propagator}
+
+\href{http://bohr.physics.berkeley.edu/classes/221/0708/notes/pathint.pdf}{The propagator and the path integral} -- Litttejohn.  Looks \emph{very} good.
+
+\href{http://www.ks.uiuc.edu/Services/Class/PHYS480/qm_PDF/chp2.pdf}{quamtum Mechanical Path Integral} -- UIUC
+
+\href{http://www.phy.ohiou.edu/~elster/lectures/relqm_17.pdf}{Green's functions and propagators}  - OSU, discusses relativistic and non-relativistic propagators
+
+\href{http://eduardo.physics.illinois.edu/phys582/582-chapter10.pdf}{Observables and Propagators} -- U Illinois
+
+\href{http://www.physics.rutgers.edu/~steves/501/Lectures_Final/Lec06_Propagator.pdf}{Lecture 6: propagator}
+
+\href{https://stuff.mit.edu/afs/athena/course/8/8.06/spring08/handouts/units.pdf}{Natural units} -- MIT course handout
