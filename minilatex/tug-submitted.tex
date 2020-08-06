@@ -78,7 +78,7 @@ Below is a summary of MiniLaTeX features. See \href{https://minilatex.lamdera.ap
 \item \strong{Export.} MiniLaTeX documents can be exported to standard LaTeX, complete with the necessary \code{\bs{usepackage}} statements, \code{\bs{begin}\texarg{document}}, \code{\bs{end}\texarg{document}}, and any needed macro definitions.  Exported documents are ready to process with \code{\bs{pdflatex}}.  Here is \href{https://noteimages.s3.amazonaws.com/anharmonic_oscillator.pdf}{an example} of an exported document compiled to PDF using TeXShop.
 
 
-\item \strong{Images} The macro \code{\bs{image}\texarg{URL}\texarg{{Caption}\texarg{Format}} is used to place images in a MiniLaTeX document.  See \href{https://minilatex.lamdera.app/g/21}{the manual} for examples. 
+\item \strong{Images} The macro \code{\bs{image}\texarg{URL}\texarg{{Caption}\texarg{Format}} is used to place images in a MiniLaTeX document.  
 Provision is made to render images in exported documents.  There is, in addition, an \code{svg} environment for rendering SVG images from SVG source code. 
 
 \item \strong{Unicode.} MiniLaTeX accepts unicode (UTF-8) input. More needs to be done to accomodate unicode in exported documents.
@@ -93,35 +93,17 @@ There is also a \code{\bs{strike}} macro: Please delete this \strike{very bad wo
 
 \end{itemize}
 
- An important part of the MiniLaTeX project is to properly define the subset of LaTeX to be supported.  The current rule of thumb for this is "good enough to write my lecture notes and class hand-outs."  Feedback on this issue is much appreciated (jxxcarlson at gmail).
+ An important part of the MiniLaTeX project is to properly define the subset of LaTeX to be supported.  The current rule of thumb for this is "good enough to write my lecture notes, class hand-outs, and problem sets."  Feedback on this issue is much appreciated (jxxcarlson at gmail).
 
 
-\section{Features of minilatex.lamdera.app}
+\section{Some features of minilatex.lamdera.app}
 
+The content management system \href{https://minilatex.lamdera.app}{minilatex.lamdera.app} provides a system for creating, editing, and distributuing documents from a searchable repository.  Users can search by title, author, etc.  Documents can be collaboratively edited, shared by URL, and versioned on Github through a simple user interface.  Documents can also be exported to PDF.
 
-\subsection{Collaboration} 
-
-To add a collaborator to a document, click on the \blue{Collaborators} button in the footer.  Enter collaborators in the resulting popup window one collaborator per line.  Collaborators may edit a document synchronoulsy or asynchronously.  In the former case, when both authors are online, changes by one author are reflected a fraction of a second later in the other others app.  To facilitate collaboration, there is a chat window (lower right, in footer).  The chat feature needs a good deal more work.
-
-Collaborators can attach notes to a shared document using the \code{\bs{editnote}} command.  Thus 
-
-\begin{verbatim}
-\editnote{Mary}{Joe, please check proof, Thm 4.5}
-\end{verbatim}
-
-renders as 
-
-\editnote{Mary}{Joe, please check proof, Thm 4.5}
-
-\subsection{Sharing documents}
-
-\subsection{Github integration}
-
-\subsection{Links and Index Documents}
 
 In addition to the familiar \code{\bs{href}} macro, there are \code{\bs{xlink}}  and \code{\bs{ilink}}.  The \code{\bs{xlink}} macro 
 is used to make a link from one document to another in \code{minilatex.lambdera.app}.   Thus, one can say 
-\code{\bs{xlink}\texarg{21}\texarg{Manual}}, which is rendered as \xlink{21}{Manual}, to make a link on this document to the Manual.
+\code{\bs{xlink}\texarg{21}\texarg{Manual}}, which is rendered as \xlink{21}{Manual}, to make a link to that document.
 
 The \code{\bs{ilink}} macro is similar.  It has the same syntax, but is used in constructing a page of links which functions as a table of contents or \italic{index document} for a master document, aka a book.  For an example, see \href{https://minilatex.lamdera.app/g/34}{these class notes}. It is worthwhile looking at the source to see how it is done.
 
@@ -131,38 +113,51 @@ The \code{\bs{ilink}} macro is similar.  It has the same syntax, but is used in 
 
 \section{The MiniLaTeX Compiler}
 
-
-LaTeX documents consist of snippets of math-mode LaTeX (the equations and formulas) and text-mode LaTeX (everything else, e.g. section headings, lists, and environments of various knds).  The strategy that makes writing a compiler that transforms MiniLaTeX to HTML feasible is divide and conquer.  Parse the the document, identifying the math elements as such, but not transforming them.  Then render the resulting abstract syntax tree (AST) to Html, again passing on the math elements.  Finally, have \href{https://mathjax.org}{MathJax} or \href{https://katex.org}{KaTeX} render the math elements. 
-
-\strong{Video}: \href{https://www.youtube.com/watch?v=dmDA7iziSgs&t=15s}{Making a LaTeX-to-Html parser in Elm}
-
-An abstract syntax tree is a tree of things that expresses a grammatical analysis of the source text. It is akin to what one gets when one diagrams a sentence in English class, something the present author did in Marge Lee's sophomore class in high school.  More on this later.
-
-\image{https://noteimages.s3.amazonaws.com/sentence-diagram.png}{Diagramming sentences}{width: 400}
-
 The MiniLaTeX compiler consists of two parts, a \italic{parser} and a \italic{renderer}.  The first is a function
 
 $$
-parse: \text{Source text} \to \text{AST}
+parse: \text{Source text} \to \text{AST},
 $$
 
+where \italic{AST} stands for \italic{Abstract Syntax Tree}.  This is a tree with nodes like 
+
+\begin{verbatim}
+    LXString "Pythagoras says"
+\end{verbatim} 
+
+and
+
+\begin{verbatim}
+    InlineMath "a^2 + b^2 = c^2"
+\end{verbatim}
+
+ that expresses a grammatical analysis of the source text, identifying its "parts of speech" and putting them in relationship to one another.
 The second is a function
 
 $$
 render: \text{AST} \to \text{HTML}
 $$
 
-Here we are simplifying somewhat because of various optimizations that are needed, but this is the general idea.  The compiler is the composite of these two functions:
+The compiler is the composite of these two functions:
 
 $$
 compile   = render \circ parse
 $$
 
+The strategy that makes writing such a compiler feasible is \italic{divide and conquer}.  One writes the parser using parser combinators.  One then constructs function which renders the text-mode LaTeX to HTML, passing the math-mode text on to either \href{https://mathjax.org}{MathJax} or \href{https://katex.org}{KaTeX} for rendering. 
+
+\strong{Video}: \href{https://www.youtube.com/watch?v=dmDA7iziSgs&t=15s}{Making a LaTeX-to-Html parser in Elm}
+
+An abstract syntax tree is a tree of things that expresses a grammatical analysis of the source text. It is akin to what one gets when one diagrams a sentence in English class.
+
+
+
+
 In designing a parser, one generally starts with a grammar.  However, there is no published grammar for LaTeX or for TeX, so one has to improvise.  The approach taken with MiniLaTeX was first to imagine the type of the AST, then to write a parser using parser combinators.  The parser then consists of a bunch of functions which call one another.  They are in rough correspondence with the productions of a grammar, and so one can write down a grammar after the fact. Ideally one should have written the grammar, then the parser, but real life is often messy.
 
 \subsection{AST}
 
-Every value in a statically typed language like Haskell, ML, or Elm, has a \italic{type}.  Below is the type of AST for the MiniLaTeX compiler.
+Every value in a statically typed language like Haskell, ML, or Elm, has a \italic{type}.  Below is the type of AST for the MiniLaTeX compiler.  Writing down this type definition was the first step in writing the parser.
 
 \begin{listing}
 type LatexExpr
@@ -179,7 +174,8 @@ type LatexExpr
     | LXError (List (DeadEnd Context Problem))
 \end{listing}
 
-Below is a series of examples that give an idea of how the parser works.  The examples are generated using a command-line tool that applies the parser to a string of text supplied by the user.
+Note that the definition of \code{LatexExpr} refers to itself, hence is recursive.  This is typical of the definitions of types of structured trees. 
+To give an idea of how the parser works, consider the following  examples.
 
 \begin{verbatim}
 > Pythagoras
@@ -194,6 +190,8 @@ Macro "strong" [] [LatexList [LXString "Pythagoras"]]
   , InlineMath "a^2 + b^2 = c^2"
 \end{verbatim}
 
+
+The parser takes up roughly 500 lines of Elm code and consists of a set of functions which call upon one another.  The top-level parser function is given below.  Note the close correspondence between its parts and the parts of the type definition.  It is built using the \code{oneOf} parser, a combinator which takes a list of parsers as arguments and which returns a parser as value.
 
 Below is the top-level parser function.  Note the close correspondence
 with the AST type.  The \code{lazy} function is needed for recursion.  The \code{oneOf} function is a combinator that takes a list of parrsers and produces a new parser from them.  The resulting parser operates as follows: try the first parser.  If it succeeds, return the result.  If not, try the next parser.  And so on.  If the list is exhausted without success, return an error.
@@ -214,7 +212,7 @@ latexExpression =
         ]
 \end{listing}
 
-Below is the parser for macros.  It uses a \italic{parser pipeline} in the following way.   First, find the name of the macro, then the list of optional arguments, then the list of  actual arguments, then eat any whitespace (spaces, newlines).  Second, feed the values found in the order found to the constructor \code{Macro} for the \code{LatexExpr} type.  In this example, \code{whitespace} is a parser for white space, which can come in different flavors depending on context e.g., spaces only or spaces and newlines.
+We give one more example, the \code{macro} parser.  It uses the combinators \code{|=} and \code{|.} to \italic{sequence} parsers and thereby to form a new parser.  The resulting "parser pipeline" operates  in the following way.   First, find the name of the macro, then the list of optional arguments, then the list of  actual arguments, then eat any whitespace (spaces, newlines).  Second, feed the values found in the order found to the constructor \code{Macro} for the \code{LatexExpr} type.  In this example, \code{whitespace} is a parser for white space, which can come in different flavors depending on context e.g., spaces only or spaces and newlines.
 
 \begin{listing}
 macro : LXParser () -> LXParser LatexExpr
@@ -226,7 +224,7 @@ macro =
         |. whitespace
 \end{listing}
 
-One can continue down the rabbit hole, explaining the parsers and \code{macroName}, \code{optionalArg},  \code{arg} and the combinators \code{itemList}, etc, but we stop here.  What is important to understand is that there are really only three things in something like the MiniLaTeX parser: primitive parsers, combinators that choose among alternatives, and combinators that sequence other parsers.
+One can continue down the rabbit hole, explaining the parsers and \code{macroName}, \code{optionalArg},  \code{arg} and the combinators \code{itemList}, etc, but we stop here.  What is important to understand is that there are really only three things in something like the MiniLaTeX parser: primitive parsers, combinators that choose among alternatives, and combinators that sequence other parsers. As a note, it is important to eat trailing whitespace because lexing and parsing are not separate operations in this set-up.
 
 \subsection{Rendering}
 
@@ -234,56 +232,17 @@ One can continue down the rabbit hole, explaining the parsers and \code{macroNam
 The top-level renderiing function is much like the top-level parsing functions. It analyzes the type of a LatexExpr and dispatches the appropriater renderer, which may in turn call other rendering functions, including the top level one. And so on, down the rabbit hole of function calls we go.
 
 
-\begin{listing}
-render : String -> LatexState -> LatexExpr -> Html msg
-render source latexState latexExpr =
-    case latexExpression of
-        Comment str ->
-            Html.p [] [ Html.text "" ]
-
-        Macro name optArgs args ->
-            renderMacro source latexState name optArgs args
-
-        Item level latexExpr ->
-            renderItem source latexState level latexExpr
-
-        InlineMath str ->
-            Html.span [] [ 
-              inlineMathText 
-                latexState 
-               (evalStr  latexState.macroDict str) ]
-
-        DisplayMath str ->
-            Html.span [] [ 
-              displaMathText 
-                latexState 
-               (evalStr  latexState.macroDict str) ]
-
-        Environment name args body ->
-            renderEnvironment source latexState name args body
-
-        LatexList latexList ->
-            renderLatexList source latexState latexList
-\end{listing}
-
 \subsection{Code}
 
-Code for the MiniLaTeX compiler as well as the demo app is found at \href{https://github.com/jxxcarlson/meenylatex}{github.com/jxxcarlson/meenylatex}.  The strange name is to reserve the name \blue{github.com/jxxcarlson/minilatex} for a future stable version with a polished API.  The repository just mentioned also contains simple demos t show how to use the compiler.
+Code for the MiniLaTeX compiler as well as the demo app is found at \href{https://github.com/jxxcarlson/meenylatex}{github.com/jxxcarlson/meenylatex}.  The strange name is to reserve the name \blue{github.com/jxxcarlson/minilatex} for a future stable version with a polished API.  The repository just mentioned contains simple demos to show how to use the compiler.
 
 The code for the \href{https://minilatex.lamdera.app}{minilatex.lamdera.app} is at \href{https://github.com/jxxcarlson/lamdera-minilatex-app}{github.com/jxxcarlson/lamdera-minilatex-app}.
 
-All code is open source. The web application \href{https://minilatex.lamdera.app}{minilatex.lamdera.app}  is offered as a service. It is free for now. The intent is to (a) keep it free for students, (b) eventually charge a small annual fee for other users, (c) have institutional licenses. Bills have to be paid and code has to be iimproved and maintained!  Note that guests may browse the site without establishing an account.
-
-
-
-This document was written in MiniLaTeX and is avaiable at \href{https://minilatex.lamdera.app/g/22}{https://minilatex.lamdera.app/g/22}.
-
+All code is open source. 
 
 \section{Plans}
 
-I am very interested in feedback from the community regarding features, bugs, etc.  Of special interest is the subset of LaTeX used: what should it be? 
-
-Some plans:
+I am very interested in feedback from the community regarding features, bugs, etc.  Of special interest is the subset of LaTeX used: what should it be? Some plans:
 
 \begin{enumerate}
 
@@ -295,9 +254,13 @@ Some plans:
 
 \end{enumerate}
 
+Comments to jxxcarlson at gmail.
 
 \section{Acknowledgements}
 
 I would like to thank Evan Czaplicki, Ilias Van Peer, Mario Rogic, and Luke Westby, all of the Elm community, Davide Cervone, \href{https://mathjax.org}{MathJax.org}, and the team at \href{https://katex.org}{Katex.org} for their generous and invaluable help.   I also wish to thank the \href{https://simonsfoundation.org}{Simons Foundation} for its support of this project.
+
+\italic{This document was written in MiniLaTeX and is avaiable at \href{https://minilatex.lamdera.app/g/22}{minilatex.lamdera.app/g/22}.}
+
 
 
