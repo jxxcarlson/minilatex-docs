@@ -1,0 +1,130 @@
+\section{Lambda Calculus}
+
+
+\innertableofcontents
+
+The lambda calculus was created by Alonzo Church to formulate what is meant by "computable."  His notion of computability is equivalent to that of Turing.   We first describe the syntax of the lambda calculus, then its semantics.
+
+
+\subsection{Syntax} 
+
+The syntax of the lambda calculus is given by the following formal grammar:
+
+\begin{enumerate}
+
+\item $EXPR \to NAME\ |\ FUNCTION\ |\ APPLICATION$
+
+\item $NAME \to a, b, c, \ldots$ (any one of a countable set of terminal symbols).
+
+\item $FUNCTION \to\lambda\; NAME\; .\; EXPR$
+
+\item $APPLICATION \to EXPR\; EXPR$
+
+\end{enumerate}
+
+Here are some expressions that can be produced with this grammar: (1) $x$, (2) $x\, y$, (3) $\lambda x.x$, and (4) $(\lambda x.x)\,y$, The first is a name, the second is an application, the third is a function, and the fourth is an application of function.  On the other hand $x . y$ is not a lambda expression.  An expression of the form $\lambda x.E$ is called a \term{lambda abstraction}.  Thus there two operations in the lambda calculus: abstraction and application.
+
+There are no parentheses in the foregoing grammar, but for human readers they are convenient. If $E$ is an expression then $(E)$ is the same expression.  Application associates to the left, so $xyz$ is the same as $((xy)z)$.  An expression like $\lambda xyz.t$ is shorthand for $\lambda x. \lambda y. \lambda z.t = (\lambda x. (\lambda y. (\lambda z.t)))$.
+
+The grammar above describes the \emph{pure lambda calculus}. One can augment it with additional expreonon}ssions, e.g., the integers and the operations of arithmetic.  Then it makes sense to speak of an expression such as $\lambda x.x+1$.  As we shall see in a moment, this expression defined the function $x \mapsto x + 1$.
+
+
+
+\subsection{Semantics}
+
+The semantic rules of the lambda calculus give meaning to the notions of abstraction and application.  The basic idea is this.  Consider a function $\lambda x.E$, where $E$ is a lambda expression.  Consider its application to an expression $F$, namely $\lambda x. E\, F$.  One can form a new expression by replacing every occurence of $x$ in $E$ by $F$.  This substitution operation is called \emph{beta reduction} and is denoted by 
+
+\begin{equation}
+  \lambda x. E\, F \to_\beta E[F/x]
+\end{equation}
+
+Let's look at some examples. Consider first the expression $(\lambda x.x)F$.  Substituing $F$ for $x$ in the body of the function, we obtain  $F$.  Thus $\lambda x.x$ is the identity function $x \mapsto x$.  There is perhaps more to this computation than meets the eye.  One has
+
+\begin{equation}
+  (\lambda x.x)(\lambda y. y) = \lambda y. y
+\end{equation}
+
+The fact that $\lambda x.x$ operaties on all lambda expressions meeans that in particular, it operates on functions.  Consider next the expression $(\lambda x.a) F$, where $a \ne x$ is name.Replacig all occurrences of $x$ ion $a$ by $F$  means doing nothing at all.  Therefore $(\lambda x.a)F = a$, and so $\lambda x.a$ is the constant function $x \mapsto a$.
+
+Let's consider a few examples in an extended lambda calculus.  The expresion $(\lambda x.x+1)n$ reduces to $n+1$ and therefore reprensetns the function $x \mapsto x + 1$.  If the argument is an integer, this makes good sense.  But we could consider, for example, 
+$$
+  (\lambda x.x + 1)(\lambda x.x) = (\lambda x.x) + 1,
+$$ 
+which is generally considered to be nonsense.  Such odd results can be avoided by using a typed version of the lambda calculus.
+
+For a more interesting example consider first this example of beta-reduction:
+
+\begin{align}
+  \lambda x y.(x + y)\, 3\, 5 &\to_\beta \lambda y.(3 + y)\, 5 \\
+      &\to_\beta (3 + 5) \\
+    &\to_\beta 8 \\
+\end{align}
+
+All very good.  The function $\lambda xy.(x+y)$ is the usual addition function, yielding the value 8 with arguments 3 and 5.  Note, however, that we can stop the beta reduction at any stage.  Thus the expression
+
+The expression $\text{T} = \lambda x.\lambda y . x$ defines projection on the first factor, and $\text{F} = \lambda x.\lambda y . y$ defines projection on the second factor.  The odd choice of notation comes from the fact that T and F can be used to represent the Boolean values True and False.  We will see why this is shortly.
+
+
+
+
+
+Let's work out the details to see the meaning of (3).  Consider the expression 
+
+\begin{align}
+ \text{T}ab &= (\lambda x.\lambda y . x)ab \\
+ &= ((\lambda x.\lambda y . x)a)b  \\
+&= (\lambda y.a) b \\
+&= a
+\end{align}
+
+Thus $ \text{T}ab = a$, so that $ \text{T}$ is the function $xy \mapsto x$.  In the same way, one sees that $ \text{F}ab = b$, so that $ \text{F}$ is the function $xy \mapsto y$.  
+
+
+An expression like $\lambda xyz.xyz$ is shorthand for $\lambda x. \lambda y. \lambda z. xyz$.  In parenthesized form, it reads $(\lambda x.(\lambda y.(\lambda z.xyz)))$. It is an easy exercise in the defintions to see that 
+
+\begin{equation}
+  (\lambda xyz .xyz) abc = abc = ((ab)c)
+\end{equation}
+
+
+Consider the expression $E = \lambda x. \lambda y. (2x + 3y)$. Then 
+
+\begin{align}
+ E\ 5\ 7 &= \lambda x. \lambda y. (2x + 3y)\ 5\ 7\\
+  &= \lambda y . (10 + 3y)\ 7 \\
+  &= (10 + 21) \\
+  &= 31 \\
+\end{align}
+
+What about the expression $E\ 5$?  
+
+\begin{align}
+ E\ 5 &= \lambda x. \lambda y. (2x + 3y)\ 5\\
+  &= \lambda y . (10 + 3y) \\
+\end{align}
+
+Thus $E\ 5$ is function.  In light of this example, one can define function-valued functions in the lambda calculus.  For another example, consider the expression 
+
+$$
+E = (\lambda f . \lambda g . \lambda x)(f\ g\ x)
+$$
+
+We claim that $E$ defines the composition $f\circ g$:
+
+\begin{align}
+E\ (F\ G) &= (\lambda f . \lambda g . \lambda x)(f\ g\ x)\ (F\ G) \\
+&= \lambda g . \lambda x\ (F\ g\ x)\ G \\
+&= \lambda x . (F\ G\ x) \\
+\end{align}
+
+Thus, with the lambda calculus one can define functions which take functions as arguments.  
+
+Note that the lambda calculus has just three formation rules — introduction of variables, abstraction, and application — and one reduction rule (to simplify expressions). A tiny language indeed.  Yet powerful.
+
+\subsection{References}
+
+\href{http://www.cse.chalmers.se/research/group/logic/TypesSS05/Extra/geuvers.pdf}{Introduction to Lambda Calculus}, Henk Barendregt Erik Barendsen (2000)
+
+\href{https://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf}{A Tutorial Introduction to the Lambda Calculus}, Rául Rojas (1998)
+
+\href{http://www.cs.cornell.edu/courses/cs312/2008sp/recitations/rec26.html}{Cornell recitation notes on Lambda Calculus}
