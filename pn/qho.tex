@@ -1,0 +1,57 @@
+
+
+
+
+\section{Quantum harmonic oscillator at temperature T}
+
+
+
+Consider a quantum-mechanical harmonic oscillator with frequencye $\nu$ and energy $E = h\nu$.  The expected energy of the oscillator is computed from the Boltzmann distribution:
+
+\begin{equation}
+\bar{E} = \frac{\sum jE e^{-jE\beta}}{\sum e^{-jE\beta}}
+\end{equation}
+
+The partition function is
+
+\begin{equation}
+Z = \sum e^{-jE\beta}
+\end{equation}
+
+and its derivative is
+
+
+\begin{equation}
+\frac{dZ}{d\beta} =  - \sum jE e^{-jE\beta}
+\end{equation}
+
+from which it follows that 
+
+\begin{equation}
+\bar{E} = - \frac{dZ/d\beta}{Z} = - \frac{d}{d\beta} \log Z
+\end{equation}
+
+Applying the geometric formula, we find that
+
+\begin{equation}
+Z = \frac{1}{1 - e^{-E\beta}},
+\end{equation}
+
+from which it follows that
+
+\begin{equation}
+\bar{E} = \frac{E}{e^{E/kT} - 1}.
+\end{equation}
+
+
+or, better,
+
+
+\begin{equation}
+\bar{E} = \frac{h\nu}{e^{h\nu/kT} - 1}.
+\end{equation}
+
+
+
+
+
