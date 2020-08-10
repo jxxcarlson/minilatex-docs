@@ -1,0 +1,123 @@
+
+\section{Classical Gentzen Systems}
+
+(((Under construction)))
+
+\innertableofcontents
+
+Recall the notion of \term{tautological consequence} for a set of formulas $\Gamma$ and a formula $B$: if an interpretation $\phi$ satisfies every element of $\Gamma$, then it satisfies $B$.  In this case, we write $\Gamma \models B$.  Truth tables give a straightforward decision procedure for $\set{A_1, \ldots, A_n} \models B$. By the completeness theorem, it also gives a deccision procedure for $\Gamma \vdash B$, that is, for a formal proof of $B$ with additional assumptions $A_1$, ... $A_n$. However, as remarked earlier, the number of rows in the truth table grows exponentially in the number of propositional variables.  Consequently tnis is not a practical method.  Gentzen systems give an alternative decision procedure, which we describe below.  There are many Gentzen systems.  The one we will look at first is $G_L$.
+
+
+
+
+\subsection{Preliminaries}
+
+As a first step, we require the lemma
+
+\begin{lemma}
+$\set{A_1, \ldots, A_n} \models B$ if and only if $\models (A_1 \land \cdots \land A_n) \to B$.
+\end{lemma}
+
+\strong{Proof.} 
+Consider the case in which $n= 1$, in which case we write $A \models B$ and 
+$\models (A \to B)$.  Suppose $A \models B$. We must show that $A \to B$
+ is a tautology.  Let $\phi$ be an interpretation.  If $\phi(A) = T$, then 
+$\phi(B) = T$ by hypothesis.  Therefore $\phi(A \to B) = T$.  If $\phi(A) = F$, then $\phi(A \to B) = T$ regardless of the value of $\phi(B)$.  Therefore $\phi(A \to B) = T$.
+
+Next, suppose that $\models \phi(A \to B)$.  Then $\phi(A \to B) = T$ regardlless of the truth values of $A$ and $B$.  Suppose further that $\phi(A)$ i s true. Then $\phi(B)$ is true.  Consequently $A \models B$.
+
+For the proof of the general case, one uses the fact that $\phi$ satisfies $\set{A_1, \ldots, A_n}$ if and only if $\phi(A_1 \land \cdots \land A_n) = T$. \strong{Q.E.D.}
+
+\begin{lemma}
+$\set{A_1. \ldots , A_n} \models B$ if and only if $A_1, \ldots , A_n, \neg B$ is unsatisfiable.
+\end{lemma}
+
+\strong{Proof.} By the previous lemma, $\set{A_1. \ldots , A_n} \models B$  is equivalent to $\models (A_1 \land \cdots \land A_n) \to B$. A formula $F$ is a tautology if and only if $\neg F$ is unsatisfiable.  Therefore the assertion to be proved is equivalent to the assertion that $\neg (A_1 \land \cdots \land A_n \to B)$ is unsatisfiable.  But 
+
+\begin{align}
+  \neg (A_1 \land \cdots \land A_n \to B) &=  \neg(\neg(A_1 \land \cdots \land A_n) \lor B) \\
+  &= A_1 \land \cdots \land A_n \land \neg B \\
+\end{align}
+
+\strong{Q.E.D.}
+
+In view of the lemma. we can establish $\set{A_1, \ldots, A_n} \models B$ by retuting $\set{A_1,  \ldots , A_n, \neg B}$
+
+Let $\Gamma$ be a set of formulas consistng entirely of \term{literals}, that is, of propositional variables and their negations, e.g.$\Delta = \set{p, q, r, \neg r}$. and  $\Gamma = \set{p, \neg p, r, \not s}$ and  . The first set is satisfiable, whereas the second is not.  We record the essential difference between the two in the following result.
+
+\begin{lemma}
+Let $\Gamma$ be a set of formulas consisting entirely of literals.  Then $\Gamma$ is unsatisfiable if and only if it contains a subset $\set{p, \neg p}$ for some $p$.
+\end{lemma}
+
+\subsection{Decomposition rules}
+
+The Gentzen sysem $G_L$ has three rules of inference.    The "numerator" is the antecedent, the "denominator" is the consequent.  The antecedent is unsatisfiable if and only if he consequent is unsatisfiable (Exercise).
+
+$\neg\neg$ RULE: $$\frac{\Gamma, \neg\neg A}{\Gamma, A} $$ 
+
+$\lor$ RULE: $$\frac{\Gamma, A \lor B}{\Gamma, A \quad \Gamma, B} $$ 
+
+$\neg\lor$ RULE: $$\frac{\Gamma, \neg(A \lor B)}{\Gamma, \neg A, \neg B} $$ 
+
+
+
+\subsection{Strategy}
+
+
+First, assume that all formulas are expressed in terms of the operators $\neg$ and $\lor$.  Next, define the \term{level} of a formula recursively by 
+
+\begin{enumerate}
+
+\item $\text{level}(P) = 0$ if $P$ is atomic.
+
+\item  $\text{level}(\neg P) = 1 + \text{level}(P)$.
+
+\item  $\text{level}(P \lor Q) = 1 + \max \set{\text{level}(P), \text{level}(Q)}$.
+
+\end{enumerate}
+
+
+The formula  $p$ has level 0, the formulas $\neg q$ and $p \lor q$ have  level 1, and both $\neg p \lor q$ and $\neg p \lor \neg q$ have level 2.  These are all the formulas of level strictly less than 3.  Define the level of a set of formulas to be the maximum of the levels of its elements.  Notice that for the three rules of inference, the level of the consequent is less than the level of the antecedent. Now imagine that we have procedure $expand$ for evolving a tree from a set of formulas. We start from a node of the form $A_1, \ldots, A_n, \neg B$.  Applying $expand$ to this node adds children with the following properties:
+
+\begin{enumerate}
+  \item The level of a child is less than the level of the parent
+ \item  The parent is unsatisfiable if and only if all of its children are unsatisfiable.
+\end{enumerate}
+
+The parent has a sole child unless Rule $\lor$ comes into play.  if it is used $n$ times at a given stage, then $2^n$ children result.  Apply the rule repeatedly until the leaves of the tree thereby generated have level at most 2.  Then each leaf is a set of formulas of the form $p$, $\neg p$, $p \lor q$, $\neg \neg p$, $\neg p \lor q$, or $p \lor \neg q$, or $\neg p \lor \neg q$. The expansion rule from this stage onward is somewhat different.  Call a leaf "closed" if it contains an axiom or if it consists entirely of atomic formulas and their negations.  If all leaves are closed, we stop.  In the contrary case, there is a node to which we may apply an expansion rule.  This 
+second phase will terminate in a tree whose leaves are closed.  If all leaves contain an axiom, then all leaves are unstatisfiable.  It follows that the root node $\set{A_1, \ldots, A_n, \neg B}$ is unsatisfiable.  Consequently $\set{A_1, \ldots, A_n} \models B$.   In the contrary case, there is an interpretation which satisfies at least one leaf, and therefore satisfies the root.  This is the rough idea of a Gentzen system.
+
+
+\subheading{Example}
+
+
+We verify that $\set{ [ p \to q, p \to r} \models p \to (q \land r)$.  This assertion is equivalent to the assertion that $\set{p \to q, p \to r, \neg[ p \to (q \land r)] } $ is unsatisfiable.  The latter set is equiavalent to 
+
+\begin{indent}
+(1) 
+$ \set{ \neg p \lor q, \neg p \lor r, \neg[\neg p \lor \neg(\neg q \lor \neg r)] }$, 
+\end{indent}
+
+which has level 5.  Apply Rule $\neg \lor$ to the rightmost formula to obtain the set
+
+\begin{indent}
+(2) 
+$ \set{ \neg p \lor q, \neg p \lor r, \neg\neg p, \neg\neg(\neg q \lor \neg r) }$,
+\end{indent}
+
+which has level 4.  The $\neg\neg$ rule appies to the two right-most formula to yield
+
+\begin{indent}
+(3) 
+$ \set{ \neg p \lor q, \neg p \lor r,  p, \neg q \lor \neg r }$,
+\end{indent}
+
+which has level 2.  We are now at phase two of the expansion.  Apply the $\lor $ rule to the first element of this last set to obtain two children,
+
+\begin{indent}
+(4a) $\set{ \neg p, \neg p \lor r,  p, \neg q \lor \neg r }$  and (4b)   $\set{ q, \neg p \lor r,  p, \neg q \lor \neg r }$ 
+\end{indent}
+
+The set in (4a) contains an axiom, so that leaf is closed.  The set in (4b) does not contain an axiom, and so must be expanded further.  Further expansion results in closed leaves, so we conclude that $\set{p \to q, p \to r, \neg[ p \to (q \land r)] } $ and so $\set{ [ p \to q, p \to r} \models p \to (q \land r)$ is valid, as claimed.
+  
+
