@@ -1,0 +1,288 @@
+\section{Type Theory}
+
+((( Very Much Under Construction )))
+
+\innertableofcontents
+
+\subsection{What is a type?}
+
+
+In set theory, one speaks of elements and membership of elements in sets.  Thus, one says that $0$ is an element of the set $\nat$, writing $0 \in \nat$.  Likewise one can say that, $\spadesuit \in Suits$, where 
+
+$$ Suits = \set{\heartsuit, \diamondsuit, \clubsuit, \spadesuit }$$
+
+A set is defined by listing its elements, and membership is determined by looking at that list.  Thus, it makes sense to say $0 \not\in Suits$.  
+
+In type theory, one speaks of \term{terms} and \term{types}.  Every term has a type, and it "belongs" to just one type.  Thus, we may declare that $Suit$ is a type and that the four objects $\clubsuit$, $\spadesuit$, etc. are terms of this type.  We can assert the same facts symbolically by saying
+
+$$
+\diamondsuit : Suit \quad
+\heartsuit : Suit \quad
+\clubsuit : Suit \quad
+\spadesuit : Suit \quad
+$$
+
+To give a type is to give rules for constructing terms of that type, as we have just done.  We must also give rules for determining when terms are the same.  We may say this:  $a = a : Suit$.  In other words, we impose the smallest relation on the terms, so that they are all distinct.
+
+Let us define a new type, perhaps for an elementary game of cards.  A $SuitPair$ will be an expression of the form $(a,b)$, where $a : Suit$ and $b : Suit$.  We may express this more fomally via the rule 
+
+$$
+\frac{a : Suit \quad b : Suiit}{(a,b) : SuitPair}
+$$
+
+This rule, like our inference rules, has an antecedent (the numerator) and a consequent (the denominator).  The rule is a \term{construction rule}.  It tells us how to build terms of type $SuitPair$, e.g. $(\clubsuit, \spadesuit)$.  Let us now define equality for terms of this type.  We introduce a rule in addition to reflexivity: 
+
+$$
+\frac{(a,b) : SuitPair }{(a,b) = (b,a) : SuitPair}
+$$
+
+Thus 
+$$(\clubsuit, \spadesuit) = (\spadesuit, \clubsuit) : SuitPair
+$$
+
+Note that equality can be decided algorithmically, that is, by a suitable computer program.  In the case at hand, the rules equality define the type version of unordered pair.  If we had limited ourselves to the reflexive rule, we would have defined the type analogue of ordered pair.  
+
+\subsection{The natural numbers}
+
+
+Let us now consider the type of natural numbers, written $\nat$.  It has two construction rules:
+
+$$
+\frac{}{0 : \nat} \qquad \frac{a : \nat}{s(a) : \nat}
+$$
+
+where we think of $s(a)$ as the successor of $a$.  Thus $0$ is a term, as is $s(0)$, $s(s(0))$, and so on.  The officical way to view $s$ is as a function $s : \nat \to \nat$.  For now, think of a function as a rule that constructs a new term from an old one.  In our case, $0$ is a term, and therefore so is $s(0)$, and also $s(s(0))$, and so on.  As for equality, we admit the reflexive rule, and also these:
+
+$$
+\frac{a = b : \nat}{s(a)  = s(b) : \nat}
+\qquad 
+\frac{s(a)  = s(b) : \nat}{a = b : \nat}
+$$
+
+One can make defintions such as $1 =_{def}  s(0)$, $2 =_{def}  s(s(0))$, etc.  
+
+Statements like $2 = s(1)$ now make sense, and so our type theory version of the natural numbers is beginning to look familiar.   But let us take the time to check.  According to our definitions, is it the case that $2 = s(1)$?  We begin by replacing $2$ by its defintion, so that the assertion becomes $s(s(0)) = s(s(0)): \nat$.  Applying the right-hand rule, we obtain $s(0) = s(0): \nat$; applying it once more yields the axiom $0 = 0 : \nat$. Note once again the computational nature of this equality check.
+
+
+What about operations such as addition and multplication?  Can they be fined in hie lmited setting?
+Addition can be defined by saying that (i) $a + 0 = 0$ for any $a:\nat$, and that (ii) $a + s(b) = s(a + b)$ for any $a,b:\nat$.  For example, we compute $2 + 2$:
+
+\begin{align}
+2 + 2 &= s(s(0) + s(s(0))\\
+  &= s(s(s(0)) + s(0)) \\
+  &= s(s(s(s(0)) + 0)) \\
+  &= s(s(s(s(0)))) \\
+  &= 4
+\end{align}
+
+
+Notice that everything that we have done here, e.g., constructing terms of type $\nat$, definiing addition, checkig that equality holds, has \emph{computational content} and could quite easily be formulated as a computer program.
+
+
+\strong{Exercise.} Define the multiplication operator,  It should have the property that if $a, b : \nat$ then $a \times b : \nat$.
+
+Let us now consider functions.  In set theory, a function $f: \nat \to \nat$ is defined as a subset of the Cartesian product $\nat \times \nat$.  In type theory, functions are a primitive notion.  There is a type $\nat \to \nat$ whose terms are called functions, and whose meaning will be determined by the rules we apply to them.   Here is one:
+
+$$
+\frac{a : \nat \quad f : \nat \to \nat}{f\, a : \nat}
+$$
+
+Here we think of $f\, a$ as $f$ applied to $a$.  So far we have defined a type and posited rules obeyed by that type.  But is is not clear that  the type $\nat \to \nat$ has any terms.  We rectify that using $\lambda$-expressions.
+Consider, for example, the identity function.  We may define it by  $\lambda (x:\nat).x$.  This expression is a term of $\nat \to \nat$ because the rules of the $\lambda$-calculus tell us that $(\lambda x.x) x = x$.
+
+
+For another example, comsider the expression $(x:\nat) + (x:\nat):\nat$, which we may abbreviate as $x + x: \nat$ where $x: \nat$.  Then $\lambda x. x + x$ is a term of type $\nat \to \nat$. Once again this constructions has computational content.  Here, for example, is the computation of $(\lambda x.x + x)\,1$:
+
+\begin{align}
+(\lambda x.x + x) \,1 &= (\lambda x.x + x) s(0) \\
+&=  s(0) + s(0) \\
+&= s(s(0) + 0)\\
+&= s(s(0)) \\
+&= 2 \\
+\end{align}
+
+Informally speakiing then, a term $f$ of type $A \to B$ is a rule for constructing a term $f(a): B$ given a term $a:A$.  More formally, such rules are given by typed lambda expressions.  To define a function via a $\lambda$-expression is to say that a computer program can be written which give $a: A$ will produce an output $f a : B$.  A computer program is something expressible in a finite number of symbols — letters and numerals, zeroes and ones, etc.  A set-theoretic function $f : A \to B$ is not something that can be expressed in this way if either $A$ or $B$ is an infinite set.
+
+
+ 
+
+\strong{Summary.r} In defining a type as contrasted with a set, \emph{one defines an object  with explicit computational content}.  This content is sufficient to generate canonical elements of the type, e.g. $0$ or $s(s(s(0)))$, and to decide when canonical elements are equal.  It gives the means to define operations such as addition (hence to define new terms), and also the means to decide equalities in which one or both terms are non-canonical, e.g. $2 + 2 = 4$ or $2 + 2 = 3$.  
+
+Reference: \cite{EPB}:
+
+
+\subsection{Functional programming}
+
+In the previous section, we remarked that types have computational content.  Indeed, type theory is part of the foundation of strictly typed functional languages such as standard ML, Ocaml, Haskell, and Elm.  Let us look at some examples.  In Elm, one can defined the $Suit$ type like this;
+
+\begin{verbatim}
+type Suit = Diamond | Heart | Club | Spade
+\end{verbatim}
+
+and one can define $SuitPair$ as
+
+\begin{verbatim}
+type alias SuitPair = (Suit, Suit)
+\end{verbatim}
+
+Then we can implement equality for the \code{SuitPair} type as below (or in some more elegant way):
+
+\begin{verbatim}
+suitPairSwap : SuitPair -> SuitPair
+suitPairSwap ( a, b ) =
+    ( b, a )
+
+suitEqual : SuitPair -> SuitPair -> Bool
+suitEqual a b =
+    a == b || suitPairSwap a == b
+
+\end{verbatim}
+
+Then we can say
+
+\begin{verbatim}
+> me = (Diamond, Spade)
+> you = (Spade, Diamond)
+> suitPairEqual me you
+  True
+\end{verbatim}
+
+Here we are emulating a type theory in a statically typed functional language.  Elm does not support type theory natively in the sense used here.  (( Redo with Haskell example instead. ))
+
+\subsection{Formation of new types}
+
+So far we have discussed four types: $Suit$, $SuitPair$, $\nat$, $\nat \to \nat$..  The first type was introduced by (a) naming it, (b) listing its four terms $\diamondsuit$, $\heartsuit$, $\clubsuit$, and $\spadesuit$, (c) defining equality for this type.  In general, one introduces a type by making certain \term{judgements}.  The $Suit$ type is introduced by positing the rule
+
+$$
+\frac{}{Suit : Type}
+$$
+
+In effect, we introduce a name, and declare that it is the name of type.  If we were to stop here (as we may), we would have a type with no terms.  This is a useful thing to have, an example of which is the type $\bot$.  But we go further, saying
+
+$$
+\frac{}{\diamondsuit : Suit} \quad
+\frac{}{\heartsuit : Suit} \quad
+\frac{}{\clubsuit : Suit} \quad
+\frac{}{\spadesuit : Suit} \quad
+$$ 
+
+These are the rules for constructing terms.  Our type is now "inhabited."  
+Notice that the statement $0 : Suit$  is neither true nor false: it makes no sense, as it is not derivable from the rules of the type. Adjunction of the rule
+
+$$
+\frac{a : Suit}{a = a : Suit}
+$$ 
+
+completes the formation of the Suit type. 
+
+The $SuitPair$ type is an instance of the Cartesian product type, whch is formed by the rule
+
+\begin{equation}
+\frac{A : Type \quad B : Type}{A\times B : Type}
+\end{equation}
+
+
+\subsubsection{Functions}
+
+Formation:
+
+\begin{equation}
+\frac{A : Type \quad B : Type }{A \to B : Type}
+\end{equation}
+
+
+Introduction:
+
+\begin{equation}
+\frac{x :  A \vdash b : B}{ \lambda x. b : A \to B}
+\end{equation}
+
+Elimination:
+
+\begin{equation}
+\frac{a : A \quad f : A \to B }{ f \,a : B}
+\end{equation}
+
+Computation:
+
+\begin{equation}
+\frac{x :  A \vdash b : B \quad a: A }{(\lambda x. b)(a) \to_\beta b[x/a]}
+\end{equation}
+
+
+Uniqueness: 
+
+
+\subsubsection{Cartesian products}
+
+The formation rule for the $Suit$ type had no antecedent, while formation of  Cartesian products depends on two antecedent types, $A$  and $B$. Terms of $A\times B$ are introduced by the rule 
+
+\begin{equation}
+\frac{a : A \quad b : B}{(a,b) : A \times B}
+\end{equation}
+
+The term $(a,b)$ is an atomic notion. To have access to what in set theory we think of as its components, we need the projections functions 
+
+\begin{align}
+pr_1 : A \times B \to A \\
+pr_2 : A \times B \to B \\
+\end{align}
+
+To define them, it is enough to say how a function $g : A \to B \to C$ defines a function $f: A\times B \to C$ namely,
+
+\begin{equation}
+f((a,b)) =_{def} g(a)(b)
+\end{equation}
+
+
+With $g =\lambda a.\lambda b . a$ this construction yields $pr_1$, and with 
+$g =\lambda a.\lambda b . b$, it yields $pr_2$.  
+
+
+
+
+
+\subsection{Curry-Howard Isomorphism}
+
+\strong{Example.} The formula $A \to (B \to A)$ can be viewed as a type.  Then a proof, if there is one, is an inhabitant $p$ of that type. It must have the form $\lambda a: A.f:B \to A$.  For $f$ we can take $\lambda b.a$ so the expression $p = \lambda a.(\lambda b.a)$ has the correct type.
+
+
+
+
+\strong{Example.} The formula $A \to \neg \neg A$ corresponds to the type $A \to ((A \to \bot) \to \bot)$.  Let $f : A \to \bot$. If $a:A$, then $\lambda f . f(a)$ has type $((A \to \bot) \to \bot)$ and so $\lambda a. \lambda f . f(a)$ has type  $A \to ((A \to \bot) \to \bot)$.
+
+
+
+
+\strong{Example.}. Consider the law of contraposition,
+
+$$
+(A \to B) \to (\neg B \to \neg A)
+$$
+
+It is a type.  Viewed as a proposition, to provide a proof is to exhibit an inhabitant.  Suppose give $f : A \to B$ and $g : \neg B$, that is, 
+$g : B \to \bot$.  Then $g\circ f : A \to \bot$.  The task, then, is to write down a lambda expression for the function $\rho =  f \mapsto (g \mapsto g\circ f)$.  We proced in stages:
+
+\begin{align}
+f \mapsto (g \mapsto g\circ f) & = \lambda f .(g \mapsto g\circ f)\\
+ & = \lambda f . \lambda g . (g\circ f) \\
+& = \lambda f . \lambda g . (\lambda a. g(f(a))) \\
+\end{align}
+
+\subsection{References}
+
+\href{http://www.cse.chalmers.se/~smith/handbook.pdf}{Martin-Löf's Type Theory}
+
+\href{http://staff.math.su.se/palmgren/lecturenotesTT.pdf}{Lecture Notes on Type Theory} — Palmgren
+
+\href{https://home.sandiego.edu/~shulman/hottseminar2012/02typetheory-handout2up.pdf}{Basics of type theory and Coq} — Shulman
+
+\href{http://www.cs.nott.ac.uk/~psztxa/talks/fmv18.pdf}{Altenkirch}, Introduction to (Homotopy) Type Theory
+
+\href{http://www.cs.nott.ac.uk/~psztxa/talks/bristol-16.pdf}{Altenkirch}, Bristol talk
+
+\href{https://www.heidelberg-laureate-forum.org/wp-content/uploads/2013/10/Homotopy-Type-Theory_Univalent-Foundations-of-Mathematics.pdf}{Univalent Foundations Book}
+
+\href{http://philsci-archive.pitt.edu/12824/1/A.Meaning.Explanation.for.HoTT.pdf}{Dimitris Tsementzis}, A Meaning Explanation of HoTT (2017)
+
+\href{https://www.researchgate.net/publication/312243911_The_HoTT_library_a_formalization_of_homotopy_type_theory_in_Coq}{The HoTT Library}
