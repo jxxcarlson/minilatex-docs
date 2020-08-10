@@ -1,0 +1,125 @@
+
+
+\section{Boltzmann distribution}
+
+Consider a system with energy levels $E_j$ which 
+are occupied with probabiity $p_j$. We shall
+derive the Boltzmann distribution 
+
+\begin{equation}
+p_j= \frac{e^{-E_j/kT}}{Z},
+\end{equation}
+
+for such a system, where
+
+\begin{equation}
+Z = \sum e^{-  E_j/kT}.
+\end{equation}
+
+is the \term{partition} function.  
+For the derivation, we assume that (1) energy is conserved,
+
+\begin{equation}
+\label{eq:conservedEnergy}
+ \sum p_kE_k = E
+\end{equation}
+
+and that (2), the entropy
+
+\begin{equation}
+S = - k \sum p_k \log p_k
+\end{equation}
+
+is maximal.  The second condition yields the differential relation
+
+\begin{equation}
+dS = - k \sum (1 +\log p_k)  dp_k = 0
+\end{equation}
+
+
+Since the sum of the $p_k$ is 1, we have the "conservation of probablity" relation
+
+\begin{equation}
+\label{eq:consprob}
+\sum dp_k = 0
+\end{equation}
+
+The previous equation therefore reduces to 
+
+\begin{equation}
+\label{eq:diffEntropy}
+ dS = -k \sum \log p_k\,  dp_k = 0
+\end{equation}
+
+
+
+The differential form of the conservation of energy equation is
+
+\begin{equation}
+\label{eq:dffConservedEnergy}
+ \sum E_k\, d p_k = 0
+\end{equation}
+
+Now  equation \eqref{eq:diffEntropy} must be a linear combination of \eqref{eq:consprob}
+and \eqref{eq:conservedEnergy}, so that $\log p_k = \alpha - \beta E_k$
+for some constants $\alpha$ and $\beta$.  Substitute this relation in to \eqref{eq:diffEntropy} to obtain
+
+\begin{align}
+ dS & = -k \sum \log p_k\,  dp_k \\
+      & = -k \sum (\alpha - \beta E_k) dp_k \\
+      & = k\beta \sum E_k dp_k \\
+     & = k\beta \sum dq_i \\
+    & = k\beta dq_{rev},
+\end{align}
+
+where in the second to the last step we use the fact that $dq_k = E_k dp_k$  is the  amount of heat energy exchanged when the
+probability of occupying state $k$ is changed by $dp_k$.  Thus we have
+
+$$
+dS = k\beta dq_{rev}
+$$
+
+
+But from classical thermodynamics, we also have $dS = dq_{rev}/T$.  Combining these equations, we find that
+
+\begin{equation}
+\beta = \frac{1}{kT}
+\end{equation}
+
+From $\log p_k = \alpha - \beta E_k$, we find that
+
+\begin{equation}
+p_k = e^\alpha e^{-E_k/kT}
+\end{equation}
+
+Summing this equation over all $k$ yields
+
+\begin{equation}
+1 = \sum p_k = e^\alpha \sum e^{-E_k/kT}
+\end{equation}
+
+Thus $e^\alpha = 1/Z$, where is 
+
+\begin{equation}
+Z = \sum e^{-E_k/kT}
+\end{equation}
+
+is the partition function defined above.
+
+
+\subheading{References}
+
+\href{http://casegroup.rutgers.edu/lnotes/ccb341/boltzmann.pdf}{Notes on the Boltzmann distribution, Chem 341}
+
+\href{http://www.physics.udel.edu/~glyde/PHYS813/Lectures/chapter_3.pdf}{The Method of the Most Probable Distribution}
+
+
+
+
+
+
+
+
+
+
+
