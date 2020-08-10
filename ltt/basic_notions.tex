@@ -1,0 +1,436 @@
+
+
+\section{Basic notions}
+
+\innertableofcontents
+
+
+\subsection{Origins}
+
+Logic is the science of valid reasoning.  An old science that goes back at least to Aristotle (384\ndash 322 BC), it gives answers to the question \italic{What forms of argument yield true conclusions from true hypotheses?} 
+Such argements are the valid ones.  We interested in recognizing and constructing them. Argumenst have the form
+
+\begin{equation}
+\label{argument}
+A_1, A_2, \ldots A_{n-1}, A_n
+\end{equation}
+
+for some sequence of statements $A_i$.  That is, an argument is an ordered list of statements.  The last of these statements is the \term{conclusion}.  To emphasize the imporance of he conclusion, we may write
+
+\begin{equation}
+\label{argument2}
+A_1, A_2, \ldots A_{n-1} \therefore A_n
+\end{equation}
+
+Consider, for example the argument below:
+
+\begin{verbatim}
+A: If (it is raininng) then (I will take my umbrella)
+B: It is raining
+-----------------------
+C: I will take my umbrella
+\end{verbatim}
+
+It has the form $A, B, C$, or $A, B \therefore C$.
+
+We can  decompose the argument into smaller parts, setting $P =$ \italic{It is raining}, and $Q =$ \italic{I will take my umbrella}.  Statments of the form \italic{If P then Q} can be abbreviated $P \to Q$.  The argument then takes the form
+
+
+
+\begin{equation}
+\label{modusponens}
+P \to Q, P \therefore Q
+\end{equation}
+
+We recognize this argument as a proper form of argument, known classically as \term{Modus Ponens}.   The example just given is the beginning of the subject of propositional logic, within which we can study the related notions of (a) is.a proposition true and (b) is a proposition provable?  Propositional logic is the simplest of the classical logics and is quite limited.  For example the statement \italic{All integers are either even or odd}, can formulated in the system of first-order logic, which features quantifiers "For all" and "There exists", but not within propositional logic.
+
+
+
+\subsection{Formal Languages}
+
+To properly discuss various logics, we will need the notion of a \term{formal language} and \term{formal system,}. To begin, suppose given a set of symbols $\Sigma$ , e.g., $\set{a, b., \ldots, y, z}$. The set of symbols can be thought of as a alphabet from which one can form \term{expressions}, which are by definition  any finite sequence of elements.  Thus $car$, $cat$, and $xuux$ are expressions in the given alphabet.  We denote the set of all expressions in $\Sigma$ by $\Sigma^*$, where the empty expression $\epsilon$ is also included.  The subset which disallows the empty expression is denoted by $\Sigma^+$.  By a \term{formula}, we mean an element of a designated subset $\for \subset \Sigma^*$.  The set of Engish words is one possible set of formulas.  It contains $car$ and $cat$ but not $xuux$.  Another possbility is the set of palindromes, which includes $mom$, $dad$, $xuux$, but not $car$.  Etc.  For another example, consider $\Sigma = \set{+, |, =}$.  Then $|||$, $+ | +$, and $|| + || = ||||$ are expressions.  Here we elect to write spaces between symbols.
+
+Formulas  are often given by some set of rules, rather than by enumerating he members of a set.  Take, for example, the set of palindromes.  It is defined by a set $G$ of two rules: (1) a symbol $\sigma \in \Sigma$ is a palindrome as is $\sigma\sigma$. (2) if $P$ is a palindrome, and $\sigma \in \Sigma$, then the expression $\sigma P \sigma$ is a palindrome.  The palindrome $xabax$ is the result of the transformations $b \to aba \to xabax$, while $xuux$ resuts from $uu \to xuux$.  Any palindrome results from repeated application of rule (3) to some "seed" palindrome defined by (1)
+
+Let us extract the grammatical essence of palindrome generation.  (1) There is a set of starting elements $S \subset \Sigma^+$.  (2) here is a set of rules $G$, the grammar, which may be written out as above, or encoded as a set of functions $g: S \to \Sigma^*$.  The set of well-formed formulas $\for$ is the smallest subset of $\Sigma^*$ which is closed under application of functions in $G$.  Call this set the \term{inductive closure} of $S$ with respect to $G$.
+
+We view $G$ as a grammar for the set of formulas $\for$.  In the case of palindromes, the grammar is given by the rule $R_\alpha: P \to \alpha P \alpha$, that is, by the corresponding set of functions $G = \set{ R_{\alpha }}$.  
+
+To summarize, a formal language is a triple $\lang = (\Sigma, G, S)$.  Given such a triple, the set of formulae $\for$ is defined.
+
+\subsection{Truth, and the language M}
+
+We consider next a language of marks.  Its alphabet is the set $\Sigma = \set{+, |, =}$ considered above.  Its start set is $S = \set{\  | + | = |\ }$, and its grammar is given by the rule $| \to ||$, which may be applied to any one of the operands $x, y, z$ in $x + y = z$. The rule is in fact three rules, one acting on $x$, one on $y$, and one on $z$.  Thus both $|| + ||| = |$ 
+and $|| + ||| = |||||$ are fomulae in M, the language of marks.
+
+So far, everything we have done has been done in the realm of syntax, that is, in the realm of grammar and rules.  Let us now consider \term{semantics}, or meaning.  The best we can do in mathematics to give meaning to formulae is to map formulae to some other domain, and to consider the value in that domain to be the meaning, or interpretation of the formula.  In logic, the target domain is generally
+
+$$
+  Bool = \set{T, F}
+$$
+
+where $T$ and $F$ referes to True and False.  It is better, and if feels better, to assign these "truth .values" in a way that is in accord with our underying intuition, when that is possible.  For M, we define an interpretation 
+
+$$
+\phi : \for \to Bool
+$$
+
+by $\phi(A) = T$ if and only if the number of marks to the left of the equals sign is equal to the number of marks to the right.  In this case, we say that $A$ is true.
+When a formula $A$ is true in an interpretation $\phi$, we wrire 
+
+$$
+\models_{\phi} A
+$$
+
+The subscript reminds us that truth is relative to interpretation.  Later, when we consider propositoinal logic, we will encounter the notion of \term{tautology}.  A formula is tautology if it is true in all interpretations.  In that case, we  write
+
+$$
+\models A
+$$
+
+
+
+
+\subsection{Proof, and the formal system ADD}
+
+We now take up the notion of proof.  To this end, define 
+ a  \term{Formal System} \strong{F} to be a triple 
+$(\lang, \axioms, R)$, where $\lang$ is a formal language endowed with a \term{axioms} and \term{rules of inference}.  The axioms are a distinguised subset  $\axioms \subset \for$ of the formulas of $\lang$ . The rules of inference take the form  $A_1, A_2, \ldots A_n\ : B$, where all the elements of the rule are formulas. The $A_i$  are called the \term{premises}, and $B$ is the \term{conclusion} of the rule.
+
+  A proof in \strong{F} is a sequence of formuluas $A_* = A_1, A_2, \ldots A_n$, where one of the following holds for each $A_j$: (1) $A_j$ is an axiom; (2) $A_j$ is the conclusion of a rule of inference, where its premises are formulas $A_i$ with $i < j$.  We say that $A_*$ is a proof of $A_n$.  A fundamental question is: given a formlua $A \in \for$, is it a theorem?
+
+For an example of a formal syster, we consider ADD. \cite{RH}, sectiion 1.3. Its formal language is the language of marks conisdered above.  There is one axiom and two rules of inference:
+
+\begin{indent}
+\strong{AXIOM.} $| + | = ||$
+\end{indent}
+
+\begin{indent}
+\strong{R1.} $x + y = z \ : \ x| + y = z|$
+\end{indent}
+
+\begin{indent}
+\strong{R2.} $x + y = z \ : y + x = z$
+\end{indent}
+
+Here is a proof of the theorem $|| + || = ||||$:
+
+\begin{indent}
+\begin{tabular}{lll}
+$A_1$ & $| + | = ||$ & AXIOM \\
+$A_2$ &$|| + | = |||$ & R1 \\
+$A_3$ &$| + || = |||$ & R2 \\
+$A_4$ &$|| + || = ||||$ & R1 \\
+\end{tabular}
+\end{indent}
+
+
+
+
+If a formula $A$ has a proof in the system \strong{F}, we write $\vdash_F A$.  In our case, we have
+
+$$
+\vdash_{ADD} || + ||  = ||||
+$$
+
+When the formal system is understood, we drop the subscript and write just $\vdash A$.
+
+Consider now the formula $B = | + ||| = ||$.  Is it a theorem? To show that it is not, we go back to the notion of truth, and prove this theorem:
+
+\begin{theorem}
+\label{add:soundness}
+Every theorem of ADD is true.
+\end{theorem}
+
+
+
+\strong{Proof.} Recall that we have the interpretation $\phi: \for \to Bool$, and that we say that $A \in \for$ is true if $\phi(A) = T$. The axiom of ADD satisfies $\phi$, meading that $\phi(A) = T$, where $A$ is the axiom.   Consider now a rule $A : B$. Suppose that whenever $A$ satisfie $\phi$, so does $B$.  Such a ruiel is \term{sound}.  It is easy to see that R1 and R2 are sound rules.  If a proof is constructed using only axioms and sound rues of inference is, we say that it is sound.
+All proofs in ADD are sound. It follows thqat all theorems are true. of applications of R1 and R2, property $M$ holds for all elements of $\theorems$. \strong{Q.E.D.}
+
+As a consequence of this priniciple, formula $B$ is not a theorem in ADD.
+We claim that in \strong{F}, the converse of the previous theorem also holds:
+
+\begin{theorem}
+\label{add:completeness}
+Every true formula in ADD has a proof..  
+\end{theorem}
+
+\strong{Proof.} Let $n(A)$ be the number of marks on the right side of a formula. We prove theorem by induction on $n(A)$.  If $n(A) = 2$, then $A$ is the axiom, and so $A \in \theorems$.  Suppose that that $n(A) = k > 2$.  Let $A$ be $x + y + z$.  Then one of $x$ or $y$ has at least two marks.  If one term has more marks thatn the other, take a mark away from it.  Otherwise, take a mark away from one of the terms.  Then take a mark away from the right-hand side.  The result is a formula $A'$ satisfying $\phi$ with $n(A') = k - 1$. By the inductive hypothesis, $A'$ is a theorem.  Since $A$ is obtained from $A'$ by application of the rules, $A$ is also a theorem. \strong{Q.E.D.}
+
+
+Theorem \ref{add:soundness} says that every theorem in the sysem \strong{F} is true, meaning true relative to $\phi$.  This is an instance of the Soundness Theorem in logic.
+The converse, Theorem \ref{add:completeness} says that every true formula is a theorem.  This is an instance of the Completness Theorem.    In a system that is both sound and complete, a formula is true if and only if it is provable.
+
+The distinction between truth and provabiity is one that we will revisit many times.  To say that a formula is provable is to say that one can find a sequence of moves in a certain game that leads from an initial configuration \mdash  the one axiom in this case \mdash to a final configuration, the theorem to be proved.  To say that. a formula is true, is to say that. certain function invoked upon it has a  certain value.  Provability is a syntactic matter: can the right sequence of moves be found?  Truth is a semantic matter; it depends on the interpretation.
+
+
+
+\subheading{Summary}
+
+The \strong{Soundness Theorem} says that every provable statement is true, i.e,
+
+\begin{indent}
+If $\vdash_F A$, then $\models_\phi A$.
+\end{indent}
+
+The theorem assumes that the interpretation is compatible with the formal system: every axiom is true, and the rules of inference are sound. The \strong{Completeness Theorem} says that every true statement is provable, that is,
+
+\begin{indent}
+If$\models_\phi A$, then $\vdash_F A$ .
+\end{indent}
+
+Once agin, the interpretation must be compatible with the formal system.
+
+\subsection{Propositional Logic}
+
+We consider next the formal system PROP for the propositional callcus.  Let $\Sigma$, consist of an infinite sequence $ p_1, p_2, p_3, \dots$ of \term{propositional variables}, together with  \term{logical  connectives} $\neg, \lor, \land, \to$ and $\leftrightarrow$ as well as the symbols $($ and $)$. We also admit the letter $p, q, r, \ldots$ as propositional variables so as not to have to write subscripts all the time.  One may form new expressions as in the last section, by concatenating symbols, e.g., $p \lor q$ and $\neg (p \to\to q) \neg$. The formulas are are defined as the inductive closure of the set of propositonal varaibles with respect to the follwoing rules, one for each connective:
+
+\begin{enumerate}
+
+\item If $A$ is a formula, then $\neg A$ is a formulas.  We read the latter as "not $A$."
+
+\item If $A$ and $B$ are formulas, then so is $(A \lor B)$ is also. We read this as $``A \text{ or } B"$
+
+\item If $A$ and $B$ are formulas, then so is $(A \land B)$ is also. We read this as $``A \text{ and } B"$..
+
+\item If $A$ and $B$ are formulas, then so is $(A \to B)$ is also. We read this as $``A \text{ implies } B"$..
+
+\item If $A$ and $B$ are formulas, then so is $(A \leftrightarrow B)$ is also. We read this as $``A \text{ is equvalent to } B"$.
+\end{enumerate}
+
+Thus $p$, $(p \land q)$, $(p \land (q \to \neg r)$, etc, are formulas, whereas $p \to \to q \neg$ is not.  A formula like $p$ which has no connectives is called \term{atomic}:  Formulas are also called propositions. 
+
+The rules given above define a language $\lang$, the formulas of propositional logic.  Just as with system ADD, one may use induction to prove assertions such as the following:
+
+\begin{proposition}
+The number of left parentheses of a formula is the same as the number of right parentheses.
+\end{proposition}
+
+So far we have considered only syntax.  Let us now consider semantics.
+To that end, define an interpretation of PROP to be function 
+
+\begin{equation}
+\phi: \set{p_1, p_2, \dots} \to Bool
+\end{equation}
+
+It can be extended to a function $\phi: \for \to Bool$ using induction and rules which respect the conventional meanings of the logical symbols that are given in the table below.  Each row should be thought of as defining an interpretation. Thus, interpretation 1 assigns T to both P and Q,, interpretation 2 assings T to P and F to Q, etc.
+
+\begin{indent}
+\begin{tabular}{cccccccc}
+- & $\phi(P)$ & $\phi(Q)$ & $\phi(\neg P)$ & $\phi(P \lor Q)$ & $\phi(P \land Q)$ & $\phi(P \to Q)$ & $\phi(P \leftrightarrow Q)$ \\
+$\phi_1$ & $T$ & $T$ & $F$ & $T$ & $T$ & $T$ & $T$ \\
+$\phi_2$ & $T$ & $F$ & $F$ & $T$ & $F$ & $F$ & $F$ \\
+$\phi_3$ & $F$ & $T$ & $F$ & $T$ & $F$ & $T$ & $F$ \\
+$\phi_4$ &$F$ & $F$ & $F$ & $F$ & $F$ & $T$ & $T $ \\
+\end{tabular}
+\end{indent}
+
+We can think of this table as expressing rules such as $\phi(P \lor Q) = \phi(P) \cup \phi(Q)$ where $a \cup b$  is an expression in  Boolean algebra. Let $\phi$ be an interpretation. Then we have the following definitions:
+
+\begin{itemize}
+
+\item If $\phi(A) =T$, then  $\phi$ \term{satisfies} $A$.  We write $\models_\phi A$
+
+\item $A$ is \term{satisfiable} if there is an an interpretation which satisfies it; if there is none such, then $A$ is \term{unsatisfiable}.
+
+\item If $A$ is saisfied by all interpreations, then it is \term{valid}, or a \term{tautology}.  In this case, we write $\models A$.
+
+\end{itemize} 
+
+Any atomic  proposition, e.g., $p$, is satisfiable, but  $p \land \neg p$ is unsatisfiable.  The formua  $p  \lor \neg p$ is a tautology.
+
+\begin{exercise}
+(a) Show that the formula $(p \to q) \leftrightarrow (\neg q \to \neg p)$ is a tautology.  That is, the equivalnece of an implication and its contrapositive is a tautology. (b) Show that the formula $(p \to q) \to (q \to  p)$ is not a tautology;
+(c) Is $(p \to q) \land p) \to q$ a tautology? (d) What about $((p \to q) \land (q \to r)) \to (p \to r)$?
+\end{exercise}
+
+
+Let $\Gamma$ be a set of formulas, and let $A$ be a formula.  Suppose that whenever all the formulas of $\Gamma$ are satisfied,  then $A$  is also satisfed. In that case we say that $A$ \term{is a semantic consequence} of $\Gamma$, or that $\Gamma$ \term{entails} $A$.  In this case, we write
+
+$$
+\Gamma \models A
+$$
+
+Notice what this statement says.  There is a smallest set $V$ of propositional variables in which the formullas of the set $\Gamma \cup \set{A}$ can be expressed.  Consider the set $I(V)$ of all functions $\phi: V \to Bool$.  There are $2^N$ such functions, where $N$ is the cardinality of $V$.  Let $I_\Gamma(V)$ be the subset of functions for which all formulas of $\Gamma$ are true.  This is the set of interpretations which satisfy $\Gamma$. Then $\models_\phi A$ for all $\phi$ in $I_\Gamma(V)$.
+
+
+Consider, for example, the statement
+
+$$
+P, P \to Q \models Q
+$$
+
+If $P$ is true, the interpretation in question must be either $\phi_1$ or
+$\phi_2$. But $P \to Q$ is true, so the only interpretation is $\phi_1$.  In this interpretation, $Q$ is true. \strong{Q.E.D}
+
+
+If $\Gamma$ is empty, then $A$ is a tautology, and we write $\models A$.   Thus, we can say that $\models P \lor \neg P$.
+
+ 
+If $A \models B$ and $B \models A$, then $A$ and $B$  are (semantically) equivalent, and we write $A \cong B$.  For example, $A \lor B \cong B \lor A$.
+
+Note that $A \leftrightarrow B$ and $A \cong B$ are not the same because they are not even the same kind of statement.  The first is a formula in the propositional calculus.  The second is not, but is instead a relation between propositions.  Said another way, the first is a formula \emph{in} the language $\lang$ whereas the second is a statement \emph{about} the language, that is, a statement in the metalanguage
+
+
+\subsection{Decidability}
+
+
+
+A \term{decision problem} is a problem with a yes-no answer.  It is \term{decidable} if there is an algorithm for determining the answer.  In system \strong{F} above, the question \italic{Is the fomula $A$ true?} is decidable.  "Count the marks" is  a suitable algorithm.  By Theorem \ref{F:adequacy}, Adequacy, the question \italic{Is the formula $A$ provable?} is also decidable.
+
+
+Consider next Propositional Logic.  The \term{satisfiabilty problem} asks whether a given formula is satisfiable.  This problem is decidable.  Let $p_1, \ldots p_n$ be the propositional variables in a formula $A$.  There are $2^n$ possible truth assignments for these variables, which may be enumerated as $\phi_1, \ldots, \phi_N$.  Compute $\phi_1(P)$.  if the result is true, stop.  Otherwise, continues with $\phi_2$, $\phi_3$, etc. If we find that $\phi_j(P) = T$, we stop and know that $P$ is satisfiable.  If we find that $\phi_i(P) = F$ for all $i$, we know that $P$ cannot be satisfied.
+
+While the satisfiablility problem is decidable, our algorithm is not practical for formulas with a large number of vaiables, say, 100 or more.  There are 
+$2^{100} \sim 10^{30}$ truth assignments for 100 variables.  If one truth assignment could be checked in one nanosecond, the decision problem for such a formula could take on the order of $10^{14}$  years to settle.  Even worse is the tautology problem, which can be decided by the same algorithm, except that \emph{all} assignments must be checked.  
+
+We have seen that truth is decibable in the propositional calculus, just as it was in our toy system \strong{F}.  What about provability?  We cannot yet answer this question, because we have not yet defined what a proof is, much less devised a system to find them.  This is our next task.  Once we have a proof system, we can examine the relationship between truth and provabiity for the propositional calculus.  That is, we can determine whether the Soundness and Adequacy theorems hold.
+
+
+Before setting out, we should note that there are different proof systems, e.g,  classical and intuitionistic or constructivist logic.  Each has different sets of inference rules, and it will turn out that there are formulas provable in one system that are not provable in the other.  The differences between the systems have to do with the treatment of negation and of principles like the law of the excluded midde, which is true in classical logic, but not in constructiveis logic.
+
+\subsection{Proofs in classical logic}
+
+
+There are many proof systems for classical propositional logic.  They vary in the number and character of their rules of inference.  We will follow  \cite{RH},Chapter 3, in describing a formal system \strong{P} for proving theorems in classical propositional logic. Having already defined the language $\lang$ of propositional formalae, it remains to set out the axioms, of which there is just one, and the rues of inference, of which there are four:
+
+\strong{Axiom.} For all formulas $A$, $A \lor \neg A$ is an axiom.
+
+
+
+\strong{Associativity.} $(A \lor (B \lor C)) : ((A \lor B) \lor C)$
+
+\strong{Expansion.} $A : B \lor A$
+
+\strong{Contraction.} $A \lor A : A$
+
+\strong{Cut.} $(A \lor B), (\neg A \lor C) : (B \lor C) $
+
+The single axiom (really an infinite set of axioms ot the same form) is a tautology. We claim in addition that the rules of inference are sound.  We  verify just one of these the cut rule, leaving the remaining verifications as exercises.  Thus, for the cut rule, one must show that
+
+$$
+A \lor B, \neg A \lor C \models B \lor C
+$$
+
+To this end, list the interpretations $\phi$ defined on the variables $A,B,C$ in the truth table below.
+
+
+\begin{indent}
+CUT
+\begin{tabular}{ccccccc}
+- & $A$ & $B$ & $C$ & $A \lor B$ & $\neg A \lor C$ & $B \lor C$ \\
+1 & T & T & T & T & T & T \\
+\red{2} & T & T & F & T & \red{F} & \red{F} \\
+3 & T & F & T & T & T & T \\
+\red{4} & T & F & F & T &  \red{F} & \red{F} \\
+5 & F & T & T & T & T & T \\
+6 & F & T & F& T & T & T \\
+\red{7} & F & F & T &  \red{F} & T &  \red{F} \\
+\red{8} & F & F & F &  \red{F} & T &  \red{F} \\
+\end{tabular}
+\end{indent}
+
+In rows 2, 4, 7, 8, one of the formulas $A\lor B$ and $\neg A \lor C$ is unsatisfied.  Strike these rows and look at the value in the last column of the remaining rows.  Those values are all T, and so the resut is proved.
+
+As a first application of these rules, we derive the theorem $A \lor B \vdash B \lor A$.
+
+\begin{indent}
+COMM
+\begin{tabular}{lll}
+1 & $A \lor B$ & HYP \\
+2 & $\neg A \lor A$ & AXIOM \\
+3 & $B \lor A$ & CUT \\
+\end{tabular}
+\end{indent}
+
+Note the liberal use of the law of the excluded middle. From the COMM rule, 
+one derives the two variants of the main inference rules;
+
+\strong{Expansion'} $A : A \lor B$
+
+\strong{Associativity.} $(A \lor B) \lor C : A \lor (B  \lor C)$
+
+Let's look at some othe rules that can be deduced from the
+four basic rules.
+
+\strong{Modus Ponens,} $A, A \to B : B$
+
+\begin{indent}
+Proof
+\begin{tabular}{lll}
+1 & $A$ & HYP \\
+2 & $A \to B$ & HYP \\
+3 & $\neg A \lor B$ & DEF \\
+4 & $B \lor A$ & EXP \\
+5 & $A \lor B$ & COMM \\
+6 & $B \lor B$ & CUT(3,5) \\
+7 & $B$ & CONTR \\
+\end{tabular}
+\end{indent}
+
+We have proved $B$ given $A$ and $A \to B$,  That is,
+
+$$
+A, A \to B \vdash B
+$$
+
+For the sake of notational consistency, when we put this theorem into our stock of inference rules, we write as $A, A \to B : B$.
+
+$\neg \neg$ \strong{Rule 1.} $A : \neg \neg A$
+
+
+\begin{indent}
+Proof
+\begin{tabular}{lll}
+1 & $A$ & HYP \\
+2 & $\neg \neg A \lor \neg A$ & AXIOM  \\
+3 & $\neg \neg A \lor A$ & EXP (1) \\
+4 &  $\neg \neg A \lor \neg \neg A$ & CUT(2,3) \\
+5 & $\neg \neg A $ & CONTR \\
+\end{tabular}
+\end{indent}
+\begin{exercise}
+Show tha $A, A \to B \models B$.
+\end{exercise}
+
+\subheading{Exercises}
+
+\begin{enumerate}
+
+\item \strong{Disjunctive syllogism (DS)} $A \lor B, \neg A : B$.
+
+\item \strong{Hypothetical Syllogism (HS)}. $A \to B, B \to C : A \to C$l
+
+\item \strong{Modus Tollens (MT)}. $A \to B, \neg B : \neg A$
+
+\item \strong{Contrapositive (CP)}.. $A \to B : \neg B \to \neg A$.
+
+\item \strong{Separation (SEP)}. $A \land B : A$; $A \land B : A$
+
+\item \strong{JOIN}. $A, B : A \land B$.
+
+\end{enumerate}
+
+\subsection{Soundness and Completeness for Propositional Logic}
+
+The soundness theorem for propostional logic asserts that all theorems are true:
+
+\begin{theorem}
+If $\vdash A$, then $\models A$.
+\end{theorem}
+
+\strong{Proof.} For the proof, note first that the axioms are true: for any interpretation $\phi$ and any formula $A$,
+
+$$\phi(A \lor \neg A) = \phi(A) \cup \neg \phi(A) = T$$
+
+As an extended exercise, one shows that for any rule of inference, the truth of the premises implies thre truth of the conclusion.  Thus boh the axioms and the rues of inference are sound.  It follows that if $A$ is any element of the inductive closure of the axioms, then $A$ is valid.  \strong{Q.E.D.}
+
+
+
+
+
+
+
+
+
+
