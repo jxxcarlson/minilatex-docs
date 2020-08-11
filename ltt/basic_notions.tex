@@ -1,4 +1,9 @@
-
+\begin{mathmacro}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\for}[0]{\mathcal{F}}
+\newcommand{\axioms}[0]{\mathcal{A}}
+\newcommand{\theorems}[0]{\mathcal{T}}
+\end{mathmacro}
 
 \section{Basic notions}
 
@@ -60,7 +65,7 @@ To summarize, a formal language is a triple $\lang = (\Sigma, G, S)$.  Given suc
 
 \subsection{Truth, and the language M}
 
-We consider next a language of marks.  Its alphabet is the set $\Sigma = \set{+, |, =}$ considered above.  Its start set is $S = \set{\  | + | = |\ }$, and its grammar is given by the rule $| \to ||$, which may be applied to any one of the operands $x, y, z$ in $x + y = z$. The rule is in fact three rules, one acting on $x$, one on $y$, and one on $z$.  Thus both $|| + ||| = |$ 
+We consider next a language of marks.  Its alphabet is the set $\Sigma = \set{+, |, =}$ considered above.  Its start set is $S = \set{ | + | = |}$, and its grammar is given by the rule $| \to ||$, which may be applied to any one of the operands $x, y, z$ in $x + y = z$. The rule is in fact three rules, one acting on $x$, one on $y$, and one on $z$.  Thus both $|| + ||| = |$ 
 and $|| + ||| = |||||$ are fomulae in M, the language of marks.
 
 So far, everything we have done has been done in the realm of syntax, that is, in the realm of grammar and rules.  Let us now consider \term{semantics}, or meaning.  The best we can do in mathematics to give meaning to formulae is to map formulae to some other domain, and to consider the value in that domain to be the meaning, or interpretation of the formula.  In logic, the target domain is generally
@@ -144,7 +149,7 @@ Every theorem of ADD is true.
 
 
 
-\strong{Proof.} Recall that we have the interpretation $\phi: \for \to Bool$, and that we say that $A \in \for$ is true if $\phi(A) = T$. The axiom of ADD satisfies $\phi$, meading that $\phi(A) = T$, where $A$ is the axiom.   Consider now a rule $A : B$. Suppose that whenever $A$ satisfie $\phi$, so does $B$.  Such a ruiel is \term{sound}.  It is easy to see that R1 and R2 are sound rules.  If a proof is constructed using only axioms and sound rues of inference is, we say that it is sound.
+\strong{Proof.} Recall that we have the interpretation $\phi: \for \to Bool$, and that we say that $A \in \for$ is true if $\phi(A) = T$. The axiom of ADD satisfies $\phi$, meading that $\phi(A) = T$, where $A$ is the axiom.   Consider now a rule $A : B$. Suppose that whenever $A$ satisfies $\phi$, so does $B$.  Such a ruiel is \term{sound}.  It is easy to see that R1 and R2 are sound rules.  If a proof is constructed using only axioms and sound rues of inference is, we say that it is sound.
 All proofs in ADD are sound. It follows thqat all theorems are true. of applications of R1 and R2, property $M$ holds for all elements of $\theorems$. \strong{Q.E.D.}
 
 As a consequence of this priniciple, formula $B$ is not a theorem in ADD.
