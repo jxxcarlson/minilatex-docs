@@ -1,3 +1,8 @@
+\begin{mathmacro}
+\newcommand{\set}[1]{\{ #1 \}}
+\newcommand{\nat}[0]{\mathbb{N}}
+\end{mathmacro}
+
 \section{Type Theory}
 
 ((( Very Much Under Construction )))
@@ -5,6 +10,7 @@
 \innertableofcontents
 
 \subsection{What is a type?}
+
 
 
 In set theory, one speaks of elements and membership of elements in sets.  Thus, one says that $0$ is an element of the set $\nat$, writing $0 \in \nat$.  Likewise one can say that, $\spadesuit \in Suits$, where 
@@ -48,7 +54,7 @@ Note that equality can be decided algorithmically, that is, by a suitable comput
 Let us now consider the type of natural numbers, written $\nat$.  It has two construction rules:
 
 $$
-\frac{}{0 : \nat} \qquad \frac{a : \nat}{s(a) : \nat}
+\frac{}{0 : \nat } \qquad \frac{a : \nat}{s(a) : \nat}
 $$
 
 where we think of $s(a)$ as the successor of $a$.  Thus $0$ is a term, as is $s(0)$, $s(s(0))$, and so on.  The officical way to view $s$ is as a function $s : \nat \to \nat$.  For now, think of a function as a rule that constructs a new term from an old one.  In our case, $0$ is a term, and therefore so is $s(0)$, and also $s(s(0))$, and so on.  As for equality, we admit the reflexive rule, and also these:
