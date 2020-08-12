@@ -1,0 +1,72 @@
+\title{MiniLaTeX: The App}
+
+\maketitle
+
+\tableofcontents
+
+
+\section{Browser compatibiity}
+
+The app works well in Chrome, Firefox, Opera, and Min.   In Safari, the display is messed up.
+
+
+
+\section{Collaboration}
+
+\subsection{Adding and removing collaborators}
+
+Press the \blue{Collaborators} button in the footer to raise the collaborators popup list.  Enter collaborators by user name one per line.
+
+
+\subsection{Notes to collaborators}
+
+If you say this:
+
+\begin{verbatim}
+\attachNote{HD}{Hey, this is a good first draft.  
+But I would refer to Blowenpuff's article on 
+quantum computing in the introduction.}
+\end{verbatim}
+
+It is rendered like this:
+
+\attachNote{HD}{Hey, this is a good first draft.  
+But I would refer to Blowenpuff's article on 
+quantum computing in the introduction.}
+
+\section{Search}
+
+Shortcut: use \code{:book} to search for "books," aka collections of documents.
+
+
+\subsection{Importing}
+
+Put the line 
+
+\begin{verbatim}
+  \include{2}
+\end{verbatim}
+
+as the first line of your document to import the contents of document 2.  The text will be inserted before the regular text.  This is a good way to include macro definitions.  To prepend the text of several documents, you can do this:
+
+\begin{verbatim}
+  \include{2, 3, 4}
+\end{verbatim}
+
+\section{Exporting to LaTeX} 
+
+Use the \blue{Export} button in the footer.  The exported document will be saved in the Downloads folder unless you tell your computer otherwise.  If your document has images, a button \blue{Images} will appear to the right of \blue{Export}.  Click on that button to bring up a window that lists the images in your document.  Right-click on these images to download them.  They should be stored in folder \blue{image} in the same place as your exported document.
+
+
+\section{Known Issues}
+
+We are working on these.  Please let us know of others as you find them (jxxcarlson at gmail).
+
+\begin{enumerate}
+
+\item Links in table of contents do not work
+
+\end{enumerate}
+
+
+\end{enumerate}
