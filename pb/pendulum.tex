@@ -1,0 +1,163 @@
+\section{The Pendulum}
+
+\image{https://upload.wikimedia.org/wikipedia/commons/6/6b/Galileo_pendulum_clock_2.png}{Galileo's Pendulum Clock}{float: left}
+
+
+((Wikipedia)) The pendulum clock was invented in 1656 by Dutch scientist and inventor Christiaan Huygens, and patented the following year. Huygens contracted the construction of his clock designs to clockmaker Salomon Coster, who actually built the clock. Huygens was inspired by investigations of pendulums by Galileo Galilei beginning around 1602. Galileo discovered the key property that makes pendulums useful timekeepers: isochronism, which means that the period of swing of a pendulum is approximately the same for different sized swings.[3][4] Galileo had the idea for a pendulum clock in 1637, which was partly constructed by his son in 1649, but neither lived to finish it.[5] The introduction of the pendulum, the first harmonic oscillator used in timekeeping, increased the accuracy of clocks enormously, from about 15 minutes per day to 15 seconds per day[6] leading to their rapid spread as existing 'verge and foliot' clocks were retrofitted with pendulums. 
+
+
+One method for measuing time is to use a pendulum, which in its simplest form is simply a weight suspended by a thread. wire, rope, or whatever.  Pushed to one side, it will swing back and forth at regular intervals.  The *amplitude,* or size of the swing  becomes gradually smaller as the pendulum loses energy through friction — friction as the wire and weight move through the air, friction at the point of suspension, etc.  But unitl the pendulum comes to rest, the swings are quite regular and can be used as the basis for a clock. To measure interval of time between events $A$ and $B$, then, is just a matter of counting the number of swings between the events.   For a truly usable clock, one needs a way of supplying the energy that is lost through friction.  That is the role of the gears you see in Galileo's clock in the Figure, above left.  Galileo conceived of the idea of this clock at the age of 73, at which point he was totally blind. He described the mechanism to his son, who made the drawing.  Galileo's student and biographer, Vincenzo Viviani, describes the invention as follows:
+
+\begin{quotation}
+One day in 1641, while I was living with him at his villa in Arcetri, I remember that the idea occurred to him that the pendulum could be adapted to clocks with weights or springs, serving in place of the usual tempo, he hoping that the very even and natural motions of the pendulum would correct all the defects in the art of clocks. But because his being deprived of sight prevented his making drawings and models to the desired effect, and his son Vincenzio coming one day from Florence to Arcetri, Galileo told him his idea and several discussions followed. Finally they decided on the scheme shown in the accompanying drawing, to be put in practice to learn the fact of those difficulties in machines which are usually not foreseen in simple theorizing.
+\href{https://en.wikipedia.org/wiki/Galileo%27s_escapement}{Source: Wikipedia}
+\end{quotation}
+
+\subsection{Regularity}
+
+An obvious and important question is *how can we know that the pendulum clock is counting out equal intervals of time.* What we know of Galileo's life suggests an answer.  Both he and his father were accomplished musicians.  Music is generally played with a regular beat, and deviations from that beat, unless deliberate, can get you expelled from the jam session. So Galileo was well-positioned  by virtue of his musical training to tell, with more authority than the average person, whether a pendulum was swinging in a regular manner.  Another method is to see if the swings of the pendulum match up with some other periodic phenomon, such as the beating of one's heart.  It is a good exercise to try to imagine in detail how such an experiment might be carried out.
+
+\subsection{Energy}
+
+Let's talk more energy.  When a pendulum swings, its motion is most rapid at the bottom of its arc, slowest at the top — indeed, stationary for just an instant as the motion from left to right changes direction
+Thus its kinetic energy is greatest at the bottom of the swing, lowest, indeed zero, at the top.  As we recall from our conversation on energy this means that there must be another term, so that total energy is conserved:
+
+$$
+E_{total} = E_{kinetic} + E_{??}
+$$
+
+What might be that other term?  Well, it is potential energy, the energy that a body has by virtue of its position — and by virtue of the force of gravity, which pulls every body towards the center of the Earth.  Once again, we find the relation 
+
+$$
+E_{total} = E_{kinetic} + E_{potential}
+$$
+
+As the pendulum swings, there is a to-and-fro exchange of energy between these two forms — first the kinetic energy is very large and the potential energy is very small.  Somewhat later the situation is reversed, with keentic energy veru mall and potential energy very large — and then the cycle repeats itself.
+
+\subsection{Equation of Motion}
+
+\image{https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Simple_gravity_pendulum.svg/1200px-Simple_gravity_pendulum.svg.png}{Simple pendulum}{float: left}
+
+The foregoing discussion illuminates the qualitiative nature of the energy exchanges in the pendulum system.  What it does not do, however is give us an explanation of why timebetween successive sngs of th pendulum are the same.  Nor does it predict the period of the pendulum.   For this, we need the equation of motion, which  is a form Newton's law, $F = ma$, wriiten in terms of the angle $\theta$ between the pendulum and the vertical.  Let's talk through the equation, with the details to be found in the appendix of this section.  First, a bit of trigonometry yields the component of the gravitatioal force perpendicular to the pendulum: that is, in the direction of the motion.  It is
+
+$$
+  F = - mg \sin\theta
+$$
+
+where $m$ is the mass of the pendulum bob, and $g$, something we have encounterd before is the accleration of gravity.  The mass times acceleration term is given by the formula below. Although we need calculus to drive it, we can see whether it is reasonable.  First, ti involves a seoond derivative of $\theta$ with respect to time.  This is good, bucase accelration is a rate of change in velocity, which is already a reate of change.  So: two time derivatives.  The factor of $\ell$, the length of the pendulum, is also reasonable.  Think of moving sticks in a circle — a broomstick and a drumsiick — held out in right and left turns as you turn round and round at a ocnstant rate, say ten turns a minute.  Then end of the broomstick will move much faster than the end of the drumstick.
+
+$$
+ma = m\ell \ddot \theta
+$$
+
+Settng $F = ma$ we find that 
+
+$$ 
+  m\ell \ddot \theta = - mg \sin\theta
+$$
+
+
+When we study this equation, we find something remarkable.  The mass can be cancelled from both sides, yielding
+
+$$ 
+ \ddot \theta = -\frac{g}{\ell} \sin\theta
+$$
+
+This equation is quite suggestive.  It says that the behavior of the system depends only on the the ratio $g/\ell$.  Let's think about the unit of measure for $g/\ell$.. The numerator is an acceleration, measured in meters per second per second — $m/s^2$ The denominator is a length, and so is mesaured in meters. Thus we have
+
+$$
+\frac{\text{meters}}{\text{seconds}^2} \times \frac{1}{\text{meters}} =  
+\frac{1}{\text{seconds}^2}
+$$
+
+What kind of quantity might have these units?  We can cheat a little and think about what we woiuld like to know about  the pendulum. Its most important characteristic is is its period — the amount of time it takes to make one complete cycle.  The period, therefore, is measured in seconds.  What algebraic expression can we cook up from $g/l$ that has these units?  Well, iif we take the reciprocal of $g/\ell$, we get seconds squared, and if we take the square root of that, we get seconds.  So an expression of the form
+
+$$
+  P = C\sqrt{\frac{\ell}{g}}
+$$
+
+where $C$ is a constant, works.  The constant turns out to be $2\pi$.   Figuring this out required a little more mathematics.  See the appendix below. In any case, our final result is
+
+$$
+  P = 2\pi\sqrt{\frac{\ell}{g}}
+$$
+
+\subsubsection{Frequency and click rate}
+
+Let's think about this.  First off, the formula does not involve the mass, which may come as a suprise.  Second, the period is larger if the pendulum arm is longer.  Third, if $g$ increases, then $P$ decreases.    This means that we can build a device that detects changes in the acceleration due to the graviational force of Earth.  Remember that that the force that the Earth exerts on a body of mass $m$ is $mg$.  Thus our device measures the force of gravity.  Why might this be useful?  Imagine that we are prospecting for minerals.  A body of ore — a big blob of mineral rock under the surface of the earth — typically has a higher than normal density.  Oil has a lower density.  Thus the period of our device would be smaller over a deposit of gold  and larger over a subterranean lake of oil.
+
+Let's think about a practical question.  in designing our detector, it might be more conveninent to measure the frequency of the pendulum than the period.  Imagine that each time the pendulum reaches its lowest position, it makes a clicking sound.  We want to measure clicks per second.  The units of clicks per second is $1/\text{seconds}$.  We might thingk that the click rate is the reciprocal of the period, say
+
+$$
+\nu = \frac{1}{2\pi}\sqrt{\frac{g}{\ell}}
+$$ 
+
+In fact, we have
+
+$$
+\text{click rate} = \frac{1}{\pi}\sqrt{\frac{g}{\ell}}
+$$ 
+
+The reason is that there are two clicks in every pendulum cycle: one when the pendulum is at the bottom moving left, the other when it is moving right.  The symbol $\nu$ in the first formula is the *frequency*, most commonly measured in Hertz, which is a synonym for "cycles per second."
+
+\subsubsection{Grandfather clock }
+
+\image{https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1934-grandfather-clock-patent-dan-sproul.jpg}{Grandfather clock}{float: left}
+
+
+ Let's enjoy what we have learned by doing a little calculation.  Suppose that we want to build a grandfather clock.  These are tall devices that stand of the floor,  typically about the height of a person, as in the Figure on the left.  Le's say that we make the pendulum arm one meter long.  Then
+
+$$
+\text{click rate} = \frac{1}{3.14159}\sqrt{\frac{9.80665}{1}} = 0.99681 \text{ seconds}
+$$ 
+
+Amazing!  By pure good luck, we have hit on design with a click rate very close to one click per second.  But we can do better.  Let's cut the pendulum are to just the right length to get a one click per second rate.  To do this, we solve the equation
+
+$$
+\kappa = \frac{1}{\pi}\sqrt{\frac{g}{\ell}},
+$$
+
+where $\kappa$ is the click rate, to get 
+
+$$
+\ell = \frac{g}{\pi^2 \kappa}
+$$
+
+In our case, $\ell = 0.99361$ meters — about $4$ millimeters short of one meter.
+
+
+\subsubsection{Gravity meter}
+
+Let's use our formula to examine the design of our gravity meter.  At an altitude of 1 km, $g = 9.80357$, and we find $\kappa = 0.99967 \text{ Hertz}$, or about $0.35$ milliseconds.  That is a difference that could be detected with very good equipment.  
+
+
+It might be better to design our gravity detector so that it has a short pendulum arm and a much higher click rate.  Certainly it will be easier to transport  Let's make a tiny device with a 1 cm pendulum — a kind of mini metrnome.  At sea level, the click rate is $\kappa = 9.9681 \text{ Hertz}$. On the top of a 1000 m high hill, $\kappa' = 9.9667 \text{ Hertz}$.  The difference is 
+
+\subsection{Dimensional Analysis}
+
+Let's return to our "discovery" of the formula for the period of the pendulum.  The flow of the reasoning was 
+
+1. The equtation of motion depends on the ration $g/\ell$.
+
+2. The units of $g/\ell$ are $\text{seconds}^{-2}$. 
+
+3.  Therefore $\sqrt{\ell/g}$ is meaured in seconds.
+
+4. The only relevant quantity  in the pendlum system that is measured in seconds is the period.
+
+5. Therefore it is reasonable to think that the period is proportional to $\sqrt{\ell/g}$.
+
+At the end of step (5) there are two questions: (a) is the proportionality a correct relationship, (b) what is the constant of proporitionality.  For (a) there is both experimental and theoretical evidence.  For (b), one needs theory.  Why $\pi$ and not $3.14$, for example?  We discuss the theory part in the appendix. As for the experimental part, we can measure the periods of pendula of different lengths.  Suppose the one pendulum as period $P$ and length $\ell$ and that another has period $P'$ and length $\ell'$.    The 
+
+$$
+  \frac{P'}{P} = \frac{\sqrt\ell'}{\sqrt\ell}
+$$
+
+Since both pendula are at the same altitude, they have the same $g$, which cancels out in the ratio. In the same way, the constant cancels out. Our experiment, then, is to measure the periods and lengths of two pendula, then compare the ratios as in the formula above.  If the two sides of the equation are "equal within experimental error," then we have confirmed the formula.  Not proved it, but confirmed it. 
+
+This businesss of using the units of measure to guess what is going on is called \term{dimensional anaysis}. One sometimes says things lke "the dimension of the quantity $\sqrt{\ell/g}$ is seconds."
+
+
+\subsection{Appendix}
+
+
