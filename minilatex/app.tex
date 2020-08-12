@@ -9,7 +9,23 @@
 
 The app works well in Chrome, Firefox, Opera, and Min.   In Safari, the display is messed up.
 
+\section{Home page}
 
+Tag a document as  \italic{home} and make it public.  It will then appear in the list of home pages that you see when you click on the button \blue{Home pages} (header, upper right).  If your username is \code{aristotle}, you can send someone a link to your home page like this:
+
+\begin{verbatim}
+https://minilatex.lamdera.app/h/aristotle
+\end{verbatim}
+
+Your home page can have text, images, math, etc., as well as links to other documents on this site.  Use the \code{\bs{xlink}} macro fo this:
+
+\begin{verbatim}
+\xlink{30}{Magical Thinking}
+
+\xlink{uuid:abc12...34de}{More Magical Thinking}
+\end{verbatim}
+
+The firs links to document 30, the second to the document with Uuid \code{uuid:abc12...34de}.  The document number of the current document is displayed in the footer.  To find the Uuid of  document, click on the button \blue{Version} in the footer. 
 
 \section{Collaboration}
 
