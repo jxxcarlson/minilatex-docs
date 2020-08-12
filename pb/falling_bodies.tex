@@ -1,0 +1,128 @@
+# On Falling Bodies
+
+___
+
+[Main](#id/403f000a-8f08-4bc7-8b64-87ceaa4f4723)
+
+___
+
+## Aristotle and Galileo
+
+Consider the question
+
+> *Do heavy bodies fall faster than light ones?*  
+
+According to Aristotle (384-322 BC), the answer is "yes." Bodies fall at a speed proportional to their mass. According to Galileo (1564-1642), the answer is "no." Two bodies of different masses falling from the same height will strike the ground at the same time.  Let us call this the *Principle of Equal Times*.
+
+Which of these eminent thinkers is correct?  To find out, we do an experiment. Drop an orange and a small scrap of paper from chest height. The orange hits the ground first.  Therefore Aristotle wins!  While the result is clear, we are cautious and decide to investigate further.  Perhaps the rate of fall depends on what the objects are made of? Perhaps there are other factors to take into account? We drop an orange and a pencil. This time, they strike the ground at the same time. Therefore Galileo wins!
+
+Why the confusing results?  It turns out  that we have neglected something important.  A falling body is subject to two forces: the downward pull of gravity, $F_{gravity}$, and the upward push of air resistance, $F_{drag}$. The motion of a body is determined by the total force applied to it,
+
+$$
+F_{total} = F_{gravity} - F_{drag}
+$$
+
+For an orange or a pencil, drag is small compared to the pull of gravity, so the total force  is almost the same as the gravitational force:
+
+$$
+F_{total} \sim F_{gravity}
+$$
+
+In this case the Principle of Equal Times holds.  But for a scrap of paper, which has small mass and large area, the effect of drag is quite large.  That is why in the race between the orange and the scrap of paper, the orange wins.
+
+
+One might argue that because it ignores air resistance, the Principle of Equal Times is not good physics.  Good physics should apply universally, without special restrictions.  That indeed is the proper goal.  Nonetheless, we often make progress by simplifying the system, so that Nature speaks in a clear voice, revealing to us her fundamental laws.  As we shall see shortly, the Principle of Equal Times prepared the way for Galileo's time-squared law and then to Newton's laws of motion.  With the latter in hand the role of air resistance can be explained.  But to reach this explanation, we first had to eliminate its effects.  Seems roundabout and inefficient, but that convoluted path is the one most often taken.
+
+
+
+
+
+## On Experiments
+
+Let's go back to Galileo's discovery of the principle of equal times.  We have recounted it as a story in which down-to-earth experimentalists (us, Galileo) vanquish out-of-touch, impractical theorists such as Aristotle.  Indeed, In an often retold tale, Galileo is said to have dropped two weights from the leaning tower of Pisa, proving the ancient theories wrong when they landed together at the foot of the tower,
+The real history, of course, is more complicated. The documentary evidence for the leaning tower experiment comes from a biography of Galileo written by his student Vincenzo Viviani, written in 1654 and published in 1717.  There is no account of such an experiment by Galileo himself.  What does exist, however, is a description of a *thought experiment,* conducted not in a laboratory, but entirely in Galileo's mind. It goes something like this.  Imagine two stones, one which is heavier and so falls faster than the other. Now tie them together with a light, strong string.  As the composite two-stone system falls, the lighter stone will retard the motion of the heavier one.  Thus the system will fall more slowly than the heavier stone alone.  But this contradicts the hypothesis that the heavier object, the faster it falls. 
+
+
+Here is Galileo's account of his experiment in *Discorsi e dimostrazioni matematiche* (1638) ('Discourses and Mathematical Demonstrations') 
+
+>    *Salviati.* If then we take two bodies whose natural speeds are different, it is clear that on uniting the two, the more rapid one will be partly retarded by the slower, and the slower will be somewhat hastened by the swifter. Do you not agree with me in this opinion?
+
+>    *Simplicio.* You are unquestionably right.
+
+>    *Salviati.* But if this is true, and if a large stone moves with a speed of, say, eight while a smaller moves with a speed of four, then when they are united, the system will move with a speed less than eight; but the two stones when tied together make a stone larger than that which before moved with a speed of eight. Hence the heavier body moves with less speed than the lighter; an effect which is contrary to your supposition. Thus you see how, from your assumption that the heavier body moves more rapidly than the lighter one, I infer that the heavier body moves more slowly.[11]
+
+While most experiments in physics are of the usual in-laboratory kind, thought experiments have from time to time played a leading role in advancing the subject. Einstein's clever thought experiments with trains and elevators, for example, led him to his Theory of Relativity.
+
+
+
+## Newton
+
+Galileo's principle of equal times raises a new, deeper question: *Why?*
+Why is it that bodies strike the ground at the same time regardless of their mass?  There must be some underlying reason for this, some mechanism.
+
+
+The answer, which was was given by Newton (1643-1727), depends on the notions of *force* and *acceleration*.  A force is a push or a pull.  When you push a table from one side of the room to the other, you apply a force to it. Same when you lift a bucket of sand.  Acceleration is the rate of change in velocity ("speed").  Suppose you are driving down the road at 14 meters per second (50 km/hour).  You realize you are late for work, so you step on the accelerator.  Two seconds later you are traveling at 30 meters per second.  The average rate of change in the car's velocity is the change in its velocity divided by the time it took for that change to occur:
+
+$$
+\frac{(30 - 14) \ m/s}{2\ s} = 8\  m/s^2.
+$$
+
+Here we have written $m$ for meters and $s$ for seconds.   In words, we say "my average acceleration during those 2 seconds was 8 meters per second per second."  
+
+If you are driving a fancy sports car, you can read the *actual acceleration* from a dial on the dashboard.  Mathematically, you get closer and closer to the actual acceleration by computing the average acceleration for smaller and smaller intervals of time.  See the appendix on Rates of Change for more about this.
+
+Back to Newton.  His Second Law of Motion relates the force acting on a body to its acceleration, that is, to the change in its motion:
+
+$$
+F = ma \qquad (*)
+$$
+
+In words, the total force and the acceleration are proportional, where the constant of proportionality is the mass of the object. 
+
+Let's work out some consequences of Newtons law. First off, what happend if the force is zero? Then so is the acceleration.  Zero acceleration means no change in velocity.  So if the object is at rest, it remains at rest.  But suppose the object moves in a straight line at 100 km/hour with no external forces acting on it.  According to Newton's law, the velocity will not change.  Therefore the object will continue moving along the same straight line at 100 km/hr.  This seems crazy.  If the object as our car, it would slow down and stop.  But that is because of the frictional forces (coming from the tires and the road) and the drag force (air resistance).  Consider instead a hockey puck.  As it slides across the ice, the frictional force is nearly zero, and so the acceleration is nearly zero. The puck keeps on moving at high speed in a straight line until it runs into something: net, hockey stick, etc.  This accords with our experience.
+
+We can rewrite Newton's equation as $a = F/m$.  Then it is evident that for a given force, the acceleration will be smaller if the mass is larger.  Mass, therefore furnishes *inertia* — resistence to changes of motion. 
+
+
+Let's look at a final consequence of Newton's law.  For bodies near the surface of the Earth, the downward pull of gravity is proportional to the mass,
+
+$$
+F_{gravity} = mg, \qquad (**)
+$$
+
+where the constant of proportionality $g$ is 9.8 meters per second per second.  Note the units of $g$: they are the same as the units of acceleration.  Now substitute the gravity equation  $(**)$ in Newton's law $(*)$ to obtain
+
+$$
+mg = ma
+$$
+
+A close look reveals something amazing!  The mass is common to both sides of the equation.  Cancelling it, we have
+
+$$
+a = g
+$$
+
+The acceleration of an object depends only on $g$, not on mass, color, texture, or anything else. This is the deep explanation for Galileo's principle of equal times. 
+
+
+There is a still deeper enigma hidden in our answer to *Why*.  The mass $m$ that appears in Newton's law of motion $(*)$ is the *inertial mass* of an object.  As noted above, it describes the extent to which an object resists changes in its motion.  The mass $m$ that appears in $(**)$ is the *gravitational* mass.  It describes how a body interacts with the gravitational field, e.g., how strong is the pull that *it* exerts on other bodies.  Our argument relies on the the assumption that the two forms of mass are equal.  But in fact, they are defined differently (XXX), so it is not fore-ordained that they be have same numerical value. Nonetheless, equality of the two quantities has so far passed all experimental tests. (1). Explaining (or disproving) the equality of these two forms of mass is an enduring problem in physics.  Galileo's pendulum experiments verify equality to two parts in 100.  His result is the start of a long succession of improved experimental results, the most recent of which (2017) verifies equality to one part ion $10^{15}$.
+
+
+## Notes
+
+It takes no special equipment or measuring devices to carry out the falling-bodies experiment.  Common household objects are enough.  One must conclude that it did not occur to Aristotle to do the experiment. Nor to his successors for the next two thousand years. In this way, a fundamental misconception persisted, handed down from one generation to the next for two millennia.  The experimental method changed everything by supplying away to quickly debunk wrong ideas. (We should say "wrong," not "bad."  Aristotle's idea had a grain of truth, but missed the main point.  An experiment taking only a minute's time would have decided the issue.  As we shall see in the next section, experiments (the real kind) can often help *formulate* new ldeas as well as verify them.
+
+
+## Project
+
+Redo the experiment with a piece of orange peel about the same size as the scrap of paper.  What are your results?  Can they be explained by the theory of drag?
+
+
+
+## References
+
+1. [Equivalence principle](https://en.wikipedia.org/wiki/Equivalence_principle)
+
+
+
+
