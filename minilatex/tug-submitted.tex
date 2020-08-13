@@ -1,4 +1,4 @@
-\title{MiniLaTeX: a subset of LaTeX for the Web}
+\uuid{c8a051a2-069d-4246-836f-278d2ce00733}
 \author{James Carlson}
 \date{August 8, 2020}
 
@@ -9,8 +9,8 @@
 
 \href{https://youtu.be/TAIYpCc3VV0}{Video version of this paper}
 
-\begin{abstract} 
-\italic{MiniLaTeX is a no-setup subset of LaTeX that can be rendered on the fly to HTML.   One can use it to build web apps with true HTML display viewable on any device from smart phone to tablet to desktop.  Typesetting occurs in real time, and error messages are displayed in-line in the rendered text. MiniLaTeX documents can be exported to standard LaTeX. 
+\begin{abstract}
+\italic{MiniLaTeX is a no-setup subset of LaTeX that can be rendered on the fly to HTML.   One can use it to build web apps with true HTML display viewable on any device from smart phone to tablet to desktop.  Typesetting occurs in real time, and error messages are displayed in-line in the rendered text. MiniLaTeX documents can be exported to standard LaTeX.
 
 \medskip
 We describe (a) MiniLaTeX the language, (b) the main features of the document management application
@@ -40,7 +40,7 @@ The compiler is written in \href{https://elm-lang.org}{Elm}, a strictly typed la
 
 \subheading{Apps}
 
-Below are two links to  apps that use  MiniLaTeX.  
+Below are two links to  apps that use  MiniLaTeX.
 
 \begin{itemize}
 
@@ -56,7 +56,7 @@ hosted on \href{https://minilatex.lamdera.app}{minilatex.lamdera.app}.
 \begin{itemize}
 
 \item \strong{Guest access.} Sign in to \href{https://minilatex.lamdera.app}{minilatex.lamdera.app}
-as \blue{guest} with password \blue{minilatex} to explore documents that have been made public by their authors.  Both the source and rendered text are available, so you can see how MiniLaTeX documents are written. 
+as \blue{guest} with password \blue{minilatex} to explore documents that have been made public by their authors.  Both the source and rendered text are available, so you can see how MiniLaTeX documents are written.
 
 \item \strong{Registered user.} Create and edit documents on a desktop computer or tablet. Works in read-only mode on smart phones.
 
@@ -73,19 +73,19 @@ Below is a summary of MiniLaTeX features. See \href{https://minilatex.lamdera.ap
 
 \item \strong{Macros and Environments.} Environments include theorem, problem, definition, etc., as well as equation, align, verbatim, and more.  The \code{\bs{maketitle}}, \code{\bs{section}}. \code{\bs{cite}} and \code{\bs{eqref}} macros and many others work as expected.  Unimplemented macros are rendered verbatim, but colored red to indicate their status.
 
-\item \strong{Macro definitions.} One can define both math-mode and text-mode macros in MiniLaTeX.  
+\item \strong{Macro definitions.} One can define both math-mode and text-mode macros in MiniLaTeX.
 
 \item \strong{Export.} MiniLaTeX documents can be exported to standard LaTeX, complete with the necessary \code{\bs{usepackage}} statements, \code{\bs{begin}\texarg{document}}, \code{\bs{end}\texarg{document}}, and any needed macro definitions.  Exported documents are ready to process with \code{\bs{pdflatex}}.  Here is \href{https://noteimages.s3.amazonaws.com/anharmonic_oscillator.pdf}{an example} of an exported document compiled to PDF using TeXShop.
 
 
-\item \strong{Images} The macro \code{\bs{image}\texarg{URL}\texarg{{Caption}\texarg{Format}} is used to place images in a MiniLaTeX document.  
-Provision is made to render images in exported documents.  There is, in addition, an \code{svg} environment for rendering SVG images from SVG source code. 
+\item \strong{Images} The macro \code{\bs{image}\texarg{URL}\texarg{{Caption}\texarg{Format}} is used to place images in a MiniLaTeX document.
+Provision is made to render images in exported documents.  There is, in addition, an \code{svg} environment for rendering SVG images from SVG source code.
 
 \item \strong{Unicode.} MiniLaTeX accepts unicode (UTF-8) input. More needs to be done to accomodate unicode in exported documents.
 
-\item \strong{Paragraph-centric.} MiniLaTeX is \blue{paragraph-centric}, meaning that the smallest unit of recompilation is the \italic{logical paragraph}.  A logical paragraph is either an ordinary paragraph or an outer begin-end block.  
+\item \strong{Paragraph-centric.} MiniLaTeX is \blue{paragraph-centric}, meaning that the smallest unit of recompilation is the \italic{logical paragraph}.  A logical paragraph is either an ordinary paragraph or an outer begin-end block.
 
-\item \strong{Additions.} 
+\item \strong{Additions.}
 Besides the \code{\bs{image}} command, there are various other commands that exist in MiniLaTeX but not plain LaTeX.  These commands are provide with suitable macro definitions on export so that a MiniLaTeX document can always be compiled with standard LaTeX Tools.  Here are some examples.  Text can be colored blue using the \code{\bs{blue}} macro: \italic{I am feeling \blue{blue}}.  Text can be highlighted using the \code{\bs{highlight}} macro.  The teacher said that \highlight{all work on our class project is due by October 1}.
 There is also a \code{\bs{strike}} macro: Please delete this \strike{very bad word}.  For a complete list of additions, see \href{https://minilatex.lamdera.app/g/21}{minilatex.lamdera.app/g/21}.
 
@@ -101,8 +101,8 @@ There is also a \code{\bs{strike}} macro: Please delete this \strike{very bad wo
 The content management system \href{https://minilatex.lamdera.app}{minilatex.lamdera.app} provides a system for creating, editing, and distributing documents from a searchable repository.  Users can search by title, author, etc.  Documents can be collaboratively edited, shared by URL, and versioned on Github through a simple user interface.  Documents can also be exported to PDF.
 
 
-In addition to the familiar \code{\bs{href}} macro, there are \code{\bs{xlink}}  and \code{\bs{ilink}}.  The \code{\bs{xlink}} macro 
-is used to make a link from one document to another in \code{minilatex.lambdera.app}.   Thus, one can say 
+In addition to the familiar \code{\bs{href}} macro, there are \code{\bs{xlink}}  and \code{\bs{ilink}}.  The \code{\bs{xlink}} macro
+is used to make a link from one document to another in \code{minilatex.lambdera.app}.   Thus, one can say
 \code{\bs{xlink}\texarg{21}\texarg{Manual}}, which is rendered as \xlink{21}{Manual}, to make a link to that document.
 
 The \code{\bs{ilink}} macro is similar.  It has the same syntax, but is used in constructing a page of links which functions as a table of contents or \italic{index document}. In this way, one can assemble many documents into one to make a book.  For an example, see \href{https://minilatex.lamdera.app/g/34}{these class notes}. It is worthwhile looking at the source to see how it is done.
@@ -119,11 +119,11 @@ $$
 parse: \text{Source text} \to \text{AST},
 $$
 
-where \italic{AST} stands for \italic{Abstract Syntax Tree}.  This is a tree with nodes like 
+where \italic{AST} stands for \italic{Abstract Syntax Tree}.  This is a tree with nodes like
 
 \begin{verbatim}
     LXString "Pythagoras says"
-\end{verbatim} 
+\end{verbatim}
 
 and
 
@@ -144,7 +144,7 @@ $$
 compile   = render \circ parse
 $$
 
-The strategy that makes writing such a compiler feasible is \italic{divide and conquer}.  One writes the parser using parser combinators.  One then constructs function which renders the text-mode LaTeX to HTML, passing the math-mode text on to either \href{https://mathjax.org}{MathJax} or \href{https://katex.org}{KaTeX} for rendering. 
+The strategy that makes writing such a compiler feasible is \italic{divide and conquer}.  One writes the parser using parser combinators.  One then constructs function which renders the text-mode LaTeX to HTML, passing the math-mode text on to either \href{https://mathjax.org}{MathJax} or \href{https://katex.org}{KaTeX} for rendering.
 
 \strong{Video}: \href{https://www.youtube.com/watch?v=dmDA7iziSgs&t=15s}{Making a LaTeX-to-Html parser in Elm}
 
@@ -174,7 +174,7 @@ type LatexExpr
     | LXError (List (DeadEnd Context Problem))
 \end{listing}
 
-Note that the definition of \code{LatexExpr} refers to itself, hence is recursive.  This is typical of the definitions of types of structured trees. 
+Note that the definition of \code{LatexExpr} refers to itself, hence is recursive.  This is typical of the definitions of types of structured trees.
 To give an idea of how the parser works, consider the following  examples.  In each, the first line is the source text, the others constitute the resulting AST.
 
 \begin{verbatim}
@@ -212,7 +212,7 @@ latexExpression =
         ]
 \end{listing}
 
-We give one more example, the \code{macro} parser.  It uses the combinators \code{(|=)} and \code{(|.)} to \italic{sequence} parsers thereby formin a new one.  The resulting "parser pipeline" operates  in the following way.   The phrase \code{|= macro} parses the name of the macro.  Then \code{|= itemList optionalArg} recognizes the list of optional arguments, and \code{|= itemList arg} does the same for the regular macro arguments.  Finally, \code{|. whitespace} "eats" but ignores whatever white space it finds.  The values  found by the \code{(|=)} phrases are taken as arguments of  the constructor \code{Macro} for the \code{LatexExpr} type, and the result of this function call is a value of type \code{LatexExpr}.  
+We give one more example, the \code{macro} parser.  It uses the combinators \code{(|=)} and \code{(|.)} to \italic{sequence} parsers thereby formin a new one.  The resulting "parser pipeline" operates  in the following way.   The phrase \code{|= macro} parses the name of the macro.  Then \code{|= itemList optionalArg} recognizes the list of optional arguments, and \code{|= itemList arg} does the same for the regular macro arguments.  Finally, \code{|. whitespace} "eats" but ignores whatever white space it finds.  The values  found by the \code{(|=)} phrases are taken as arguments of  the constructor \code{Macro} for the \code{LatexExpr} type, and the result of this function call is a value of type \code{LatexExpr}.
 
 In this example, \code{whitespace} is a parser for white space, which can come in different flavors depending on context e.g., spaces only or spaces and newlines.
 
@@ -237,7 +237,7 @@ The top-level renderiing function is much like the top-level parsing function. I
 \subsection{Code}
 
 Code for the MiniLaTeX compiler as well as the demo app is found at \href{https://github.com/jxxcarlson/meenylatex}{github.com/jxxcarlson/meenylatex}.  The strange name is to reserve the name \blue{github.com/jxxcarlson/minilatex} for a future stable version with a polished API.   For the minilatex.lamdera.app, the code is at \href{https://github.com/jxxcarlson/lamdera-minilatex-app}{github.com/jxxcarlson/lamdera-minilatex-app}.
-Both repositories are open source. 
+Both repositories are open source.
 
 \section{Feedback}
 
@@ -254,6 +254,3 @@ Comments to jxxcarlson at gmail.
 I would like to thank Evan Czaplicki, Ilias Van Peer, Mario Rogic, and Luke Westby, all of the Elm community, Davide Cervone, \href{https://mathjax.org}{MathJax.org}, and the team at \href{https://katex.org}{Katex.org} for their generous and invaluable help.   I also wish to thank the \href{https://simonsfoundation.org}{Simons Foundation} for its support of this project.
 
 \italic{This document was written in MiniLaTeX and is available at \href{https://minilatex.lamdera.app/g/22}{minilatex.lamdera.app/g/22}.}
-
-
-
