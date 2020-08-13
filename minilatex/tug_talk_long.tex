@@ -1,0 +1,601 @@
+\title{MiniLaTeX: a subset of LaTeX for the Web}
+\author{James Carlson}
+\date{July 26, 2020}
+
+\maketitle
+
+\tableofcontents
+
+
+\href{https://youtu.be/TAIYpCc3VV0}{Video version of this paper}
+
+\begin{abstract}
+\italic{MiniLateX is a subset of LaTeX that can be rendered on the fly to HTML.   With it, one can build web apps with true HTML display that can be viewed on any device from smart phone to tablet to desktop.  Typesetting occurs in real time, and error messages are displayed in-line in the rendered text. MiniLaTeX documents can be exported to standard LaTeX. We describe the main features of the MiniLaTeX application
+\href{https://minilatex.lamdera.app}{minilatex.lamdera.app}}, then describe some the technical work required to implement an on-the-fly LaTeX-to-Html compiler.  This is done in \href{https://elm-lang.org}{Elm}, a strongly typed language of pure functions that is designed for building web apps.
+\end{abstract}
+
+\strong{Website}: \href{https://minilatex.io}{minilatex.io}.
+
+\strong{Apps}:  \href{https://demo.minilatex.app/}{demo.minilatex.app} |
+\href{https://minilatex.lamdera.app/}{minilatex.lamdera.app}
+
+
+\section{Introduction}
+
+MiniLaTeX refers to MiniLaTeX as a subset of LaTeX as well as a system for managing documents written in MiniLaTeX.
+
+
+\subsection{Subset of LaTeX}
+
+MiniLaTeX provides a  well-defined subset of LaTeX which is small enough for one human to write an efficient parser by hand, yet large enough to be useful, e.g, for lecture notes, problem sets, small articles, or just learning LaTeX.  One can see the current state of the project with the two apps listed below:
+
+
+\subsection{Apps}
+
+\begin{itemize}
+
+\item \strong{\href{https://demo.minilatex.app}{demo.minilatex.app}}: a simple no-signin app for learning LaTeX and experimenting with MiniLaTeX.
+
+\item \strong{\href{https://minilatex.lamdera.app/g/34}{minilatex.lamdera.app/g/34}}:  An example of class notes hosted on
+\href{https://minilatex.lamdera.app}{minilatex.lamdera.app}.
+
+\begin{itemize}
+
+\item \strong{Guest access.} Sign in as \blue{guest} with password \blue{minilatex} to explore documents that have been made public by their authors.  Both the source and rendered text are available, so you can see how MiniLaTeX documents are written.
+
+\item \strong{Registered user} Create and edit documents on a dektop computer or tablet. Works in read-only mode on smart phones.
+
+\end{itemize}
+
+
+\end{itemize}
+
+
+\section{Features}
+
+
+\subsection{Use anywhere, on any  device}
+
+As a web app, minilatex.lamdera.app is available anywhere there is an internet connection.  Just sign in and start working.
+
+\strong{On your computer}
+
+
+\image{https://noteimages.s3.amazonaws.com/minilatex-lamdera-app.png}{minilatex.lamdera.app}{width: 400, align: center}
+
+\strong{On your phone}
+
+On a smart phone, the app displays public documents only.  They can be read, but not created or edited.  There are two modes.  In the first, a list of documents is presented If you click on a title in the list, the document is displayed. To display the document list again, click on the \blue{List} button in the header. Use the search bar in the header to display fewer documents.  For example, if you put \blue{minilatex} or just \blue{mini}, only documents with MiniLaTeX in the title are shown.
+
+\image{https://noteimages.s3.amazonaws.com/iphone-minilatex2.PNG}{}{width: 180, align: center}
+
+\subsection{Typeset documents in real time}
+
+Changes to the rendered text of your documents are displayed as you type, as are any error messages.  The. error messages are displayed in the rendered text.  While editing, only parts of the text which have changed are recompiled.  The advantage of this strategy  is that recompilation is very fast.  The disadvantage is that things like tables of contents, cross-references, etc., can get out of sync.  To put things back in sync, click on the \blue{Full Render} button ion the footer.
+
+Here is an example of a real-time, in-place error message.  Source text on the left, rendered text on the right:
+
+\image{http://noteimages.s3.amazonaws.com/good_error_message_minilatex.png}{Error message}{align: center, width: 400}
+
+\strong{NOTE.} MiniLaTeX is \blue{paragraph-centric}, meaning that the smallest unit of recompilation is the \italic{logical paragraph}.  A logical paragraph is either an ordinary paragraph or an outer begin-end block.  For this reason, it is good practice to use plenty of white space in MiniLaTeX documents: a blank line before and after defines a logical paragraph.  The source text of your document will be easier to read, and the compiler will better do its work.
+
+\subsection{Export to Standard LaTeX}
+
+Use the \blue{Export} button in the footer of minilatex.lamdera.app for this.  The exported document will be saved in the Downloads folder unless you tell your computer otherwise.  If your document has images, a button \blue{Images} will appear to the right of \blue{Export}.  Click on that button to bring up a window that lists the images in your document.  Right-click on these images to download them.  They should be stored in folder \blue{image} in the same place as your exported document.  Below are two links  exported documents:
+
+
+\begin{itemize}
+
+
+\item \href{https://noteimages.s3.amazonaws.com/Minilatex__Examples.pdf}{MiniLaTeX: Examples}
+
+\item \href{https://noteimages.s3.amazonaws.com/anharmonic_oscillator.pdf}{Anharmonic Oscillator}
+
+\item \href{https://noteimages.s3.amazonaws.com/TUG_Talk_July_2020.pdf}{This document}
+
+\end{itemize}
+
+
+\subsection{No setup}
+
+MiniLaTeX documents require no setup: no preamble, no \bs{usepackage}, no \bs{begin}\texarg{document} etc.  Just start typing. On the otherand, all of the relevant boilerplate is present in exported documents so that they can be processed in the way that you woiuld normally process a LaTeX document.
+
+Documents are saved at intervals of roughly 400 milliseconds while editing.
+
+\subsection{Images}
+
+You can place an image in a MiniLaTeX document if it it exists somewhere on the internet and you have its "limage ocation" or URL.  You can usuallly find the location/URL of an image that you see in a browser  by right-clcking on it. The URL for the image displayed below is
+
+\begin{verbatim}
+https://psurl.s3.amazonaws.com/images/jc/beats-eca1.png
+\end{verbatim}
+
+Place an image like this:
+
+\begin{verbatim}
+\image{URL}{Caption}{Format}
+\end{verbatim}
+
+The caption and format are optional.  The format has two parts, both of which are optional: the \blue{width} and the \blue{placement}. The width is a fragment like \blue{width: 350}.  Placement can be one of the following:
+
+\begin{verbatim}
+align: center
+float: left
+float: right
+\end{verbatim}
+
+\image{https://psurl.s3.amazonaws.com/images/jc/beats-eca1.png}{Figure 1. Two-frequency beats}{width: 350, align: center}
+
+\subsection{SVG Images}
+
+SVG images can be placed like this:
+
+\begin{verbatim}
+\begin{svg}
+CODE FOR SVG IMAGE
+\end{svg}
+\end{verbatim}
+
+In the example below, the SVG code was produced by a graphics program.  You can also produce SVG code by hand, or by writing a program.
+
+\begin{svg}
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="381.603" height="250.385" viewBox="0, 0, 381.603, 250.385">
+  <g id="Layer_1">
+    <g>
+      <path d="M95.401,166.09 L71.5,124.692 L95.401,83.295 L143.203,83.295 L167.103,124.692 L143.202,166.09 z" fill="#CCDD10"/>
+      <path d="M95.401,166.09 L71.5,124.692 L95.401,83.295 L143.203,83.295 L167.103,124.692 L143.202,166.09 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M166.401,126.09 L142.5,84.692 L166.401,43.295 L214.203,43.295 L238.103,84.692 L214.202,126.09 z" fill="#0D9B53"/>
+      <path d="M166.401,126.09 L142.5,84.692 L166.401,43.295 L214.203,43.295 L238.103,84.692 L214.202,126.09 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M167.401,207.885 L143.5,166.487 L167.401,125.09 L215.203,125.09 L239.103,166.487 L215.202,207.885 z" fill="#0D9B53"/>
+      <path d="M167.401,207.885 L143.5,166.487 L167.401,125.09 L215.203,125.09 L239.103,166.487 L215.202,207.885 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M309.401,209.885 L285.5,168.487 L309.401,127.09 L357.203,127.09 L381.103,168.487 L357.203,209.885 z" fill="#0D9B53"/>
+      <path d="M309.401,209.885 L285.5,168.487 L309.401,127.09 L357.203,127.09 L381.103,168.487 L357.203,209.885 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M309.401,125.09 L285.5,83.692 L309.401,42.295 L357.203,42.295 L381.103,83.692 L357.203,125.09 z" fill="#0D9B53"/>
+      <path d="M309.401,125.09 L285.5,83.692 L309.401,42.295 L357.203,42.295 L381.103,83.692 L357.203,125.09 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M23.401,126.09 L-0.5,84.692 L23.401,43.295 L71.203,43.295 L95.103,84.692 L71.203,126.09 z" fill="#0D9B53"/>
+      <path d="M23.401,126.09 L-0.5,84.692 L23.401,43.295 L71.203,43.295 L95.103,84.692 L71.203,126.09 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M237.401,84.295 L213.5,42.897 L237.401,1.5 L285.203,1.5 L309.103,42.897 L285.203,84.295 z" fill="#CCDD10"/>
+      <path d="M237.401,84.295 L213.5,42.897 L237.401,1.5 L285.203,1.5 L309.103,42.897 L285.203,84.295 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M239.401,249.885 L215.5,208.487 L239.401,167.09 L287.203,167.09 L311.103,208.487 L287.203,249.885 z" fill="#CCDD10"/>
+      <path d="M239.401,249.885 L215.5,208.487 L239.401,167.09 L287.203,167.09 L311.103,208.487 L287.203,249.885 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M94.401,84.295 L70.5,42.897 L94.401,1.5 L142.203,1.5 L166.103,42.897 L142.202,84.295 z" fill="#CCDD10"/>
+      <path d="M94.401,84.295 L70.5,42.897 L94.401,1.5 L142.203,1.5 L166.103,42.897 L142.202,84.295 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+    <g>
+      <path d="M333.302,94.897 C327.411,94.897 322.635,90.328 322.635,84.692 C322.635,79.056 327.411,74.487 333.302,74.487 C339.193,74.487 343.968,79.056 343.968,84.692 C343.968,90.328 339.193,94.897 333.302,94.897 z" fill="#D60B8E"/>
+      <path d="M333.302,94.897 C327.411,94.897 322.635,90.328 322.635,84.692 C322.635,79.056 327.411,74.487 333.302,74.487 C339.193,74.487 343.968,79.056 343.968,84.692 C343.968,90.328 339.193,94.897 333.302,94.897 z" fill-opacity="0" stroke="#000000" stroke-width="1"/>
+    </g>
+  </g>
+</svg>
+\end{svg}
+
+When a MiniLaTeX document is exported, a placeholder is put in the place of the SVG image.  The TeX processors I am a aware of require png, pdf, etc., so you will have to ocnvert the SVG image to one of those formats.
+
+\subsection{Collaboration.}
+
+To add a collaborator to a document, click on the \blue{Collaborators} button in the footer.  Enter collaborators in the resulting popup window one collaborator per line.  Collaborators may edit a document synchronoulsy or asynchronously.  In the former case, when both authors are online, changes by one author are reflected a fraction of a second later in the other others app.  To facilitate collaboration, there is a chat window (lower right, in footer).  The chat feature needs a good deal more work.
+
+Collaborators can attach notes to a shared document using the \code{\bs{attachnote}} command.  Thus
+
+\begin{verbatim}
+\attachnote{Mary}{Joe, please check proof, Thm 4.5}
+\end{verbatim}
+
+renders as
+
+\subsection{Links and Index Documents}
+
+In addition to the familiar \code{\bs{href}} macro, there are \code{\bs{xlink}}  and \code{\bs{link}}.  The \code{\bs{xlink}} macro
+is used to make a link from one document to another in \code{minilatex.lambdera.app}.   Thus, one can say
+\code{\bs{xlink}\texarg{21}\texarg{Manual}}, which is rendered as \xlink{21}{Manual}, to make a link on this document to the Manual.
+
+The \code{\bs{link}} macro is similar.  It has the same syntax, but is used in constructing a page of links which functions as a table of contents or \italic{index document} for a master document, aka a book.  For an example, see \href{https://minilatex.lamdera.app/g/34}{these class notes}. It is worthwhile looking at the source to see how it is done.
+
+
+
+
+\subsection{Additions}
+
+Besides the \code{\bs{image}} command, there are various other commands that exist in MiniLaTeX but not plain LaTeX.  These commands are provide with suitable macro definitions on export so that a MiniLaTeX document can always be compiled with standard LaTeX Tools.  Here are some examples.  Text can be colored blue using the \code{\bs{blue}} macro: \italic{I am feeling \blue{blue}}.  Text can be highlighted using the \code{\bs{highlight}} macro.  The teacher said that \highlight{all work on our class project is due by October 1}.
+There is also a \code{\bs{strike}} macro: Please delete this \strike{very bad word}.  For a complete list of additions, see \href{https://minilatex.lamdera.app/g/21}{minilatex.lamdera.app/g/21}.
+
+
+\subsection{Unicode}
+
+MiniLaTeX accepts unicode (UTF-8) input.  Here, for example, is The first stanza of Pushkin's Bronze Horseman, copy-pasted from the \href{http://www.columbia.edu/~fdc/utf8/}{UTF-8 Sampler}.
+
+
+\begin{center}
+\begin{verse}
+На берегу пустынных волн
+Стоял он, дум великих полн,
+И вдаль глядел. Пред ним широко
+Река неслася; бедный чёлн
+По ней стремился одиноко.
+По мшистым, топким берегам
+Чернели избы здесь и там,
+Приют убогого чухонца;
+И лес, неведомый лучам
+В тумане спрятанного солнца,
+Кругом шумел.
+\end{verse}
+\end{center}
+
+Greek, some lines of Odysseus Elytis (Polytonic):
+
+\begin{center}
+\begin{verse}
+Τὴ γλῶσσα μοῦ ἔδωσαν ἑλληνικὴ
+τὸ σπίτι φτωχικὸ στὶς ἀμμουδιὲς τοῦ Ὁμήρου.
+Μονάχη ἔγνοια ἡ γλῶσσα μου στὶς ἀμμουδιὲς τοῦ Ὁμήρου.
+ἀπὸ τὸ Ἄξιον ἐστί
+τοῦ Ὀδυσσέα Ἐλύτη
+\end{verse}
+\end{center}
+
+From the Anglo-Saxon \href{http://www.ragweedforge.com/poems.html}{Rune Poem}:
+
+\begin{center}
+\begin{verse}
+ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ
+ᛋᚳᛖᚪᛚ᛫ᚦᛖᚪᚻ᛫ᛗᚪᚾᚾᚪ᛫ᚷᛖᚻᚹᛦᛚᚳ᛫ᛗᛁᚳᛚᚢᚾ᛫ᚻᛦᛏ᛫ᛞᚫᛚᚪᚾ
+ᚷᛁᚠ᛫ᚻᛖ᛫ᚹᛁᛚᛖ᛫ᚠᚩᚱ᛫ᛞᚱᛁᚻᛏᚾᛖ᛫ᛞᚩᛗᛖᛋ᛫ᚻᛚᛇᛏᚪᚾ᛬
+\end{verse}
+\end{center}
+\end{verse}
+\end{center}
+
+And finally, some Arabic text,  taken from \href{https://www.ltg.ed.ac.uk/~richard/unicode-sample.html}{www.ltg.ed.ac.uk}:
+
+، ؛ ؟ ء آ أ ؤ إ ئ ا ب ة ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ـ ف ق ك ل م ن ه و ى ي ً ٌ ٍ َ ُ ِ ّ ْ ٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ ٪ ٫ ٬ ٭ ٰ ٱ ٲ ٳ ٴ ٵ ٶ ٷ ٸ ٹ ٺ ٻ ټ ٽ پ ٿ ڀ ځ ڂ ڃ ڄ څ چ ڇ ڈ ډ ڊ ڋ ڌ ڍ ڎ ڏ ڐ ڑ ڒ ړ ڔ ڕ ږ ڗ ژ ڙ ښ ڛ ڜ ڝ ڞ ڟ ڠ ڡ ڢ ڣ ڤ ڥ ڦ ڧ ڨ ک ڪ ګ ڬ ڭ ڮ گ ڰ ڱ ...
+
+The issue of export to LaTeX and use of the requisite packages has not yet been addressed.
+
+
+\subsection{Defining Macros}
+
+To define math-mode macros in MiniLaTeX, follow this example
+
+\begin{mathmacro}
+\newcommand{\ZZ}[0]{\mathbb{Z}}
+\newcommand{\FFF}[0]{\mathcal{F}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\sett}[2]{\{ #1\ |\ #2 \}}
+\end{mathmacro}
+
+\begin{verbatim}
+\begin{mathmacro}
+\newcommand{\ZZ}[0]{\mathbb{Z}}
+\newcommand{\FFF}[0]{\mathcal{F}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\sett}[2]{\{ #1\ |\ #2 \}}
+\end{mathmacro}
+\end{verbatim}
+
+Then one can say
+
+$$
+\FFF(\ZZ) = \set{1,2,3}
+$$
+
+or this:
+
+$$
+\text{roots} = \sett{ x}{ f(x) = 0 }
+$$
+
+There are some restrictions (for the moment): (1) even if the macro takes no arguments, you must use the fragment \code{[0]}; (2) can't be used inside other macros.  The last restriction is especially annoying and will be removed soon.
+
+Text mode macros are defined in much the same way:
+
+\begin{textmacro}
+\newcommand{\boss}{Phineas Fogg}
+\newcommand{\hello}[1]{Hello \strong{#1}!}
+\newcommand{\reverseconcat}[3]{#3#2#1}
+\end{textmacro}
+
+\begin{verbatim}
+\begin{textmacro}
+\newcommand{\boss}{Phineas Fogg}
+\newcommand{\hello}[1]{Hello \strong{#1}!}
+\newcommand{\reverseconcat}[3]{#3#2#1}
+\end{textmacro}
+\end{verbatim}
+
+Then
+
+\begin{verbatim}
+\italic{My boss is \boss.}
+\end{verbatim}
+
+produces \italic{My boss is \boss.}
+Likewise, the text
+
+\begin{verbatim}
+\hello{John}
+\end{verbatim}
+
+yields \hello{John}.
+
+\subsection{The subset}
+
+A rough definition of the subset of LaTeX, plus extensions, is provided
+be the lists below.  Macros defined in MiniLaTeX for which LaTeX macro definitions are provided on export or handled in some other way in export are rendered in blue.
+
+\subsubsection{All macros}
+
+Some explanations, others where needed are forthcoming
+
+\begin{indent}
+\blue{attachnote}
+author,
+bigskip,
+blue,
+\blue{bs},
+cite,
+\blue{code},
+date,
+\blue{dollar},
+email,
+emph,
+eqref,
+\blue{highlight},
+href,
+\blue{ilink},
+image,
+\blue{include},
+index,
+\blue{innertableofcontents},
+\blue{italic,}
+label,
+\blue{maintableofcontents},
+maketitle,
+\blue{mdash},
+medskip,
+\blue{ndash},
+\blue{percent},
+\blue{red},
+ref,
+revision,
+section,
+section*,
+setcounter,
+smallskip,
+\blue{strike},
+\blue{texarg},
+\blue{strong},
+subheading,
+subsection,
+subsection*,
+subsubsection,
+subsubsection*,
+tableofcontents,
+\blue{term},
+title,
+\blue{underscore},
+\blue{xlink}
+\end{indent}
+
+\subsubsection{Regular environments}
+
+\begin{indent}
+align,
+center,
+comment,
+\blue{defitem},
+enumerate,
+eqnarray,
+equation,
+\blue{indent},
+itemize,
+\blue{listing},
+\blue{mathmacro},
+quotation,
+\blue{svg},
+tabular,
+\blue{textmacro},
+thebibliography,
+verbatim,
+\blue{verse},
+\end{indent}
+
+\subsubsection{Theorem-like environments}
+
+\begin{indent}
+corollary,
+definition,
+lemma,
+problem,
+proposition,
+theorem
+\end{indent}
+
+
+\section{The MiniLaTeX Compiler}
+
+
+LaTeX documents consist of snippets of math-mode LaTeX (the equations and formulas) and text-mode LaTeX (everything else, e.g. section headings, lists, and environments of various knds).  The strategy that makes writing a compiler that transforms MiniLaTeX to HTML feasible is divide and conquer.  Parse the the document, identifying the math elements as such, but not transforming them.  Then render the resulting abstract syntax tree (AST) to Html, again passing on the math elements.  Finally, have \href{https://mathjax.org}{MathJax} or \href{https://katex.org}{KaTeX} render the math elements.
+
+\strong{Video}: \href{https://www.youtube.com/watch?v=dmDA7iziSgs&t=15s}{Making a LaTeX-to-Html parser in Elm}
+
+An abstract syntax tree is a tree of things that expresses a grammatical analysis of the source text. It is akin to what one gets when one diagrams a sentence in English class, something the present author did in Marge Lee's sophomore class in high school.  More on this later.
+
+\image{https://noteimages.s3.amazonaws.com/sentence-diagram.png}{Diagramming sentences}{width: 400}
+
+The MiniLaTeX compiler consists of two parts, a \italic{parser} and a \italic{renderer}.  The first is a function
+
+$$
+parse: \text{Source text} \to \text{AST}
+$$
+
+The second is a function
+
+$$
+render: \text{AST} \to \text{HTML}
+$$
+
+Here we are simplifying somewhat because of various optimizations that are needed, but this is the general idea.  The compiler is the composite of these two functions:
+
+$$
+compile   = render \circ parse
+$$
+
+In designing a parser, one generally starts with a grammar.  However, there is no published grammar for LaTeX or for TeX, so one has to improvise.  The approach taken with MiniLaTeX was first to imagine the type of the AST, then to write a parser using parser combinators.  The parser then consists of a bunch of functions which call one another.  They are in rough correspondence with the productions of a grammar, and so one can write down a grammar after the fact. Ideally one should have written the grammar, then the parser, but real life is often messy.
+
+\subsection{AST}
+
+Every value in a statically typed language like Haskell, ML, or Elm, has a \italic{type}.  Below is the type of AST for the MiniLaTeX compiler.
+
+\begin{listing}
+type LatexExpr
+    = LXString String
+    | Comment String
+    | Item Int LatexExpression
+    | InlineMath String
+    | DisplayMath String
+    | SMacro String (List LatexExpr) (List LatexExpr) LatexExpr
+    | Macro String (List LatexExpr) (List LatexExpr)
+    | Environment String (List LatexExpr) LatexExpr
+    | LatexList (List LatexExpr)
+    | NewCommand String Int LatexExpr
+    | LXError (List (DeadEnd Context Problem))
+\end{listing}
+
+Below is a series of examples that give an idea of how the parser works.  The examples are generated using a command-line tool that applies the parser to a string of text supplied by the user.
+
+\begin{verbatim}
+> Pythagoras
+LXString "Pythagoras"
+
+> \strong{Pythagoras}
+Macro "strong" [] [LatexList [LXString "Pythagoras"]]
+
+> \strong{Pythagoras} says that $a^2 + b^2 = c^2$
+Macro "strong" [] [LatexList [LXString "Pythagoras"]]
+  , LXString "says  that "
+  , InlineMath "a^2 + b^2 = c^2"
+\end{verbatim}
+
+
+Below is the top-level parser function.  Note the close correspondence
+with the AST type.  The \code{lazy} function is needed for recursion.  The \code{oneOf} function is a combinator that takes a list of parrsers and produces a new parser from them.  The resulting parser operates as follows: try the first parser.  If it succeeds, return the result.  If not, try the next parser.  And so on.  If the list is exhausted without success, return an error.
+
+\begin{listing}
+latexExpression : LXParser LatexExpr
+latexExpression =
+    oneOf
+        [ texComment
+        , displayMathDollar
+        , displayMathBrackets
+        , inlineMath
+        , newcommand
+        , macro
+        , smacro
+        , words
+        , lazy (\_ -> environment)
+        ]
+\end{listing}
+
+Below is the parser for macros.  It uses a \italic{parser pipeline} in the following way.   First, find the name of the macro, then the list of optional arguments, then the list of  actual arguments, then eat any whitespace (spaces, newlines).  Second, feed the values found in the order found to the constructor \code{Macro} for the \code{LatexExpr} type.  In this example, \code{whitespace} is a parser for white space, which can come in different flavors depending on context e.g., spaces only or spaces and newlines.
+
+\begin{listing}
+macro : LXParser () -> LXParser LatexExpr
+macro =
+    succeed Macro
+        |= macroName
+        |= itemList optionalArg
+        |= itemList arg
+        |. whitespace
+\end{listing}
+
+One can continue down the rabbit hole, explaining the parsers and \code{macroName}, \code{optionalArg},  \code{arg} and the combinators \code{itemList}, etc, but we stop here.  What is important to understand is that there are really only three things in something like the MiniLaTeX parser: primitive parsers, combinators that choose among alternatives, and combinators that sequence other parsers.
+
+\subsection{Rendering}
+
+
+The top-level renderiing function is much like the top-level parsing functions. It analyzes the type of a LatexExpr and dispatches the appropriater renderer, which may in turn call other rendering functions, including the top level one. And so on, down the rabbit hole of function calls we go.
+
+
+\begin{listing}
+render : String -> LatexState -> LatexExpr -> Html msg
+render source latexState latexExpr =
+    case latexExpression of
+        Comment str ->
+            Html.p [] [ Html.text "" ]
+
+        Macro name optArgs args ->
+            renderMacro source latexState name optArgs args
+
+        Item level latexExpr ->
+            renderItem source latexState level latexExpr
+
+        InlineMath str ->
+            Html.span [] [
+              inlineMathText
+                latexState
+               (evalStr  latexState.macroDict str) ]
+
+        DisplayMath str ->
+            Html.span [] [
+              displaMathText
+                latexState
+               (evalStr  latexState.macroDict str) ]
+
+        Environment name args body ->
+            renderEnvironment source latexState name args body
+
+        LatexList latexList ->
+            renderLatexList source latexState latexList
+\end{listing}
+
+\subsection{Code}
+
+Code for the MiniLaTeX compiler as well as the demo app is found at \href{https://github.com/jxxcarlson/meenylatex}{github.com/jxxcarlson/meenylatex}.  The strange name is to reserve the name \blue{github.com/jxxcarlson/minilatex} for a future stable version with a polished API.  The repository just mentioned also contains simple demos t show how to use the compiler.
+
+The code for the \href{https://minilatex.lamdera.app}{minilatex.lamdera.app} is at \href{https://github.com/jxxcarlson/lamdera-minilatex-app}{github.com/jxxcarlson/lamdera-minilatex-app}.
+
+All code is open source. The web application \href{https://minilatex.lamdera.app}{minilatex.lamdera.app}  is offered as a service. It is free for now. The intent is to (a) keep it free for students, (b) eventually charge a small annual fee for other users, (c) have institutional licenses. Bills have to be paid and code has to be iimproved and maintained!  Note that guests may browse the site without establishing an account.
+
+
+
+This document was written in MiniLaTeX and is avaiable at \href{https://minilatex.lamdera.app/g/22}{https://minilatex.lamdera.app/g/22}.
+
+
+\section{Plans}
+
+I am very interested in feedback from the community regarding features, bugs, etc.  Of special interest is: what should the subset of LaTeX be.  Below are some ideas.
+
+\begin{enumerate}
+
+\item An image uploader.  With this in place, you can post images on a server and use the resulting URL to place images in your MiniLaTeX documents.
+
+\item Address documents by URL.
+
+\item Better error messages
+
+\item An IDE/editor with sync of source and rendered text, syntax highlighting, etc.
+
+\item  There will eventually be a small annual fee (unless you are a student) so that we can sustain the project over the long term.  If you decide against the annual fee, your content will remain on the site.  Your account can be re-activated at any time.
+
+\end{enumerate}
+
+
+\section{Acknowledgements}
+
+I would like to thank Evan Czaplicki, Ilias Van Peer, Mario Rogic, and Luke Westby, all of the Elm community, Davide Cervone, \href{https://mathjax.org}{MathJax.org}, and the team at \href{https://katex.org}{Katex.org} for their generous and invaluable help.   I also wish to thank the \href{https://simonsfoundation.org}{Simons Foundation} for its support of this project.
