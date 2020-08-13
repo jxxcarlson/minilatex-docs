@@ -1,3 +1,5 @@
+\uuid{62b8dc6a-0c0c-4274-8b20-751d32464909}
+
 \begin{mathmacro}
 \newcommand{\set}[1]{\{ #1 \}}
 \newcommand{\opensets}[0]{\mathcal{O}}
@@ -46,7 +48,7 @@ The next result shows that classical  and intuitionistic logic are different, e.
 
 
 If axiom J10 is replaced by $\neg \neg A \to A$, tthe law of the excluded middle, then the resulting system yields classical propositional logic.
-For the proof of the theorem, we will use some semantics for intuitionisitc logic.  Semantics in this kind of logic has a very different character than the semantics of classical logic, where one usually takes interpretations with values in the $Bool$, the 2-element Boolean algebra.  The interpretations we will use in the argument below take values in the set  $\mathbf{n} = \set{0, \ldots, n}$ for various values of $n$. 
+For the proof of the theorem, we will use some semantics for intuitionisitc logic.  Semantics in this kind of logic has a very different character than the semantics of classical logic, where one usually takes interpretations with values in the $Bool$, the 2-element Boolean algebra.  The interpretations we will use in the argument below take values in the set  $\mathbf{n} = \set{0, \ldots, n}$ for various values of $n$.
 
 Intepretations with values in a finite set are quite useful, but are not sufficiently powerful to prove the Soundness Theorem. To prove this fundamental result, we shall use \term{Heyting algebras}.  An example of such an algebra is the algebra $\opensets(\reals)$ of open subsets of the real line in the usual topology.  We think of $\opensets(\reals)$ as a sophisticated "topological version" of the power set $2^X$. It is endowed with the operations of union and intersection and with partial order $U \subset V$.  With these operations, it is a complete distributive lattice. Here "complete" means that there are least and greatest elements with respect to the partial order, namely $\emptyset$ and $\reals$.  We write these $\bot$ and $\top$. For a given open set $U$, one defines the operation $\neg U$ to be the largest open set contained in the complement of $U$:
 
@@ -66,7 +68,7 @@ Turning to the proof of Theorem \ref{lem},  we fix an integer $n > 0$ and define
 
 \item  $\phi(a \land b) = \max \phi(A), \phi(B)$
 
-\item If $\phi(A) \ge \phi(B)$, then $\phi(A \to B) = 0$.  Otherwise, 
+\item If $\phi(A) \ge \phi(B)$, then $\phi(A \to B) = 0$.  Otherwise,
 $\phi(A \to B) = \phi(B)$.
 
 \item If $\phi(A) = n$, then $\phi(\neg A) = 0$.  Otherwise, $\phi(A) = n$.
@@ -97,14 +99,14 @@ $$
   \phi(A \leftrightarrow B) = \max \phi(A), \phi(B)
 $$
 
-and 
+and
 
 $$
   \phi(A \leftrightarrow B) = 0
 $$
 
 in the contrary case.  Using this fact, one may assign values to the $p_i$ to show that for $n  \ge 2$, there is an interpretation with values in $\mathbf{n}$ such that  $\phi(D_n) \ne 0$.  For example, with $n = 3$, we may take $\phi(p_i) = i-1$.
-Then 
+Then
 
 \begin{align}
 \phi(D_3) &= \phi((p_1 \leftrightarrow p_2) \lor (p_1 \leftrightarrow p_3)\lor (p_2 \leftrightarrow p_2)) \\
@@ -118,10 +120,10 @@ The fact that increasingly larger models are needed to express the semantics of 
 
 \subsection{Applying Heyting Semantics}
 
-We will now give an applciation of the Heyting algebra $\opensets(\reals)$ consiidered above \mdash the algebra of open subsets of the real line.  To this end, let us give the formal definition. A Heyting algebra conists of partially ordered set $(H, \le)$ endowed with operations $\land$ and $\lor$ which make it into a distributive lattice.  In addition, there are greatest and least elements, $\top$ and $\bot$, respectively.  Finally, there is a operation $\to$ which satisfies $z \le (x \to y)$ if and only if $z \land x \le y$.  Every Boolean algebra is a Heyting algebra, where $x \to y = \neg x \lor y$.  A Heyting algebra which is complemented in the sense that $x \lor \neg x = \top$ is a Boolean algebra. 
+We will now give an applciation of the Heyting algebra $\opensets(\reals)$ consiidered above \mdash the algebra of open subsets of the real line.  To this end, let us give the formal definition. A Heyting algebra conists of partially ordered set $(H, \le)$ endowed with operations $\land$ and $\lor$ which make it into a distributive lattice.  In addition, there are greatest and least elements, $\top$ and $\bot$, respectively.  Finally, there is a operation $\to$ which satisfies $z \le (x \to y)$ if and only if $z \land x \le y$.  Every Boolean algebra is a Heyting algebra, where $x \to y = \neg x \lor y$.  A Heyting algebra which is complemented in the sense that $x \lor \neg x = \top$ is a Boolean algebra.
 
 The only piece lacking in our description of  $\opensets(\reals)$ as a Heyting algebra
-is the operation $U \to V$,  It is defined as as 
+is the operation $U \to V$,  It is defined as as
 
 $$
 U \to V = \bigcup \set{W\in \mathcal{O} : W \cap U \subset V }
@@ -129,7 +131,7 @@ $$
 
 It is easy to see that $W \cap U \subset V$ if and only if $W \subset (U \to V)$.  For computations, we will use the formulation of the Lemma below.  If we omit taking thei interior  (or use the discrete topology) in this definition and the defintion of negation, we recover classical logic.
 
-\begin{lemma} 
+\begin{lemma}
 $U \to V = Int(U^c \cup V)$.
 \end{lemma}
 
@@ -170,7 +172,7 @@ rules below.
 
 \item $\phi(A \to B) = \phi(A) \to \phi(B)$.
 
-\end{enumerate} 
+\end{enumerate}
 
 \begin{lemma} The axioms of system J are satisfied by any $\opensets(\reals)$-valued
 interpretation.
@@ -199,7 +201,7 @@ for any $\opensets(\reals)$-valued interpretation.  To this end, let $U = \phi(A
 
 The remark labeled "topology" is the statement $Int(X) \cup Int(Y) \subset Int(X \cup Y)$.
 
-The next lemma says that Modus Ponens operates as it should 
+The next lemma says that Modus Ponens operates as it should
 on the level of semantics.
 
 \begin{lemma}
@@ -214,6 +216,4 @@ Suppose that $\vdash_J A$, and suppose that $\phi$ is an $\opensets(\reals)$-val
 
 \subheading{Notes for further work}
 
-\cite{RH} sketches an argument based on the formulas $D_n$ to show that no set of functions $\phi: \for \to B$ for $B$ a finite set can express the semantics of system J. I've used \cite{RH}, \cite{WKIL} and \cite{EPS} as sources for the above discussion.  
-
-
+\cite{RH} sketches an argument based on the formulas $D_n$ to show that no set of functions $\phi: \for \to B$ for $B$ a finite set can express the semantics of system J. I've used \cite{RH}, \cite{WKIL} and \cite{EPS} as sources for the above discussion.

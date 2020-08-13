@@ -1,3 +1,5 @@
+\uuid{eda86b76-c70e-419c-ab4d-002d4bd716ef}
+
 \section{Lambda Calculus}
 
 
@@ -6,7 +8,7 @@
 The lambda calculus was created by Alonzo Church to formulate what is meant by "computable."  His notion of computability is equivalent to that of Turing.   We first describe the syntax of the lambda calculus, then its semantics.
 
 
-\subsection{Syntax} 
+\subsection{Syntax}
 
 The syntax of the lambda calculus is given by the following formal grammar:
 
@@ -32,7 +34,7 @@ The grammar above describes the \emph{pure lambda calculus}. One can augment it 
 
 \subsection{Semantics}
 
-The semantic rules of the lambda calculus give meaning to the notions of abstraction and application.  The basic idea is this.  Consider a function $\lambda x.E$, where $E$ is a lambda expression.  Consider its application to an expression $F$, namely $\lambda x. E\, F$.  One can form a new expression by replacing every occurence of $x$ in $E$ by $F$.  This substitution operation is called \emph{beta reduction} and is denoted by 
+The semantic rules of the lambda calculus give meaning to the notions of abstraction and application.  The basic idea is this.  Consider a function $\lambda x.E$, where $E$ is a lambda expression.  Consider its application to an expression $F$, namely $\lambda x. E\, F$.  One can form a new expression by replacing every occurence of $x$ in $E$ by $F$.  This substitution operation is called \emph{beta reduction} and is denoted by
 
 \begin{equation}
   \lambda x. E\, F \to_\beta E[F/x]
@@ -46,10 +48,10 @@ Let's look at some examples. Consider first the expression $(\lambda x.x)F$.  Su
 
 The fact that $\lambda x.x$ operaties on all lambda expressions meeans that in particular, it operates on functions.  Consider next the expression $(\lambda x.a) F$, where $a \ne x$ is name.Replacig all occurrences of $x$ ion $a$ by $F$  means doing nothing at all.  Therefore $(\lambda x.a)F = a$, and so $\lambda x.a$ is the constant function $x \mapsto a$.
 
-Let's consider a few examples in an extended lambda calculus.  The expresion $(\lambda x.x+1)n$ reduces to $n+1$ and therefore reprensetns the function $x \mapsto x + 1$.  If the argument is an integer, this makes good sense.  But we could consider, for example, 
+Let's consider a few examples in an extended lambda calculus.  The expresion $(\lambda x.x+1)n$ reduces to $n+1$ and therefore reprensetns the function $x \mapsto x + 1$.  If the argument is an integer, this makes good sense.  But we could consider, for example,
 $$
   (\lambda x.x + 1)(\lambda x.x) = (\lambda x.x) + 1,
-$$ 
+$$
 which is generally considered to be nonsense.  Such odd results can be avoided by using a typed version of the lambda calculus.
 
 For a more interesting example consider first this example of beta-reduction:
@@ -68,7 +70,7 @@ The expression $\text{T} = \lambda x.\lambda y . x$ defines projection on the fi
 
 
 
-Let's work out the details to see the meaning of (3).  Consider the expression 
+Let's work out the details to see the meaning of (3).  Consider the expression
 
 \begin{align}
  \text{T}ab &= (\lambda x.\lambda y . x)ab \\
@@ -77,17 +79,17 @@ Let's work out the details to see the meaning of (3).  Consider the expression
 &= a
 \end{align}
 
-Thus $ \text{T}ab = a$, so that $ \text{T}$ is the function $xy \mapsto x$.  In the same way, one sees that $ \text{F}ab = b$, so that $ \text{F}$ is the function $xy \mapsto y$.  
+Thus $ \text{T}ab = a$, so that $ \text{T}$ is the function $xy \mapsto x$.  In the same way, one sees that $ \text{F}ab = b$, so that $ \text{F}$ is the function $xy \mapsto y$.
 
 
-An expression like $\lambda xyz.xyz$ is shorthand for $\lambda x. \lambda y. \lambda z. xyz$.  In parenthesized form, it reads $(\lambda x.(\lambda y.(\lambda z.xyz)))$. It is an easy exercise in the defintions to see that 
+An expression like $\lambda xyz.xyz$ is shorthand for $\lambda x. \lambda y. \lambda z. xyz$.  In parenthesized form, it reads $(\lambda x.(\lambda y.(\lambda z.xyz)))$. It is an easy exercise in the defintions to see that
 
 \begin{equation}
   (\lambda xyz .xyz) abc = abc = ((ab)c)
 \end{equation}
 
 
-Consider the expression $E = \lambda x. \lambda y. (2x + 3y)$. Then 
+Consider the expression $E = \lambda x. \lambda y. (2x + 3y)$. Then
 
 \begin{align}
  E\ 5\ 7 &= \lambda x. \lambda y. (2x + 3y)\ 5\ 7\\
@@ -96,14 +98,14 @@ Consider the expression $E = \lambda x. \lambda y. (2x + 3y)$. Then
   &= 31 \\
 \end{align}
 
-What about the expression $E\ 5$?  
+What about the expression $E\ 5$?
 
 \begin{align}
  E\ 5 &= \lambda x. \lambda y. (2x + 3y)\ 5\\
   &= \lambda y . (10 + 3y) \\
 \end{align}
 
-Thus $E\ 5$ is function.  In light of this example, one can define function-valued functions in the lambda calculus.  For another example, consider the expression 
+Thus $E\ 5$ is function.  In light of this example, one can define function-valued functions in the lambda calculus.  For another example, consider the expression
 
 $$
 E = (\lambda f . \lambda g . \lambda x)(f\ g\ x)
@@ -117,7 +119,7 @@ E\ (F\ G) &= (\lambda f . \lambda g . \lambda x)(f\ g\ x)\ (F\ G) \\
 &= \lambda x . (F\ G\ x) \\
 \end{align}
 
-Thus, with the lambda calculus one can define functions which take functions as arguments.  
+Thus, with the lambda calculus one can define functions which take functions as arguments.
 
 Note that the lambda calculus has just three formation rules — introduction of variables, abstraction, and application — and one reduction rule (to simplify expressions). A tiny language indeed.  Yet powerful.
 

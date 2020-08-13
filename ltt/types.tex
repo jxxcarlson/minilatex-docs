@@ -1,3 +1,5 @@
+\uuid{uuid:088197f2-b1f5-49f7-9ca8-45321077e981}
+
 \begin{mathmacro}
 \newcommand{\set}[1]{\{ #1 \}}
 \newcommand{\nat}[0]{\mathbb{N}}
@@ -13,11 +15,11 @@
 
 
 
-In set theory, one speaks of elements and membership of elements in sets.  Thus, one says that $0$ is an element of the set $\nat$, writing $0 \in \nat$.  Likewise one can say that, $\spadesuit \in Suits$, where 
+In set theory, one speaks of elements and membership of elements in sets.  Thus, one says that $0$ is an element of the set $\nat$, writing $0 \in \nat$.  Likewise one can say that, $\spadesuit \in Suits$, where
 
 $$ Suits = \set{\heartsuit, \diamondsuit, \clubsuit, \spadesuit }$$
 
-A set is defined by listing its elements, and membership is determined by looking at that list.  Thus, it makes sense to say $0 \not\in Suits$.  
+A set is defined by listing its elements, and membership is determined by looking at that list.  Thus, it makes sense to say $0 \not\in Suits$.
 
 In type theory, one speaks of \term{terms} and \term{types}.  Every term has a type, and it "belongs" to just one type.  Thus, we may declare that $Suit$ is a type and that the four objects $\clubsuit$, $\spadesuit$, etc. are terms of this type.  We can assert the same facts symbolically by saying
 
@@ -30,23 +32,23 @@ $$
 
 To give a type is to give rules for constructing terms of that type, as we have just done.  We must also give rules for determining when terms are the same.  We may say this:  $a = a : Suit$.  In other words, we impose the smallest relation on the terms, so that they are all distinct.
 
-Let us define a new type, perhaps for an elementary game of cards.  A $SuitPair$ will be an expression of the form $(a,b)$, where $a : Suit$ and $b : Suit$.  We may express this more fomally via the rule 
+Let us define a new type, perhaps for an elementary game of cards.  A $SuitPair$ will be an expression of the form $(a,b)$, where $a : Suit$ and $b : Suit$.  We may express this more fomally via the rule
 
 $$
 \frac{a : Suit \quad b : Suiit}{(a,b) : SuitPair}
 $$
 
-This rule, like our inference rules, has an antecedent (the numerator) and a consequent (the denominator).  The rule is a \term{construction rule}.  It tells us how to build terms of type $SuitPair$, e.g. $(\clubsuit, \spadesuit)$.  Let us now define equality for terms of this type.  We introduce a rule in addition to reflexivity: 
+This rule, like our inference rules, has an antecedent (the numerator) and a consequent (the denominator).  The rule is a \term{construction rule}.  It tells us how to build terms of type $SuitPair$, e.g. $(\clubsuit, \spadesuit)$.  Let us now define equality for terms of this type.  We introduce a rule in addition to reflexivity:
 
 $$
 \frac{(a,b) : SuitPair }{(a,b) = (b,a) : SuitPair}
 $$
 
-Thus 
+Thus
 $$(\clubsuit, \spadesuit) = (\spadesuit, \clubsuit) : SuitPair
 $$
 
-Note that equality can be decided algorithmically, that is, by a suitable computer program.  In the case at hand, the rules equality define the type version of unordered pair.  If we had limited ourselves to the reflexive rule, we would have defined the type analogue of ordered pair.  
+Note that equality can be decided algorithmically, that is, by a suitable computer program.  In the case at hand, the rules equality define the type version of unordered pair.  If we had limited ourselves to the reflexive rule, we would have defined the type analogue of ordered pair.
 
 \subsection{The natural numbers}
 
@@ -61,11 +63,11 @@ where we think of $s(a)$ as the successor of $a$.  Thus $0$ is a term, as is $s(
 
 $$
 \frac{a = b : \nat}{s(a)  = s(b) : \nat}
-\qquad 
+\qquad
 \frac{s(a)  = s(b) : \nat}{a = b : \nat}
 $$
 
-One can make defintions such as $1 =_{def}  s(0)$, $2 =_{def}  s(s(0))$, etc.  
+One can make defintions such as $1 =_{def}  s(0)$, $2 =_{def}  s(s(0))$, etc.
 
 Statements like $2 = s(1)$ now make sense, and so our type theory version of the natural numbers is beginning to look familiar.   But let us take the time to check.  According to our definitions, is it the case that $2 = s(1)$?  We begin by replacing $2$ by its defintion, so that the assertion becomes $s(s(0)) = s(s(0)): \nat$.  Applying the right-hand rule, we obtain $s(0) = s(0): \nat$; applying it once more yields the axiom $0 = 0 : \nat$. Note once again the computational nature of this equality check.
 
@@ -110,9 +112,9 @@ For another example, comsider the expression $(x:\nat) + (x:\nat):\nat$, which w
 Informally speakiing then, a term $f$ of type $A \to B$ is a rule for constructing a term $f(a): B$ given a term $a:A$.  More formally, such rules are given by typed lambda expressions.  To define a function via a $\lambda$-expression is to say that a computer program can be written which give $a: A$ will produce an output $f a : B$.  A computer program is something expressible in a finite number of symbols — letters and numerals, zeroes and ones, etc.  A set-theoretic function $f : A \to B$ is not something that can be expressed in this way if either $A$ or $B$ is an infinite set.
 
 
- 
 
-\strong{Summary.r} In defining a type as contrasted with a set, \emph{one defines an object  with explicit computational content}.  This content is sufficient to generate canonical elements of the type, e.g. $0$ or $s(s(s(0)))$, and to decide when canonical elements are equal.  It gives the means to define operations such as addition (hence to define new terms), and also the means to decide equalities in which one or both terms are non-canonical, e.g. $2 + 2 = 4$ or $2 + 2 = 3$.  
+
+\strong{Summary.r} In defining a type as contrasted with a set, \emph{one defines an object  with explicit computational content}.  This content is sufficient to generate canonical elements of the type, e.g. $0$ or $s(s(s(0)))$, and to decide when canonical elements are equal.  It gives the means to define operations such as addition (hence to define new terms), and also the means to decide equalities in which one or both terms are non-canonical, e.g. $2 + 2 = 4$ or $2 + 2 = 3$.
 
 Reference: \cite{EPB}:
 
@@ -170,16 +172,16 @@ $$
 \frac{}{\heartsuit : Suit} \quad
 \frac{}{\clubsuit : Suit} \quad
 \frac{}{\spadesuit : Suit} \quad
-$$ 
+$$
 
-These are the rules for constructing terms.  Our type is now "inhabited."  
+These are the rules for constructing terms.  Our type is now "inhabited."
 Notice that the statement $0 : Suit$  is neither true nor false: it makes no sense, as it is not derivable from the rules of the type. Adjunction of the rule
 
 $$
 \frac{a : Suit}{a = a : Suit}
-$$ 
+$$
 
-completes the formation of the Suit type. 
+completes the formation of the Suit type.
 
 The $SuitPair$ type is an instance of the Cartesian product type, whch is formed by the rule
 
@@ -216,18 +218,18 @@ Computation:
 \end{equation}
 
 
-Uniqueness: 
+Uniqueness:
 
 
 \subsubsection{Cartesian products}
 
-The formation rule for the $Suit$ type had no antecedent, while formation of  Cartesian products depends on two antecedent types, $A$  and $B$. Terms of $A\times B$ are introduced by the rule 
+The formation rule for the $Suit$ type had no antecedent, while formation of  Cartesian products depends on two antecedent types, $A$  and $B$. Terms of $A\times B$ are introduced by the rule
 
 \begin{equation}
 \frac{a : A \quad b : B}{(a,b) : A \times B}
 \end{equation}
 
-The term $(a,b)$ is an atomic notion. To have access to what in set theory we think of as its components, we need the projections functions 
+The term $(a,b)$ is an atomic notion. To have access to what in set theory we think of as its components, we need the projections functions
 
 \begin{align}
 pr_1 : A \times B \to A \\
@@ -241,8 +243,8 @@ f((a,b)) =_{def} g(a)(b)
 \end{equation}
 
 
-With $g =\lambda a.\lambda b . a$ this construction yields $pr_1$, and with 
-$g =\lambda a.\lambda b . b$, it yields $pr_2$.  
+With $g =\lambda a.\lambda b . a$ this construction yields $pr_1$, and with
+$g =\lambda a.\lambda b . b$, it yields $pr_2$.
 
 
 
@@ -266,7 +268,7 @@ $$
 (A \to B) \to (\neg B \to \neg A)
 $$
 
-It is a type.  Viewed as a proposition, to provide a proof is to exhibit an inhabitant.  Suppose give $f : A \to B$ and $g : \neg B$, that is, 
+It is a type.  Viewed as a proposition, to provide a proof is to exhibit an inhabitant.  Suppose give $f : A \to B$ and $g : \neg B$, that is,
 $g : B \to \bot$.  Then $g\circ f : A \to \bot$.  The task, then, is to write down a lambda expression for the function $\rho =  f \mapsto (g \mapsto g\circ f)$.  We proced in stages:
 
 \begin{align}

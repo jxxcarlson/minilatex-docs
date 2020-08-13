@@ -1,3 +1,5 @@
+\uuid{efc13baf-2cad-4a92-8331-2b8c5de330ef}
+
 \begin{mathmacro}
 \newcommand{\set}[1]{\{ #1 \}}
 \newcommand{\for}[0]{\mathcal{F}}
@@ -12,7 +14,7 @@
 
 \subsection{Origins}
 
-Logic is the science of valid reasoning.  An old science that goes back at least to Aristotle (384\ndash 322 BC), it gives answers to the question \italic{What forms of argument yield true conclusions from true hypotheses?} 
+Logic is the science of valid reasoning.  An old science that goes back at least to Aristotle (384\ndash 322 BC), it gives answers to the question \italic{What forms of argument yield true conclusions from true hypotheses?}
 Such argements are the valid ones.  We interested in recognizing and constructing them. Argumenst have the form
 
 \begin{equation}
@@ -59,13 +61,13 @@ Formulas  are often given by some set of rules, rather than by enumerating he me
 
 Let us extract the grammatical essence of palindrome generation.  (1) There is a set of starting elements $S \subset \Sigma^+$.  (2) here is a set of rules $G$, the grammar, which may be written out as above, or encoded as a set of functions $g: S \to \Sigma^*$.  The set of well-formed formulas $\for$ is the smallest subset of $\Sigma^*$ which is closed under application of functions in $G$.  Call this set the \term{inductive closure} of $S$ with respect to $G$.
 
-We view $G$ as a grammar for the set of formulas $\for$.  In the case of palindromes, the grammar is given by the rule $R_\alpha: P \to \alpha P \alpha$, that is, by the corresponding set of functions $G = \set{ R_{\alpha }}$.  
+We view $G$ as a grammar for the set of formulas $\for$.  In the case of palindromes, the grammar is given by the rule $R_\alpha: P \to \alpha P \alpha$, that is, by the corresponding set of functions $G = \set{ R_{\alpha }}$.
 
 To summarize, a formal language is a triple $\lang = (\Sigma, G, S)$.  Given such a triple, the set of formulae $\for$ is defined.
 
 \subsection{Truth, and the language M}
 
-We consider next a language of marks.  Its alphabet is the set $\Sigma = \set{+, |, =}$ considered above.  Its start set is $S = \set{ | + | = |}$, and its grammar is given by the rule $| \to ||$, which may be applied to any one of the operands $x, y, z$ in $x + y = z$. The rule is in fact three rules, one acting on $x$, one on $y$, and one on $z$.  Thus both $|| + ||| = |$ 
+We consider next a language of marks.  Its alphabet is the set $\Sigma = \set{+, |, =}$ considered above.  Its start set is $S = \set{ | + | = |}$, and its grammar is given by the rule $| \to ||$, which may be applied to any one of the operands $x, y, z$ in $x + y = z$. The rule is in fact three rules, one acting on $x$, one on $y$, and one on $z$.  Thus both $|| + ||| = |$
 and $|| + ||| = |||||$ are fomulae in M, the language of marks.
 
 So far, everything we have done has been done in the realm of syntax, that is, in the realm of grammar and rules.  Let us now consider \term{semantics}, or meaning.  The best we can do in mathematics to give meaning to formulae is to map formulae to some other domain, and to consider the value in that domain to be the meaning, or interpretation of the formula.  In logic, the target domain is generally
@@ -74,14 +76,14 @@ $$
   Bool = \set{T, F}
 $$
 
-where $T$ and $F$ referes to True and False.  It is better, and if feels better, to assign these "truth .values" in a way that is in accord with our underying intuition, when that is possible.  For M, we define an interpretation 
+where $T$ and $F$ referes to True and False.  It is better, and if feels better, to assign these "truth .values" in a way that is in accord with our underying intuition, when that is possible.  For M, we define an interpretation
 
 $$
 \phi : \for \to Bool
 $$
 
 by $\phi(A) = T$ if and only if the number of marks to the left of the equals sign is equal to the number of marks to the right.  In this case, we say that $A$ is true.
-When a formula $A$ is true in an interpretation $\phi$, we wrire 
+When a formula $A$ is true in an interpretation $\phi$, we wrire
 
 $$
 \models_{\phi} A
@@ -98,8 +100,8 @@ $$
 
 \subsection{Proof, and the formal system ADD}
 
-We now take up the notion of proof.  To this end, define 
- a  \term{Formal System} \strong{F} to be a triple 
+We now take up the notion of proof.  To this end, define
+ a  \term{Formal System} \strong{F} to be a triple
 $(\lang, \axioms, R)$, where $\lang$ is a formal language endowed with a \term{axioms} and \term{rules of inference}.  The axioms are a distinguised subset  $\axioms \subset \for$ of the formulas of $\lang$ . The rules of inference take the form  $A_1, A_2, \ldots A_n\ : B$, where all the elements of the rule are formulas. The $A_i$  are called the \term{premises}, and $B$ is the \term{conclusion} of the rule.
 
   A proof in \strong{F} is a sequence of formuluas $A_* = A_1, A_2, \ldots A_n$, where one of the following holds for each $A_j$: (1) $A_j$ is an axiom; (2) $A_j$ is the conclusion of a rule of inference, where its premises are formulas $A_i$ with $i < j$.  We say that $A_*$ is a proof of $A_n$.  A fundamental question is: given a formlua $A \in \for$, is it a theorem?
@@ -157,7 +159,7 @@ We claim that in \strong{F}, the converse of the previous theorem also holds:
 
 \begin{theorem}
 \label{add:completeness}
-Every true formula in ADD has a proof..  
+Every true formula in ADD has a proof..
 \end{theorem}
 
 \strong{Proof.} Let $n(A)$ be the number of marks on the right side of a formula. We prove theorem by induction on $n(A)$.  If $n(A) = 2$, then $A$ is the axiom, and so $A \in \theorems$.  Suppose that that $n(A) = k > 2$.  Let $A$ be $x + y + z$.  Then one of $x$ or $y$ has at least two marks.  If one term has more marks thatn the other, take a mark away from it.  Otherwise, take a mark away from one of the terms.  Then take a mark away from the right-hand side.  The result is a formula $A'$ satisfying $\phi$ with $n(A') = k - 1$. By the inductive hypothesis, $A'$ is a theorem.  Since $A$ is obtained from $A'$ by application of the rules, $A$ is also a theorem. \strong{Q.E.D.}
@@ -203,7 +205,7 @@ We consider next the formal system PROP for the propositional callcus.  Let $\Si
 \item If $A$ and $B$ are formulas, then so is $(A \leftrightarrow B)$ is also. We read this as $``A \text{ is equvalent to } B"$.
 \end{enumerate}
 
-Thus $p$, $(p \land q)$, $(p \land (q \to \neg r)$, etc, are formulas, whereas $p \to \to q \neg$ is not.  A formula like $p$ which has no connectives is called \term{atomic}:  Formulas are also called propositions. 
+Thus $p$, $(p \land q)$, $(p \land (q \to \neg r)$, etc, are formulas, whereas $p \to \to q \neg$ is not.  A formula like $p$ which has no connectives is called \term{atomic}:  Formulas are also called propositions.
 
 The rules given above define a language $\lang$, the formulas of propositional logic.  Just as with system ADD, one may use induction to prove assertions such as the following:
 
@@ -212,7 +214,7 @@ The number of left parentheses of a formula is the same as the number of right p
 \end{proposition}
 
 So far we have considered only syntax.  Let us now consider semantics.
-To that end, define an interpretation of PROP to be function 
+To that end, define an interpretation of PROP to be function
 
 \begin{equation}
 \phi: \set{p_1, p_2, \dots} \to Bool
@@ -240,7 +242,7 @@ We can think of this table as expressing rules such as $\phi(P \lor Q) = \phi(P)
 
 \item If $A$ is saisfied by all interpreations, then it is \term{valid}, or a \term{tautology}.  In this case, we write $\models A$.
 
-\end{itemize} 
+\end{itemize}
 
 Any atomic  proposition, e.g., $p$, is satisfiable, but  $p \land \neg p$ is unsatisfiable.  The formua  $p  \lor \neg p$ is a tautology.
 
@@ -271,7 +273,7 @@ $\phi_2$. But $P \to Q$ is true, so the only interpretation is $\phi_1$.  In thi
 
 If $\Gamma$ is empty, then $A$ is a tautology, and we write $\models A$.   Thus, we can say that $\models P \lor \neg P$.
 
- 
+
 If $A \models B$ and $B \models A$, then $A$ and $B$  are (semantically) equivalent, and we write $A \cong B$.  For example, $A \lor B \cong B \lor A$.
 
 Note that $A \leftrightarrow B$ and $A \cong B$ are not the same because they are not even the same kind of statement.  The first is a formula in the propositional calculus.  The second is not, but is instead a relation between propositions.  Said another way, the first is a formula \emph{in} the language $\lang$ whereas the second is a statement \emph{about} the language, that is, a statement in the metalanguage
@@ -286,8 +288,8 @@ A \term{decision problem} is a problem with a yes-no answer.  It is \term{decida
 
 Consider next Propositional Logic.  The \term{satisfiabilty problem} asks whether a given formula is satisfiable.  This problem is decidable.  Let $p_1, \ldots p_n$ be the propositional variables in a formula $A$.  There are $2^n$ possible truth assignments for these variables, which may be enumerated as $\phi_1, \ldots, \phi_N$.  Compute $\phi_1(P)$.  if the result is true, stop.  Otherwise, continues with $\phi_2$, $\phi_3$, etc. If we find that $\phi_j(P) = T$, we stop and know that $P$ is satisfiable.  If we find that $\phi_i(P) = F$ for all $i$, we know that $P$ cannot be satisfied.
 
-While the satisfiablility problem is decidable, our algorithm is not practical for formulas with a large number of vaiables, say, 100 or more.  There are 
-$2^{100} \sim 10^{30}$ truth assignments for 100 variables.  If one truth assignment could be checked in one nanosecond, the decision problem for such a formula could take on the order of $10^{14}$  years to settle.  Even worse is the tautology problem, which can be decided by the same algorithm, except that \emph{all} assignments must be checked.  
+While the satisfiablility problem is decidable, our algorithm is not practical for formulas with a large number of vaiables, say, 100 or more.  There are
+$2^{100} \sim 10^{30}$ truth assignments for 100 variables.  If one truth assignment could be checked in one nanosecond, the decision problem for such a formula could take on the order of $10^{14}$  years to settle.  Even worse is the tautology problem, which can be decided by the same algorithm, except that \emph{all} assignments must be checked.
 
 We have seen that truth is decibable in the propositional calculus, just as it was in our toy system \strong{F}.  What about provability?  We cannot yet answer this question, because we have not yet defined what a proof is, much less devised a system to find them.  This is our next task.  Once we have a proof system, we can examine the relationship between truth and provabiity for the propositional calculus.  That is, we can determine whether the Soundness and Adequacy theorems hold.
 
@@ -348,7 +350,7 @@ COMM
 \end{tabular}
 \end{indent}
 
-Note the liberal use of the law of the excluded middle. From the COMM rule, 
+Note the liberal use of the law of the excluded middle. From the COMM rule,
 one derives the two variants of the main inference rules;
 
 \strong{Expansion'} $A : A \lor B$
@@ -429,13 +431,3 @@ If $\vdash A$, then $\models A$.
 $$\phi(A \lor \neg A) = \phi(A) \cup \neg \phi(A) = T$$
 
 As an extended exercise, one shows that for any rule of inference, the truth of the premises implies thre truth of the conclusion.  Thus boh the axioms and the rues of inference are sound.  It follows that if $A$ is any element of the inductive closure of the axioms, then $A$ is valid.  \strong{Q.E.D.}
-
-
-
-
-
-
-
-
-
-

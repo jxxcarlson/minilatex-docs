@@ -1,3 +1,5 @@
+\uuid{49bcc8a6-293a-49a4-9805-a7c0d6a30d1a}
+
 \section{Computability}
 
 The set $PR$ of \term{primitive recursive functions} $\nat^k \to \nat$ (for arbitrary $k$) is defined as follows.  First, there is a stock $X$ of basic functions: (i) the 0-ary constant function with value zero, $o'() = 0$, (ii) the 1-ary constant function with value 0, $o(x) = 0$, (iii) the projection $p^i_k$ from $\nat^k$ on the $i$-th factor, and (iv) the successor function $succ(x) = x + 1$.  Two operations of functions are defined. The first is composition.  Suppose given a function $f$ of arity $m$ and $m$ functions $g_i$ of arity $k$.  Then one defines the composite function
@@ -10,7 +12,7 @@ C(f,g_1,\ldots,g_m)(\mathbold{x}) = f(g_1(\mathbold{x}), \ldots, g_m(\mathbold{x
 The second operation, denoted $R$ for recursion, takes as input  function $f$ of arity $k+2$ and a functions $g$ of arity $k$.  It produces as output a function $h = R(g,f)$ of arity $k$, namely, the unique function satisfying the relation
 
 \begin{align}
-  h(0, \mathbold{y}) &= g(\mathbold{y}) \\ 
+  h(0, \mathbold{y}) &= g(\mathbold{y}) \\
   h(x + 1, \mathbold{y}) &= f(h(x,\mathbold{y}), x, \mathbold{y}) \\
 \end{align}
 
@@ -30,7 +32,7 @@ The set of primitive recursive functions is the smallest set of functions contai
 
 \subsection{Counterexamples}
 
-Define the \term{Ackerman function} by 
+Define the \term{Ackerman function} by
 
 $$
 A(m,n) = \begin{cases}
