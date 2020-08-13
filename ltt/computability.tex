@@ -1,6 +1,6 @@
 \uuid{49bcc8a6-293a-49a4-9805-a7c0d6a30d1a}
 
-\xlink{75617ed5-f446-4491-bab9-a7ea85e5a817}{Notes on Logic and Type Theory}
+\xlink{uuid:75617ed5-f446-4491-bab9-a7ea85e5a817}{Notes on Logic and Type Theory}
 
 \begin{mathmacro}
 \newcommand{\nat}[0]{\mathbb{N}}
@@ -45,7 +45,7 @@ Define the \term{Ackerman function} by
 A(m,n)  =& \\
                & n+ 1 \quad  \text{if $m = 0$} \\
               & A(m-1,1)  \quad \text{if $m > 0$ and $n = 0$} \\
-              & A(m-1,A(m,n-1)) \quad \text{if $m > 0$ and $n > 0$} \ \ 
+              & A(m-1,A(m,n-1)) \quad \text{if $m > 0$ and $n > 0$} \ \
 \end{align}
 
 It is a total recursive function but not primitive recursive because it grows faster than any primitive recursive function.
