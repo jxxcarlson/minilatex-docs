@@ -1,19 +1,25 @@
 \uuid{49bcc8a6-293a-49a4-9805-a7c0d6a30d1a}
 
+\xlink{75617ed5-f446-4491-bab9-a7ea85e5a817}{Notes on Logic and Type Theory}
+
+\begin{mathmacro}
+\newcommand{\nat}[0]{\mathbb{N}}
+\end{mathmacro}
+
 \section{Computability}
 
 The set $PR$ of \term{primitive recursive functions} $\nat^k \to \nat$ (for arbitrary $k$) is defined as follows.  First, there is a stock $X$ of basic functions: (i) the 0-ary constant function with value zero, $o'() = 0$, (ii) the 1-ary constant function with value 0, $o(x) = 0$, (iii) the projection $p^i_k$ from $\nat^k$ on the $i$-th factor, and (iv) the successor function $succ(x) = x + 1$.  Two operations of functions are defined. The first is composition.  Suppose given a function $f$ of arity $m$ and $m$ functions $g_i$ of arity $k$.  Then one defines the composite function
 
 
 \begin{equation}
-C(f,g_1,\ldots,g_m)(\mathbold{x}) = f(g_1(\mathbold{x}), \ldots, g_m(\mathbold{x}))
+C(f,g_1,\ldots,g_m)(\boldsymbol{x}) = f(g_1(\boldsymbol{x}), \ldots, g_m(\boldsymbol{x}))
 \end{equation}
 
 The second operation, denoted $R$ for recursion, takes as input  function $f$ of arity $k+2$ and a functions $g$ of arity $k$.  It produces as output a function $h = R(g,f)$ of arity $k$, namely, the unique function satisfying the relation
 
 \begin{align}
-  h(0, \mathbold{y}) &= g(\mathbold{y}) \\
-  h(x + 1, \mathbold{y}) &= f(h(x,\mathbold{y}), x, \mathbold{y}) \\
+  h(0, \boldsymbol{y}) &= g(\boldsymbol{y}) \\
+  h(x + 1, \boldsymbol{y}) &= f(h(x,\boldsymbol{y}), x, \boldsymbol{y}) \\
 \end{align}
 
 \begin{definition}
@@ -34,13 +40,13 @@ The set of primitive recursive functions is the smallest set of functions contai
 
 Define the \term{Ackerman function} by
 
-$$
-A(m,n) = \begin{cases}
-               n+ 1 \ \ \text{if} \ \ m = 0\\
-              A(m-1,1) \ \ \text{if} \ \ m > 0 \ \ \text{and} \ \ n = 0 \\
-              A(m-1,A(m,n-1)) \ \ \text{if} \ \ m > 0 \ \ and \ \ n > 0
-            \end{cases}
-$$
+
+\begin{align}
+A(m,n)  =& \\
+               & n+ 1 \quad  \text{if $m = 0$} \\
+              & A(m-1,1)  \quad \text{if $m > 0$ and $n = 0$} \\
+              & A(m-1,A(m,n-1)) \quad \text{if $m > 0$ and $n > 0$} \ \ 
+\end{align}
 
 It is a total recursive function but not primitive recursive because it grows faster than any primitive recursive function.
 
