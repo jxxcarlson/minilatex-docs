@@ -1,4 +1,5 @@
 \uuid{f2a8724a-fc18-44f0-af4e-d96db08b9f42}
+
 \title{MiniLaTeX: Language Manual}
 
 \maketitle
@@ -74,6 +75,17 @@ Here is a \xlink{58}{an example}. It is done like this:
 \end{verbatim}
 
 The first argument, 58 in this case, is the numerical ID of the document in question. The document ID is displayed in the footer of this app.
+
+One can also link to  \xlink{uuid:4c66bef1-f9a6-4fe6-a6c8-3dfb62bf352a}{the example} using the UUID of a document, as illustrated below.  This is more verbose, but more reliable.
+
+
+\begin{verbatim}
+ \xlink{uuid:4c66bef1-f9a6-4fe6-a6c8-3dfb62bf352a}{the example}
+\end{verbatim}
+
+
+You will find the UUID of the document in the first line of the source text.  This line should not be modified.
+
 
 \subsection{Index links}
 
