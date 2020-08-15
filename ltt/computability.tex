@@ -1,5 +1,21 @@
-\uuid{49bcc8a6-293a-49a4-9805-a7c0d6a30d1a}
-
+beginMetadata:
+{
+    "id": "49bcc8a6-293a-49a4-9805-a7c0d6a30d1a",
+    "documentNumber": 16,
+    "author": "jxxcarlson",
+    "title": "Computability",
+    "path": "ltt/computability.tex",
+    "tags": [],
+    "keyString": "computability a=jxxcarlson ltt/computability.tex ",
+    "timeCreated": 1597326133951,
+    "timeModified": 1597517809743,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 3,
+    "versionDate": 1597329649913
+}
+endMetadata
 \xlink{uuid:75617ed5-f446-4491-bab9-a7ea85e5a817}{Notes on Logic and Type Theory}
 
 \begin{mathmacro}
@@ -45,7 +61,7 @@ Define the \term{Ackerman function} by
 A(m,n)  =& \\
                & n+ 1 \quad  \text{if $m = 0$} \\
               & A(m-1,1)  \quad \text{if $m > 0$ and $n = 0$} \\
-              & A(m-1,A(m,n-1)) \quad \text{if $m > 0$ and $n > 0$} \ \
+              & A(m-1,A(m,n-1)) \quad \text{if $m > 0$ and $n > 0$} \ \ 
 \end{align}
 
 It is a total recursive function but not primitive recursive because it grows faster than any primitive recursive function.
