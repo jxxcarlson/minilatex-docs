@@ -1,0 +1,42 @@
+\uuid{e37f684d-01b2-4946-97cb-a53f10e7ba03}
+
+\begin{verbatim}
+module IO exposing
+  ( IO
+  , pure      -- Pair a naked model with Cmd.none
+  , with      -- Add another Cmd to an existing (model, Cmd msg)
+  , extract   -- Pull out the model from a (model, Cmd msg)
+  , map       -- Map the model inside a (model, Cmd msg)
+  , mapCmd    -- Map the cmd(s) inside a (model, Cmd msg)
+  , andThen   -- Map the model inside a (model, Cmd msg) into a new tuple and
+              -- join the cmds.
+  )
+type alias IO model msg =
+  ( model, Cmd msg )
+
+pure : model -> IO model msg
+pure model =
+  ( model, Cmd.none )
+
+extract : IO model msg -> model
+extract ( model, _ ) =
+  model
+
+with : Cmd msg -> IO model msg -> IO model msg
+with cmd ( model, cmds ) =
+  ( model, Cmd.batch [ cmd, cmds ] )
+
+map : (a -> b) -> IO a msg -> IO b msg
+map f ( model, cmd ) =
+  ( f model, cmd )
+
+mapCmd : (a -> b) -> IO model a -> IO model b
+mapCmd f ( model, cmd ) =
+  ( model, Cmd.map f cmd )
+
+andThen : (a -> IO b msg) -> IO a msg -> IO b msg
+andThen f ( model, cmd ) =
+  f model
+    |> Tuple.mapSecond (List.singleton >> (++) [ cmd ] >> Cmd.batch
+
+\end{verbatim}
