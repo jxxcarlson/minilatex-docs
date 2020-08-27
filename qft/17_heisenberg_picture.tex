@@ -1,3 +1,24 @@
+beginMetadata:
+{
+    "id": "88df19a3-1136-4fee-bdc1-05b788a22472",
+    "documentNumber": 49,
+    "author": "jxxcarlson",
+    "title": "Heisenberg Picture",
+    "path": "qft/17_heisenberg_picture.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "heisenberg picture a=jxxcarlson qft/17_heisenberg_picture.tex t=quantum t=physics",
+    "timeCreated": 1595381214298,
+    "timeModified": 1595381214298,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555904997
+}
+endMetadata
 \italic{\xlink{34}{Notes on Quantum Field Theory}}
 
 
@@ -28,20 +49,20 @@ To use the Heisenberg picture we need the equations of motion for observables.  
 \dot A_t &= - (U_t^{-1}  \dot U_t U_t^{-1} ) A U_t + U_t^{-1}A\dot U_t \\
 &=  (i/\hbar)(U_t^{-1}  H) A U_t - (i/\hbar) U_t^{-1}A HU_t \\
 &=  (i/\hbar)U_t^{-1} (HA - AH)U_t  \\
-&=  (i/\hbar)[H_t ,A_t]
+&=  (i/\hbar)[H_t ,A_t] 
 \end{align}
 
 The equation of motion is therefore
 
 \begin{equation}
-\dot A(t) =  \frac{i}{\hbar}[H(t),A(t)]
+\dot A(t) =  \frac{i}{\hbar}[H(t),A(t)] 
 \end{equation}
 
 
 \subsection{Commutators}
 
-When working in  the Heisenberg picture one has access to all commutator relations that exist in the Schrödinger picture. Suppose that $A$ and $B$ are observables satisfying $[A,B] = C$, and let $A(t)$, $B(t)$ and $C(t)$ their time-evolved versions.
-Then
+When working in  the Heisenberg picture one has access to all commutator relations that exist in the Schrödinger picture. Suppose that $A$ and $B$ are observables satisfying $[A,B] = C$, and let $A(t)$, $B(t)$ and $C(t)$ their time-evolved versions. 
+Then 
 
 \begin{equation}
 [A(t), B(t)] = C(t)
@@ -51,10 +72,10 @@ This follows from a straightforward computation:
 
 \begin{align}
 U_t^{-1} [A, B] U_t&= U_t^{-1} (AB  - BA) U_t \\
-&= (U_t^{-1} AU_t)(U_t^{-1} BU_t)
+&= (U_t^{-1} AU_t)(U_t^{-1} BU_t) 
  - U_t^{-1}BU_t U_t^{-1} AU_t \\
 &= A_tB_t - B_t  U_t \\
-&= [A_t, B_t]
+&= [A_t, B_t] 
 \end{align}
 
 But $U_t^{-1} [A, B] U_t = U_t^{-1} C U_t = C_t$, so the result is proved.
@@ -68,7 +89,7 @@ To evaluate the commutator for  $n=2$, write
  &= \{A, [A, B] \},
 \end{align}
 
-where $\{A,B\} = AB + BA$ is the anti-commutator.  If in addition, $A$ commutes with $[A,B]$, then
+where $\{A,B\} = AB + BA$ is the anti-commutator.  If in addition, $A$ commutes with $[A,B]$, then 
 
 \begin{equation}
 [A^2, B] = 2A[A,B]
@@ -89,11 +110,11 @@ According to the above $\hat p(t) = U(t)^{-1}\hat p U(t)$ and $\hat x(t) = U(t)^
 To find explicit formulas for $\hat p(t)$ and $\hat x(t)$, we solve the equations of motion.  First,
 
 \begin{equation}
-\frac{d\hat x(t)}{dt} = \frac{i}{\hbar}[\hat H(t), \hat x`(t)]
-= \frac{i}{2m\hbar}[\hat p^2(t), \hat x(t)]
+\frac{d\hat x(t)}{dt} = \frac{i}{\hbar}[\hat H(t), \hat x`(t)] 
+= \frac{i}{2m\hbar}[\hat p^2(t), \hat x(t)] 
 \end{equation}
 
-But
+But 
 
 \begin{equation}
 [\hat p^2(t), \hat x(t)] = 2[\hat p(t), [\hat p(t), \hat x(t)]] = -2i\hbar \hat p(t),
@@ -102,7 +123,7 @@ But
 so that
 
 \begin{equation}
-\frac{d\hat x(t)}{dt}
+\frac{d\hat x(t)}{dt} 
 = -\frac{\hat p(t)}{m}
 \end{equation}
 
@@ -121,7 +142,7 @@ Combining these, we have
 
 Both observables are governed by the harmonic oscillator equation.
 The momemtum observable has the general form $\hat p(t) = A\cos \omega t + B\sin\omega t$, where $\hat p(0) = \hat p$ and $d\hat p/dt(0) = -m\omega^2 \hat x$.
-Therefore
+Therefore 
 
 \begin{equation}
 \hat p(t) = (\cos\omega t) \hat p -  (m\omega \sin \omega t) \hat x
@@ -147,7 +168,7 @@ Recall that the creation and annihilation operators for the harmonic oscillator 
 a^\dagger = \frac{m\omega x - i\hat p}{\sqrt{2m\omega\hbar}}
 \end{equation}
 
-and
+and 
 
 \begin{equation}
 \label{annihilationop2}
@@ -171,10 +192,10 @@ To evaluate the commutator, use the identity $[\hat a(t), \hat a^\dagger(t)] = 1
 
 \begin{align}
 [\hat a^\dagger(t) \hat a(t), a^\dagger(t)]
- &= \hat a^\dagger(t) \hat a(t) \hat a^\dagger(t) -
+ &= \hat a^\dagger(t) \hat a(t) \hat a^\dagger(t) - 
 \hat a^\dagger(t) \hat a^\dagger(t) \hat a(t) \\
 &= \hat a^\dagger(t) \hat a^\dagger(t)(t) \hat a
- + a -
+ + a - 
 \hat a^\dagger(t) \hat a^\dagger(t) \hat a(t) \\
 &= \hat a^\dagger(t)
 \end{align}
@@ -202,7 +223,7 @@ These differential equation give explicit solutions of the equations of motion:
 From general principles, we know that
 
 \begin{equation}
-\hat H(t) = \hbar \omega\left(\hat a^\dagger(t)  \hat a(t)
+\hat H(t) = \hbar \omega\left(\hat a^\dagger(t)  \hat a(t) 
 + \small{\frac{1}{2}} \right)
 \end{equation}
 
