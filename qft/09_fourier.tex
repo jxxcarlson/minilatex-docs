@@ -1,5 +1,25 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "531df50c-44c1-4413-a777-4b5542882aca",
+    "documentNumber": 41,
+    "author": "jxxcarlson",
+    "title": "Fourier Transform",
+    "path": "qft/09_fourier.tex",
+    "tags": [
+        "quantum",
+        "physics",
+        "fourier"
+    ],
+    "keyString": "fourier transform a=jxxcarlson qft/09_fourier.tex t=quantum t=physics t=fourier",
+    "timeCreated": 1595380196327,
+    "timeModified": 1598555245013,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555266008
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bra}[0]{\langle}
 \newcommand{\ket}[0]{\rangle}
@@ -26,7 +46,7 @@ The Fourier transform is a unitary operator on $L^2(\boR )$ with inverse
 (\caF^{-1} g)(x) =  \frac{1}{\sqrt{2\pi}} \int_{\infty}^\infty g(k) e^{-ikx} dk
 \end{equation}
 
-One often writes $\hat g$ for $\caF(g)$.
+One often writes $\hat g$ for $\caF(g)$. 
 
 The fact that $\caF$ is invertible allows us to write
 
@@ -34,7 +54,7 @@ The fact that $\caF$ is invertible allows us to write
 g(x) = (\caF^{-1} \caF g)(x) =  \frac{1}{\sqrt{2\pi}}  \int_{-\infty}^\infty \hat g(k)  e^{ikx} dk
 \end{equation}
 
-The fact that the Fourier transform is unitary is \term{Plancherel's theorem}.  Thus $g(x)$
+The fact that the Fourier transform is unitary is \term{Plancherel's theorem}.  Thus $g(x)$ 
 isa superposition of  functions $e^{ikx}$ which appear with weight $\hat g(k)$.  In Dirac's notation, we proceed formally to write this equation as
 
 \begin{equation}
@@ -50,7 +70,7 @@ g(x)  = \frac{1}{2\pi} \int_{-\infty}^\infty  | k \ket \bra k | g \ket dk
 Still proceeding formally, we write his as
 
 \begin{equation}
-{\bf 1} = \frac{1}{2\pi} \int_{-\infty}^\infty dk | k \ket \bra k |
+{\bf 1} = \frac{1}{2\pi} \int_{-\infty}^\infty dk | k \ket \bra k |  
 \end{equation}
 
 This is the resolution of the identity in the case of continuous spectrum.
@@ -81,7 +101,7 @@ These are functions which decay exponentially at infinity.  Consider next a rect
   \int_{-\infty}^\infty r_a(x-\xi)f(x) dx = \text{av}_{a, \xi}(g)
 \end{equation}
 
-where the average is the average of the function on an interval of width $a$ with center $\xi$.  The Fourier transform is given by
+where the average is the average of the function on an interval of width $a$ with center $\xi$.  The Fourier transform is given by 
 
 \begin{align}
 \frac{1}{a}\int_{-a/2}^{a/2} e^{-ikx} dx
@@ -105,7 +125,7 @@ Consider now the limit
 We ask: \emph{can we pass the limit under the integral sign, and if so, what is that limit?} The answer is yes, provided that we view convergence in the sense of convergence for linear functionals, the functional being
 
 \begin{equation}
-f \mapsto \int_{-\infty}^\infty r_a(x-\xi) f(x) dx
+f \mapsto \int_{-\infty}^\infty r_a(x-\xi) f(x) dx 
 \end{equation}
 
 Given that caveat, we write
@@ -125,13 +145,13 @@ It is characterized by its action on functions:
 
 
 We ask next: \emph{what is the Fourier transform of $\delta$?}
-A tentative answer is that it is the limit of the Fourier transforms of the rectangular pulses $r_a(x)$.  Therefore let us think about the limit of the functions $\text{sinc}(ak/2)$ as $a$ tends to zero.  The first node to the right of the origin occurs at $k = 2\pi/a$.  Thus the width of the principal lobe of the sinc function, which has height 1, increases without bound as $a$ tends to zero.  In other words,
+A tentative answer is that it is the limit of the Fourier transforms of the rectangular pulses $r_a(x)$.  Therefore let us think about the limit of the functions $\text{sinc}(ak/2)$ as $a$ tends to zero.  The first node to the right of the origin occurs at $k = 2\pi/a$.  Thus the width of the principal lobe of the sinc function, which has height 1, increases without bound as $a$ tends to zero.  In other words, 
 
 \begin{equation}
 \lim_{a\to 0} \text{sinc}(ka/2)  = 1
 \end{equation}
 
-We conclude that
+We conclude that 
 
 \begin{equation}
 \hat \delta = \frac{1}{\sqrt{2\pi}}
@@ -160,7 +180,7 @@ More generally, consider any polynomial $P(s)$.  The $P(d/dx)$ is a constant-coe
 \caF(P(d/dx)f)(k) = P(-ik)\caF(f)
 \end{equation}
 
-The fact the Fourier transform converts differentiation into multiplication means that differential equations can be solved by a combination of ordinary algebra and Fourier analysis.  Consider, for example, the first order equation
+The fact the Fourier transform converts differentiation into multiplication means that differential equations can be solved by a combination of ordinary algebra and Fourier analysis.  Consider, for example, the first order equation 
 
 \begin{equation}
 \label{ode1}
@@ -195,7 +215,7 @@ Thus we have
 u(x) = \int_{-\infty}^{\infty} G(x-x') f(x') dx'
 \end{equation}
 
-where
+where 
 
 \begin{equation}
 \label{green1}
@@ -223,7 +243,7 @@ There is more to say about the Green's function.  First, note what happens when 
 &= \int_{-\infty}^{\infty} \frac{d}{dx}  f(x-y)g(y)dy \\
 \end{align}
 
-so that
+so that 
 
 \begin{equation}
 (f*g)'(x)= f'*g(x)
@@ -235,7 +255,7 @@ This identity holds more generally for any differential operator with constant c
 L(f*g)(x)= (Lf)*g(x)
 \end{equation}
 
-Returning to our equation $Lu = f$, where $Lu  = u' -\lambda u$, we have $u = G*f$ as general solution.  Substitute back into the ODE to obtain $L(G*f) = f$.
+Returning to our equation $Lu = f$, where $Lu  = u' -\lambda u$, we have $u = G*f$ as general solution.  Substitute back into the ODE to obtain $L(G*f) = f$.  
 Apply the above identity to write this as $LG*f = f$.
 Here $f$ is abitrary (within reason) and so $LG$ reveals itself as the identity element for the operation of convolution.  The question is: \emph{is there such an object?}
 There is  a hint in equation  \eqref{diracdelta1}, which looks almost like a convolution.  Now the delta function is (among other things) the limit of a sequence of even functions, and therefore is itself even: $\delta(-x) = \delta(x)$.  Thus we may write \eqref{diracdelta1}as
@@ -256,8 +276,8 @@ If $(LG)* f = f$ for all $f$, then $LG = \delta$.  We conclude that \emph{the Gr
 
 \subsection{More about convolution}
 
-The operation of convolution satisfies many pleasant and useful properties.  One is that convolution of $g$ with $f$ tends to smooth out $g$ and increase its support.
-To illustrate this, let $f = r_a$ be  rectangular pulse of unit area supported on $[-a/2, a/2]$ considered above.  For any even function $f$, we have
+The operation of convolution satisfies many pleasant and useful properties.  One is that convolution of $g$ with $f$ tends to smooth out $g$ and increase its support.  
+To illustrate this, let $f = r_a$ be  rectangular pulse of unit area supported on $[-a/2, a/2]$ considered above.  For any even function $f$, we have 
 
 \begin{align}
 (f*g)(x) &= \int_{-\infty}^\infty  f(x - y) g(y) dy \\
@@ -288,8 +308,9 @@ where $ \overline{g_a}(x) $ is the average of $g(x)$ on $[x - a/2, x + a/2]$.  A
 
 \href{http://math.arizona.edu/~kglasner/math456/fouriertransform.pdf}{Fourier transform techniques} -- U. Arizona notes
 
-\href{https://www.math.utah.edu/~gustafso/s2013/3150/pdeNotes/fourierTransorm-PeterOlver2013.pdf}{Fourier transform} --
+\href{https://www.math.utah.edu/~gustafso/s2013/3150/pdeNotes/fourierTransorm-PeterOlver2013.pdf}{Fourier transform} -- 
 
 \href{http://www.physics.rutgers.edu/~steves/501/Lectures_Final/Lec06_Propagator.pdf}{Olver notes, Free particle propagator}
 
 \href{http://www.reed.edu/physics/faculty/wheeler/documents/Miscellaneous%20Math/Delta%20Functions/Simplified%20Dirac%20Delta.pdf}{Delta function} -- Reed college notes
+
