@@ -1,0 +1,300 @@
+beginMetadata:
+{
+    "id": "d31df25c-8196-4206-b087-f6e2301e14e0",
+    "documentNumber": 36,
+    "author": "jxxcarlson",
+    "title": "Wave Packets and Schroedinger's Equation",
+    "path": "qft/packets.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "wave packets and schroedinger's equation a=jxxcarlson qft/packets.tex t=quantum t=physics",
+    "timeCreated": 1595360133934,
+    "timeModified": 1595360133934,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\begin{mathmacro}
+\newcommand{\bop}[0]{\bf{p}}
+\newcommand{\boF}[0]{\bf{F}}
+\newcommand{\bor}[0]{\bf{r}}
+\newcommand{\bov}[0]{\bf{v}}
+\end{mathmacro}
+
+\setcounter{section}{3}
+
+
+
+\section{Wave Packets and Schroedinger's Equation}
+
+\innertableofcontents{3.}
+
+
+
+Last time we recalled the founding equation of classical mechanics
+
+\begin{equation}
+\frac{d \bf{p} }{dt} = \boF
+\end{equation}
+
+where $\bop = m\bov $ is the momentum and $\boF $  is the applied force.  Newton's formulation rests on the notion a trajectory $\bor(t) = (x,y,z)(t)$.  It implies exact knowledge at all times of the position and velocity, and so is not consistent with the uncertainty principle.
+
+We also recalled some salient events in the history of optics. Ray theories of light were invoked to describe the phenomena of reflection and refraction, and these were explained (by Hero and Fermat) as the result of principles of least distance or least time.  A quite different explanation, using waves rather than rays, was given by Huygens. 
+
+We will look more closely at wave phenomena here, then seek a mathematical language that is capable of handling both wave and particle phenomena.  Waves can interfere with one another.  Particles are localizable. We need a language that can do both.
+
+\subsection{Waves}
+
+Consider first a plane wave
+
+\begin{equation}
+\label{planewave}
+\psi(x,t) = Ae^{i(kx - \omega t)}
+\end{equation}
+
+Here $k$ is the \term{wave number}.  If we write $k\lambda= 2\pi$, then we see that $k$ waves of length $\lambda$ can fit in an interval of length $2\pi$.
+The quantity $\omega$ is the \term{angular frequency}, related to the actual frequency by $\omega = 2\pi$.  The quantity $\phi = kx - \omega t$  is the \term{phase (angle)}.   Thus the equation $x = (\omega/k)t + \phi/k$ describes the time evolution of points of given phase.  Therefore $dx/dt = \omega/k$ is the \term{phase velocity}: the speed $c = \omega/k$ with which the waves propagate. 
+
+Note that the plane wave \eqref{planewave}  travels to the right, i.e., in the direction of increasing $x$.  For a leftwards traveling wave, use $\exp(kx + \omega t)$.
+
+\subsection{Equations of motion}
+
+What equations of motion might plane waves satisfy?  To investigate this question, let us compute some derivatives.
+
+
+\begin{equation}
+\label{psix}
+\frac{\partial\psi}{\partial x} = ik\psi
+\end{equation}
+
+Thus $\psi$ is an eigenvector of the operator $\partial/\partial x$ with eigenvalue $ik\psi$.  Likewise,
+
+
+
+\begin{equation}
+\frac{\partial\psi}{\partial t} = -i\omega\psi
+\end{equation}
+
+Thus $\psi$ is an eigenvector of the operator $\partial/\partial x$ with eigenvalue $ik\psi$. One possible equation is therefore
+
+\begin{equation}
+\omega \frac{\partial\psi}{\partial x} = k \frac{\partial\psi}{\partial t} ,
+\end{equation}
+
+or better
+
+\begin{equation}
+\frac{\partial\psi}{\partial x} = \frac{1}{c} \frac{\partial\psi}{\partial t} 
+\end{equation}
+
+where $c = \omega/k$ as above.  Unfortunately, this so-called telegraph equation, only admits solutions that propagate in the direction of increasing $x$.  To rectify this, take second derivatives:
+
+\begin{equation}
+\frac{\partial^2 \psi}{\partial x^2} = - k^2 \psi
+\end{equation}
+
+and 
+
+\begin{equation}
+\frac{\partial^2 \psi}{\partial t^2} = - \omega^2 \psi
+\end{equation}
+
+Comparing, one finds that
+
+\begin{equation}
+\frac{\partial^2 \psi}{\partial x^2} = \frac{1}{c^2} \;\frac{\partial^2 \psi}{\partial t^2}
+\end{equation}
+
+By construction, plane waves are solutions of the wave equation, as are superpositions, of plane waves, e.g., the series
+
+\begin{equation}
+\psi(x,t) = \sum a_n e^{ik_n(x - ct)}
+\end{equation}
+
+or the Fourier integral
+
+\begin{equation}
+\psi(x,t) = \int_{-\infty}^\infty a(k)e^{ik_n(x - ct)}
+\end{equation}
+
+\image{http://psurl.s3.amazonaws.com/images/jc/dalembert-cf58.jpg}{d'Alembert's solution}{width: 250, float: right}
+One also has D'Alembert's solution.  Let $\phi(u)$ be an arbitrary smooth function, and let $\psi_{\pm}(x,t)  = \phi(x \pm ct)$.  The result is a solution to the wave equation like the one in the first figure.
+
+\subsubsection{Superposition in action}
+
+% Superposition in action
+
+\image{http://psurl.s3.amazonaws.com/images/jc/dalembert2-5287.jpg}{Superposition}{width: 250, float: right}
+Let us see what happens when add two solutions to the wave equation as in the second figure.  The wave on the left in Frame 1 is a mirror image of the wave on the right, but displaced to the left and traveling to the right.  As the two waves approach each other and  begin to overlap, they almost completely cancel each other out, disappearing from view for a short time.  An instant later, they pop back into view, now traveling away from each other.   Such is the strangeness of wave phenomena. 
+
+\subsection{A common wave-particle language}
+
+We now come to the big question. \italic{Is there a common language that captures both wave-like and particle-like behavior?}  Let's stipulate both superposition and localizability.  To this end, consider first plane waves.  They extend throughout space and are of constant amplitude:
+
+\begin{equation}
+|\psi(x,t)| = |Ae^{i(kx - \omega t)}| = |A| 
+\end{equation}
+
+A plane wave is as un-localized as possible.   On the other hand, if you accept de Broglie's relation $p = h/\lambda$, which we can also write as
+
+\begin{equation}
+p = \hbar k,
+\end{equation}
+
+then a plane wave has a completely definite momentum.
+
+As we have seen, complicated waves can be built up from simpler ones by superposition, as in the following Fourier integral:
+
+\begin{equation}
+\psi(x,t) = \int_{-\infty}^\infty a(k) e^{i(kx - \omega t)}dk
+\end{equation}
+
+where we assume for now that $\omega(k) = ck$.  This  direct proportionality corresponds to the fact that all terms in the Fourier integral have the same phase velocity.  The function $a(k)$ gives the amplitude with which plane waves of wave number $k$ enter in to th superposition.  The function $|a(k)|^2$ is called the \term{spectrum}.  Notice that if we set  $\phi(u) = \psi(u,0)$, then the above integral is d/Alembert's solution $\psi(x,t) = \phi(x - ct)$.  Notice also  that 
+
+\begin{equation}
+\check a(u) = \int_{-\infty}^\infty a(k) e^{iku} du
+\end{equation}
+
+is the inverse Fourier transform of $a(k)$, up to conventional constants.  The Fourier transform, also up to such constants, is
+
+\begin{equation}
+\hat f(k) = \int_{-\infty}^\infty f(u) e^{iku} du
+\end{equation}
+
+Plancherel's theorem says that the operators $f\mapsto \hat f$, $a \mapsto \check a$ are inverses of one another, with the same caveat as before.
+
+\subsection{The sinc packet}
+
+
+\image{http://psurl.s3.amazonaws.com/images/jc/square_pulse-d804.jpg}{Square pulse}{width: 250, float: right}
+A particularly nice superposition of plane waves is given by the \term{sinc packet}.  Let $a(k)$ be the square pulse of the figure, with support in the interval $[0,b]$.  Let us use this pulse for the spectrum of the wave packet
+
+\begin{equation}
+\phi(u) = \int_0^b e^{iku} dk
+\end{equation}
+
+Then
+
+\begin{equation}
+\phi(u) = \frac{1}{iu} e^{iku} \Big\vert_{k=0}^{k=b} = 
+\frac{1}{iu} \Big[  e^{ibu} - 1 \Big]
+\end{equation}
+
+With a little manipulation, this becomes
+
+\begin{equation}
+\phi(u) = be^{ibu/2}\text{sinc }\,bu/2,
+\end{equation}
+
+where 
+
+\begin{equation}
+\text{sinc}\,(u)= \frac{\sin u}{u}
+\end{equation}
+
+\image{http://psurl.s3.amazonaws.com/images/jc/sinc-194c.jpg}{Sinc packet}{width: 250, float: right}
+The sinc function is concentrated in the region between the first two nodes, that is, in the interval $[-\pi/2b, \pi/2b]$.  Notice that the momenta of the waves (or their wave numbers) range over the interval $[0,b]$.  The widths of these intervals, which we shall call $\Delta x$ and $\Delta k$, are reciprocals of one another:
+
+\begin{equation}
+\Delta x \Delta k =2 \pi
+\end{equation}
+
+This, in prototypical form, is Heisenberg's Uncertainty Principle.
+
+\subsection{Schroedinger's equation: the free particle}
+
+We have a good start on a language that can handle both wave and particle behaviors.  That is, we have a good start on the "kinematics" of theory.  What we need next are the dynamics, that is, the equations of motion.  Suppose that we can guess the correct equations of motion for plane waves.  Then, by the superposition principle, we have the equations of motion for arbitrary wave packets.  To find the equations, let us compute some derivatives of the plane wave $\psi(x,t) = \exp(i(kx - \omega t))$.  For the spatial derivative, we have
+
+\begin{equation}
+\frac{\partial\psi}{\partial x} = ik\psi
+\end{equation}
+
+Notice that $\psi$ is an eigenvector of the operator $\partial/\partial x$ with eigenvalue $ik$. Using the de Broglie relation, we have
+
+\begin{equation}
+\frac{\partial\psi}{\partial x} = \frac{ip}{\hbar}\,\psi
+\end{equation}
+
+For the time derivative, we have
+
+\begin{equation}
+\frac{\partial\psi}{\partial t} = -i\omega\psi
+\end{equation}
+
+Again, $\psi$ is an eigenvector. Using the de Planck-Einstein relation, we have
+
+\begin{equation}
+\label{spsix}
+\frac{\partial\psi}{\partial t} = -\frac{iE}{\hbar}\,\psi
+\end{equation}
+
+Now in classical mechanics, we have the relation
+
+\begin{equation}
+E = \frac{p^2}{2m}.
+\end{equation}
+
+This suggests that we consider the second derivative
+
+
+
+\begin{equation}
+\frac{\partial^2 \psi}{\partial x^2} = - \frac{p^2} { \hbar^2}
+\end{equation}
+
+Then
+
+\begin{equation}
+-\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2} = - \frac{p^2} { 2m} = E\psi
+\end{equation}
+
+Let us rewrite \eqref{spsix} as 
+
+\begin{equation}
+i\hbar \frac{\partial\psi}{\partial t} = E\psi
+\end{equation}
+
+Eliminating $E$ from the last two equations, we have
+
+\begin{equation}
+i\hbar \frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2}
+\end{equation}
+
+This is Schrödinger's equation for  a free particle of mass $m$. 
+
+\subsection{Dispersion relation and group velocity}
+
+Take the classical mechanics relation  $E = p^2/2m$ and rewrite $E$ and $p$ in terms of $\omega$ and $k$ using proportionality equations of Planck-Einstein and de Broglie. We obtain the relation  
+
+\begin{equation}
+\omega(k) = \hbar \frac{k^2}{2m}
+\end{equation}
+
+The dispersion relation tells us how the phase velocity  depends on wave number:
+
+\begin{equation}
+v_{phase}(k) = \frac{\omega}{k} = \frac{\hbar}{2m}\,k
+\end{equation}
+
+If a massive particle is described by a wave packet, then the plane waves that make up the packet have different phase velocities: the shorter wave length components travel faster.  Thus in principle, the wave can change shape as it evolves in time.  Moreover, it turns out that the speed at which the packet moves is not the same as the speed with which its individual components move.  Indeed, such an assertion does not even makes sense, since one would first have to answer the question, \emph{which component} of the packet has the same velocity of the packet.  
+
+We shall see presently that a wave packet moves at a "group velocity"
+
+\begin{equation}
+v_{group}  = \frac{d\omega}{dk}
+\end{equation}
+
+In the case of a massive particle governed by Schrödinger's equation,  we have
+
+\begin{equation}
+v_{group}  = \frac{\hbar k}{m} = \frac{p}{m} = v
+\end{equation}
+
+Thus the group velocity of the wave packet is the same as the classical velocity of the particle modeled by the wave function.  This is an encouraging confirmation that we are on the right track.
