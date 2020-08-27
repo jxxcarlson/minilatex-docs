@@ -1,5 +1,26 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "255aea55-5754-4c45-bf59-cd2df1029a04",
+    "documentNumber": 1,
+    "author": "jxxcarlson",
+    "title": "Anharmonic Oscillator",
+    "path": "qft/07_anharmonic.tex",
+    "tags": [
+        "quantum",
+        "physics",
+        "oscillator",
+        "harmonic"
+    ],
+    "keyString": "anharmonic oscillator a=jxxcarlson qft/07_anharmonic.tex t=quantum t=physics t=oscillator t=harmonic",
+    "timeCreated": 1595082122908,
+    "timeModified": 1598555055974,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555085973
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bra}[0]{\langle}
 \newcommand{\ket}[0]{\rangle}
@@ -14,7 +35,7 @@
 
 \innertableofcontents
 
-The classical anharmonic oscillator is one with a "non-linear spring". By this we mean that the standard force law $F = -kx$ has additional terms, e.g., $F = -kx - \ell x^3$.  In this case the corresponding potential is a quartic:
+The classical anharmonic oscillator is one with a "non-linear spring". By this we mean that the standard force law $F = -kx$ has additional terms, e.g., $F = -kx - \ell x^3$.  In this case the corresponding potential is a quartic: 
 
 \begin{equation}
 V(x) = (1/2)kx^2 + (\ell/4)x^4
@@ -36,11 +57,11 @@ The $\epsilon^0$ component of this equation is
 
 
 \begin{equation}
-H_0\psi_0 =
-E_0\psi_0
+H_0\psi_0 = 
+E_0\psi_0 
 \end{equation}
 
-Therefore $\psi_0$, the zeroth term in the perturbation expansion, is an eigenfunction of the unperturbed Hamiltonian.  That is, $\psi_0 = \psi^{(m)}$ up to  a constant.
+Therefore $\psi_0$, the zeroth term in the perturbation expansion, is an eigenfunction of the unperturbed Hamiltonian.  That is, $\psi_0 = \psi^{(m)}$ up to  a constant.  
 
 The $\epsilon^1$ component of the equation reads
 
@@ -94,27 +115,27 @@ The numbers are the Fourier coefficients of the expansion of $\psi$:
 
 \begin{equation}
 \label{perturbation-fourier-expansion}
-  \psi = \psi^{(n)}
-+ \epsilon \sum_{m \ne n} \frac{\langle \psi^{(n)} | V | \psi^{(m)} \rangle}{  E^{(n)} - E^{(m)}  }\psi^{(m)}
+  \psi = \psi^{(n)} 
++ \epsilon \sum_{m \ne n} \frac{\langle \psi^{(n)} | V | \psi^{(m)} \rangle}{  E^{(n)} - E^{(m)}  }\psi^{(m)} 
 \end{equation}
 
 \subsection{Quartic perturbation by Gaussian integrals}
 
 
-Let us consider a quartic perturbation of the harmonic oscillator, where
+Let us consider a quartic perturbation of the harmonic oscillator, where 
 
 \begin{equation}
 H_0 = \frac{1}{2m}(\hat p^2 + m^2 \omega^2 x^2) +  \lambda g x^4,
 \end{equation}
 
-where $\lambda$ is a small dimensionless parameter.  Now $p^2/2m$ is a kinetic energy term, so $[gx^4] = [E]$, where $E$ is an energy and $[\  ]$ means "units of". Solving, we have $[g] = [Ex^{-4}]$.  Let us try to cook up a "natural value" for $g$.  A natural energy is the zero point energy of the oscillator, $\omega\hbar/2$.  In addition, we need a natural length scale for $x$.  To this end, consider the ground state wave function, which is proportional to $e^{-m\omega x^2/2\hbar}$.  Solve for $m\omega x^2/2\hbar = 1$. One obtains $x_0^2 = 2\hbar/m\omega$. At disance $x = x_0$, the value of the wave function has decreased from its maximum at $x = 0$ by a factor of $1/e$. Thus a natural choice is
+where $\lambda$ is a small dimensionless parameter.  Now $p^2/2m$ is a kinetic energy term, so $[gx^4] = [E]$, where $E$ is an energy and $[\  ]$ means "units of". Solving, we have $[g] = [Ex^{-4}]$.  Let us try to cook up a "natural value" for $g$.  A natural energy is the zero point energy of the oscillator, $\omega\hbar/2$.  In addition, we need a natural length scale for $x$.  To this end, consider the ground state wave function, which is proportional to $e^{-m\omega x^2/2\hbar}$.  Solve for $m\omega x^2/2\hbar = 1$. One obtains $x_0^2 = 2\hbar/m\omega$. At disance $x = x_0$, the value of the wave function has decreased from its maximum at $x = 0$ by a factor of $1/e$. Thus a natural choice is 
 
 \begin{equation}
 g = \frac{\omega\hbar}{2}\left(\frac{2\hbar}{m\omega}\right)^{-2} = \frac{m^2 \omega^3}{8\hbar}
 \end{equation}
 
 
-Writing $H= H_0 + \lambda g x^4$, we find ourselves in the context of perturbation theory. Then the shift in the $n$-th energy level is given by
+Writing $H= H_0 + \lambda g x^4$, we find ourselves in the context of perturbation theory. Then the shift in the $n$-th energy level is given by 
 
 \begin{equation}
 \label{DeltaEn]}
@@ -132,10 +153,10 @@ The integral to be evaluated has the form
 I_2 = \int_{-\infty}^\infty x^2 e^{-\alpha x^2} dx
 \end{equation}
 
-To compute it, recall that
+To compute it, recall that 
 
 \begin{equation}
-\int_{-\infty}^\infty e^{-\alpha x^2} dx
+\int_{-\infty}^\infty e^{-\alpha x^2} dx 
 = \left( \frac{\pi}{\alpha} \right)^{1/2}
 \end{equation}
 
@@ -174,7 +195,7 @@ first order energy shift:
 
 \subsection{Quartic perturbation by operator calculus}
 
-The operator "multiplication by $x$" can also be written in terms of creation and annihilation operators.  Adding the expressions for these operators in the xref::225[last section], we find that
+The operator "multiplication by $x$" can also be written in terms of creation and annihilation operators.  Adding the expressions for these operators in the xref::225[last section], we find that 
 
 \begin{equation}
 x = \left[\frac{ \hbar }{  2m \omega} \right]^{1/2} (a + a^\dagger )
@@ -188,7 +209,7 @@ Substituting this into \eqref{DeltaE}, we find that
 &= \lambda \frac{1}{16}\frac{\omega \hbar}{2}\bra \psi_0 | ( a + a^\dagger )^4 | \psi_0 \ket
 \end{align}
 
-The operator $(a + a^\dagger)^4$ is a sum of sixteen noncommutative monomials which can be listed in lexicographical order as
+The operator $(a + a^\dagger)^4$ is a sum of sixteen noncommutative monomials which can be listed in lexicographical order as 
 
 \begin{align}
 & a^\dagger a^\dagger a^\dagger a^\dagger \\
@@ -198,7 +219,7 @@ The operator $(a + a^\dagger)^4$ is a sum of sixteen noncommutative monomials wh
 & etc
 \end{align}
 
-We say that a monomial is in \term{normal order} if all of the creation operators appear before the annihilation operators.  In the list above, the first, second, and fourth entries are in normal order.  Using the identity $[a,a^\dagger] = 1$, any monomial can be expressed as a sum of monomials in normal order.  One has, for instance, $aa^\dagger = a^\dagger a + 1$.  Now consider the monomials $M$ that might enter into the formula \eqref{aa4} with nonzero coefficient.  A bit of reflection tells us that such a monomial must consist of two creation operators and two annihilation operators.  This is because the expression $M\psi_0$ must be be a multiple of $\psi_0$.  That is, $M$ must raise the eigenvalue twice and also lower it twice. There are six such monomials. The monomial $M$ must also have a creation operator on the right, since otherwise $M\psi_0 = 0$.  For essentially the same reasons, it must have an annihilation operator on the left.  This constraint reduces the number of admissible monomials to two: $aa^\dagger aa^\dagger$ and
+We say that a monomial is in \term{normal order} if all of the creation operators appear before the annihilation operators.  In the list above, the first, second, and fourth entries are in normal order.  Using the identity $[a,a^\dagger] = 1$, any monomial can be expressed as a sum of monomials in normal order.  One has, for instance, $aa^\dagger = a^\dagger a + 1$.  Now consider the monomials $M$ that might enter into the formula \eqref{aa4} with nonzero coefficient.  A bit of reflection tells us that such a monomial must consist of two creation operators and two annihilation operators.  This is because the expression $M\psi_0$ must be be a multiple of $\psi_0$.  That is, $M$ must raise the eigenvalue twice and also lower it twice. There are six such monomials. The monomial $M$ must also have a creation operator on the right, since otherwise $M\psi_0 = 0$.  For essentially the same reasons, it must have an annihilation operator on the left.  This constraint reduces the number of admissible monomials to two: $aa^\dagger aa^\dagger$ and 
 $aaa^\dagger a^\dagger$.  Let us give the beginning of the computation for the first of these so that you see the pattern.  Then we will state the result. The computation is a kind of game in which we move $a$'s to the right using the relation $ a a^\dagger = a^\dagger a + 1$.  To win the game is to express the monomial as a sum of monomials in normal order.  The first move is $aaa^\dagger a^\dagger = aa^\dagger a a^\dagger + aa^\dagger$.  After a sequence of such moves, you will find that
 
 \begin{equation}
@@ -228,7 +249,7 @@ is 1 if  $M = 1$.  We can therefore read off the value of the perturbation term 
 
 This is in agreement with the value computed by doing a Gaussian integral.
 
-\begin{remark}
+\begin{remark} 
 Let $P(a,a^\dagger)$ be a polynomial in the creation and annihilation operators.  Let $m_M(P)$ be the multiplicity with which $M$ appears in the normal order expression for $P$. Then $\bra \psi_0 | P(a,a^\dagger) | \psi_0 \ket = m_1(P)$
 \end{remark}
 
