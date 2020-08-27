@@ -1,0 +1,333 @@
+beginMetadata:
+{
+    "id": "ec668cf1-1c2d-44a8-a075-89c1f716df5c",
+    "documentNumber": 45,
+    "author": "jxxcarlson",
+    "title": "Special Relativity",
+    "path": "qft/special_relativity.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "special relativity a=jxxcarlson qft/special_relativity.tex t=quantum t=physics",
+    "timeCreated": 1595380574318,
+    "timeModified": 1595380574318,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555540003
+}
+endMetadata
+
+\italic{\xlink{34}{Notes on Quantum Field Theory}}
+
+\setcounter{section}{13}
+
+
+\section{Special Relativity}
+
+\innertableofcontents
+
+\subsection{Invariance}
+
+The purpose of this note is to develop the material,
+both historical and theoretical, needed to understand
+the law of proportionality $E = pc$ between energy
+and momentum for any massless particle, and in particular
+for the photon.
+
+\subsection{Galilean transformations}
+
+Transformations which leave the laws of Nature
+invariant have been part of physics since the time
+of Galileo.  Later, especially in the work of Emmy Noether,
+it was realized that these transformations,
+or symmetries, play a much more fundamental role: they
+correspond to conservation laws.
+
+Let us begin with a 1-dimensional universe govefrned
+by  the laws of classical mechanics.  A \term{Galilean transformation}
+is one of the form
+
+\begin{align}
+  x' &= x - a - Vt \\
+  t' &= t
+\end{align}
+
+If we view these equations as defining a transformation
+from $(x,t)$-coordinates to $(x',t')$, coordinates, then the
+origin of the $x'$ system at time $t = t'$ corresponds to
+$x = a + Vt$ in the $(x,t)$ system.  In particular, an object
+at rest in the primed coordinates corresponds to an object
+moving with velocity $V$ in the unprimed system.  One
+could think of the unprimed system as the "Earth" system
+along a railroad track and the primed system as the 
+coordinate system of a train moving with velocity $V$.
+
+Now consider Newton's equation for a free particle,
+\[
+    m\frac{d^2x}{dt^2} = 0
+\]
+The inverse Galilean transformation is
+
+\begin{align}
+  x &= x' + a + Vt' \\
+  t &= t'
+\end{align}
+
+Substituting these relations into Newton's equation, we find
+that
+\[
+    m\frac{d^2x'}{dt'^2} = 0
+\]
+The operative laws of physics do not depend on the 
+coordinate system used, as long as these coordinate
+systems are related by a Galilean transformation.
+
+
+\subsection{Maxwell's equations}
+
+Let us now consider electrodynamics, the central characters
+of which are the electric field $E$ and the magnetic field
+$B$.  These fields are governed by Maxwell's equations:
+
+\begin{align}
+ \nabla\cdot E &= 4\pi\rho \phantom{\frac{2}{2}}\\
+ \nabla\cdot B &= 0 \phantom{\frac{2}{2}}\\
+ \nabla\times E &= - \frac{\partial B}{\partial t} \\
+ \nabla\times B &= \epsilon_0J -\mu_0\epsilon_0\frac{\partial E}{\partial t} 
+\end{align}
+
+Here $\rho$ is the charge density and $J$ is the current.  
+The constants are the \term{permitivity}
+$\epsilon_0$ and the 
+\term{permeability} $\mu_0$ of  free space:
+
+\begin{align}
+\epsilon_0 &= 8.85 \times 10^{-12} \; F/m \\
+\mu_0 &= 4\pi 10^{-7} \; N/A^2
+\end{align}
+
+These constants can be measured by clever experiments
+(see the references) based on fundamental 
+laws.  For the permittivity, the key fact
+ is Coulomb's law:
+
+\begin{equation}
+\label{coulombs_law}
+  F = \frac{1}{4\pi \epsilon_0} \frac{Q_1Q_2}{r^2}
+\end{equation}
+
+The permittivity is the constant that regulates the force
+between two charges $Q_i$ at a given distance $r$.   For the permeability,
+the key fact is Ampere's law,
+
+\begin{equation}
+\label{amperes_law}
+  F = \mu_0 \frac{I_1I_2L}{2\pi d^2}
+\end{equation}
+
+The permeability is the constant of proportionality that
+regulates the force between two parallel wires of length $L$
+separated by a distanced $d$ and carrying currents $I_k$.
+
+Consider
+Maxwell's equations in a charge-free, current-free region.  Then
+
+\begin{equation}
+\nabla\times\nabla\times E =  \frac{1}{c^2} \frac{\partial^2 E}{\partial t^2}
+\end{equation}
+
+where
+
+\begin{equation}
+c = (\epsilon_0\mu_0)^{-1/2} = 3\times 10^8\; m/sec
+\end{equation}
+
+The components of the left-hand side are expressions in the 
+second spatial derivatives of the electric field.  One finds
+that 
+
+\begin{equation}
+\Delta E =  \frac{1}{c^2} \frac{\partial^2 E}{\partial t^2}
+\end{equation}
+
+so that the components of the electric field satisfy the wave
+equation, e.g.,
+
+\begin{equation}
+ \frac{\partial^2 E_x}{\partial x^2}= \frac{1}{c^2} \frac{\partial^2 E_x}{\partial t^2}
+\end{equation}
+
+Solutions are given by
+
+\begin{equation}
+ E_x(x,t) = \phi(x - ct),
+\end{equation}
+
+where $c$ is the propagation velocity of the waves.  Remarkably,
+this constant, derived from the permeability and permitivity
+of free space, is also the speed of light, as measured by Roemer
+and his successors.
+
+\strong{References}
+
+\begin{enumerate}
+
+\item \href{http://www.santarosa.edu/~lwillia2/42/WaveEquationDerivation.pdf}{Derivation of wave equation from Maxwell's equations} 
+
+\item \href{http://www.amnh.org/education/resources/rfl/web/essaybooks/cosmic/p_roemer.html}{Roemer's measurement of the speed of light}
+
+\item \href{http://www.mathpages.com/home/kmath203/kmath203.htm}{Roemers  Hypothesis}
+
+\item \href{http://www.mathpages.com/rr/s3-03/3-03.htm}{De Mora Luminis} from \italic{Reflections on Relativity} by Kevin Brown
+
+\item \href{http://physics.wooster.edu/JrIS/Files/Moore_Web_article.pdf}{Measuring the magnetic permeability of free space} 
+
+\item \href{http://people.physics.tamu.edu/mcintyre/courses/phys208H/labs/Lab_1.pdf}{Measuring the permittivity of the vacuum: Coulomb's law, the Cavendish experiment }
+
+\item \href{http://mysite.du.edu/~jcalvert/phys/elechome.htm}{Electrostatics at home}
+
+\item  \href{http://ocw.mit.edu/courses/physics/8-02t-electricity-and-magnetism-spring-2005/labs/exp02.pdf}{Measuring the Coulomb force (MIT)}
+
+\end{enumerate}
+
+
+
+\subsection{Lorentz transformations}
+
+We now ask: \italic{under what transformations are Maxwell's equations invariant?}   Let us consider the wave equation
+
+\begin{equation}
+\frac{\partial^2 \psi}{\partial x^2}  
+= 
+\frac{1}{c^2} 
+\frac{\partial^2 \psi}{\partial t^2}
+\end{equation}
+
+From the relations defining the Galilean transformation,
+one has
+
+\begin{align}
+  \frac{\partial}{\partial x'} &=  \frac{\partial}{\partial x} \\
+  \frac{\partial}{\partial t'} &= V \frac{\partial}{\partial x}
+  + \frac{\partial}{\partial t} 
+\end{align}
+
+and so
+
+\begin{equation}
+\frac{\partial^2 \psi}{\partial x'^2}  
+-
+\frac{1}{c^2} 
+\frac{\partial^2 \psi}{\partial t'^2}
+= 
+\frac{\partial^2 \psi}{\partial x^2}  
+-
+\frac{1}{c^2} \left[
+V^2 \frac{\partial^2 \psi}{\partial x^2}  +  V \frac{\partial^2 \psi}{\partial x \partial t}  +  \frac{\partial^2 \psi}{\partial t^2}
+\right]
+\end{equation}
+
+The wave equation is \italic{not} invariant under Galilean 
+transformations.
+
+
+`TO BE CONTINUED:` *There is a big gap between the above and the below. In the section below, we derive the expression for the 4-momentum based on what the relativistic momentum is -- a rescaling by $\gamma$ of the classical momentum.*
+
+\subsection{Energy-momentum tensor}
+
+
+
+
+
+As we have seen, the relativistic momentum of a particle
+moving in a 1-D universe is 
+
+\begin{equation}
+  p = \gamma mv
+\end{equation}
+
+Let us imagine that $p$ is one component of a "relativistic
+momentum vector" $P = (a, p)$, where $a$ is to be determined.
+Apply a Lorentz transformation so that in the $t', x'$ system,  the momentum $p'$ is zero.  In other words, the primed system is a rest frame for the particle.  Then
+
+
+
+\begin{equation}
+\begin{pmatrix} a' \\ 0 \end{pmatrix}
+=
+\gamma \begin{pmatrix} 
+    1  & - \beta c  \\
+  -\beta/c & \phantom{-}1
+\end{pmatrix}
+\begin{pmatrix} a \\ p \end{pmatrix}
+\end{equation}
+
+and so
+
+\begin{equation}
+  a = \frac{cp}{\beta} = \frac{c\gamma mv}{v/c} = \gamma mc^2
+\end{equation}
+
+What is the nature of the quantity $\gamma mc^2$?
+Since $\gamma$ is dimensionless, it has the same units
+as does the kinetic energy $(1/2)mv^2$.  Thus it is an energy of
+some kind. To see better what this energy is, write
+
+\begin{equation}
+\gamma m c^2 
+=  mc^2(1 + \small{\frac{1}{2}} \frac{v^2 }{ c^2} + \cdots)
+= mc^2 + \small{\frac{1}{2}} mv^2 + \cdots
+\end{equation}
+
+Here $m$ is the rest mass -- the mass of the particle is a frame
+of reference in which the particle is stationay, e.g., at the origin.
+The first term is an energy due entirely to the energy inherent 
+in a particle's mass. The second term is the classical kinetic energy.
+We think of $\gamma mc^2$ as the \term{total energy} of a particle, 
+and we write $E = \gamma mv^2$.  Thus the 4-momentum 
+takes fhe form
+
+\begin{equation}
+  P = \begin{pmatrix}E \\ p \end{pmatrix}
+\end{equation}
+
+
+
+The norm-squared of $P$ is the Lorentz scalar
+
+\begin{equation}
+  ||P||^2 = \frac{E^2 }{ c^2} - p^2
+\end{equation}
+
+Evaluating it in a rest frame, we have
+
+\begin{equation}
+  ||P||^2 = - \frac{E^2 }{ c^2}  = m^2 c^2
+\end{equation}
+
+so that in general
+
+\begin{equation}
+  \frac{E^2 }{ c^2} - p^2  = m^2 c^2
+\end{equation}
+
+We can also write this as
+\begin{equation}
+\label{relativistic_energy_momentum_equation}
+E^2 = p^2 c^2 + m^2 c^4
+\end{equation}
+
+In the case of a massless particle such as the photon,
+the right-hand side vanishes, and so we have
+
+\strong{Energy-momentum proportionality}
+\begin{equation}
+\label{energy_momentum_proportionality}
+\text{For a massless particle,  }
+ E = pc.
+\end{equation}
+
+Notice that in this case, $P$ is a null-vector for the Minkowski form.
