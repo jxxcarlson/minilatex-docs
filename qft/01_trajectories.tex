@@ -1,3 +1,27 @@
+beginMetadata:
+{
+    "id": "1c9d37f2-d70c-4290-ba37-4ec82e8fb87a",
+    "documentNumber": 33,
+    "author": "jxxcarlson",
+    "title": "Trajectories and Uncertainty",
+    "path": "qft/01_trajectories.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "trajectories and uncertainty a=jxxcarlson qft/01_trajectories.tex t=quantum t=physics",
+    "timeCreated": 1595359637946,
+    "timeModified": 1598548993970,
+    "public": true,
+    "collaborators": [
+        "fred",
+        "mary"
+    ],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598549039969
+}
+endMetadata
 \italic{\xlink{34}{Notes on Quantum Field Theory}}
 
 \maintableofcontents
@@ -8,6 +32,7 @@
 
 \innertableofcontents
 
+%%%%%
 
 Quantum mechanics is the physical theory needed to understand atoms, electrons, and other tiny particles.  It answers questions such as theseima
 
@@ -21,7 +46,7 @@ Quantum mechanics is the physical theory needed to understand atoms, electrons, 
 
 To understand quantum mechanics, we need to understand why the classical theories of mechanics and optics cannot explain phenomena such as those listed above.  Despite the fact that they do not work in the quantum domain, they furnish a vocabulary of notions -- force, field, wave, conservation of momentum and energy, symmetry, and minimum principle -- from which one fashions a new language of wave packets and wave functions, operators and observables that form the core of quantum theory and quantum field theory.
 
-We begin with the notion of trajectory in mechanics, then consider optical theories, beginning with Hero of Alexandria (c. AD 30), who explained the law of reflection via a minimum principle for light rays.  Much later came the formulation of Snell's law of refraction and Fermat's explanation of it via a principle of minimum time for rays.  The optical theories motivated physics to find a way of understanding minimum principles.  In 1788, Lagrange formulated his powerful Principle of Least Action. It appears again and again in the history of physics, including its key role in Richard Feynman's path integral approach to quantum field theory.
+We begin with the notion of trajectory in mechanics, then consider optical theories, beginning with Hero of Alexandria (c. AD 30), who explained the law of reflection via a minimum principle for light rays.  Much later came the formulation of Snell's law of refraction and Fermat's explanation of it via a principle of minimum time for rays.  The optical theories motivated physics to find a way of understanding minimum principles.  In 1788, Lagrange formulated his powerful Principle of Least Action. It appears again and again in the history of physics, including its key role in Richard Feynman's path integral approach to quantum field theory. 
 
 There is a second branch of the optics storyline.  It begins with Huygens' wave theory of the propagation of light (1670) and gains momentum as it is able to explain not only reflection and refraction, but also phenomena such as interference and diffraction which the ray and corpuscular theories could not.
 
@@ -63,7 +88,7 @@ h = 6.6\times 10^{-34}\;\text{Joule-sec}
 
 It has the dimension of an \term{action} and is the fundamental constant of quantum physics.
 
-One sometimes says that $\Delta x$ is the standard deviation in measurements of position of (say) a particle, and that $\Delta p$ is the same for the momentum.  There is an element of truth to this if one thinks of a series of repeated experiments.  But the real truth lies deeper.  It has to do with the fuzziness mentioned above, and can only be properly stated in the language of wave packets.
+One sometimes says that $\Delta x$ is the standard deviation in measurements of position of (say) a particle, and that $\Delta p$ is the same for the momentum.  There is an element of truth to this if one thinks of a series of repeated experiments.  But the real truth lies deeper.  It has to do with the fuzziness mentioned above, and can only be properly stated in the language of wave packets.  
 
 You may say, OK, all that philosophy is fine, but let's rig thing so that $\Delta x$ is so small that we might as well consider out particle to be a classical point particle.  But if $\Delta x$ is very, very small, then the uncertainty principle ensures that $\Delta p$ will be very, very large, as will be $\Delta v = \Delta p/m$.  In our attempt to recover a classical trajectory, we make $\Delta p$ so large that the notion of a well defined velocity is meaningless. Thus, whatever the mathematical language of quantum mechanics is, it cannot be based on a function ${\bf r}(t)$ which gives position and therefore also velocity ${\bf r}(t)$ and momentum ${\bf p}(t)$.
 
@@ -80,7 +105,7 @@ We will confine an electron to a little box with the dimension of two Bohr radii
   K.E. = \frac{1}{2}\;mv^2 = \frac{p^2}{2m}
 \end{equation}
 
-Thus $\Delta E = (\Delta p)^2/m = 1.6\times 10^{-19}\; \text{Joules}$.
+Thus $\Delta E = (\Delta p)^2/m = 1.6\times 10^{-19}\; \text{Joules}$. 
 
 To understand the significance of the value just computed for $\Delta E$, we compare it to the energy of the rest mass of an electron:
 
@@ -100,7 +125,7 @@ What about the velocity?  If we make a straightforward classical computation, we
 
 \subsection{A smaller box}
 
-Let us continue the thought experiment. This time, we will confine the electron to a box about the size of a proton, so that $\Delta x = 10^{-15}\;\text{m}$.  Repeating the calculations, we find that $\Delta p = 2.5\times 10^{-20}\;\text{kg-m/s}$ and $\Delta E = 7\times 10^{-10}\;\text{Joules}$.  This time $\Delta E$ is much, much larger than the rest mass. It is so large that some of that energy could be converted into the formation of new particles!  This is the phenomenon of \term{pair production}.  It actually happens, indeed, is happening all around us.
+Let us continue the thought experiment. This time, we will confine the electron to a box about the size of a proton, so that $\Delta x = 10^{-15}\;\text{m}$.  Repeating the calculations, we find that $\Delta p = 2.5\times 10^{-20}\;\text{kg-m/s}$ and $\Delta E = 7\times 10^{-10}\;\text{Joules}$.  This time $\Delta E$ is much, much larger than the rest mass. It is so large that some of that energy could be converted into the formation of new particles!  This is the phenomenon of \term{pair production}.  It actually happens, indeed, is happening all around us.  
 
 \subsection{ Relativistic computations}
 
@@ -113,7 +138,7 @@ The large value for the uncertainty of the momentum implies a large value for th
 We will explain this later when when we review special relativity.  But for now, observe that the factors of $c$ and $c^2$ in the parentheses ensure that all terms on the right have the same dimension, namely energy.  Doing the computation, we find that
 
 \begin{equation}
-(\Delta E)^2 = 5.6\times 10^{-23} + 6.7\times 10^{-27}
+(\Delta E)^2 = 5.6\times 10^{-23} + 6.7\times 10^{-27} 
 \end{equation}
 
 Thus $\Delta E \sim 7.5\times 10^{-12}$.  This value is about 100 times less than the one previously calculated, but is still about 100 times greater than the rest mass.  There is still enough energy for pair production.
@@ -131,17 +156,17 @@ Theories of optics have an even longer history than do theories of mechanics.  T
 The Law of Reflection states that the angle of reflection is equal to the angle of incidence.  That is, $\angle AMB = \angle BMC$ as in the Figure.  The Law is due to to the mathematician Hero of Alexandria (c. 10 AD -- c. 70 AD).  In addition to stating the law, he gave an explanation of it in terms of a minimum principle: the path that a reflected ray AMC follows in passing from A to C is the one of shortest length.  Hero's argument is likely the first application of a minimum principle in physics, and thus the forerunner of the Lagrangian approach to mechanics.
 
 \image{http://psurl.s3.amazonaws.com/images/jc/hero_reflection_1-7f3c.jpg}{Hero's argument?}{float: right, width: 250}
-Here is a possible reconstruction of his argument.  Consider
-paths $ARB$ and $ASB$.  Assume that
-$\angle ARX \cong BRY$, that is, that that the angle
-of incidence is equal to the angle of reflection.  Construct a perpendicular to $XY$ passing through $B$. Let
-$F$ be the foot of the perpendicular on $XY$ and let $C$ be the point on the perpendicular opposite to $B$ such that
+Here is a possible reconstruction of his argument.  Consider 
+paths $ARB$ and $ASB$.  Assume that 
+$\angle ARX \cong BRY$, that is, that that the angle 
+of incidence is equal to the angle of reflection.  Construct a perpendicular to $XY$ passing through $B$. Let 
+$F$ be the foot of the perpendicular on $XY$ and let $C$ be the point on the perpendicular opposite to $B$ such that 
 $CF \cong BF$. Then $\triangle BRF \cong \triangle CRF$ and so $RB \cong RC$.  Therefore the paths $ARB$ and $ARC$ have the same length.  The same reasoning shows that the paths $ASB$  and $ASC$ are of equal length.
 
 For path $ARB$ one can make an additional assertion.
 Since $\triangle BRF \cong \triangle CRF$ , $\angle CRF \cong \angle BRF$.
-But then $\angle CRF = \angle ARX$ and so path $ARC$ is a
-straight line.  It follows that $ARCS = ACS$ is a triangle, and that $AS + SC > AC$, where $AC = AR + RB$.
+But then $\angle CRF = \angle ARX$ and so path $ARC$ is a 
+straight line.  It follows that $ARCS = ACS$ is a triangle, and that $AS + SC > AC$, where $AC = AR + RB$.  
 
 Q.E.D
 
@@ -160,10 +185,10 @@ When a light ray crossed the boundary between two media, it is bent with respect
 
 \image{http://psurl.s3.amazonaws.com/images/jc/snell2-5b65.jpg}{}{float: right, width: 150} Snell's Law can be rewritten as
 $\sin \theta_2 = (c_2/c_1) \sin \theta_1$.  Thus, if the speed of light is lower in the second medium than in the first, the sine of the second angle will be less than the sine of the first angle. And since the sine is a strictly increasing function for angles less than $90^\circ$, the second angle will be less than the first, as in the figure.
- The speed of light in air is about 300,000 km/sec in air, 224,000 km/sec in water, and 200,000 km/sec in glass.  Using
-$\sin\theta_2 = (c_2/c_1)\sin\theta_1$, we find that
-$\sin\theta_2 =( 0.66)\sin\theta_1$ for transmission
-from air to water and $\sin\theta_2 = (0.75)\sin\theta_1$
+ The speed of light in air is about 300,000 km/sec in air, 224,000 km/sec in water, and 200,000 km/sec in glass.  Using 
+$\sin\theta_2 = (c_2/c_1)\sin\theta_1$, we find that 
+$\sin\theta_2 =( 0.66)\sin\theta_1$ for transmission 
+from air to water and $\sin\theta_2 = (0.75)\sin\theta_1$ 
 for air to ordinary glass.
 
 
@@ -172,13 +197,13 @@ for air to ordinary glass.
 \image{http://psurl.s3.amazonaws.com/images/jc/fermat_principle-94da.jpg}{}{float: right, width: 250} Snell's Law is a consequence of Fermat's principle, which states that light rays travel in such a way that their time of transit from one point to another is minimized. To see that this is the case, the refracted ray ABC.  It originates at A, passes from one medium to another at B, and ends at C. We have
 
 \begin{equation}
-AB = \frac{h}{\cos \theta_1} \qquad BC= \frac{h}{\cos \theta_2}
+AB = \frac{h}{\cos \theta_1} \qquad BC= \frac{h}{\cos \theta_2} 
 \end{equation}
 
-so that the time of transit is
+so that the time of transit is 
 
 \begin{equation}
-t(\theta_1, \theta_2) = h\left(
+t(\theta_1, \theta_2) = h\left(  
 \frac{1}{c_1\cos\theta_1}  + \frac{1}{c_2\cos\theta_2} \right)
 \end{equation}
 
@@ -190,7 +215,7 @@ f(\theta_1, \theta_2)  = h(\tan\theta_1 + \tan\theta_2) = L
 
 
 
-The method of Lagrange multipliers tells us that the minimum is found by solving the equation $\nabla t = \lambda \nabla f$.  At a point which solves the Lagrange equation, the gradient of $t$ is normal to the surface and hence the rate of change in all directions is zero. One has
+The method of Lagrange multipliers tells us that the minimum is found by solving the equation $\nabla t = \lambda \nabla f$.  At a point which solves the Lagrange equation, the gradient of $t$ is normal to the surface and hence the rate of change in all directions is zero. One has 
 
 \begin{equation}
 \nabla t = h\left(\frac{\sin \theta_1}{c_1 \cos^2 \theta_1},
@@ -243,14 +268,14 @@ Q.E.D.
 \subsection{Quantum Mechanics}
 
 As we have seen, Snell's Law can be explained via Fermat's principle of least time.  There is also a quantum-mechanical explanation based on the the principle of conservation of momentum for photons.
-The starting point is the deBroglie relation, which relates particle momentum $p$ to wavelength $\lambda$:
+The starting point is the deBroglie relation, which relates particle momentum $p$ to wavelength $\lambda$: 
 
 \begin{equation}
 \label{debroglie}
 p = h/\lambda
 \end{equation}
 
-Here $h$ is Planck's constant, $6.6\times 10^{-34}$ Joule-sec.  For a wave propagating with speed $c$, one has $c = \lambda\nu$, where $\nu$ is the frequency.  Thus one can rewrite the de Broglie relation as
+Here $h$ is Planck's constant, $6.6\times 10^{-34}$ Joule-sec.  For a wave propagating with speed $c$, one has $c = \lambda\nu$, where $\nu$ is the frequency.  Thus one can rewrite the de Broglie relation as 
 
 \begin{equation}
 \label{debroglie2}
@@ -262,10 +287,10 @@ Here $h$ is Planck's constant, $6.6\times 10^{-34}$ Joule-sec.  For a wave propa
 
 In \eqref{debroglie}, $p$ stands for the magnitude of the momentum vector
 $\vec p$. Since momentum is a vector quantity, it is
-conserved componentwise.  Therefore, if $\vec p$ is the
-momentum in the first medium and $\vec p'$  is
+conserved componentwise.  Therefore, if $\vec p$ is the 
+momentum in the first medium and $\vec p'$  is 
 the momentum in the second, we have $p_x = p'_x$ for the
-$x$ component. By trigonometry, this reads $p\sin\theta_1 = p\sin\theta_2$  Using \eqref{debroglie2} and trigonometry, we
+$x$ component. By trigonometry, this reads $p\sin\theta_1 = p\sin\theta_2$  Using \eqref{debroglie2} and trigonometry, we 
 have
 
 \begin{equation}
@@ -274,7 +299,7 @@ have
 \frac{h \nu}{c_2}\;\sin \theta_2
 \end{equation}
 
-Simplifying, we
+Simplifying, we 
 
 \begin{equation}
 \frac{\sin \theta_1}{\sin \theta_2}
@@ -283,3 +308,4 @@ Simplifying, we
 \end{equation}
 
 This is Snell's Law.
+
