@@ -1,5 +1,24 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "3d27bff4-1365-468d-988c-b0e2ec04f750",
+    "documentNumber": 37,
+    "author": "jxxcarlson",
+    "title": "Bound States",
+    "path": "qft/04_bound_states.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "bound states a=jxxcarlson qft/04_bound_states.tex t=quantum t=physics",
+    "timeCreated": 1595360230936,
+    "timeModified": 1598554875977,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598554898980
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bop}[0]{\bf{p}}
 \newcommand{\boF}[0]{\bf{F}}
@@ -17,7 +36,7 @@
 So far we have consider the Schroedinger equation for a free particle:
 
 \begin{equation}
-  i\hbar \frac{\partial \psi}{\partial t}
+  i\hbar \frac{\partial \psi}{\partial t} 
     =
   -\frac{ \hbar^2 }{2m}\frac{ \partial^2 \psi}{ \partial x^2 }
 \end{equation}
@@ -38,15 +57,15 @@ The operator on the right-hand side of the Schroedinger equation can be written 
  = \frac{\hat p^2}{2m}
 \end{equation}
 
-Thus the right-hand side is the classical kinetic energy, $K.E. = p^2/2m$ with the momentum operator in place of the momentum.
+Thus the right-hand side is the classical kinetic energy, $K.E. = p^2/2m$ with the momentum operator in place of the momentum.  
 
 Or task is now to find the the general form of the right-hand side. To this end, we review the notions of potential energy and Hamiltonian function from classical mechanics.
 
 \subsection{Potential and Force}
 
-Consider a particle moving under the influence of a force $\boF = - \nabla V$ where  $V$ is a function -- the potential of the force.  It is well-defined up to addition of a constant..  For example, take the one-dimensional universe  represented by the $y$ axis, where $y = 0$ corresponds to ground level.  Consider a body of mass $m$ subject the for force associated with the potential $V(y) = mgy$.  The higher the body of above ground level, the greater the potential  The associated force, $F = -mg$, is directed downwards, as is the force of gravity in every day life.
+Consider a particle moving under the influence of a force $\boF = - \nabla V$ where  $V$ is a function -- the potential of the force.  It is well-defined up to addition of a constant..  For example, take the one-dimensional universe  represented by the $y$ axis, where $y = 0$ corresponds to ground level.  Consider a body of mass $m$ subject the for force associated with the potential $V(y) = mgy$.  The higher the body of above ground level, the greater the potential  The associated force, $F = -mg$, is directed downwards, as is the force of gravity in every day life. 
 
-What kind of quantity is the potential $V(y)$?  Since $F = -V'(y)$, and since $F$ is of dimension $\text{kg-m/sec}^2$, $V$ must be of dimension $\text{kg-m}^2/\text{sec}^2$.  That is, it has the same dimension as the kinetic energy $(1/2)mb^2$.  Consequently $V$
+What kind of quantity is the potential $V(y)$?  Since $F = -V'(y)$, and since $F$ is of dimension $\text{kg-m/sec}^2$, $V$ must be of dimension $\text{kg-m}^2/\text{sec}^2$.  That is, it has the same dimension as the kinetic energy $(1/2)mb^2$.  Consequently $V$ 
 \italic{is} an energy: the \term{potential energy}.
 It is the energy that a body has by virtue of its position.
 
@@ -56,7 +75,7 @@ Consider now the quantity
   E = \frac{1}{2}mv^2 + V
 \end{equation}
 
-In our example,
+In our example, 
 
 \begin{equation}
   E(t) = \frac{1}{2}m\left(\frac{dy}{dt}(t)\right)^2 + V(y(t))
@@ -71,15 +90,15 @@ Let us see how this quantity changes with $t$:
 We can rewrite this as
 
 \begin{equation}
-  \frac{dE}{dt}
-   = \frac{dy}{dt}\left(m\frac{ d^2y }{ dt^2 }+ V'(y(t))\right)
+  \frac{dE}{dt} 
+   = \frac{dy}{dt}\left(m\frac{ d^2y }{ dt^2 }+ V'(y(t))\right) 
     = \frac{dy}{dt}\left(ma - F\right)  = 0
 \end{equation}
 
-Thus the total energy $E$ is a \term{conserved quantity}: it does not vary
+Thus the total energy $E$ is a \term{conserved quantity}: it does not vary 
 as $t$ varies.
 
-Conservation of energy makes it easy to solve physics problems without solving differential equations.  Consider, for example, a 10 kg stone held at rest 10 meters above the ground.  The acceleration of gravity at sea level is about 9.8 $\text{m/sec}^2$.  Thus its potential energy is about 98 Joules.  If the stone is dropped, potential energy is transformed into kinetic energy -- energy of position is transformed into energy of motion. When the stone reaches the ground, the potential energy is zero and the kinetic energy is 98 Joules.  Thus the velocity is $\sqrt{9.8}$ = 3.13 m/sec.
+Conservation of energy makes it easy to solve physics problems without solving differential equations.  Consider, for example, a 10 kg stone held at rest 10 meters above the ground.  The acceleration of gravity at sea level is about 9.8 $\text{m/sec}^2$.  Thus its potential energy is about 98 Joules.  If the stone is dropped, potential energy is transformed into kinetic energy -- energy of position is transformed into energy of motion. When the stone reaches the ground, the potential energy is zero and the kinetic energy is 98 Joules.  Thus the velocity is $\sqrt{9.8}$ = 3.13 m/sec.  
 
 \subsection{Harmonic Oscillator}
 
@@ -89,7 +108,7 @@ As a further example of a system govenred by a potiential, consider the classica
 m\ddot x + kx = 0
 \end{equation}
 
-This equation has complex solutions
+This equation has complex solutions 
 
 \begin{equation}
   x(t) = e^{\pm i\omega t},
@@ -101,7 +120,7 @@ or real solutions
   x(t) = A\cos \omega t + B \sin \omega t,
 \end{equation}
 
-where
+where 
 
 \begin{equation}
 \omega = \sqrt{\frac{k}{m}}
@@ -119,7 +138,7 @@ If one takes $x(t) = A\sin \omega t$, one sees that as the phase $\omega t$ incr
 \begin{remark}
 We shall generally write the Hamiltonian as
 \[
-H  = \frac{p^2}{2m} + \frac{m\omega^2 }{2 } x^2
+H  = \frac{p^2}{2m} + \frac{m\omega^2 }{2 } x^2 
 \]
 \end{remark}
 
@@ -133,14 +152,14 @@ $(x,p)$.  For higher-dimensional universes, take $x$ and $p$ to be vectors.  Pha
 H(x, p) = \frac{p^2}{2m} + V(x)
 \end{equation}
 
-When $x$ and $p$ are vectors, $p^2$ is the square of the norm.  This is the \term{Hamiltonian function}.  Let us calculate its derivative \italic{along a trajectory} -- that is, along the path associated to the physical motion of a particle.  By the chain rule,
+When $x$ and $p$ are vectors, $p^2$ is the square of the norm.  This is the \term{Hamiltonian function}.  Let us calculate its derivative \italic{along a trajectory} -- that is, along the path associated to the physical motion of a particle.  By the chain rule, 
 
 \begin{equation}
 \frac{dH}{dt} = \frac{p}{m} \dot p + \nabla V\cdot \dot x
 \end{equation}
 
 Applying Newton's law and the definition $p = m\dot x $, we
-obtain
+obtain 
 
 \begin{equation}
 \frac{dH}{dt} = -\frac{p}{m} \nabla V + \nabla V\cdot \frac{p}{m} = 0
@@ -148,7 +167,7 @@ obtain
 
 Consequently \italic{physical trajectories lie on the level surface the Hamiltonian function}.  This is a restatement of the principle of conservation of energy.
 
-We can say still more.  The velocity vector field of a path in phase space is given by $(\dot x, \dot p)$.  If this is the path of a physical trajectory, then in addition      $(\dot x, \dot p) = (p/m, -\nabla V)$.  The right hand side is a function of the point $(x,p)$ and therefore defines a vector field $\mathcal{H}$.
+We can say still more.  The velocity vector field of a path in phase space is given by $(\dot x, \dot p)$.  If this is the path of a physical trajectory, then in addition      $(\dot x, \dot p) = (p/m, -\nabla V)$.  The right hand side is a function of the point $(x,p)$ and therefore defines a vector field $\mathcal{H}$.  
 
 NB: The physical trajectories are the flow lines of the Hamiltonian vector field $\mathcal{H}$.
 
@@ -159,7 +178,7 @@ We now return to quetion of the general form of Schrödinger's equation. For  a 
 For a particle subject to a potential, there should be an additional operator.  The simplest choice is the multiplication operator associated to the potential, that is, the operator that maps $\psi$ to $V\psi$.  Thus our candidate equation is
 
 \begin{equation}
-  i\hbar \frac{\partial \psi}{\partial t}
+  i\hbar \frac{\partial \psi}{\partial t} 
     =
   -\frac{ \hbar^2 }{2m}\frac{ \partial^2 \psi}{ \partial x^2 }
    + V\psi
@@ -168,19 +187,19 @@ For a particle subject to a potential, there should be an additional operator.  
 We can write this in more general form as
 
 \begin{equation}
-  i\hbar \frac{\partial \psi}{\partial t}
+  i\hbar \frac{\partial \psi}{\partial t} 
     =
   H\psi
 \end{equation}
 
-where $H$ is the \term{Hamiltonian operator}.
+where $H$ is the \term{Hamiltonian operator}.  
 
-In this example, we see the general rule for writing down the Hamiltonian of a quantum system corresponding to classical one.
+In this example, we see the general rule for writing down the Hamiltonian of a quantum system corresponding to classical one. 
 
 \begin{enumerate}
 \item Replace the components $p_k$ of the momentum $\bop$ by the the corresponding operators $-i\hbar \partial/\partial x_k$.
 
-\item View any function of the coordinates as a multiplication operator.
+\item View any function of the coordinates as a multiplication operator. 
 \end{enumerate}
 
 \subsection{The Rectangular Potential Well}
@@ -204,20 +223,20 @@ Dividing by $\phi(x)\upsilon(t)$, we obtain
 i\hbar \frac{\dot\upsilon(t)}{\upsilon(t)} = -\frac{\hbar^2}{2m}\frac{\phi''(x)}{\phi(x)} + V(x)
 \end{equation}
 
-Since the left and right-hand sides depend on different variables, they must both be constant, say equal to a constant $E$.  For the function of time, we have a first order differential equation
+Since the left and right-hand sides depend on different variables, they must both be constant, say equal to a constant $E$.  For the function of time, we have a first order differential equation 
 
 \begin{equation}
 i\hbar \dot\upsilon(t) = E\upsilon(t)
 \end{equation}
 
-with constant coefficients.  Its solutions are multiples of
+with constant coefficients.  Its solutions are multiples of 
 
 \begin{equation}
 \upsilon(t) = e^{-i(E/\hbar)t}
 \end{equation}
 
 For the the function of position, we have the second order
-differential equation
+differential equation 
 
 \begin{equation}
  -\frac{\hbar^2}{2m}\phi''(x)+ V(x)\phi(x) = E\phi(x).
@@ -245,17 +264,17 @@ k = \frac{\sqrt{2m(E-V_0)}}{\hbar}
 \image{http://psurl.s3.amazonaws.com/images/jc/bound-state-rectangular-well-ecca.jpg}{Even solution}{width: 250, float: right}
 Let us return the case of the rectangular well and consider the case in which $E < V_0$.   A solution to Schrödinger's equation consists of three parts: a sum of exponentials in the left-most and right-most regions, and a sum of sines and cosines in the middle region.  For physical reasons, the absolute value of the wave function cannot increase without bound as $x$ tends to $\pm \infty$.  Thus the pieces must consist of an increasing exponential on the left, a trigonometric function in the middle, and a decreasing exponential on the right.
 
-We can make a further simplification.  Let $\Pi$ be the \term{parity operator}. Thus $\Pi\phi(x) = \phi(-x)$.  A function is even if it
+We can make a further simplification.  Let $\Pi$ be the \term{parity operator}. Thus $\Pi\phi(x) = \phi(-x)$.  A function is even if it 
 is an eigenfunction of $\Pi$ with eigenvalue $+1$.  A function is odd if it is an eigenvector with eigenvalue $-1$.
-Let
+Let 
 
 \begin{equation}
    [ A,B ]  = AB - BA
 \end{equation}
 
-be the commutator of operators.  One finds that
-$ [\Pi, d/dx ] = 0$ and also that
-$ [ \Pi , V ]  = 0$.  From this it follows that
+be the commutator of operators.  One finds that 
+$ [\Pi, d/dx ] = 0$ and also that 
+$ [ \Pi , V ]  = 0$.  From this it follows that 
 $  [  \Pi, H ] = 0  $,
 so that the even and odd components of a solution are also solutions. Let us concentrate on an even solution.  The assumption of even parity means that the middle solution is a cosine.  Thus the solution we seek has the form
 
@@ -263,7 +282,7 @@ so that the even and odd components of a solution are also solutions. Let us con
 \phi(x) = [Ae^{k'x} , B\cos kx , A e^{-k'x}]
 \end{equation}
 
-where the listed expressions give the function on the interval $(-\infty, -L2]$, $[-L/2, L/2]$, and $[L/2, \infty]$, respectively, and
+where the listed expressions give the function on the interval $(-\infty, -L2]$, $[-L/2, L/2]$, and $[L/2, \infty]$, respectively, and 
 where
 
 \begin{equation}
@@ -279,7 +298,7 @@ The constants must be chosen so that function values and values of derivatives m
 The equations for matching solutions at the discontinuities of the potential at $x = -L/2$
 
 \begin{equation}
-Ae^{-k'L/2} = B\cos kL/2
+Ae^{-k'L/2} = B\cos kL/2 
 \end{equation}
 
 from which we obtain
@@ -297,7 +316,7 @@ Ak'e^{-k'L/2} = Bk\sin kL/2 ,
 from which we obtain
 
 \begin{equation}
-\frac{A}{B} = \frac{k\sin kL/2}{ k'e^{-k'L/2} }
+\frac{A}{B} = \frac{k\sin kL/2}{ k'e^{-k'L/2} } 
 \end{equation}
 
 Comparing the two expressions for $A/B$, we find that
@@ -352,7 +371,7 @@ Let us find the ground state energy of an electron trapped in a potential well o
 \begin{equation}
 E_n = 37.5n^2
 \end{equation}
-Now consider what happens when an electron in state $n$ emits a photon and falls to the ground state.  The energy of the photon will be the difference $E_n - E_1$, that is, $37.5(n^2 - 1)$ electron volts.
+Now consider what happens when an electron in state $n$ emits a photon and falls to the ground state.  The energy of the photon will be the difference $E_n - E_1$, that is, $37.5(n^2 - 1)$ electron volts.  
 For example, if the electron falls from state $n = 2$ to state $n = 1$, it
 will emit a photon of $112.5$ electron volts or   Let us find the wavelength of the light.
 According the Einstein-Planck relation, the frequency of the light corresponding to this photon is $E = h\nu$. The wavelength and frequency are related by $\nu\lambda = c$, where $c$ is the velocity of light.  Thus
@@ -366,3 +385,8 @@ According to this relation, an energy of 112.5 electron volts corresponds to a w
 
 
 See \href{http://hyperphysics.phy-astr.gsu.edu/hbase/quantum/pfbox.html}{hyperphysics}
+
+
+
+
+
