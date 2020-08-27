@@ -1,5 +1,24 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "a2004948-4c0c-4d10-ad14-abf4a516e614",
+    "documentNumber": 39,
+    "author": "jxxcarlson",
+    "title": "Harmonic Oscillator",
+    "path": "qft/06_harmonic.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "harmonic oscillator a=jxxcarlson qft/06_harmonic.tex t=quantum t=physics",
+    "timeCreated": 1595360392933,
+    "timeModified": 1598554981976,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555012978
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bra}[0]{\langle}
 \newcommand{\ket}[0](\rangle}
@@ -25,10 +44,10 @@ The system vibrates at an angular frequency given by
 \omega^2 = \frac{k}{m}
 \end{equation}
 
-The Hamiltonian function for this system is∂and
+The Hamiltonian function for this system is∂and 
 
 \begin{equation}
-  H = K.E. + P.E. = \frac{1}{2}m\dot x^2 + \frac{1}{2}kx^2
+  H = K.E. + P.E. = \frac{1}{2}m\dot x^2 + \frac{1}{2}kx^2 
 \end{equation}
 
 For the passage to quantum mechanics, we write it as
@@ -58,7 +77,7 @@ In more detail,
 
 
 This ordinary differential equation is of the form $L\phi = E\phi$
-where $L$ is a positive, self-adjoint operator.
+where $L$ is a positive, self-adjoint operator.  
 While the eigenvalues and eigenfunctions
 can be found explicitly by the method of power series,
 the algebraic method described below gives more insight into the nature and structure of the solutions.
@@ -94,14 +113,14 @@ so that
 \end{equation}
 
 
-This relation is a form of the Heisenberg Uncertainty Principle.
-Let us therefore re-calculate out trial factorization my
+This relation is a form of the Heisenberg Uncertainty Principle.  
+Let us therefore re-calculate out trial factorization my 
 multiplying out the expression $A^\dagger A/2m$:
 
 \begin{align}
-\frac{1}{2m}A^\dagger A
-  &= \frac{1}{2m}\left[ (m\omega x - i\hat p)(m\omega x + i \hat p)\right] \\
-  &= \frac{1}{2m}\left[ (m^2 \omega^2 x^2+ \hat p^2) - im\omega [\hat p, x] \right]
+\frac{1}{2m}A^\dagger A 
+  &= \frac{1}{2m}\left[ (m\omega x - i\hat p)(m\omega x + i \hat p)\right] \\ 
+  &= \frac{1}{2m}\left[ (m^2 \omega^2 x^2+ \hat p^2) - im\omega [\hat p, x] \right] 
 \end{align}
 
 Using the Uncertainty Principle \emph{qua} commutator relation, we have
@@ -125,7 +144,7 @@ Write
 A^\dagger = \sqrt{2m\omega\hbar}\, a^\dagger
 \end{equation}
 
-and define $a$ in the same way by rescaling  $A$.
+and define $a$ in the same way by rescaling  $A$. 
 These are the  \term{creation} and \term{annihilation} operators:
 
 \begin{equation}
@@ -133,7 +152,7 @@ These are the  \term{creation} and \term{annihilation} operators:
 a^\dagger = \frac{m\omega x - i\hat p}{\sqrt{2m\omega\hbar}}
 \end{equation}
 
-and
+and 
 
 \begin{equation}
 \label{annihilation_op}
@@ -183,7 +202,7 @@ Using
 \eqref{hfactorplus}, we find that
 
 \begin{align}
-\bra H\phi, \phi\ket
+\bra H\phi, \phi\ket 
   &= \hbar\omega(\bra a^\dagger a \phi, \phi \ket + (1/2)\bra \phi, \psi \ket) \\
   &= \hbar \omega(||a\phi||^2 + (1/2)||\phi||^2)
 \end{align}
@@ -194,7 +213,7 @@ Thus, if $H\phi = \lambda\phi$, then (recalling that $\lambda$ is real, we have
 \lambda \ge \hbar\omega/2
 \end{equation}
 
-Thus the closure of the set of eigenvalues is a a closed set of real numbers with least element $\lambda^* \ge \hbar\omega/2$.  Since $\lambda^*$ is, \emph{a priori} not an eigenvalue but rather a limit of eigenvalues, there is an eigenvalue $\lambda_0 \ge \lambda^*$ that satisfies $\lambda_0 < \hbar\omega$.
+Thus the closure of the set of eigenvalues is a a closed set of real numbers with least element $\lambda^* \ge \hbar\omega/2$.  Since $\lambda^*$ is, \emph{a priori} not an eigenvalue but rather a limit of eigenvalues, there is an eigenvalue $\lambda_0 \ge \lambda^*$ that satisfies $\lambda_0 < \hbar\omega$.  
 
 \begin{lemma}
 If $\phi_\lambda$ is an eigenvector of $H$ with eigenvalue $\lambda$, then either (i) $a\phi_\lambda = 0$ or (b) $a\phi_\lambda$ is an eigenvector with eigenvalue $\lambda - \hbar\omega$.
@@ -226,7 +245,7 @@ Thus, if $a\phi_\lambda$ is nonzero, it is an eigenvector with
 eigenvalue $\lambda - \hbar\omega$. *Q.E,D.*
 
 Now let $\phi_0$ be an eigenvector with eigenvalue $\lambda_0$
-as above.footnote:[We are abusing notation.  If $n$ is an integer, then it stands for a label -- a quantum number -- for the wave function $\phi_n$,
+as above.footnote:[We are abusing notation.  If $n$ is an integer, then it stands for a label -- a quantum number -- for the wave function $\phi_n$, 
 which then has eigenvalue $\lambda_n$.]  The vector $a\phi_0$ is either zero or an eigenvector
 of the Hamiltonian with eigenvalue $\lambda_0 - \hbar\omega$.
 But $\lambda_0 - \hbar\omega < \lambda^*$, and so
@@ -234,7 +253,7 @@ $a\phi_0$ must be zero.  We conclude the following:
 
 
 \begin{theorem}
-The greatest lower bound for the spectrum of the
+The greatest lower bound for the spectrum of the 
 harmonic oscillator is (i) an isolated point, (ii) an eigenvalue, (iii)
 has the value $\hbar\omega/2$.
 \end{theorem}
@@ -243,7 +262,7 @@ Only the last assertion requires proof.  Let $\phi_0$ be an eigenvector with lea
 
 
 \begin{equation}
-H\phi_0 = \hbar\omega(a^\dagger a + 1/2)\phi_0 = \frac{\hbar\omega}{2}\phi_0
+H\phi_0 = \hbar\omega(a^\dagger a + 1/2)\phi_0 = \frac{\hbar\omega}{2}\phi_0 
 \end{equation}
 
 
@@ -257,7 +276,7 @@ The vectors $\phi_n = (a^\dagger)^n \phi_0$ are eigenvectors with eigenvalue $E_
 
 
 \begin{theorem}
-If $\phi$ is an eigenfunction of $H$ with
+If $\phi$ is an eigenfunction of $H$ with 
 eigenvalue $E$, the $a^\dagger \phi$ is an eigenfunction
 with eigenvalue $E + \hbar\omega$.
 \end{theorem}
@@ -266,7 +285,7 @@ with eigenvalue $E + \hbar\omega$.
 \[
   Ha^\dagger \phi = a^\dagger H\phi + [H, a^\dagger ]\phi
 \]
-One shows that
+One shows that 
 \[
   [H,a^\dagger]  = \hbar\omega
 \]
@@ -321,7 +340,7 @@ Writing it out, we have
 In still better form,
 
 \begin{equation}
-  \frac{d\log\phi}{dx} = -\frac{m\omega}{\hbar} x
+  \frac{d\log\phi}{dx} = -\frac{m\omega}{\hbar} x 
 \end{equation}
 
 so that
@@ -339,7 +358,7 @@ a^\dagger = m\omega x - i\hat p = m\omega x - \hbar\frac{d}{dx}
 Thus,
 
 \begin{equation}
-\phi_1(x) = 2m\omega x e^{-m\omega x^2/2\hbar}
+\phi_1(x) = 2m\omega x e^{-m\omega x^2/2\hbar} 
 \end{equation}
 
 which we write as
@@ -354,7 +373,7 @@ where $H_1(x) = 2x$. In general, the $n$-th eigenfunction is a polynomial of deg
   \phi_n(x) = m\omega H_n(x)e^{ -m\omega  x^2/2  \hbar}
 \end{equation}
 
-and the polynomials are the \term{Hermite polynomials}.
+and the polynomials are the \term{Hermite polynomials}.  
 
 Proceeding in the same way, one can discover the wave functions $\phi_n$ for arbitrary $n$, that is, one can find the Hermite polynomals
 
@@ -373,7 +392,7 @@ Note that the set of functions $\set{\phi_n}$ is orthogonal, since its elements 
 \phi = \sum_n c_n \phi_n,
 \end{equation}
 
-where
+where 
 
 \begin{equation}
 c_n = \frac{\langle \phi, \phi_n \rangle}{||\phi_n||^2}
@@ -389,7 +408,7 @@ The images below are graphs of the probability densities $|\psi_n(x)|^2$ for var
 \image{http://psurl.s3.amazonaws.com/images/jc/harmonic_oscillator_wave_functions-f79d.png}{Harmonic Oscillator}{width: 400, align: center}
 
 
-There are other lessons to be learned from thinking about these graphs.  Consider for a moment the corresponding classical harmonic oscillator.
+There are other lessons to be learned from thinking about these graphs.  Consider for a moment the corresponding classical harmonic oscillator. 
 We have
 
 \begin{equation}
@@ -402,15 +421,15 @@ where $E$ is the total energy.  Since all quantities are real, the squares are n
 |x| \le \left(\frac{2E}{ n\omega^2 }\right)^{1/2}
 \end{equation}
 
-Larger values of $x$ are forbidden.  Now consider any one of the pure states $\psi_n(x)$. The wave function is a polynomial times a decaying exponential.  Let $x_L$ be the the maximum of the absolute values of the zeros of $\psi_n(x)$.  Then for $|x| > x_L$, the wave function, although it decays exponentially.  There is a small but nonzero probability that the the particle be found in this region, and so there is a nonzero probability that it be found in the classically forbidden region.
+Larger values of $x$ are forbidden.  Now consider any one of the pure states $\psi_n(x)$. The wave function is a polynomial times a decaying exponential.  Let $x_L$ be the the maximum of the absolute values of the zeros of $\psi_n(x)$.  Then for $|x| > x_L$, the wave function, although it decays exponentially.  There is a small but nonzero probability that the the particle be found in this region, and so there is a nonzero probability that it be found in the classically forbidden region.  
 
 In the figure above, the dotted line represents the probability that the corresponding classical harmonic oscillator is found at a given position.  notice that as the occupation number $n$ increases, the quantum probability approaches the classical one in a certain sense: the "upper profile" of the latter approaches the former inside the classically permitted region.  What is quite different about the quantum distribution is (a) the fact that it oscillates and (b) its "leakage" outside of the classical region.
 
 
 \subsection{Normalization}
 
-In computing Fourier expansions, it is convenient to have in hand normalized wavefunctions, that is,  eigefunctions $\psi_n$ for which $||\psi_n||^2 = 1$.
-We have in hand the eigenfunctions $\phi_n = (a^\dagger )^n\phi_0$.  We must find constants $A_n$ such that $|A_n|^2||\phi_n||^2 = 1$.  For the ground state, this is easy.  The integral in
+In computing Fourier expansions, it is convenient to have in hand normalized wavefunctions, that is,  eigefunctions $\psi_n$ for which $||\psi_n||^2 = 1$. 
+We have in hand the eigenfunctions $\phi_n = (a^\dagger )^n\phi_0$.  We must find constants $A_n$ such that $|A_n|^2||\phi_n||^2 = 1$.  For the ground state, this is easy.  The integral in 
 
 \begin{equation}
 |A_0|^2 \int_{-\infty}^\infty e^{-m\omega x^2/\hbar}dx = 1
@@ -464,7 +483,7 @@ Let us find the normalizations for the first few wave functions.  From \eqref{ra
 From ($\eqref{raise}$), with $n = 1$, we find that
 
 \begin{equation}
-\psi_2 = \frac{1}{\sqrt 2} a^\dagger \psi_1
+\psi_2 = \frac{1}{\sqrt 2} a^\dagger \psi_1 
  = \frac{1}{\sqrt 2} ( a^\dagger )^2 \psi_0
 \end{equation}
 
@@ -492,20 +511,20 @@ A diatomic molecule like $\text{H}_2$ or $\text{HCl}$ can be idealized as a mass
 \mu \ddot x = F,
 \end{equation}
 
-where
+where 
 
 \begin{equation}
 \mu = \frac{m_1m_2}{m_1 + m_2}
 \end{equation}
 
-is the \term{reduced mass}.  Quantum-mechanically such a system is governed by the Schroedinger equation
+is the \term{reduced mass}.  Quantum-mechanically such a system is governed by the Schroedinger equation 
 
 \begin{equation}
 \frac{\hat p^2 }{2\mu} + V(x)
 \end{equation}
 
 The potential $V(x)$ can be expanded in a Taylor series; by suitable coordinate changes, we may assume that it begins with a quadratic term.  If we neglect higher order terms, we are left with the harmonic oscillator:
-
+ 
 
 \begin{equation}
 \frac{\hat p^2 }{2\mu} + \frac{\mu\omega^2 }{2} x^2
@@ -581,3 +600,5 @@ NOTE: In the references on the chem::[HCl] spectrum, wavenumber, usually in inve
 
 
 \href{http://depa.fquim.unam.mx/amyd/archivero/DiatomicMolecule_1314.pdf}{Intro to Molecular spectroscopy}
+
+
