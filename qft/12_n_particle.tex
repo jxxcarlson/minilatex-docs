@@ -1,3 +1,24 @@
+beginMetadata:
+{
+    "id": "b61c9758-4019-4f30-8e1e-4df8bf8400be",
+    "documentNumber": 44,
+    "author": "jxxcarlson",
+    "title": "n-Particle Systems: Bosons and Fermions",
+    "path": "qft/12_n_particle.tex",
+    "tags": [
+        "quanutm",
+        "physics"
+    ],
+    "keyString": "n-particle systems: bosons and fermions a=jxxcarlson qft/12_n_particle.tex t=quanutm t=physics",
+    "timeCreated": 1595380465319,
+    "timeModified": 1595380465319,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555488003
+}
+endMetadata
 
 \italic{\xlink{34}{Notes on Quantum Field Theory}}
 
@@ -20,12 +41,12 @@
 
 \innertableofcontents
 
-So far our quantum mechanical universe has been a rather lonely one -- generally just a single particle.  We now take up the study of many-particle systems, in which we learn once again how powerful is the influence of symmetry. (Viva Emmy Noether!)
+So far our quantum mechanical universe has been a rather lonely one -- generally just a single particle.  We now take up the study of many-particle systems, in which we learn once again how powerful is the influence of symmetry. (Viva Emmy Noether!) 
 
 \subsection{Distinguishable particles}
 
 We begin with two particles, one of mass $m_1$, the other of mass $m_2$.  In classical mechanics each is located by a position vector $\bor_i$.  In quantum mechanics, the system is described by a wave function $\psi(\bor_1, \bor_2)$ governed by a Hamiltonian operator
-which of the general form
+which of the general form 
 
 \begin{equation}
 H = \frac{\hat p_1^2 }{2m_1}
@@ -40,20 +61,20 @@ Now let $\set{\psi_a({\bf r}_1 )}$ and $\set{\psi_b(({\bf r}_2 )}$ be complete o
 
 \subsection{Identical particles: bosons and fermions}
 
-The preceding discussion assumes that we can tell the particles apart, so that it makes sense to say that particle 1 is in state $a$ and particle 2 is in state $b$.  In this case, we view $a, b$ as an ordered pair.  But it may be that the particles are identical.  If this is the case, both $\psi_a(\bor_1)\psi_b(\bor_2)$ and $\psi_a(\bor_2)\psi_b(\bor_1)$ belong to state $a, b$.  We should view the label as a set, not an ordered pair.
+The preceding discussion assumes that we can tell the particles apart, so that it makes sense to say that particle 1 is in state $a$ and particle 2 is in state $b$.  In this case, we view $a, b$ as an ordered pair.  But it may be that the particles are identical.  If this is the case, both $\psi_a(\bor_1)\psi_b(\bor_2)$ and $\psi_a(\bor_2)\psi_b(\bor_1)$ belong to state $a, b$.  We should view the label as a set, not an ordered pair. 
 
 To better understand the space of states $a, b$, consider the \term{exchange operator} $P$. It acts on coordinates by $P(\bor_1, \bor_2) = (\bor_2, \bor_1)$ and on functions by $(Pf)(\bor_1, \bor_2) = f(\bor_2,\bor_1)$, that is, $Pf = f\circ P$.  Since $P^2 = 1$, the spectrum of $P$ is $\set{\pm1}$. Since $P$ commutes with the Hamiltonian, the space of states $a, b$, decomposes as an orthogonal direct sum of eigenspaces of $P$.  The eigenvectors are
 
 \begin{equation}
 \label{boson}
-\psi^+_{a,b}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_b(\bor_2) + \psi_a(\bor_2)\psi_b(\bor_1))
+\psi^+_{a,b}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_b(\bor_2) + \psi_a(\bor_2)\psi_b(\bor_1)) 
 \end{equation}
 
 for the $+1$ eigenspace and
 
 \begin{equation}
 \label{fermion}
-\psi^-_{a,b}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_b(\bor_2) - \psi_a(\bor_2)\psi_b(\bor_1))
+\psi^-_{a,b}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_b(\bor_2) - \psi_a(\bor_2)\psi_b(\bor_1)) 
 \end{equation}
 
 for the $-1$ eigenspace.  The first are called \term{bosons}, the second \term{fermions}.  Electron and protons are fermions. Photons and the Higgs particle are bosons.  A composite particle made of an odd number fermions is a fermion, while a composite made of an even number is a boson.
@@ -64,7 +85,7 @@ Bosons and fermions have markedly different properties.  Consider, for example, 
 \psi^-_{a,a}  = \frac{1}{\sqrt 2}(\psi_a(\bor_1)\psi_a(\bor_2) - \psi_a(\bor_2)\psi_a(\bor_1)) = 0
 \end{equation}
 
-It is zero, that is, it is not a state.  Said in other words,
+It is zero, that is, it is not a state.  Said in other words, 
 
 \begin{equation}
 \text{Two fermions cannot occupy the same state.}
@@ -79,7 +100,7 @@ Consider now a system of $N$ identical particles. and let $P_{ij}$ be the operat
 Wave functions that transform according to the trivial representation are wave functions of bosons.  To write out the wave function, let and element $\sigma$ of the permutation group act by permuting the coordinates.  If $f$ is a function of those coordinates, then $\sigma f = f\circ \sigma$.  The bosonic wave functions are then
 
 \begin{equation}
- \psi^+(\bor_1, \ldots , \bor_N)
+ \psi^+(\bor_1, \ldots , \bor_N) 
 =
 \frac{1}{N!} \sum_{\sigma \in S_N} \sigma \psi
 \end{equation}
@@ -87,7 +108,7 @@ Wave functions that transform according to the trivial representation are wave f
 Wave functions that transform according to the sign representation are wave functions of fermions.  They can be written as
 
 \begin{equation}
- \psi^-(\bor_1, \ldots , \bor_N)
+ \psi^-(\bor_1, \ldots , \bor_N) 
 =
 \frac{1}{N!} \sum_{\sigma \in S_N} \text{sign}(\sigma)\sigma \psi,
 \end{equation}
@@ -95,7 +116,7 @@ Wave functions that transform according to the sign representation are wave func
 where the sign of a permutation is $-1$ if it is a product of an an odd number of transpositions and $+1$ if it it is product of an even number.
 
 
-NOTE: The fact that there are only two one-dimensional representations of the symmetric group follows from the fact that its abelianization is the  a cyclic group of order two.  Every one-dimensional representation factors through the abelianization.  A representation $\phi: C_2 \longrightarrow \mathbb{C}^*$ of the cyclic group of order two is determined by the value  $u$ of $\phi(g)$, where $g$ generates $C_2$.  Since $g^2 = 1$,
+NOTE: The fact that there are only two one-dimensional representations of the symmetric group follows from the fact that its abelianization is the  a cyclic group of order two.  Every one-dimensional representation factors through the abelianization.  A representation $\phi: C_2 \longrightarrow \mathbb{C}^*$ of the cyclic group of order two is determined by the value  $u$ of $\phi(g)$, where $g$ generates $C_2$.  Since $g^2 = 1$, 
 $u^2 = 1$ as well.  Thus $u \in \set{ +1, -1}$.
 
 
@@ -104,7 +125,7 @@ $u^2 = 1$ as well.  Thus $u \in \set{ +1, -1}$.
 
 \subsection{Periodic Table}
 
-The Pauli Exclusion Principle has profound implications, among which is the construction of the periodic table of elements.   To review very quickly, the Hamiltonian for in spherical coordinates has the form
+The Pauli Exclusion Principle has profound implications, among which is the construction of the periodic table of elements.   To review very quickly, the Hamiltonian for in spherical coordinates has the form 
 
 \begin{equation}
 H = - \frac{ \hbar^2 }{2mr}\frac{ \partial^2 }{ \partial r^2 } r + \frac{{\bf L}^2}{ 2mr^ 2 }  + V(r)
@@ -113,7 +134,7 @@ H = - \frac{ \hbar^2 }{2mr}\frac{ \partial^2 }{ \partial r^2 } r + \frac{{\bf L}
 where $\boL$ is the angular momentum operator.  The square of the angular momentum operator $\boL^2$ commutes with the Hamiltonian and has eigenvalues $\ell(\ell + 1)$, where $\ell \ge 0$ is an integer.  The angular momentum operator $L_z$ commutes with both $\boL^2$ and the Hamiltonian, and has eigenvalues which are integers $m$ with $|m| < \ell$. Thus the states of Hamiltonian are $\psi){n\ell m}$, where the eigenvalues of the Hamiltonian are $E_n$. Setting $\psi_{n\ell m}  = Y^m_\ell(\theta, \phi)u(r)/r$, one obtains the radial equation
 
 \begin{equation}
-- \frac{\hbar^2}{2m} \frac{ d^2 u}{ dr^2 }
+- \frac{\hbar^2}{2m} \frac{ d^2 u}{ dr^2 }  
    + \frac{ \hbar^2 } { 2m } \frac{\ell(\ell + 1)}{ r^2 } u + V(r)u = E_n u
 \end{equation}
 
@@ -133,7 +154,7 @@ name | n | l | m | N | elements |
 Consider first a system of two distinguishable particles with wave function $\psi_a(x_1)\psi_b(x_2)$, where $\psi_a$ and $\psi_b$ are normalized.  That is, the first particle is in state $a$ and the second in state $b$.  We ask: what is the expected value of the square of their separation?  Now
 
 \begin{equation}
-\bra (x_1 - x_2)^2 \ket
+\bra (x_1 - x_2)^2 \ket 
   = \bra x_1^2 \ket
  + \bra x_2^2 \ket
  - 2 \bra x_1 \ket\bra x_1 \ket,
@@ -142,7 +163,7 @@ Consider first a system of two distinguishable particles with wave function $\ps
 so our problem is reduced to the computation of these simpler expectations.  For the first, we have
 
 \begin{align}
-\bra x_1^2 \ket
+\bra x_1^2 \ket 
 &= \int\kern-4pt\int x_1^2 |\psi_a(x_1)\psi_b(x_2)|^2 dx_1 dx_2 \\
 &= \int |\psi_a(x_1)|^2 dx_1 \int |\psi_b(x_2)|^2  dx_2\\
 &= \int x_1^2 |\psi_a(x_1)|^2 dx_1 \\
@@ -153,8 +174,8 @@ the expectation of $x^2$ for state $a$.  (We omit the limits of integration, whi
 Likewise, $\bra x_2^2 \ket = \bra x^2 \ket_b$.  For the cross term, we have
 
 \begin{align}
-\bra x_1x_2 \ket &= \int\kern-4pt\int x_1x_2 |\psi_a(x_1)|^2 |\psi_a(x_2)|^2 dx_1 dx_2 \\
-&= \bra x \ket_a \bra x \ket_b
+\bra x_1x_2 \ket &= \int\kern-4pt\int x_1x_2 |\psi_a(x_1)|^2 |\psi_a(x_2)|^2 dx_1 dx_2 \\ 
+&= \bra x \ket_a \bra x \ket_b 
 \end{align}
 
 Thus we have
@@ -170,13 +191,13 @@ Introducing the standard deviation $\sigma_a^2 = \bra x^2 \ket - (\bra x \ket)^2
 \end{equation}
 
 Let us call the quantity on the left $\bra (x_1 - x_2)^2 \ket_{dist}$.
-Nothing too exciting yet, bit we need this result as a standard of comparison for the behavior of the mean-squared separation for bosons and fermions.  To this end, we compute the analogous quantities
+Nothing too exciting yet, bit we need this result as a standard of comparison for the behavior of the mean-squared separation for bosons and fermions.  To this end, we compute the analogous quantities 
 $\bra (x_1 - x_2)^2 \ket_{Bose}$ and $\bra (x_1 - x_2)^2 \ket_{Fermi}$
 
 From equation  \eqref{boson} we find that bosons satisfy
 
 \begin{equation}
-|\psi(x_1,x_2)|^2 = \frac{1}{2}\left[   |\psi_a(x_1)|^2  |\psi_b(x_2)|^2
+|\psi(x_1,x_2)|^2 = \frac{1}{2}\left[   |\psi_a(x_1)|^2  |\psi_b(x_2)|^2 
 + |\psi_b(x_1)|^2  |\psi_a(x_2)|^2 \\
 + \psi_a(x_1)\psi_b(x_1)^*\psi_b(x_2)\psi_a(x_2)^* \\
 + \psi_b(x_1)\psi_a(x_1)^*\psi_a(x_2)\psi_b(x_2)^* \right]
@@ -209,7 +230,7 @@ must be nonzero.  In other words, there must be an overlap between the wave func
 
 \begin{thebibliography}
 
-\bibitem{Broida} \href{http://physics.ucsd.edu/students/courses/fall2009/physics130b/IdentParts.pdf}{Identical particles}
+\bibitem{Broida} \href{http://physics.ucsd.edu/students/courses/fall2009/physics130b/IdentParts.pdf}{Identical particles} 
 
 \bibitem{Hyperphysics} \href{http://hyperphysics.phy-astr.gsu.edu/hbase/chemical/eleorb.html}{Periodic table and quantum numbers}
 
@@ -217,3 +238,4 @@ must be nonzero.  In other words, there must be an overlap between the wave func
 
 
 \end{thebibliography}
+
