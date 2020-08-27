@@ -1,261 +1,300 @@
+beginMetadata:
+{
+    "id": "d31df25c-8196-4206-b087-f6e2301e14e0",
+    "documentNumber": 36,
+    "author": "jxxcarlson",
+    "title": "Wave Packets and Schroedinger's Equation",
+    "path": "qft/02_packets.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "wave packets and schroedinger's equation a=jxxcarlson qft/02_packets.tex t=quantum t=physics",
+    "timeCreated": 1595360133934,
+    "timeModified": 1595360133934,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598554487983
+}
+endMetadata
 \italic{\xlink{34}{Notes on Quantum Field Theory}}
 
-\setcounter{section}{2}
+\begin{mathmacro}
+\newcommand{\bop}[0]{\bf{p}}
+\newcommand{\boF}[0]{\bf{F}}
+\newcommand{\bor}[0]{\bf{r}}
+\newcommand{\bov}[0]{\bf{v}}
+\end{mathmacro}
 
-\section{Wave packets and the dispersion relation}
+\setcounter{section}{3}
+
+%%%%
+
+\section{Wave Packets and Schroedinger's Equation}
+
+\innertableofcontents{3.}
 
 
 
-\innertableofcontents{2.}
+Last time we recalled the founding equation of classical mechanics
 
-\image{https://psurl.s3.amazonaws.com/images/jc/sinc2-bcbf.png}{Wave packet}{width: 250, float: right}
-As we have seen with the sinc packet, wave packets can be localized in space.  A key feature of such packets is their \italic{group velocity} $v_g$.  This is the velocity which which the "body" of the wave packet travels.  Now a wave packet is synthesized by superposing many plane waves, so the natural question is how is the group velocity of the packet related to the phase velocities of its constituent plane waves.  We will answer this first in the simplest possible situation -- a superposition of two sine waves.  Next, we will reconsider the case of the sinc packet.  Finally, we will study a more realistic approximation to actual wave packets which gives insight into the manner and speed with which wave packets change shape as they evolve in time.  We end by applying this to an electron in a thought experiment in which it has been momentarily confned to an atom-size box -- about one Angstrom, or $10^{-10}\text{ meter}$.
+\begin{equation}
+\frac{d \bf{p} }{dt} = \boF
+\end{equation}
+
+where $\bop = m\bov $ is the momentum and $\boF $  is the applied force.  Newton's formulation rests on the notion a trajectory $\bor(t) = (x,y,z)(t)$.  It implies exact knowledge at all times of the position and velocity, and so is not consistent with the uncertainty principle.
+
+We also recalled some salient events in the history of optics. Ray theories of light were invoked to describe the phenomena of reflection and refraction, and these were explained (by Hero and Fermat) as the result of principles of least distance or least time.  A quite different explanation, using waves rather than rays, was given by Huygens. 
+
+We will look more closely at wave phenomena here, then seek a mathematical language that is capable of handling both wave and particle phenomena.  Waves can interfere with one another.  Particles are localizable. We need a language that can do both.
+
+\subsection{Waves}
+
+Consider first a plane wave
+
+\begin{equation}
+\label{planewave}
+\psi(x,t) = Ae^{i(kx - \omega t)}
+\end{equation}
+
+Here $k$ is the \term{wave number}.  If we write $k\lambda= 2\pi$, then we see that $k$ waves of length $\lambda$ can fit in an interval of length $2\pi$.
+The quantity $\omega$ is the \term{angular frequency}, related to the actual frequency by $\omega = 2\pi$.  The quantity $\phi = kx - \omega t$  is the \term{phase (angle)}.   Thus the equation $x = (\omega/k)t + \phi/k$ describes the time evolution of points of given phase.  Therefore $dx/dt = \omega/k$ is the \term{phase velocity}: the speed $c = \omega/k$ with which the waves propagate. 
+
+Note that the plane wave \eqref{planewave}  travels to the right, i.e., in the direction of increasing $x$.  For a leftwards traveling wave, use $\exp(kx + \omega t)$.
+
+\subsection{Equations of motion}
+
+What equations of motion might plane waves satisfy?  To investigate this question, let us compute some derivatives.
 
 
+\begin{equation}
+\label{psix}
+\frac{\partial\psi}{\partial x} = ik\psi
+\end{equation}
 
-\subsection{A two-frequency packet: beats}
-
-\image{https://psurl.s3.amazonaws.com/images/jc/beats-eca1.png}{Two-frequency beats}{width: 350, float: right}
-Consider a wave
-$\psi = \psi_1 + \psi_2$ which is the sum of two terms with slightly different frequencies.  If the waves are sound waves, then then what one will hear is a pitch that corresponding to the average of the two frequencies modulated in such a way that the volume goes up and down at a frequency corresponding to their difference.
-
-Let us analyze this phenomenon mathematically, setting
+Thus $\psi$ is an eigenvector of the operator $\partial/\partial x$ with eigenvalue $ik\psi$.  Likewise,
 
 
 
 \begin{equation}
-\psi_1(x,t)  = \cos((k - \Delta k/2)x - (\omega - \Delta \omega/2)t)
+\frac{\partial\psi}{\partial t} = -i\omega\psi
 \end{equation}
 
-and
+Thus $\psi$ is an eigenvector of the operator $\partial/\partial x$ with eigenvalue $ik\psi$. One possible equation is therefore
 
 \begin{equation}
-\psi_2(x,t)  = \cos((k + \Delta k/2)x - (\omega + \Delta \omega/2)t)
+\omega \frac{\partial\psi}{\partial x} = k \frac{\partial\psi}{\partial t} ,
 \end{equation}
 
-By the addition law for the sine, this can be rewritten as
+or better
 
 \begin{equation}
-\psi(x,t) = 2\sin(kx - \omega t)\sin((\Delta k)x - (\Delta \omega)t)
+\frac{\partial\psi}{\partial x} = \frac{1}{c} \frac{\partial\psi}{\partial t} 
 \end{equation}
 
-
-The resultant wave -- the sum -- consists of of a high-frequency sine wave oscillating according to the average of the component wave numbers and angular frequencies, modulated by a cosine factor that oscillates according to the difference of the wave numbers and the angular frequencies, respectively.  The velocity associated to the high frequency factor is
+where $c = \omega/k$ as above.  Unfortunately, this so-called telegraph equation, only admits solutions that propagate in the direction of increasing $x$.  To rectify this, take second derivatives:
 
 \begin{equation}
-v_{phase} = \frac{\omega}{k},
+\frac{\partial^2 \psi}{\partial x^2} = - k^2 \psi
 \end{equation}
 
-whereas the velocity associated with the low-frequency factor is
+and 
 
 \begin{equation}
-v_{group} = \frac{\Delta \omega}{\Delta k}
+\frac{\partial^2 \psi}{\partial t^2} = - \omega^2 \psi
 \end{equation}
 
-This is the simplest situation in which one observes the phenomenon of the group velocity.  Take a look at this \href{https://galileo.phys.virginia.edu/classes/109N/more_stuff/Applets/wavepacket/wavepacket.html}{animation}.
-
-
-\subsection{Step function approximation}
-
-$$
-\int_0^1 x^n dx = \frac{1}{n+1}
-$$
-
-
-We will now find an an approximation to
+Comparing, one finds that
 
 \begin{equation}
-\psi(x,t) = \int_{-\infty}^\infty a(k) e^{i(kx - \omega(k)t)} dk
+\frac{\partial^2 \psi}{\partial x^2} = \frac{1}{c^2} \;\frac{\partial^2 \psi}{\partial t^2}
 \end{equation}
 
-under the assumption that $a(k)$ is nearly constant over an interval from $k_0 -\Delta k/2$ to $k_0 + \Delta k/2$ and that outside of that interval it approaches zero at a rapid rate.  In that case the Fourier integral is approximated by
+By construction, plane waves are solutions of the wave equation, as are superpositions, of plane waves, e.g., the series
 
 \begin{equation}
- \int_{k_0 - \Delta k/2}^{k_0 + \Delta k/2}  a(k_0)e^{i((k_0 + (k - k_0)x - (\omega_0t + \omega_0'(k - k_0)t))}dk,
+\psi(x,t) = \sum a_n e^{ik_n(x - ct)}
 \end{equation}
 
-where $\omega_0 = \omega(k_0)$ and $\omega_0' = \omega'(k_0)$.
-This integral can be written as a product $F(x,t)S(x,t)$, where the first factor is "fast" and the second is "slow."  The fast factor is just
+or the Fourier integral
 
 \begin{equation}
-F(x,t) = a(k_0)e^{ i(k_0x - \omega(k_0)t) }
+\psi(x,t) = \int_{-\infty}^\infty a(k)e^{ik_n(x - ct)}
 \end{equation}
 
-It travels with velocity $v_{phase} = \omega(k_0)/k_0$.  Setting $k; = k- k_0$, the slow factor is
+\image{http://psurl.s3.amazonaws.com/images/jc/dalembert-cf58.jpg}{d'Alembert's solution}{width: 250, float: right}
+One also has D'Alembert's solution.  Let $\phi(u)$ be an arbitrary smooth function, and let $\psi_{\pm}(x,t)  = \phi(x \pm ct)$.  The result is a solution to the wave equation like the one in the first figure.
+
+\subsubsection{Superposition in action}
+
+% Superposition in action
+
+\image{http://psurl.s3.amazonaws.com/images/jc/dalembert2-5287.jpg}{Superposition}{width: 250, float: right}
+Let us see what happens when add two solutions to the wave equation as in the second figure.  The wave on the left in Frame 1 is a mirror image of the wave on the right, but displaced to the left and traveling to the right.  As the two waves approach each other and  begin to overlap, they almost completely cancel each other out, disappearing from view for a short time.  An instant later, they pop back into view, now traveling away from each other.   Such is the strangeness of wave phenomena. 
+
+\subsection{A common wave-particle language}
+
+We now come to the big question. \italic{Is there a common language that captures both wave-like and particle-like behavior?}  Let's stipulate both superposition and localizability.  To this end, consider first plane waves.  They extend throughout space and are of constant amplitude:
 
 \begin{equation}
-S(x,t) = \int_{-\Delta k/2}^{\Delta k/2} e^{ik'\left(x - \omega'(k_0)t\right)} dk',
+|\psi(x,t)| = |Ae^{i(kx - \omega t)}| = |A| 
 \end{equation}
 
-The slow factor be evaluated explicitly:
+A plane wave is as un-localized as possible.   On the other hand, if you accept de Broglie's relation $p = h/\lambda$, which we can also write as
 
 \begin{equation}
-I = \int_{-\Delta k/2}^{\Delta k/2} e^{ik'u} dk' = \frac{1}{iu} e^{ik'u}\Big\vert_{k' = - \Delta k/2}^{k' = +\Delta k/2}.
+p = \hbar k,
 \end{equation}
 
-We find that
+then a plane wave has a completely definite momentum.
+
+As we have seen, complicated waves can be built up from simpler ones by superposition, as in the following Fourier integral:
 
 \begin{equation}
-I = \Delta k\; \text{sinc}\frac{\Delta k}{2}u
+\psi(x,t) = \int_{-\infty}^\infty a(k) e^{i(kx - \omega t)}dk
 \end{equation}
 
-where $\text{sinc } x = (\sin x )/x$.  Thus the slow factor is
+where we assume for now that $\omega(k) = ck$.  This  direct proportionality corresponds to the fact that all terms in the Fourier integral have the same phase velocity.  The function $a(k)$ gives the amplitude with which plane waves of wave number $k$ enter in to th superposition.  The function $|a(k)|^2$ is called the \term{spectrum}.  Notice that if we set  $\phi(u) = \psi(u,0)$, then the above integral is d/Alembert's solution $\psi(x,t) = \phi(x - ct)$.  Notice also  that 
 
 \begin{equation}
-S(x,t) = \Delta k\, \text{sinc}(  (\Delta k/2)(x - \omega'(k_0)t)  )
+\check a(u) = \int_{-\infty}^\infty a(k) e^{iku} du
 \end{equation}
 
-
-Putting this all together, we have
+is the inverse Fourier transform of $a(k)$, up to conventional constants.  The Fourier transform, also up to such constants, is
 
 \begin{equation}
-\psi(x,t) \sim a(k_0)\Delta k_0\, e^{i(k_0x - \omega(k_0)t)}\text{sinc}(  (\Delta k/2)(x - \omega'(k_0)t)  )
+\hat f(k) = \int_{-\infty}^\infty f(u) e^{iku} du
 \end{equation}
 
-Thus the body of the sinc packet moves steadily to the right at velocity $v_{group} = \omega'(k_0)$
+Plancherel's theorem says that the operators $f\mapsto \hat f$, $a \mapsto \check a$ are inverses of one another, with the same caveat as before.
+
+\subsection{The sinc packet}
 
 
-\subsection{Gaussian approximation}
-
-The approximation used in the preceding section is good enough to capture and explain the group velocity of a wave packet.  However, it is not enough to explain how wave packets change shape as they evolve with time.  To understand this phenomenon, we begin with  an arbitrary packet
+\image{http://psurl.s3.amazonaws.com/images/jc/square_pulse-d804.jpg}{Square pulse}{width: 250, float: right}
+A particularly nice superposition of plane waves is given by the \term{sinc packet}.  Let $a(k)$ be the square pulse of the figure, with support in the interval $[0,b]$.  Let us use this pulse for the spectrum of the wave packet
 
 \begin{equation}
-\psi(x,t) = \int_{\infty}^\infty a(k) e^{i\phi(k)}\,dk,
+\phi(u) = \int_0^b e^{iku} dk
 \end{equation}
 
-where $\phi(k) = kx - \omega(k)t$.  We shall assume that the spectrum $a(k)$ is has a maximum at $k = k_0$ and decays fairly rapidly away from the maximum.  Thus we assume that the Gaussian function
+Then
 
 \begin{equation}
-a(k) = e^{ -(k-k_0)^2/ 4(\Delta k)^2}
+\phi(u) = \frac{1}{iu} e^{iku} \Big\vert_{k=0}^{k=b} = 
+\frac{1}{iu} \Big[  e^{ibu} - 1 \Big]
 \end{equation}
 
-is a good approximation.  To analyze the Fourier integral
+With a little manipulation, this becomes
 
 \begin{equation}
-\psi(x,t) = \int_{-\infty}^{\infty} e^{ -(k-k_0)^2/ 4(\Delta k)^2} e^{i(kx - \omega(k) t)},
+\phi(u) = be^{ibu/2}\text{sinc }\,bu/2,
 \end{equation}
 
-we expand $\omega(k)$ in a Taylor series up to order two, so that
+where 
 
 \begin{equation}
-\phi(k) = k_0x + (k - k_0)x - \omega_0t - \frac{d\omega}{dk}(k_0) t- \frac{1}{2}\frac{ d^2\omega }{ dk^2 }(k_0)( k - k_0)^2 t
+\text{sinc}\,(u)= \frac{\sin u}{u}
 \end{equation}
 
-Writing $\phi(k) = k_0x - \omega_0t + \phi_2(k,x,t)$, we find that
+\image{http://psurl.s3.amazonaws.com/images/jc/sinc-194c.jpg}{Sinc packet}{width: 250, float: right}
+The sinc function is concentrated in the region between the first two nodes, that is, in the interval $[-\pi/2b, \pi/2b]$.  Notice that the momenta of the waves (or their wave numbers) range over the interval $[0,b]$.  The widths of these intervals, which we shall call $\Delta x$ and $\Delta k$, are reciprocals of one another:
 
 \begin{equation}
-\psi(x,t) = e^{i(k_0x - \omega_0 t)} \int_{-\infty}^{\infty} e^{ -(k-k_0)^2/ 4(\Delta k)^2} e^{i\phi_2(k,x,t)}.
+\Delta x \Delta k =2 \pi
 \end{equation}
 
-Make the change of variables $k - k_0 = 2\Delta k u$, and write $\phi_2(k,x,t) = Q(u,x,t)$, where $Q$ is a quadratic polynomial in $u$ of the form $au + b$. One finds that
+This, in prototypical form, is Heisenberg's Uncertainty Principle.
+
+\subsection{Schroedinger's equation: the free particle}
+
+We have a good start on a language that can handle both wave and particle behaviors.  That is, we have a good start on the "kinematics" of theory.  What we need next are the dynamics, that is, the equations of motion.  Suppose that we can guess the correct equations of motion for plane waves.  Then, by the superposition principle, we have the equations of motion for arbitrary wave packets.  To find the equations, let us compute some derivatives of the plane wave $\psi(x,t) = \exp(i(kx - \omega t))$.  For the spatial derivative, we have
 
 \begin{equation}
-  a = -(1 + 2i\alpha t  (\Delta k)^2),
+\frac{\partial\psi}{\partial x} = ik\psi
 \end{equation}
 
-where
+Notice that $\psi$ is an eigenvector of the operator $\partial/\partial x$ with eigenvalue $ik$. Using the de Broglie relation, we have
 
 \begin{equation}
-\alpha = \frac{ d^2\omega }{ dk^2 }(k_0)
+\frac{\partial\psi}{\partial x} = \frac{ip}{\hbar}\,\psi
 \end{equation}
 
-One also finds that
+For the time derivative, we have
 
 \begin{equation}
-  b = 2i\Delta k(x - v_g t),
+\frac{\partial\psi}{\partial t} = -i\omega\psi
 \end{equation}
 
-where $v_g = d\omega/dk$ is the group velocity.  The integral is a standard one, of the form
+Again, $\psi$ is an eigenvector. Using the de Planck-Einstein relation, we have
 
 \begin{equation}
-\int_{-\infty}^\infty e^{- au^2 + bu} = \sqrt{\frac{\pi}{a}}\; e^{ b^2/4a }.
+\label{spsix}
+\frac{\partial\psi}{\partial t} = -\frac{iE}{\hbar}\,\psi
 \end{equation}
 
-Using this integral  formula and the reciprocity $\Delta x\Delta k = 1/2$, which we may take as a definition of $\Delta x$, we find, after some algebra, that
+Now in classical mechanics, we have the relation
 
 \begin{equation}
-\psi(x,t) \sim A e^{-B} \,e^{i(k_0 - \omega_0t)}
-,
+E = \frac{p^2}{2m}.
 \end{equation}
 
-where
+This suggests that we consider the second derivative
+
+
 
 \begin{equation}
-A = 2\Delta k \sqrt{\frac{\pi}{1 + 2i\alpha \Delta k^2 t}}
+\frac{\partial^2 \psi}{\partial x^2} = - \frac{p^2} { \hbar^2}
 \end{equation}
 
-and
+Then
 
 \begin{equation}
-B = \frac{( x-v_gt )^2 (1 - 2i\alpha \Delta k^2 t)}{4\sigma^2}
+-\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2} = - \frac{p^2} { 2m} = E\psi
 \end{equation}
 
-with
+Let us rewrite \eqref{spsix} as 
 
 \begin{equation}
-\sigma^2 = \Delta x^2 + \frac{\alpha^2 t^2}{4 \Delta x^2}
+i\hbar \frac{\partial\psi}{\partial t} = E\psi
 \end{equation}
 
-Look at the expression $B$. The first factor in the numerator controls the motion of motion of the packet and is what guides it to move with group velocity $v_g$.  The second factor is generally a small real term and a much larger imaginary one, and so only affects the phase.  The denominator controls the width of the packet, and as we can see, it increases with $t$ so long as $\alpha$, the second derivative of $\omega(k)$ at the center of the packet, is nonzero.
-
-\subsection{The electron}
-
-Let us apply what we have learned to an electron which has been confined to a box about the size of an atom, about $10^{-10}$ meters. That is, $\Delta x \sim 10^{-10}\text{ m}$.  The extent of its wave packet will double when
+Eliminating $E$ from the last two equations, we have
 
 \begin{equation}
-\frac{\alpha^2 t^2}{4 \Delta x^2} \sim \Delta x^2,
+i\hbar \frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m} \frac{\partial^2 \psi}{\partial x^2}
 \end{equation}
 
-that is, after a time
+This is Schrödinger's equation for  a free particle of mass $m$. 
+
+\subsection{Dispersion relation and group velocity}
+
+Take the classical mechanics relation  $E = p^2/2m$ and rewrite $E$ and $p$ in terms of $\omega$ and $k$ using proportionality equations of Planck-Einstein and de Broglie. We obtain the relation  
 
 \begin{equation}
-t_{double} \sim \frac{\Delta x^2}{\alpha}
+\omega(k) = \hbar \frac{k^2}{2m}
 \end{equation}
 
-The dispersion relation for a free particle is
+The dispersion relation tells us how the phase velocity  depends on wave number:
 
 \begin{equation}
-  \omega(k) = \hbar \frac{k^2}{2m},
+v_{phase}(k) = \frac{\omega}{k} = \frac{\hbar}{2m}\,k
 \end{equation}
 
-so that $\alpha = \hbar/m$.  Then
+If a massive particle is described by a wave packet, then the plane waves that make up the packet have different phase velocities: the shorter wave length components travel faster.  Thus in principle, the wave can change shape as it evolves in time.  Moreover, it turns out that the speed at which the packet moves is not the same as the speed with which its individual components move.  Indeed, such an assertion does not even makes sense, since one would first have to answer the question, \emph{which component} of the packet has the same velocity of the packet.  
+
+We shall see presently that a wave packet moves at a "group velocity"
 
 \begin{equation}
-t_{double} \sim \frac{m}{h}\, \Delta x^2 .
+v_{group}  = \frac{d\omega}{dk}
 \end{equation}
 
-In the case of our electron, we find that $t_{double} \sim 10^{-16}\,\text{sec}$.
+In the case of a massive particle governed by Schrödinger's equation,  we have
 
-\subsection{ Code}
+\begin{equation}
+v_{group}  = \frac{\hbar k}{m} = \frac{p}{m} = v
+\end{equation}
 
-
-
-\begin{verbatim}
-# jupyter/python
-
-matplotlib inline
-
-# code for sinc(x)
-import numpy as np
-import matplotlib.pyplot as plt
-
-# sinc function
-x = np.arange(-30, 30, 0.1);
-y = np.sin(x)/x
-plt.plot(x, y)
-
-# beats
-x = np.arange(-50, 250, 0.1);
-y = np.cos(0.5*x) + np.sin(0.55*x)
-plt.plot(x, y)
-\end{verbatim}
-
-
-
-\subsection{References}
-
-\href{https://www.eng.fsu.edu/~dommelen/quantum/style_a/packets.html}{Quantum Mechanics for Engineers: Wave Packets}
-
-\href{https://users.physics.harvard.edu/~schwartz/15cFiles/Lecture11-WavePackets.pdf}{Wave Packets, Harvard Physics}
-
-\href{https//ocw.mit.edu/courses/nuclear-engineering/22-02-introduction-to-applied-nuclear-physics-spring-2012/lecture-notes/MIT22_02S12_lec_ch6.pdf}{Time evolution in QM - MIT}
+Thus the group velocity of the wave packet is the same as the classical velocity of the particle modeled by the wave function.  This is an encouraging confirmation that we are on the right track.
