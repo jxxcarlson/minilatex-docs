@@ -1,5 +1,24 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "e389adce-bb4d-4fad-a8e7-1aa38836effc",
+    "documentNumber": 46,
+    "author": "jxxcarlson",
+    "title": "Principle of Least Action",
+    "path": "qft/14_least_action.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "principle of least action a=jxxcarlson qft/14_least_action.tex t=quantum t=physics",
+    "timeCreated": 1595380665314,
+    "timeModified": 1598555623097,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555648000
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bra}[0]{\langle}
 \newcommand{\ket}[0]{\rangle}
@@ -24,7 +43,7 @@
 \image{http://psurl.s3.amazonaws.com/images/jc/hero_reflection_1-7f3c.jpg}{}{width: 200, float: right}
 We have already seen two examples of how minimum principles yield a physical law.  The fact that the angle of reflection is equal to the angle of reflection was explained by xref::61[Hero of Alexandria] to be a consequence of the assertion that the path from source to mirror to eye minimizes distance.  Likewise, Snell's law of refraction was shown by Fermat to follow from a principle of xref::59[least time]. These to examples, one from around 50 AD, the other from the 17th century, lead one to ask: \emph{is there some general minimum principle form which all physical laws can be derived?}  The answer seems to be yes.  It is the Principle of Least Action.
 
-To state the Principle of Least Action properly, we imagine that our physical system is described by a \term{configuration space} $\caC$ with coordinates $q_i$.  These might be ordinary Cartesian coordinates, or some other kind of "generalized" coordinate.  If the system consists of a  single particle moving on the $x$-axis, the $q = x$ is a a good choice. The configuration space the real line: $\caC = \bbR$.  If the system consists of a particle moving in a plane under the gravitational pull of an immovable mass, then polar coordinates of the  particle centered on the large mass is a good choice.   In this case the generalized coordinates are $q_1 = r$ and $q_2 = \theta$, and the configuration space is  a cylinder: $\caC = S^1\times \bbR$.   In a system of $N$ masses, then the $3N$ quantities given by the $x$, $y$ and $z$ components of position vectors $\bor_i$ is a possible choice.
+To state the Principle of Least Action properly, we imagine that our physical system is described by a \term{configuration space} $\caC$ with coordinates $q_i$.  These might be ordinary Cartesian coordinates, or some other kind of "generalized" coordinate.  If the system consists of a  single particle moving on the $x$-axis, the $q = x$ is a a good choice. The configuration space the real line: $\caC = \bbR$.  If the system consists of a particle moving in a plane under the gravitational pull of an immovable mass, then polar coordinates of the  particle centered on the large mass is a good choice.   In this case the generalized coordinates are $q_1 = r$ and $q_2 = \theta$, and the configuration space is  a cylinder: $\caC = S^1\times \bbR$.   In a system of $N$ masses, then the $3N$ quantities given by the $x$, $y$ and $z$ components of position vectors $\bor_i$ is a possible choice. 
 
 Consider next a path $q: [a,b] \longrightarrow \caC$ in configuration space.  This path may be a possible motion of a single particle or a system of $N$ particles, or something else entirely.
 
@@ -39,7 +58,7 @@ We can combine these functions in various ways.  The sum $H = K + U$ is the \ter
 & = 0
 \end{align}
 
-On the other hand the Lagrangian varies with time, even for a physical motion as opposed to an arbitrary path.  In the case of the harmonic oscillator, which we suppose has total energy $E$, there are two noteworthy states.  The first is the state $x = 0$, in which $K = E$.  In this state the kinetic energy is at its maximum and the potential energy is at its minimum, that is, zero.  The second is the the state in which the potential energy is at its maximum, namely $E$, and the kinetic energy is zero.  The difference, $L = K - U$, varies with time between the extremes $K_{max}$ and $-U_{max}$; it represents a kind of instantaneous "cost of doing business" in the physical world.
+On the other hand the Lagrangian varies with time, even for a physical motion as opposed to an arbitrary path.  In the case of the harmonic oscillator, which we suppose has total energy $E$, there are two noteworthy states.  The first is the state $x = 0$, in which $K = E$.  In this state the kinetic energy is at its maximum and the potential energy is at its minimum, that is, zero.  The second is the the state in which the potential energy is at its maximum, namely $E$, and the kinetic energy is zero.  The difference, $L = K - U$, varies with time between the extremes $K_{max}$ and $-U_{max}$; it represents a kind of instantaneous "cost of doing business" in the physical world.  
 
 The \term{action} of a path in configuration space is the integral
 
@@ -47,7 +66,7 @@ The \term{action} of a path in configuration space is the integral
 S(q(t)) = \int_a^bL(q(t), \dot q(t)) dt,
 \end{equation}
 
-If $\caP_{ab}(\caC)$ denotes the space of paths from $a$ to $b$ in
+If $\caP_{ab}(\caC)$ denotes the space of paths from $a$ to $b$ in 
 the configuration space $\caC$, then we ahve the functional
 
 \begin{equation}
@@ -59,7 +78,7 @@ The Principle of Least Action states that motions of the system are distinguishe
 Let us find the change in the action,
 
 \begin{equation}
-\Delta S = S(q(t) + s\delta q(t)) - S(q(t))
+\Delta S = S(q(t) + s\delta q(t)) - S(q(t)) 
 \end{equation}
 
 To do, first compute the change in the Lagrangian:
@@ -78,7 +97,7 @@ Then
  + \frac{\partial L}{\partial \dot q_i}\dot \delta q_i(t)\right) dt + O(s^2)
 \end{equation}
 
-Integrating the second term by parts and using $\delta q_i(a) = \delta q_i(b) = 0$,
+Integrating the second term by parts and using $\delta q_i(a) = \delta q_i(b) = 0$, 
 we have
 
 \begin{equation}
@@ -100,7 +119,7 @@ These are the \term{Euler-Lagrange equations}.  Note that the quantity
 \begin{equation}
 \label{actionderivative|}
 \frac{\delta S}{\delta q} =  \int_a^b\left(\frac{\partial L}{\partial q_i}
- - \frac{d}{dt} \frac{\partial L}{\partial \dot q_i}\right)\delta q\, dt
+ - \frac{d}{dt} \frac{\partial L}{\partial \dot q_i}\right)\delta q\, dt 
 \end{equation}
 
 is the directional derivative of $S$ at the path $q(t)$ in the direction of the tangent vector $\delta q(t)$.  To go one step further, consider the quantity $\delta S$ with components
@@ -139,17 +158,17 @@ But the left-hand side is $a dv_i/dt$.  Thus, we have
 
 That is, a free particle moves with constant velocity. This fact, which also follows from Newton's laws of motion, comes as a consequence of (a) the Principle of Least Action, and (b) the translational and rotational symmetry of space.  In this context, constant velocity is the same as constant momentum.  More generally, one has
 
-\begin{theorem} \strong{(Noether)}
-Principle of Least Action + one-parameter group of symmetries = conservation law
+\begin{theorem} \strong{(Noether)} 
+Principle of Least Action + one-parameter group of symmetries = conservation law 
 \end{theorem}
 
 \subheading{Central force}
 As a sample application of Noether's theorem, imagine a one-particle system in the plane which is subject to a force $F$ directed towards the origin. Suppose further that the force is conservative, so that it is derived from a potential $U(r)$.  Thus $F = - \nabla U$.  Let $\bor = x\boi_x + y\boi_y$, where $\boi_x$ and $\boi_y$ are standard unit vectors in the $x$ and $y$ directions. Let $\boi_r$ and $\boi_\theta$ be unit vectors based at $\bor$ where the first points in the direction of $\bor$,  and the second is obtained from the first by rotation by 90 degrees.  The velocity $\dot \bor$ can be written as $\dot x \boi_x + \dot x \boi_y$ or in polar coordinates as $\dot r \boi_r + r\dot \theta \boi_\theta$.  Thus we can write the Lagrangian as
 
 \begin{equation}
-L
-  = \frac{1}{2} mr^2 \dot \theta^2
-  + \frac{1}{2}\, m\dot r^2
+L 
+  = \frac{1}{2} mr^2 \dot \theta^2 
+  + \frac{1}{2}\, m\dot r^2 
   - U(r)
 \end{equation}
 
@@ -196,16 +215,16 @@ Suppose that the trajectory of the particle is a circle, so that $r$ is constant
 r\dot \theta^2 = \frac{GM}{r^2}
 \end{equation}
 
-so that
+so that 
 
 \begin{equation}
 \dot \theta^2 = \frac{GM}{r^3}
 \end{equation}
 
-Now $\dot\theta$ is the angular velocity, so the period of the mass in its circular orbit is $T = 2\pi/\dot\theta$.  Consequently period is related to the radius of the orbit by
+Now $\dot\theta$ is the angular velocity, so the period of the mass in its circular orbit is $T = 2\pi/\dot\theta$.  Consequently period is related to the radius of the orbit by 
 
 \begin{equation}
-T^2 = \frac{4\pi^2}{GM}\, r^3
+T^2 = \frac{4\pi^2}{GM}\, r^3 
 \end{equation}
 
 This is a special case of Kepler's third law, which state that the square of the period is proportional to the cube of the semi-major axis of an elliptical orbit.
@@ -216,7 +235,7 @@ This is a special case of Kepler's third law, which state that the square of the
 
 \subsection{Chain of masses}
 
-Consider a system of $N+2$ objects of mass $m$ connected by springs with spring constant $k$, as in the figure below.  With the exception of the leftmost and rightmost masses, which are fixed, the masses are free to move in the direction of the $x$-axis.
+Consider a system of $N+2$ objects of mass $m$ connected by springs with spring constant $k$, as in the figure below.  With the exception of the leftmost and rightmost masses, which are fixed, the masses are free to move in the direction of the $x$-axis. 
 
 \image{http://psurl.s3.amazonaws.com/images/jc/optballs-a18c.png}{Chain of masses}{align: center}
 
@@ -261,7 +280,7 @@ W =
 \end{pmatrix}
 \end{equation}
 
-Since $W$ is symmetric, there is an orthogonal matrix $C$ such that $C^{-1}WC$ is diagonal with diagonal entries $-\omega_j^2$.  Let $q = Cq'$.  Then
+Since $W$ is symmetric, there is an orthogonal matrix $C$ such that $C^{-1}WC$ is diagonal with diagonal entries $-\omega_j^2$.  Let $q = Cq'$.  Then 
 
 \begin{equation}
 \frac{d^2 q'}{ dt^2} = C^{-1}WCq',
@@ -273,8 +292,8 @@ The resulting system, which has the form
 \frac{d^2 q'}{ dt^2} =W'q',
 \end{equation}
 
-where $W'$ is diagonal with diagonal entries $-\omega_j^2$.
-This is a system of uncoupled $ODE's$ which can be immediately solved by functions $q'_j(t) = e^{\pm i \omega_jt}$.  Note that if $w_j$ is the $j$-th eigenvalue of $W$, then the $j$-th frequency is $\omega_j =(-w_j)^{1/2}$.
+where $W'$ is diagonal with diagonal entries $-\omega_j^2$. 
+This is a system of uncoupled $ODE's$ which can be immediately solved by functions $q'_j(t) = e^{\pm i \omega_jt}$.  Note that if $w_j$ is the $j$-th eigenvalue of $W$, then the $j$-th frequency is $\omega_j =(-w_j)^{1/2}$. 
 The functions $q_j'(t)$ give the \term{normal modes} of the system in the $q'$ coordinate system.  Solutions of \eqref{discretestringeqmo} are obtained by expressing the normal modes in the $q$-coordinate system.
 
 Let us solve for the normal modes ind a different way, using the results of the foregoing discussion as a hint for the general form of a normal mode of \eqref{discretestringodes}:
@@ -322,7 +341,7 @@ where $n$ ranges over the integers in $[1,N]$.  Thus $\Omega$  ranges over an in
 
 \subsection{Relativistic Lagrangian}
 
-A relativistic Lagrangian must be  a Lorentz scalar, that is, a function invariant under Lorentz transformations.  The basic Lorentz scalar is $-c^2 t^2 +x^2 + y^2 + z^2$.  Define the infinitesimal element of arc length in Minkowsky space  by $ds^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2$.  It is also a Lorentz scalar. If $t \mapsto (t,x(t), y(t), z(t))$ is a path in Minkowski space, then $ds^2 = (c^2 - v^2)dt^2$ where
+A relativistic Lagrangian must be  a Lorentz scalar, that is, a function invariant under Lorentz transformations.  The basic Lorentz scalar is $-c^2 t^2 +x^2 + y^2 + z^2$.  Define the infinitesimal element of arc length in Minkowsky space  by $ds^2 = c^2 dt^2 - dx^2 - dy^2 - dz^2$.  It is also a Lorentz scalar. If $t \mapsto (t,x(t), y(t), z(t))$ is a path in Minkowski space, then $ds^2 = (c^2 - v^2)dt^2$ where 
 $v^2 = (dx/dt)^2 + (dy/dt)^2 + (dz/dt)^2$. Thus $ds^2$ is a positive multiple of $dt^2$ for particles traveling at less than the velocity of light.  In that case, we can take the square root and define the elapsed proper time interval along a path $\alpha(t)$ in Minkowski space as
 
 \begin{equation}
@@ -330,7 +349,7 @@ $v^2 = (dx/dt)^2 + (dy/dt)^2 + (dz/dt)^2$. Thus $ds^2$ is a positive multiple of
   \tau = \int_\alpha ds
 \end{equation}
 
-Proper time is time as measured by a clock which travels with the observer.
+Proper time is time as measured by a clock which travels with the observer.  
 
 The proper time itself is unsuitable as an action because it has the wrong dimension, namely $[x]$, where the brackets denotes "units of". Actions have dimension $[mv^2][t] = [mx^2 / t^2][t] = [mx^2/t]$.  Consider therefore the quantity
 
@@ -338,7 +357,7 @@ The proper time itself is unsuitable as an action because it has the wrong dimen
 S = kmc \int_\alpha ds
 \end{equation}
 
-where $m$ is a mass, and $k$ is a constant to be determined.  Write the infinitesimal length element as
+where $m$ is a mass, and $k$ is a constant to be determined.  Write the infinitesimal length element as 
 
 \begin{equation}
 ds = \sqrt{c^2 dt^2 - dx^2 - dy^2 - dz^2} = c\sqrt{1 - \frac{ v^2}{ c^2}}\,dit
@@ -377,7 +396,7 @@ The relativistic Lagrangian of a free particle at velocities much less than the 
 S = -mc\int_\alpha ds
 \end{equation}
 
-
+ 
 
 
 
@@ -390,22 +409,22 @@ Let us find the momentum:
 p = \frac{\partial L}{\partial v} = \frac{mv}{\sqrt{1 - \frac{ v^2}{ c^2}}}
 \end{equation}
 
-For a more compact notation, set
+For a more compact notation, set 
 
 \begin{equation}
 \gamma = \frac{1}{\sqrt{1 - v^2 /c^2}}
 \end{equation}
 
-and rewrite the momentum as
+and rewrite the momentum as 
 
 \begin{equation}
  p = \gamma mv
 \end{equation}
 
-and the Lagrangian as
+and the Lagrangian as 
 
 \begin{equation}
-L = - \frac{mc^2}{\gamma}
+L = - \frac{mc^2}{\gamma} 
 \end{equation}
 
 
@@ -418,7 +437,7 @@ H = p\cdot v - L = \gamma mv^2 +   \frac{mc^2 }{\gamma}
 Simplifying and putting $E$ in place of $H$, we find
 
 \begin{equation}
-E = \gamma m c^2
+E = \gamma m c^2 
 \end{equation}
 
 The energy is the rest mass energy scaled by the reciprocal of $\gamma$ . For velocities that are small compared to the speed of light, we have the first order Taylor approximation
@@ -448,3 +467,7 @@ In this approximation, the total energy is the rest mass energy plus the classic
 
 
 \end{thebibliography}
+
+
+
+
