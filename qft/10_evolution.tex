@@ -1,5 +1,21 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "43cd7c0f-f93c-4ed4-af03-d93c4b7321cd",
+    "documentNumber": 42,
+    "author": "jxxcarlson",
+    "title": "Evolution and Propagation",
+    "path": "qft/10_evolution.tex",
+    "tags": [],
+    "keyString": "evolution and propagation a=jxxcarlson qft/10_evolution.tex ",
+    "timeCreated": 1595380302324,
+    "timeModified": 1598555315009,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555341007
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bra}[0]{\langle}
 \newcommand{\ket}[0]{\rangle}
@@ -27,7 +43,7 @@ Now consider bases of orthogonal normalized states $\set{\psi_k(t_1)}$ and $\set
 U(t_2, t_0) = U(t_2, t_1)U(t_1, t_0)
 \end{equation}
 
-as well as $U(t,t) = 1$, $U(t_1,t_2) = U(t_2,t_1)^{-1}$.
+as well as $U(t,t) = 1$, $U(t_1,t_2) = U(t_2,t_1)^{-1}$. 
 
 Let us write $U(t) = U(t,0)$ for convenience, and let us suppose given states $\alpha$ and $\beta$.  The probability that the system finds itself in state $\beta$ after time $t$ is given by the matrix element
 
@@ -69,7 +85,7 @@ If $H$ does not depend on time, the preceding  ODE has an immediate solution, na
 U(t) = e^{-i(t/\hbar) H}
 \end{equation}
 
-Think of $H$ as a big matrix, and of the expression on the right as a big matrix exponential.
+Think of $H$ as a big matrix, and of the expression on the right as a big matrix exponential.  
 
 
 
@@ -92,8 +108,8 @@ The free-particle evolution operator is
 e^{-(it/\hbar)H} = e^{-i\hat p^2/2m\hbar}
 \end{equation}
 
-We proceed with $\hbar = 1$ then rescale afterwards.
-The wave function at time $t$ is
+We proceed with $\hbar = 1$ then rescale afterwards.  
+The wave function at time $t$ is 
 
 \begin{align}
 \psi(x,t) &= U(t)\phi(x) \\
@@ -164,7 +180,7 @@ Choose $\alpha = \hbar$, $\beta = 1$ so as to eliminate the $\hbar$'s for the Sc
 
 \begin{align}
 G(x-x',t) &= \widetilde G\left(x-x', t\hbar \right) \\
-&= \left( \frac{m}{2\pi \hbar i t} \right)^{1/2} e^{ im(x-x')^2/2\hbar t}
+&= \left( \frac{m}{2\pi \hbar i t} \right)^{1/2} e^{ im(x-x')^2/2\hbar t} 
 \end{align}
 
 \subsection{Discussion}
