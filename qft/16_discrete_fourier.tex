@@ -1,3 +1,24 @@
+beginMetadata:
+{
+    "id": "a3bde24e-0420-4bb0-a482-a51273413c0d",
+    "documentNumber": 48,
+    "author": "jxxcarlson",
+    "title": "Discrete Fourier Transform",
+    "path": "qft/16_discrete_fourier.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "discrete fourier transform a=jxxcarlson qft/16_discrete_fourier.tex t=quantum t=physics",
+    "timeCreated": 1595381136300,
+    "timeModified": 1595381136300,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555830998
+}
+endMetadata
 \italic{\xlink{34}{Notes on Quantum Field Theory}}
 
 \setcounter{section}{16}
@@ -19,9 +40,9 @@
 
  \innertableofcontents
 
-Consider  complex-valued  functions  of  the  integers,
-$q: \ZZ  \longrightarrow \CC $ ,  which  are  periodic  of  period   $N$ .   Thus   $q(n + N) = q(n)$ .   We  write  function  values  as   $q(n)$  or   $q_n$ .  Periodic  functions  of  period   $N$  may  be   identified  with  functions  on   $\ZZ/N$ ,  the  integers  modulo   $N$ .  Let
-  $\UU_n = \set{ e^{2\pi i k/N}}$  denote  the  multiplicative  group  of   $N$  -th  roots  of  unity.
+Consider  complex-valued  functions  of  the  integers,   
+$q: \ZZ  \longrightarrow \CC $ ,  which  are  periodic  of  period   $N$ .   Thus   $q(n + N) = q(n)$ .   We  write  function  values  as   $q(n)$  or   $q_n$ .  Periodic  functions  of  period   $N$  may  be   identified  with  functions  on   $\ZZ/N$ ,  the  integers  modulo   $N$ .  Let 
+  $\UU_n = \set{ e^{2\pi i k/N}}$  denote  the  multiplicative  group  of   $N$  -th  roots  of  unity.  
  Via  the  natural  identification   $\ZZ/N \cong \UU_n $ ,    $\ZZ/N$  models  the   $N$  -division  points   of  the  unit  circle.
 
 
@@ -33,7 +54,7 @@ Define  an  inner  product  on  the  space  of  functions  from   $\ZZ/N$  to   
 \begin{equation}
 \label{fft_ip}
 \langle q, q' \rangle
-  =
+  = 
 \frac{1}{N}\sum_{n \in \ZZ/N} q(n)\bar q'(n)
 \end{equation}
 
@@ -56,7 +77,7 @@ The  inner  product  of   $u_k$  and   $u_\ell$  is  the  sum
 
 
 \begin{equation}
-\bra u_k, u_\ell \ket
+\bra u_k, u_\ell \ket 
  =
 \frac{1}{N}\sum_k e^{2\pi k(n-\ell)/N}
 \end{equation}
@@ -108,7 +129,7 @@ Then  by  the  lemma  above,
 
 
 \begin{align}
-\FFF^{-1}\FFF(q)(n) &=
+\FFF^{-1}\FFF(q)(n) &= 
 \frac{1}{N} \sum_k \sum_m q(m) e^{2\pi ik(n - m)/N} \\
 &=
 \frac{1}{N} \sum_m q(m) \sum_k  e^{2\pi ik(n - m)/N} \\
@@ -131,7 +152,7 @@ In  the  section  on  the  classical  string,  we  considered
 
 \begin{equation}
 \label{crystallagrangian}
-L = \frac{m}{2} \sum_n \dot q(n)^2
+L = \frac{m}{2} \sum_n \dot q(n)^2 
 - \frac{\kappa}{2}\sum_n [q(n+1) - q(n)]^2
 - \frac{s}{2}\sum_n q(n)^2,
 \end{equation}
@@ -145,7 +166,7 @@ where  the  constants   $m$ ,   $\kappa$ ,  and   $s$  are  positive.
 
 \begin{equation}
 \label{crystallagrangian2}
-L = \sum_n \dot q(n)^2
+L = \sum_n \dot q(n)^2 
 - \frac{\omega}{2}\sum_n [q(n+1) - q(n)]^2
 - \frac{\mu}{2}\sum_n q(n)^2,
 \end{equation}
@@ -161,7 +182,7 @@ The  equation  of  motion  is  then
 \end{equation}
 
 
-The  term  in  brackets  is   $(\Delta^2 q)(n)$ ,  where   $\Delta^2$  is  the  discrete  second  derivative  operator.   It  can  be  factored  as   $\Delta^2 = \Delta_+\Delta_-$ ,  where   $(\Delta_+q)_n = q_{n+1} - q_n$  and
+The  term  in  brackets  is   $(\Delta^2 q)(n)$ ,  where   $\Delta^2$  is  the  discrete  second  derivative  operator.   It  can  be  factored  as   $\Delta^2 = \Delta_+\Delta_-$ ,  where   $(\Delta_+q)_n = q_{n+1} - q_n$  and 
   $(\Delta_-q)_n = q_{n} - q_{n-1}$ .   Thus  we  have
 
 
@@ -182,7 +203,7 @@ or,  more  succinctly,
 \end{equation}
 
 
-This
+This 
  is  the  discrete  version  of  the  Klein-Gordon  equation   \eqref{kgeq} discussed  in  the  appendix  below.
 
 
@@ -241,7 +262,7 @@ we  find  that
 \end{equation}
 
 
-for  a  function   $\lambda(k)$  which  we  now  describe.   The  expression
+for  a  function   $\lambda(k)$  which  we  now  describe.   The  expression 
   $(\lambda_+ - 1)(\lambda_- -1)(k)$  evaluates  to
  Since
 
@@ -313,7 +334,7 @@ where   $\Omega_k^2 = \omega_k^2 + \mu^2$ .   Thus  we  have  the  mode  expansi
 
 
 \begin{equation}
-q_n^+ (t) =  \sum_k Q^+ (k,t) e^{2\pi i kn/N}
+q_n^+ (t) =  \sum_k Q^+ (k,t) e^{2\pi i kn/N}  
 = \sum_k A_k^+ e^{2\pi i kn/N + i\omega_k t }
 \end{equation}
 
@@ -377,10 +398,10 @@ For  the  kinetic  energy  term,
 
 \begin{align}
 \sum_n \dot q(n,t)^2 &=
-\small{\frac{1}{N}} \sum_{n,k , \ell} \dot Q(k,t) \dot Q(\ell,t)
+\small{\frac{1}{N}} \sum_{n,k , \ell} \dot Q(k,t) \dot Q(\ell,t) 
 e^{2\pi i nk/N + 2\pi i n\ell/N} \\
-&= \small{\frac{1}{N}} \sum_{r , k+\ell = r,n} \dot Q(k,t) \dot Q(\ell,t)
-e^{2\pi i n(k + \ell)/N } \\
+&= \small{\frac{1}{N}} \sum_{r , k+\ell = r,n} \dot Q(k,t) \dot Q(\ell,t) 
+e^{2\pi i n(k + \ell)/N } \\   
 &= \sum_{k} \dot Q(k,t) \dot Q(-k,t)
 \end{align}
 
@@ -478,7 +499,7 @@ Thus  we  can  rewrite  the  Lagrangian  as
 
 
 \begin{equation}
-\tilde L = \frac{1}{2} \sum_k \Pi(k)\Pi(-k)
+\tilde L = \frac{1}{2} \sum_k \Pi(k)\Pi(-k) 
 -  \frac{1}{2}\sum_k (\omega_k^2) Q(k) Q(-k),
 \end{equation}
 
@@ -501,7 +522,7 @@ Then
 
 
 \begin{equation}
-\tilde L = \frac{1}{2} \sum_k \Pi (k) \Pi (-k)
+\tilde L = \frac{1}{2} \sum_k \Pi (k) \Pi (-k) 
 -  \frac{1}{2} \sum_k (\omega_k^2 )Q(k) Q(-k),
 \end{equation}
 
@@ -530,7 +551,7 @@ Then
 
 
 \begin{equation}
-H = \frac{1}{2} \sum_k \Pi(k) \Pi (-k)
+H = \frac{1}{2} \sum_k \Pi(k) \Pi (-k) 
 +  \frac{1}{2} \sum_k  (\omega_k^2) Q(k) Q(-k),
 \end{equation}
 
@@ -585,7 +606,7 @@ This  is  the   \term{Klein-Gordon} equation,  the  continuous  version  of   \e
 \end{equation}
 
 
-Substitute  into  the  equation  and  cancel  common  factors  to  obtain  the
+Substitute  into  the  equation  and  cancel  common  factors  to  obtain  the 
  dispersion  relation
 
 
@@ -626,3 +647,4 @@ which  is  always  less  than  or  equal  to   $c =1$ .   About  the  paradox:  
 
 
 \end{document}
+
