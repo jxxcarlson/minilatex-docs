@@ -1,5 +1,24 @@
-\italic{\xlink{34}{Notes on Quantum Field Theory}}
-
+beginMetadata:
+{
+    "id": "4f492c7d-a72a-470c-9f86-427e11e14d57",
+    "documentNumber": 40,
+    "author": "jxxcarlson",
+    "title": "Bras and Kets",
+    "path": "qft/bra_ket.tex",
+    "tags": [
+        "quantum",
+        "physics"
+    ],
+    "keyString": "bras and kets a=jxxcarlson qft/bra_ket.tex t=quantum t=physics",
+    "timeCreated": 1595380123333,
+    "timeModified": 1598555129001,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1598555145005
+}
+endMetadata
 \begin{mathmacro}
 \newcommand{\bra}[0]{\langle}
 \newcommand{\ket}[0]{\rangle}
@@ -23,11 +42,11 @@ that Dirac introduced and which abound in the physics literature.
 
 \subsection{The basics}
 
-For the inner product of two vectors, we write $\bra u | v \ket$, where this expression is linear in the second variable and conjugate linear in the first.  Thus Dirac's $\bra u | v \ket$ is the mathematicians's $\bra v, w \ket$.
+For the inner product of two vectors, we write $\bra u | v \ket$, where this expression is linear in the second variable and conjugate linear in the first.  Thus Dirac's $\bra u | v \ket$ is the mathematicians's $\bra v, w \ket$.  
 
-In this notations, $\bra u | c v\ket = c\bra u | v \ket$, but $\bra cu |  v\ket = \bar c\bra u | v \ket$. The symmetry condition reads $\bra v | u \ket = \overline{\langle u  | v \rangle}$.
+In this notations, $\bra u | c v\ket = c\bra u | v \ket$, but $\bra cu |  v\ket = \bar c\bra u | v \ket$. The symmetry condition reads $\bra v | u \ket = \overline{\langle u  | v \rangle}$.  
 
-Let $A$ be an operator.  The expression $\bra u | A | v \ket$ means $\bra u | Av \ket$.  Thus it is the same as $\bra A^*u | v \ket$.
+Let $A$ be an operator.  The expression $\bra u | A | v \ket$ means $\bra u | Av \ket$.  Thus it is the same as $\bra A^*u | v \ket$.  
 
 The symbol $|v\ket$ has the same meaning as $v$ if $v$ is a vector. Such vectors are called \term{kets}.  Let $\set{ \psi_a }$ be a set of states, that is, eigenvectors for an operator $A$ with eigenvalue $a$.  The notations $\psi_a$, $|\psi_a \ket$, and  $|a\ket$ all stand fors the same thing.  It makes sense to say
 
@@ -70,10 +89,10 @@ Let $\set{ |v_n\rangle} = \set{ |n\rangle}$ be a complete orthonormal set for $H
 That is, the expression on the left, which is a sum of projections operators, is the identity operator.  We say that the left-hand side of \eqref{resolutionofidentity} is  \term{resolution of the identity}.  The proof that  \eqref{resolutionofidentity} holds an exercise in bra-ket formalism. Let $v$ be arbitrary and write
 
 \begin{equation}
-  v = \sum_m | m \ket\bra m | v \ket
+  v = \sum_m | m \ket\bra m | v \ket 
 \end{equation}
 
-This is the Fourier decomposition of $v$.  Note that it depends linearly on $| v \ket$. Applying $\sum | n \ket\bra n|$ to $v$, we find that
+This is the Fourier decomposition of $v$.  Note that it depends linearly on $| v \ket$. Applying $\sum | n \ket\bra n|$ to $v$, we find that 
 
 \begin{align}
 \left(\sum_n  | n\ket \bra n |\right) \left(\sum_m | m \ket\bra m | v \ket \right) &=
@@ -121,13 +140,13 @@ This is the same as the identity
 One also has resolution of the identity for operators with continuous spectrum.  Take, for example, the operator $-id/dx$ which has (generalized) eigenfunctions $e^{ikx}$. Writing $| k \ket$ for $e^{ikx}$, one has
 
 \begin{equation}
-{\bf 1} = \frac{1}{2\pi} \int_{-\infty}^\infty dk\, | k \ket \bra k |
+{\bf 1} = \frac{1}{2\pi} \int_{-\infty}^\infty dk\, | k \ket \bra k |  
 \end{equation}
 
 Standing by itself, the meaning of this formula is a subtle matter.  However, when applied to a function, we have
 
 \begin{equation}
-| f \ket = \frac{1}{2\pi} \int_{-\infty}^\infty dk\, | k \ket \bra k | f \ket
+| f \ket = \frac{1}{2\pi} \int_{-\infty}^\infty dk\, | k \ket \bra k | f \ket 
 \end{equation}
 
 This is an encoding of the Fourier inversion theorem:
@@ -149,3 +168,5 @@ f(x) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty \hat f(k) e^{ikx} dk
 \href{https://www.math.utah.edu/~gustafso/s2013/3150/pdeNotes/fourierTransorm-PeterOlver2013.pdf}{Fourier transform} -- Olver notes
 
 \href{http://www.physics.rutgers.edu/~steves/501/Lectures_Final/Lec06_Propagator.pdf}{Free particle propagator}
+
+
