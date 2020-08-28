@@ -1,14 +1,17 @@
 beginMetadata:
 {
     "id": "f2a8724a-fc18-44f0-af4e-d96db08b9f42",
-    "documentNumber": 47,
+    "documentNumber": 91,
     "author": "jxxcarlson",
     "title": "MiniLaTeX: Language Manual",
     "path": "minilatex/language-manual.tex",
-    "tags": [],
-    "keyString": "minilatex: language manual a=jxxcarlson minilatex/language-manual.tex ",
+    "tags": [
+        "minilatex",
+        "manual"
+    ],
+    "keyString": "minilatex: language manual a=jxxcarlson minilatex/language-manual.tex t=minilatex t=manual",
     "timeCreated": 1597355173871,
-    "timeModified": 1597355216871,
+    "timeModified": 1598559748379,
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
@@ -16,8 +19,6 @@ beginMetadata:
     "versionDate": 1597403030879
 }
 endMetadata
-\uuid{f2a8724a-fc18-44f0-af4e-d96db08b9f42}
-
 \title{MiniLaTeX: Language Manual}
 
 \maketitle
@@ -77,37 +78,38 @@ to link to the New York Times.
 To share a public document with someone, imitate this example:
 
 \begin{verbatim}
-minilatex.lamdera.app/g/21
+minilatex.lamdera.app/g/78
 \end{verbatim}
 
-The  fragment \code{/g/} stands for \italic{guest}.  Using this link will take you to document 21, and you will be automatically logged in as guest.
+The  fragment \code{/g/} stands for \italic{guest}.  Using this link will take you to document 78, and you will be automatically logged in as guest.  You can also use the following more verbose method:
 
+\begin{verbatim}
+minilatex.lamdera.app/g/uuid:6f5a573d-5603-4470-8dc9-b0972997a6e6
+\end{verbatim}
+
+There very long string \code{6f5...6e6} is the UUID of the document. There are $2^{122} > 10^{36}$ such numbers, so the chance that any two chosen at random is very, very small.
+
+The document number is on display in the footer of the app.  To reveal the UUID of a document, click on the \blue{Doc Tools} button (footer, lower left).
 
 \subsection{Cross links}
 
 You can make link in one MiniLaTeX document that points to another.
-Here is a \xlink{58}{an example}. It is done like this:
+Here is a \xlink{78}{an example}. It is done like this:
 
 \begin{verbatim}
-\xlink{58}{an example}
+\xlink{78}{an example}
 \end{verbatim}
 
-The first argument, 58 in this case, is the numerical ID of the document in question. The document ID is displayed in the footer of this app.
-
-One can also link to  \xlink{uuid:4c66bef1-f9a6-4fe6-a6c8-3dfb62bf352a}{the example} using the UUID of a document, as illustrated below.  This is more verbose, but more reliable.
-
-
-\begin{verbatim}
- \xlink{uuid:4c66bef1-f9a6-4fe6-a6c8-3dfb62bf352a}{the example}
-\end{verbatim}
+The first argument, 78 in this case, is the numerical ID of the document in question. The document ID is displayed in the footer of this app.
+As in the previous section, you can also use UUIDs.
 
 
-You will find the UUID of the document in the first line of the source text.  This line should not be modified.
+
 
 
 \subsection{Index links}
 
-One can use the \code{\bs{ilink}} macro to construct a kind of index of links that refer to other documents.  For an example of how this is done, please see \xlink{34}{these class notes} and look at the source. For best results, put the tag \italic{index} in the tag field (editor, upper right).  Then press the \blue{Tags} button.
+One can use the \code{\bs{ilink}} macro to construct a kind of index of links that refer to other documents.  For an example of how this is done, please see \xlink{78}{these class notes} and look at the source. For best results, put the tag \italic{index} in the tag field (editor, upper right).  Then press the \blue{Tags} button.
 
 \section{Defining Macros}
 
@@ -317,6 +319,5 @@ theorem
 
 \subsection{Symbols}
 
-MiniLaTeX can work with either MathJax or KaTeX.  Currently we are using KaTeX.  This
-\href{https://katex.org/docs/support_table.html}{table of supported symbols} may be helpful.
+\href{https://katex.org/docs/support_table.html}{Table of supported symbols}: may be helpful.
 
