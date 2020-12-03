@@ -1,0 +1,77 @@
+beginMetadata:
+{
+    "id": "84cb8453-93ba-43f1-a2fe-5e8baaff06eb",
+    "documentNumber": 351,
+    "author": "jxxcarlson",
+    "title": "Mathematical Notes",
+    "path": "nott/mathematical_notes.tex",
+    "tags": [],
+    "keyString": "mathematical notes a=jxxcarlson nott/mathematical_notes.tex ",
+    "timeCreated": 1606456557241,
+    "timeModified": 1606456557241,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
+
+\begin{mathmacro}
+\newcommand{\bbN}[0]{\mathbb{N}}
+\newcommand{\blah}[0]{\text{\textunderscore}}
+\newcommand{\sp}[0]{\space}
+\newcommand{\refl}[0]{\mathop{\text{refl}}}
+\newcommand{\lhs}[0]{\mathop{\text{LHS}}}
+\newcommand{\rhs}[0]{\mathop{\text{RHS}}}
+\newcommand{\suc}[0]{\blue{succ}\space}
+\newcommand{\zero}[0]{\blue{zero}\space}
+\newcommand{\add}[0]{\blue{add}\space}
+\newcommand{\vec}[0]{\mathop{\text{Vec}}}
+\newcommand{\Set}[0]{\mathop{\text{Set}}}
+\newcommand{\mod2}[0]{\text{mod2}}
+\end{mathmacro}
+
+\setcounter{section}{6}
+
+\section{Mathematical Notes}
+
+
+\innertableofcontents
+
+\subsection{Groupoids}
+
+In algebra, a \term{groupoid} is a set $G$ with a partially defined operation $*: G\times G \to G$ that satisfies various properties.  Here is an example. Consider a space $X$, e.g.,the surface of a sphere or doughnut, i.e., a torus.  Let $\Pi(X)$ be the set of paths in  $X$.  If $\alpha$ is a path ffrom $a$ to $b$ and $\beta$ is a path from $b$ to $c$, let $\alpha * \beta$ be the path that goes form $a$ to $b$ along $\alpha$ and then from $b$ to $c$ along $\beta$.  This construction yields a partially defined function, the "product" of paths, because the end point of the first path may be different fro the starting point of the second path.  For techncial reasons, we look at paths "up to homotopy," meaning that paths are considered the same if they have the same endpoints and one can be continuously moved to the other wihile keeping the endpoints fixed . The resulting object (paths up to homotopy) is called the \term{fundamental groupoid}  of the space $X$, written $\Pi(X)$.
+
+For a partially defined operation to define a groupoid, the following conditions must be met:
+
+\begin{enumerate}
+
+\item The associative law, $(a*b)*c = a*(b*c)$ whenever all products are defined.
+
+\item For every $a$ there is an $a^{-1}$ such that  $a*(a^{-1})$ and  $(a^{-1})*a$ are always defined.
+
+\item  If $a*b$ is defined, then $a^{-1}*a*b = b$ and $a*b*b^ {-1} = a$
+
+\end{enumerate}
+
+
+Groupoids also arise in category theory.  A small category in which all morphisms are isomorphism, i.e., invertible is a groupoid.  By small, one means that both the objects and the morphisms (arrows) of the category constitute sets.
+
+Now for the connection with type theory.  View a type $A$ as a category whose objects are the terms of $A$.  Define the morphisms between terms $M$ and $N$ to be the terms of $M \equiv N$.  Then $\refl$ is the identity morphism, symmetry guarantees (2), the existence of inverses, and transitivity provides composition of morphisms.  If axiom K holds, then $M \equiv N$ has at most on inhabitant.  If one does not impose axiom K, then there may be more than one inhabitant, i.e., more than one way in which things may be equal.  This is the starting point for homotopy type theory.
+
+I believe this point of view originated with \href{https://ncatlab.org/homotopytypetheory/files/HofmannDMV.pdf}{Martin Hoffman}.
+
+
+\subsection{References and Further Reading}
+
+\href{https://homotopytypetheory.org/2011/04/18/whats-special-about-identity-types/}{What's special about identity types?}
+
+\href{https://agda.readthedocs.io/en/v2.6.1/language/with-abstraction.html}{With-Abstraction in Agda}
+
+\href{https://homotopytypetheory.org/2011/04/10/just-kidding-understanding-identity-elimination-in-homotopy-type-theory/}{Just Kidding: Understanding Identity Elimination in Homotopy Type Theory}
+
+\href{https://www.cs.bham.ac.uk/~mhe/HoTT-UF-in-Agda-Lecture-Notes/index.html}{Introduction to Univalent Foundations of Mathematics with Agda}
+
+\href{http://www.cse.chalmers.se/~abela/esslli2016/talkESSLLI3.pdf}{Lecture 3: Martin-Löf Type Theory}.  Very dense (slides).
