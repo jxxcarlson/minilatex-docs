@@ -1,0 +1,62 @@
+beginMetadata:
+{
+    "id": "da627069-1668-4999-9c6c-19f14a632e29",
+    "documentNumber": 286,
+    "author": "jxxcarlson",
+    "title": "Agda",
+    "path": "nott/agda.tex",
+    "tags": [],
+    "keyString": "agda a=jxxcarlson nott/agda.tex ",
+    "timeCreated": 1604284514165,
+    "timeModified": 1606456451240,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
+
+\setcounter{section}{3}
+
+\section{Agda}
+
+\italic{WIP: More focused on Agda than type theory per se in this section.}
+
+\begin{mathmacro}
+\newcommand{\bbN}[0]{\mathbb{N}}
+\newcommand{\blah}[0]{\text{\textunderscore}}
+\newcommand{\sp}[0]{\space}
+\newcommand{\refl}[0]{\mathop{\text{refl}}}
+\newcommand{\lhs}[0]{\mathop{\text{LHS}}}
+\newcommand{\rhs}[0]{\mathop{\text{RHS}}}
+\end{mathmacro}
+
+\innertableofcontents
+
+\subsection{Using rewrite}
+
+
+Another way to do the inductive proof is to use \term{rewrite}.  To explain, consider once again \eqref{pencil:paper}, focusing on the last line:
+
+$$
+ suc ((m + n) + p) \equiv suc (m + (n + p))
+$$
+
+ If we rewrite the left-hand side using the inductive hypothesis, this becomes
+
+\begin{equation}
+suc (m + (n + p) \equiv suc (m + (n + p))
+\end{equation}
+
+In this expression, the left and right-hand sides are equal, and so a proof is given by $\refl$. 
+The full sequence of simplifications need for the proof then go as follows: (a) simplify the left and right sides of the equality type using the rules for addition (b) rewrite the left-hand side of resulting expression using \code{rewrite} for the inductive hypothesis. We can encode this sequence of operations in the last line of the proof as presented below.  
+
+\begin{align}
+& \text{+-assoc}' : ∀ (m\ n\ p\ : ℕ) → (m + n) + p ≡ m + (n + p) \\
+& \text{+-assoc}'\ zero\ n\ p = \refl \\
+&\text{+-assoc}' (suc\ m)\ n\ p\space \text{rewrite}\space \text{+-assoc}'\  m\ n\ p = \refl 
+\end{align}
+
+Note that congruence and rewrite, while achieving the same ends, operate in different ways.   Congruence tells us that if we have evidence for $e \equiv e'$, then we also have evidence for $suc\ e \equiv suc\ e'$.  Rewrite tells us that $suc\ e \equiv suc\ e'$ reduces to $suc\ e' \equiv suc\ e'$, provided that we know (by the inductive hypothesis) that $e \equiv e'$.  Finally, $suc\ e' \equiv suc\ e'$ is inhabited by $\refl$.
