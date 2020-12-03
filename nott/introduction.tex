@@ -1,0 +1,191 @@
+beginMetadata:
+{
+    "id": "6dde9777-daf0-45ab-9be3-1bef5fefb13f",
+    "documentNumber": 297,
+    "author": "jxxcarlson",
+    "title": "Introduction",
+    "path": "nott/introduction.tex",
+    "tags": [],
+    "keyString": "introduction a=jxxcarlson nott/introduction.tex ",
+    "timeCreated": 1604728291106,
+    "timeModified": 1605284497942,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
+
+\begin{mathmacro}
+\newcommand{\bbN}[0]{\mathbb{N}}
+\newcommand{\blah}[0]{\text{\textunderscore}}
+\newcommand{\sp}[0]{\space}
+\newcommand{\refl}[0]{\mathop{\text{refl}}}
+\newcommand{\lhs}[0]{\mathop{\text{LHS}}}
+\newcommand{\rhs}[0]{\mathop{\text{RHS}}}
+\newcommand{\suc}[0]{\blue{succ}\space}
+\newcommand{\zero}[0]{\blue{zero}\space}
+\newcommand{\add}[0]{\blue{add}\space}
+\newcommand{\vec}[0]{\mathop{\text{Vec}}}
+\newcommand{\Set}[0]{\mathop{\text{Set}}}
+\newcommand{\mod2}[0]{\text{mod2}}
+\end{mathmacro}
+
+
+\section{Introduction}
+
+((\italic{WORK IN PROGRESS}))
+
+\innertableofcontents
+
+\subsection{The Type of Natural Numbers}
+
+Set theory provides a language in which we can formulate and work with mathematical ideas such as the set of natural numbers $\bbN = \{ 0, 1, 2, \ldots \}$, statements such as $5 \in \bbN$, $7/2 \not\in \bbN$,  etc.  The goal of these notes is to explain an alternative language, the \term{type theory} of Per Martin-Löf (MLTT).  The purely theoretical discussion is complemented by code examples in the programming language Agda, which implements MLTT.  See \href{https://plfa.github.io/}{Wadler} for much more on Agda as well as an introduction to type theory.
+
+As a general matter,  to define a type we must (a) give it a name, (b) describe how to construct elements of it, and (c) describe how to determine whether two elements are equal.  When we say \italic{construct} and \italic{determine} in this context, we mean a procedure or set of rules that can be carried out by machine or, given enough time and patience, with pencil and paper.  For (a), we say this:
+
+\begin{equation}
+\label{nat:intro}
+\bbN: \mathcal{U}
+\end{equation} 
+
+where $\mathcal{U}$ is some universe of types.  Universes are arranged in a chain $\mathcal{U_0} \subset \mathcal{U_1} \subset \mathcal{U_2} \subset \cdots$ where $\mathcal{U}$ may be used as a shorthand for $\mathcal{U_\ell}$, often with $\ell = 0$.  In the programming language Agda, which implements MLTT, this hierarchy is written $\Set_0 \subset \Set_1 \subset \Set_2 \subset \cdots$ where $\Set$ is shorthand for $\Set_0$.  One must take care with this terminology because types are not sets.  More on this later.
+
+For (b), construction of elements, we posit two rules.  The first tells us how to construct an element or \term{term} of the given type:
+
+\begin{equation}
+\label{construct-zero}
+\zero : \bbN
+\end{equation} 
+
+The second rule says that if \code{k} is an element of $\bbN$, then so is an element called $\suc k$.  We write the rule as a "fraction," where the numerator is the \term{premise} and the denominator is the \term{conclusion}.
+
+\begin{equation}
+\label{construct-succ}
+\frac{k: \mathbb{N}}{\text{succ}\space k : \mathbb{N}}
+\end{equation}
+
+The first rule can be written in the same form, but with an empty premise:
+
+\begin{equation}
+\label{construct-zero-b}
+\frac{}{\text{zero}\space : \mathbb{N}}
+\end{equation} 
+
+Rules with empty premises are called \term{axioms}, and are usually written as \eqref{construct-zero}.  One can construct arbitrarily many elements of the type of natural numbers by with applying \eqref{construct-succ} again and again to \eqref{construct-zero}.
+
+\begin{align}
+& \zero \\
+& \zero \to \suc \zero \\
+& \zero \to \suc \zero \to \suc \suc \zero \\
+& etc.
+\end{align}
+
+
+If we wish, we may introduce the aliases $0 = \zero$, $1 = \suc \zero$, $2 = \suc \suc \zero$, etc., so that the above reads $\suc 0 = 1$, etc.  
+
+The rules \eqref{nat:intro}, \eqref{construct-zero} and \eqref{construct-succ} are called \term{judgements}. Judgement \eqref{nat:intro} is a \term{formation rule}.  It announces a new type. Judgements \eqref{construct-zero} and \eqref{construct-succ} are \term{introduction rules}.  They furnape with a singl ish \term{constructors} which tell us how to fabricates terms of the given type.  One can imagine a simple two-tape Turing machine which reads the first tape with the symbols $\suc, \suc, \suc, \zero$ printed on it and which leaves the second tape with single printed $\blue{3}$.
+
+The first of the above rules is a \term{literal constructor}: what does $\zero$ construct?  Answer: the term $\zero$ itself.  (The Turing machine writes a $\blue{0}$ on the tape.) The second introduction rule provides a constructor $\suc$ which we may view as a function $\suc : \bbN \to \bbN$.  We can think of it as instruting the Turing machine to move the tape one square to the right and write the word \blue{suc} on the tape.
+
+Everything that we have said so far can be implemented in Agda in three lines of code.
+
+\begin{verbatim}
+data ℕ : Set where
+  zero : ℕ
+  suc  : ℕ → ℕ
+\end{verbatim}
+
+The code announces the type (a), then exhibits the constructors (b).  
+
+\subheading{Sets vs Types}
+
+In set theory it makes sense to ask \italic{is $7/2$ an element of $\bbN$?}  The response is \italic{$7/2 \in \bbN$ is false.} In type theory we cannot formulate such a question because to say  $7/2 : \bbN$ is nonsensical. There is no sequence of constructions which starts with the axiom and ends with $7/2$.  In type theory, one can speak only of that which can be constructed.  As we shall see shortly, to give a proof is also to provide a construction.
+
+\subsection{Function types}
+
+In defining the natural numbers, we introduced the constructors $\zero$ and $\suc$.  They were used to construct terms of the type $\bbN$.  There are also constructors that manufacture new types from old.  If one is given types $A$ and $B$ in $\mathcal{U}$, then $A \to B: \mathcal{U}$ is the type of functions from $A$ to $B$.  Consequently, in the context of $\mathcal{U}$, $\to$ is a \term{constructor} of types rather than a constructor of terms.  We can formulate the construction of function types just as we formulated the behavior of $\suc$:
+
+\begin{equation}
+\frac{A, B : \text{Set}_\ell}{A \to B : \text{Set}_\ell}
+\end{equation}
+
+Construction of function types can be iterated.  Thus, given a third type $C$, one can form the type  $A \to (B \to C)$.  It is the type of functions from $A$ to functions from $B$ to $C$.  
+We write it as $A \to B \to C$. Thus construction of function types associates to the right.
+
+As an example, define the function 
+
+\begin{align}
+& add : \bbN \to \bbN \to \bbN \\
+& add\ x\ y = x + y
+\end{align}
+
+so that, for example, $add\ 1\ 2$ has value 3. This uses the convention common to both type theory and  to functional languages such as Agda, Elm, and Haskell: we write $add\ 1\ 2$ rather than $add(1,2)$.  The partial function appication $add\ 1$  makes sense as the function of type $\bbN \to \bbN$ which adds 1 to its argument.  More generally, suppose given
+
+$$
+f : A \to B \to C.
+$$
+
+We read this as "the function type $A \to B \to C$ has a term $f$."  Then $f\ a : B \to C$ for any term $a : A$, and $(f\ a)\ b : C$ for terms $a: A$ and $b: B$.  We take application of a function to arguments as associating to the left, so that we may write $(f\ a)\ b : C$  as $f\ a\ b$.
+
+All functions in type theory, Agda, Haskell, Elm, etc. are functions of one variable.  This means that functions $f$ and $g$ can always be composed as $g\circ f$, sol log as the type of the codomain of $f$ is the same as the type of the domain of $g$.
+
+\subsection{Addition, etc.}
+
+Above, in just a few lines of text, we have defined  the type of natural numbers.  But what of famiilar operations such as addition, multiplication, familiar laws such as the associative and commutative laws?  These can also be defined in type theory.  For addition, three rules are enough:
+
+\begin{verbatim}
+_+_ : N →  N →  N          (type)
+0 + n = n                  (base)
+succ m + n = suc (m + n)   (ind) 
+\end{verbatim}
+
+The effect tof the first line is to declare that $+$ is a binary operator of the given type: its operands are natural numbers and so is the result of applying it to natural numbers.
+
+
+The second and third rules are sufficent to compute any sum.
+By way of example, let us compute the sum $2 + 3$.  As above, we take $2$ as a synonym for $\suc \suc 0$, and we take $3$ as a synonym for $\suc \suc \suc 0$, etc.
+Then we have equations
+
+\begin{align}
+& 2 + 3 \\
+ & = suc\ (suc\ zero) + suc\ (suc\ (suc\ 0)) & (a)\\
+& = suc\ (suc\ zero + suc\ (suc\ (suc\ 0))  & (b)\\
+& =  suc\ suc\ (zero + suc\ (suc\ (suc\ 0)))  &(c) \\
+& =  suc\ (suc\ ( suc\ (suc\ (suc\ 0)) )) & (d) \\
+& = 5  
+\end{align}
+
+Each line  follows for the one preceeding from one of the  equations defining addition.  In each case  we determine the rule to use, (base) or (ind), by matching rules with the expression to be transformed.  For  line $(a)$, the rule that matches is  (ind) with $m = suc\  zero$ and $n = suc\ suc\ suc\ zero$. Therefore the transform of line $(a)$ is line $(b)$.  Line $(c)$ is obtained inthe same way.  However, On the other hand, the "inside" of line $(c)$ matches (base) with $n = suc\ suc\ suc\ zero$, and so line $(d)$ follows form line $(c)$.  This form of inference is called \term{pattern matching}.  The pattern-matching definition of addition is said to be \term{recursive} because the definition refers to itself.  
+
+
+\subsection{Definitional equality}
+
+Let us look again at a simple expression such as  \blue{suc 0 + suc 0}. It reduces to \blue{suc suc 0} via the following process:
+$$
+\suc 0 + \suc 0 \to \suc ( 0 + \suc 0) \to \suc \suc 0
+$$
+
+By "reduce," we mean repeatedly apply the rules. In this case, repeated application leads to a form which cannot be reduced further.  Such a form is said ot be \term{normal}.  It is a feature of type theory that normal forms exist and are unique.  An element in normal form is called \term{canonical}.  Such elements are easily recognized: they contain only constructors.
+
+
+Ttwo terms that have the same canonical element are said to be "convertible" (one into the other), equal by definition," or \term{definitionally equal}.  Thus \blue{suc 0 + suc 0} and \blue{suc suc 0} are definitionally equal.  If $a$ and $b$ are definitionally equal, we write $a = b$.  
+
+The question of whether two elements of a type are definitionally equal is \term{decidable}. It can be carried out by an algorithm which is guaranteed to terminate in finitely many steps.  As we shall see shortly, there is another kind of equality called \term{propositional equality} which is writtten as  $a \equiv_T b$, where $a, b: T$ are terms of the same type. Roughly speaking, to establish propositional equality one must give a proof in the context of type theory.  We will see how to do that shortly.  Definitional equality is a kind of trivial proof, and so terms whicih are definitionally equal are also propositionally equal.
+
+
+\subsection{Propositional Equality}
+
+
+In type theory one also has \term{propositional equality}.  Suppose that $a$ and $b$ are terms of the same type $A$.  Then there is a type  $a \equiv_A b$.  To say that $a$ and $b$ are propositionally equal is to say that there exists a term of type $a \equiv_A b$.    In Martin-Löf type theory, there is exactly one constructor for this type, the term $\text{refl} : a =_A a$.    The terminology stems from the reflexive law of equality. 
+
+
+Since  the type $2 \equiv_\bbN 2$ is inhabited by the term \blue{refl}, The number 2 is propositinally equal to itself.  We also have propositional equality of $2 + 2$ and $4$, since the type $2 + 2 \equiv_\bbN 4$ is equal to the type $4 \equiv_\bbN 4$, which is inabited by \blue{refl}.  On the other hand, $2 + 3$ is not propositionally equal to $4$, since $2 + 3 \equiv_\bbN 4$ is the same as the type $4 \equiv_\bbN 5$, which is not inhabited.
+
+Terms that are definitionally equal are also propositionally equal.  However, as we see in the next section, propositionally equal terms are not in general definitionally equal.
+
+It is natural to ask whether the assertion that there is at most one inhabitant of an equality is forced up upon us.  The answer is no, a fact which leads to the subject of Homotopy Type Theory (HoTT).
+
+
