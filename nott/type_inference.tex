@@ -264,8 +264,34 @@ List\space \beta = List\ Int
 S_1 = [\alpha \rArr \beta = Int \rArr Int, \quad List\space \beta = List\ Int]
 \end{equation}
 
+Let us proceed as before.  Decomposition yields
 
 
+\begin{equation}
+S_2 = [\alpha = Int, \quad \beta = Int, \quad List\space \beta = List\ Int]
+\end{equation}
+
+Then use elimination:
+
+\begin{equation}
+S_3 = [\alpha = Int, \quad \beta = Int, \quad List\space Int = List\ Int]
+\end{equation}
+
+Then deletion applies to produce the solution to this unification problem:
+
+\begin{equation}
+S_4 = [\alpha = Int, \quad \beta = Int]
+\end{equation}
+
+One concludes that the given expression is well-typed and that the output has type $[Int]$.
+
+By contrast, suppose that $inc ::  String \to Int$.  The same argument yields the equations
+
+\begin{equation}
+S_3 = [\alpha = Int, \quad \beta = Int, \quad List\space String = List\ Int]
+\end{equation}
+
+The last equation is not valid.  We conclude that in this case $map\ inc\ foo$ is not well-typed.
 
 \bigskip
 
