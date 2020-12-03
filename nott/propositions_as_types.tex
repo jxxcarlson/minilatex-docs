@@ -1,0 +1,288 @@
+beginMetadata:
+{
+    "id": "4b10dfec-c827-40a0-8692-62faf5adaefe",
+    "documentNumber": 346,
+    "author": "jxxcarlson",
+    "title": "Propositions as Types",
+    "path": "nott/propositions_as_types.tex",
+    "tags": [],
+    "keyString": "propositions as types a=jxxcarlson nott/propositions_as_types.tex ",
+    "timeCreated": 1606189498746,
+    "timeModified": 1606189498746,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
+
+\begin{mathmacro}
+\newcommand{\bbN}[0]{\mathbb{N}}
+\newcommand{\blah}[0]{\text{\textunderscore}}
+\newcommand{\sp}[0]{\space}
+\newcommand{\refl}[0]{\mathop{\text{refl}}}
+\newcommand{\lhs}[0]{\mathop{\text{LHS}}}
+\newcommand{\rhs}[0]{\mathop{\text{RHS}}}
+\newcommand{\suc}[0]{\blue{succ}\space}
+\newcommand{\zero}[0]{\blue{zero}\space}
+\newcommand{\add}[0]{\blue{add}\space}
+\newcommand{\vec}[0]{\mathop{\text{Vec}}}
+\newcommand{\Set}[0]{\mathop{\text{Set}}}
+\newcommand{\mod2}[0]{\text{mod2}}
+\end{mathmacro}
+
+\setcounter{section}{2}
+
+\section{Propositions as Types}
+
+((\italic{WORK IN PROGRESS}))
+
+\innertableofcontents
+
+
+In 1934, Haskell Curry showed that propositional logic could be formulated in terms of type theory.  He set up a dictionary in which "proposition" is translated as "type" and "proof of a proposition" is translated as "term of a type."  Thus, if $P$ is a proposition viewed as a type, then the proposition is proved if there is a term $a $ of type $P$, i.e.,  $a : P$.  To exhibit a term $a$ of $P$ one must construct it using the avaialble rules.  The logic that type theory provides is a constructivist logic, in which the foundational notion is "has a proof" rather than "is true."  As we shall see below, this means that the Law of the Excluded Middle is not part of this system.
+
+\subsection{The Dictionary}
+
+The proposition-as-types dictionary translates the truth values and connectives of propositional logic to constructors in type theory.  If $P$, $Q$, etc. are propositions, let $|P|$, $|Q|$ etc, be the corresponding types.  The dictionary 
+ is given by the following table:
+
+\begin{indent}
+\begin{tabular}{ l l  }
+Logic & Type theory \\
+$P \wedge Q$  & $|P| \times |Q|$  \\
+$P \lor Q$ &  $|P| + |Q|$ \\
+$P \implies Q$ & $|P| \to |Q| $ \\
+False &  $\bot$ \\
+True & $\top$  \\
+$ \neg P$ & $ |P| \to \bot $ \\
+\end{tabular}
+\end{indent}
+
+The  function type $|P| \to |Q|$ was introduced in the previous section.  The types $|P| \times |Q|$ and $|P| + |Q|$ are the type-theoretic analogues of the Cartesian project and disjoint union.  The type  $\bot$ is the \term{empty type}.  It has no constructors and hence no terms.  The type $\top$ is the \term{unit type}.  It has one constructor and just one term.  
+
+
+
+As an example of the doctrine, consider the rule of \italic{modus ponens}: if $P$ is proved and we have a proof of $P$ implies $Q$, then $Q$ is proved.  According to the dictionary, the type-theoretic translation of $P$ implies $Q$ is the function type $P \to Q$.  To assert that $P$ implies $Q$ is to assert a term $f : P \to Q$.  Since we assume given a proof of $P$, we also assert given a term $a : P$. Then $f\ a$, the result of applying $f$ to $a$ is a term of $Q$.  Therefore $Q$ is proved.
+
+Here are two more examples. Consider first the implication $P \implies P$.  Its incarnation in type theory is the function type $P \to P$.  This type is "inhabited," i.e., has a term: the identify function $id$.  If we wish to be more formal, we say that $P \to P$ is inhabited by the $\lambda$-term $\lambda (x: P).x$.  Here we use the notation of the simply-typed lambda calculus. (See XXX)
+
+For the last example, consider the proposition $P \implies (Q \implies P)$.  It corresponds to the type $P \to (Q \to P)$, which is inhabited by the $\lambda$-term $\lambda(x: P)(\lambda(y:Q)x) $.
+
+\subsection{Law of the Excluded Middle}
+
+In classical logic, a proposition is either true or false.  This is the law of the excluded middle, 
+
+\begin{equation}
+\label{LEM}
+\forall P: P \lor \neg P.
+\end{equation}
+
+The Law of the Excluded Middle  is neither an axiom nor is it provable from the axioms of type theory. Indeed, assume for a moment that it does have a constructivist proof. Then there is a term of type $P + (P \to \bot)$.  Such a term gives a program with which one can decide $P$, that is, either furnish a proof of $P$ or not $P$.  But Gödel showed that in any formal system which is complex enough to contain the natural numbers, there are statements which can neither be proved nor disproved.  Therefore there is no constructivist proof of the law of the excluded middle.
+
+
+\subsection{The Predicate Calculus}
+
+ Curry's idea was extended in 1969 by William Howard so as to include the predicate calculus, that is, logic with the quantifiers $\forall$ and $\exists$.  This extension relies on the notions of  \term{dependent product} and \term{dependent sum}.  They are used to model universal quantification  and exsistential quantification, respectively.
+
+
+
+\subsection{Dependent product}
+
+Let $A$ be a type and consider a function $B : A \to \mathcal{U}$, where $\mathcal{U}$ is some universe of types. Then $B\ x : \mathcal{U}$ is a type for each term $x$ of $A$.  A \term{dependent function}
+
+\begin{equation}
+f  : (x : A) \to B\ x
+\end{equation}
+
+associates to each term $x$ of $A$ a term $f\ x$ of $B\ x$.  Thus, as $x$ varies over its domain $A$, the type in which the function value $f\ x$ "lives" also varies. (Dependent functions are rather like a section of a fibration.) The type of such dependent functions is 
+
+\begin{equation}
+(x : A) \to B\ x.
+\end{equation}
+
+It  is also called the $\Pi$-type defined by $A$ and $B$, and is written
+
+\begin{equation}
+\Pi_{x: A}B\ x.
+\end{equation}
+
+If $B\ x$ does not depend on $x$, then the type of dependent functions is the same as the ordinary function type $A \to B$
+
+Consider now a proposition of the form "For all $n$ in $\bbN$, $P(n)$,"  e.g., "for all $n$ in $\bbN$, $n(n+1)$ is even." Its translation is the dependent type
+
+\begin{equation}
+(n : \bbN) \to P\ n
+\end{equation}
+
+Thus, for each natural number $n$, there is a proposition $P\ n : \mathcal{U}$.
+A proof is a term of the given type, hence a dependent function
+
+$$
+   f : (n : \bbN) \to P\ n.
+$$
+
+For then then one has a term $f\ n : P\ n$ for each $n : \bbN$, hence a proof of $P\ n$ for all $n$ in $\bbN$.  Since in general $P\ m \ne P\ n$ for  $m \ne n$,  $f$ is a genuine dependent function.
+
+Let us use these ideas to prove the proposition $P(n) = n(n+1)\space \text{is even}$.  We can reformulate it as 
+
+$$
+P\ n = n(n+1)\space \mod2 \equiv 0.
+$$  
+
+Here assume given a function $\mod2\  : \bbN \to \bbN$ with $\mod2\ n = 0$ for $n$ even and $\mod2\ n = 1$ otherwise.  The type of the proposition to be proved is
+
+\begin{equation}
+\forall (n : \bbN) \to  n(n+1)\space \mod2 \equiv 0
+\end{equation}
+
+To give a proof is to construct a function $f$ of the given type.  We do this by induction.  Since $P\ 0 = 0(0 + 1)\space \mod2 \equiv 0 \to 0 \equiv 0$, we can set $f\ 0 = refl$.  Writing $n + 1$ for $\suc n$, we have
+
+\begin{align}
+P(\suc n) & = P(n+1) = (n+1)(n+2)\space \mod2 \equiv 0 \\
+     & \to n(n+1) + 2(n+1)\space \mod2 \equiv 0 \\
+     & \to n(n + 1)\space \mod2 \equiv 0 \\
+     & = P(n) 
+\end{align}
+
+This yields an inductive construction of the function $f$:
+
+\begin{align}
+  &f : (n : \bbN) &\to P\ n \\
+  &f\ 0 &= refl \\
+  &f\ (n + 1) &= f\ n
+\end{align}
+
+Q.E.D.
+
+
+
+\subsection{Dependent sums}
+
+Suppose once again given a type $A$ and a a type-valued function $B: A \to \mathcal{U}$.  One can speak of \term{dependent pairs} $(a, b)$ where $a : A$ and $b : B\ a$.  The type of such objects is the $\Sigma$-type
+
+\begin{equation}
+\Sigma_{x: A} B\ x \quad\text{or just}\quad \Sigma (x: A)\ (B\ x)
+\end{equation}
+
+If $(B\ x)$ does not depend on $x$, then the dependent sum is the Cartesian product $A\times B$.  Its role in the doctrine of Propositions as Types is to express statements of the form "there exists."  Thus $\exists x \in A: P(x)$ becomes "there is a term $(a,b)$ of $\Sigma (x: A)\ P\ x$."   In that case $b$ is a term of $P\ a$, and so $P\ a$ has a proof. In a constructivist logic, an existence proof always provides a means for constructing an instance of the object in question.
+
+By way of example, consider the proposition 
+
+$$
+\exists (m, n : \bbN) . m^2 + n^2 = 5^2
+$$
+
+Its formulation in type theory is
+
+$$
+\Sigma ((m, n) : \bbN\times\bbN) (m^2 + n^2 \equiv_\bbN 5^2)
+$$
+
+A proof is given by $((2,3), refl)$
+
+\subsection{Higher-order logic}
+
+We have just seen that the predicate calculus (first order logic) can be encoded in type theory.  What of second and higher order logics?  Zeroth order logic is propositional logic: no quantifiers.  First order logic admits quantification over individuals $x$  while second order logic admits quantification over predicates $P(x)$.  We think of predicates as a property, e.g., $isRed(x)$ and $isBlue(x)$.  Let us suppose that the individuals range over a set $S$ of colored polygons in the plane. Thus we can ask $\exists x \in S: isRed(x)$ — does there exist a red shape in $S$? But  we might also ask, given shapes $a$ and $b$, whether there is a property $P$ that the have in commn.  In symbols, we have $\exists P : P(a) \wedge P(b)$. This is a statement in second-order logic because we are quantifying over predicates, not individuals.  As a consequence, second order logic allows us to make statements like the law of the excluded middle:
+
+\begin{equation}
+\forall P\space \forall x : P(x) \lor \neg P(x)
+\end{equation}
+
+Second and higher-order logic can also be encoded in type theory. For the first example, we image a type $S$ of colored shapes and a type $S \to \text{Bool}$ of predicates.  Here $\text{Bool}$ is the type of Booleans, with two terms, true and false. Then we have the dependent sum type
+
+$$
+\Sigma (P : S \to \text{Bool})\ P\ a \times P\ b
+$$
+
+For the law of the excluded middle, we have the type
+
+$$
+(A : \mathcal{U}) (P : \mathcal{A} \to \text{Bool})(x : A) \to P\ x + (P\ x \to \bot)
+$$
+
+
+\subsection{Proof of Associativity}
+
+As an illustration of the doctrine of Proposition as Types, let us prove the associative law for addition.  The type corresponding to this law, written in Agda, is as follows:
+
+\begin{equation}
+\label{law:assoc}
+\text{+-assoc} : \forall (m\space N) \to \forall (n\space  : \bbN)   \to \forall (p\space  : \bbN)  \\ → (m + n) + p \equiv m + (n + p)
+\end{equation}
+
+The name of the type is \blue{+-assoc}; we can write it more compactly as
+
+
+\begin{equation}
+\label{law:assoc}
+\text{+-assoc} : \forall (m\space n\space p : \bbN) → (m + n) + p \equiv m + (n + p).
+\end{equation}
+
+Our task is to construct a term of the given type.  We call this term  \blue{+-assoc} as well, and write it out for the base case:
+
+\begin{equation}
+\label{assoc:base}
+\text{+-assoc}\ 0\ n\ p = (0 + m) + n \equiv 0 + (m + n)
+\end{equation}
+
+The right-hand side above reduces to $m + n \equiv m + n$. This equality type is inhabited by \blue{refl}, so we can write 
+
+$$
+\text{+-assoc}\ 0\ n\ p = \refl 
+$$
+
+Next we write out and simplify the inductive case:
+
+\begin{align}
+\label{pencil:paper}
+\text{+-assoc} (suc\ m)\ n\ p &= (suc\ m + n) + p \equiv suc\ m + (m + p) \\
+&= suc\ (m + n) + p \equiv suc\ m + (n + p) \\
+&= suc\ ((m + n) + p) \equiv suc\ (m + (n + p))
+\end{align}
+
+The last line has the form $suc\ x \equiv suc\ y$ where $x \equiv y$ is $\text{+-assoc}\ m\ n\ p$.  We are therefore in a position to invoke the \term{congruence principle}: 
+
+\begin{indent}
+If $e : x \equiv y$ then $cong\ f\ e: f\ x \equiv f\ y$
+\end{indent}
+
+That is, there is a function $cong$ which transforms terms of $x \equiv y$ to terms of $f\ x \equiv f\ y$.  That is, if two terms are equal, then so are the corresponding function values.  Congruence in type theory is akin to congruence in number theory.  If $f\ x = x^2$ and
+$x \equiv y\space \text{modulo}\ N$, then  $f\ x \equiv f\ y\space \text{modulo}\ N$.
+As we shall see in a moment, congruence can be formulated wholly within the context of type theory.  It is part of the package for the equality type.
+
+To conclude, we have the pattern-matching equations that furnish an inductive construction of the function $\text{+-assoc} $:
+
+\begin{align}
+& \text{+-assoc} : \forall (m\space n\space p : \bbN) → (m + n) + p \equiv m + (n + p) \\
+& \text{+-assoc}\ 0\ n\ p = \refl \\
+& \text{+-assoc} (suc\ m)\ n\ p = cong\ suc \left(((m + n) + p) \equiv (m + (n + p)) \right)  \\
+\end{align}
+
+
+
+Any specific instance of the associative law, eg., \blue{foo}: (2 + 3) + 4 $\equiv$ 2 + (3 + 4)   has as term \blue{foo} = \blue{refl}. Indeed, both sides of the equality type have the same canonical element.   However, \blue{+-assoc} = \blue{refl} does not type-check.  Therefore the general law is given by propositional, not definitional equality.
+
+\subsection{Congruence and other inference principles}
+
+
+Type theory is expressive enough to formulate and implement principles of inference such as \blue{cong}, used above:
+
+\begin{align}
+&\text{cong }: \forall (f : A → B)\space \{x\ y\} → x \equiv y → f\ x \equiv f\ y \\
+&\text{cong}\space f\space \text{refl} = \text{refl}
+\end{align}
+
+Here the fragment $ \{x\ y\}$ provides \term{implicit parameters}.  These are parameters which, along with their types, are inferred when \blue{cong} is applied.  Suppose, for example, that we say
+
+$$
+ \text{+-assoc} (suc\ m)\ n\ p = cong\ suc \left(((m + n) + p) \equiv (m + (n + p)) \right) 
+$$
+
+Then $x$ is matched with $(m + n) + p$ and $y$ with $m + (n + p)$, and both $x$ and $y$ are inferred to have type $\bbN$.
+
+\subsection{Summary}
+
+Propositions are formulated as types, and to give a proof of a proposition is to construct  term of the given type.  Not all types are \term{inhabited}  by terms.  The type $0 \equiv_\bbN 1$ is an example.  One may formulate propositions and find proofs for them entirely within the context of type theory.  No additional theory of logic is needed.  The logic given by type theory is \term{constructivist}.  In it, the Law of the Excluded Middle does not hold.
