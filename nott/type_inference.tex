@@ -1,0 +1,248 @@
+\xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
+
+\setcounter{section}{5}
+
+
+
+\section{Type Inference}
+
+\innertableofcontents
+
+The goal of Hindley-Milner type inference is to infer the type of expressions given whatever information there is at hand.  Consider, for example, the function $inc\ x = x + 1$.  We know that $x$ is of type ${\tt Int}$ and that the addition operator is a function of type $a \to a \to a$.  Therefore $a = {\tt Int}$, and $inc$ is of type ${\tt Int} \to {\tt Int}$. This \italic{ad hoc} example shows that type inference is possible.  What is needed is a systematic method for type inference that can be turned into a computer program.  We do not give the Hindley-Milner algorithm, but rather the idea behind it.
+
+\subsection{Matrix Example}
+
+As a prelude to the real thing, we consider an example from  \cite{1}.  Suppose given a quadruple $Q$ of matrices $A, B, C, D$, etc. and an expression like 
+
+\begin{equation}
+\label{unif:expr}
+E = (AB + CD)^2
+\end{equation}
+
+
+Given that $E$ makes sense as a metrix, what can we infer about the shapes of its constituent matrices?  If a matrix has $m$ rows and $n$ columns, we say that it has type $m \to n$.  Operations on matrices can only be carried out if the types are compatible.  In fact, we have te following named inference rules:
+
+\begin{equation}
+\frac{A : s \to t \quad B : t \to u}{AB : s \to u}\quad \text{MULT}
+\end{equation}
+
+That is, for multpiclication, the number of columns of $A$ must match the number of rows of $B$
+
+\begin{equation}
+\frac{A : s \to t \quad B : s\to t}{A + B : s \to t}\quad \text{ADD}
+\end{equation}
+
+
+\begin{equation}
+\frac{A : s \to s}{A^2 : s \to s}\quad \text{SQ}
+\end{equation}
+
+Each operation in \eqref{unif:expr} defines a subexpression, and each is subject to the above inference rules. To express the consequences of these rules,  Assign types as follows: $A : s \to t$, $\quad B : u \to v$, $\quad C : w \to x$, $\quad D : y \to z$, $\quad AB: a \to b$, $\quad CD: c \to d$, $\quad AB + CD : e \to f$, and $\space(AB + CD)^2 : g \to h$.
+
+\begin{enumerate}
+
+\item $AB$: $ t = u, a = s, b = v$
+
+\item $CD$: $x - y, c = w, d = z$
+
+\item $AB + CD$: $a = c = e, b = d = f$
+
+\item $(AB + CD)^2$: $g = h = e = f$
+
+\end{enumerate}
+
+The resulting set of equations has a three-dimensional space of solutions given by $t = u$, $x = y$, with all the other variables equal to one another.  Thus we may take $t$, $x$, and $a$ as free parameters for the solution, which we may write as $A: a \to t$, $B : t \to\
+ a$, $C: t \to x$, $D: x \to t$. We can summarize the discussion so far by saying that $Q$ has a parametrized type $T(a,t,x)$.  Assignment of integer values to any of these parameters yields a valid specialization of this type, e.g., $T(3,t,x)$, $T(3,4,x)$, and $T(3,4,5)$. These types are partially ordered,  In the case at hand, 
+
+\begin{equation}
+T(a,t,x) \sqsubseteq T(3,t,x)  \sqsubseteq T(3,4,x)  \sqsubseteq T(3,4,5) 
+\end{equation}
+
+The type $T(a,t,x)$ is the \term{principal type} an is distinguished as the least element of this partial order.
+
+\subsection{Functional Programming Example}
+
+Let us reconsider the example of the function $inc$ in the light of the matrix example.  To do so, we use the typing rule for function application:
+
+\begin{equation}
+\frac{f : A \to B \quad a: A}{f\ a : B} \quad \text{APP}
+\end{equation}
+
+For our purposes, we read he definitiion of $inc$ as 
+
+\begin{equation}
+inc\ x = (+)\ x\ 1
+\end{equation}
+
+and we recall that types associate to the right, so that $a \to a \to a = a \to (a \to a)$.  Assigning an unknown type $b$ to $x$, we have the partial inference rule
+
+\begin{equation}
+\frac{(+): a \to (a \to a) \quad x: b}{(+)\ x :\ ?}
+\end{equation}
+
+To satisfy it, one must impose the constraint $a = b$, and then 
+
+\begin{equation}
+\frac{(+): b \to (b \to b) \quad x: b}{(+)\ x :\ b \to b}
+\end{equation}
+
+Iterating this argument, we have the partial rule
+
+\begin{equation}
+\frac{(+)\ x: b \to b \quad 1: Int}{(+)\ x\ 1 :\ ?}
+\end{equation}
+
+which can only be solved if $b = {\tt Int}$.  We conclude that 
+
+\begin{equation}
+x : {\tt Int} \quad (+)\ x\ 1:\ {\tt Int}
+\end{equation}
+
+and so
+
+\begin{equation}
+inc : {\tt Int} \to {\tt Int}
+\end{equation}
+
+For this last assertion, one uses the typing rule
+
+\begin{equation}
+\frac{x: A\quad e:B}{\lambda x.e : A \to B} \quad \text{ABSTR}
+\end{equation}
+
+The example just given, while very simple, contains the seed of the Hindley-Milner method.  The idea is, as in the matrix example, to write down constraints for each subexpresson using the typing rules.  These constraints are expressed as equations.  Sovling the equations, if there is a solution, establishes the types of all subexpressions, including the main expression.  In that case, we say that the expression is \term{well-typed} or \term{typable}.  In the contrary case we say that it is \term{untypable}.
+
+\subsection{Unification}
+
+Type inference is an instance of the more general notion of \term{unification}, which we now describe.  A unification problem is given by a list of pairs of terms,
+
+\begin{equation}
+S =  [(s_1, t_1), \ldots, (s_n, t_n)]
+\end{equation}
+
+We seek a substitution $\sigma$ operating on these so that $ s_i  \sigma= t_i \sigma$ for all $i$. Here $t\sigma$ means "apply the substitutions of $\sigma$ to $t$." For example, suppose 
+
+\begin{equation}
+S = [ ( f(x,g(y)), f(g(z), w) )]
+\end{equation}
+
+In this case, we can take $\sigma$ to be the set of substitutions
+
+\begin{equation}
+\sigma = [x \larr g(z), w \larr g(y)]
+\end{equation}
+
+so that both terms are equal to $f(g(z), g(y)) $. Such a substitution is called a \term{unifier}.  Unifiers are not unique. For example, we could take 
+
+\begin{equation}
+\sigma' = [x \larr g(f(a,b)), y \larr f(b,a), z \larr f(a,b), w \larr g(f(b,a)],
+\end{equation}
+
+in which case $s\sigma' = t\sigma = f(g(f(a,b)), g(f(b,a))$. But note that $\sigma' = \sigma\tau$, 
+where
+
+\begin{equation}
+\tau = [z \larr f(a,b), y \larr f(b,a)  ]
+\end{equation}
+
+The unifier $\sigma$ is privileged in that all other unifiers $\sigma'$ are of the form $\sigma\tau$ for a suitable substitution $\tau$.  It is a so-called \term{most general unifier}, or MGU.  Other unifiers are \term{refinements} of the most general one.
+
+\subsection{Robinson's Method}
+
+We will now describe a general method for solving such problems (A. Robinson?).  To this end, we write unification data as set of equations to be solved:
+
+\begin{equation}
+\label{probstatement}
+S = [s_1 = t_1, \ldots, s_n = t_n]
+\end{equation}
+
+The previous example reads
+
+\begin{equation}
+S = [ ( f(x,g(y)) =f(g(z), w) )]
+\end{equation}
+
+Equality will certainly hold if corresponding arguments of $f$ on the left are equal to those on the right:
+
+\begin{equation}
+x = g(z) \qquad g(y) = w
+\end{equation}
+
+These equations are the same as the substitutions used above.  Further experimentations reveals a suite of four operations that are capable of reducing  \eqref{probstatement} to the form
+
+\begin{equation}
+\label{probsolution}
+S' = [x_1 = e_1, x_2 = e_2, \ldots]
+\end{equation}
+
+where the $x_i$ are variables in the given functions and the $e_i$ are expressions in those variables.  Robinson's method is to transform a set of equations $S$ by successive applications of these operations until it takes the form $S'$, in which case we have in hand the substitutions which yields the MGU. 
+
+\strong{Delete} And equation of the form $t = t$ can be deleted.
+
+\strong{Decompose} An equation of the form $f(s_1, s_2, \ldots ,s_n) = f(t_1, t_2, \ldots ,t_n)$ can be replaced by equations $s_1 = t_1, s_2 = t_2, \ldots, s_n = t_n$.
+
+\strong{Orient} An equation $t = x$ can be replaced by $x = t$, where $x$ is a variable and $t$ is a term.
+
+\strong{Elminate} If one has an equation of the form $x = t$, then it may be eliminated after replacing all other occurrences of $x$ in other equations by $t$.
+
+By way of example, consider the equations
+
+\begin{equation}
+S_1 = [\alpha = f(x), g(\alpha, \alpha) = g(\alpha, \beta)]
+\end{equation}
+
+Apply the elimination rule to obtain 
+
+\begin{equation}
+S_2 = [\alpha = f(x), g(f(x), f(x)) = g(f(x), \beta)]
+\end{equation}
+
+Decomposition yields
+
+\begin{equation}
+S_3 = [\alpha = f(x), f(x) = f(x), f(x) = \beta]
+\end{equation}
+
+and deletion produces the equations 
+
+\begin{equation}
+S_4 = [\alpha = f(x), f(x) = \beta]
+\end{equation}
+
+Finally, apply the orient rule:
+
+\begin{equation}
+S_5 = [\alpha = f(x), \beta = f(x)]
+\end{equation}
+
+The set of equations is now in solved form and the substitution is 
+
+\begin{equation}
+\sigma = [\alpha \larr f(x), \beta \larr f(x)]
+\end{equation}
+
+\bigskip
+
+
+
+\bigskip
+
+\begin{thebibliography}
+
+\bibitem{BE} \href{https://www.cs.unh.edu/~ruml/cs730/unification.pdf}{Bender, Unification}
+
+\bibitem{BK} \href{https://inst.eecs.berkeley.edu/~cs164/sp11/lectures/lecture22.pdf}{Berkeley, CS164, Lecture 22, Type Inference and Unification} $\quad$ \highlight{Quite good!}
+
+\bibitem{CO1} \href{https://www.cs.cornell.edu/courses/cs3110/2011sp/Lectures/lec26-type-inference/type-inference.htm}{CS3110, Type Theory and Unification (Cornell, 2011)} $\quad$ \highlight{These notes a short, down-to-earth, and to the point, with good examples}
+
+\bibitem{CO2} \href{https://www.cs.cornell.edu/courses/cs6110/2017sp/lectures/lec23.pdf}{CS3110, Type Theory and Unification (Cornell, 2011)} 
+
+\bibitem{MS} \href{http://www.cs.tau.ac.il/~msagiv/courses/pl16/types.pdf}{Mooly Sagiv, Types, Type Inference, and Unification} $\quad$ \highlight{Use parse tree to construct equations of constraint.}
+
+\bibitem{PF} \href{https://www.cs.cmu.edu/~fp/courses/15816-s12/lectures/19-unif.pdf}{Pfennig, Lecture Notes on Unification}
+
+\bibitem{IL1} \href{https://pages.github-dev.cs.illinois.edu/cs421-sp18/web/videos/unification/}{Unification (video), CS421, Illiniois}
+
+\bibitem{IL2} \href{https://pages.github-dev.cs.illinois.edu/cs421-sp18/web/pages/lectures/}{CS421}
+
+\end{thebibliography}
