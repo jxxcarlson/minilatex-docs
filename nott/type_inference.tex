@@ -221,6 +221,52 @@ The set of equations is now in solved form and the substitution is
 \sigma = [\alpha \larr f(x), \beta \larr f(x)]
 \end{equation}
 
+\subsection{Unification and Type Inference}
+
+Let us see how we can apply unificatiion to type inference in a simple example. To that end, consider the Haskell code
+
+\begin{align}
+& map :: (a \to b) \to [a] \to [b] \\
+& inc :: Int \to Int \\
+& foo :: [Int]
+\end{align}
+
+We ask whether the expression $map\ inc\ foo$ is well-typed.  To answer this question, we set up equations between  \term{type expressions}.  Type expressions are made up of \term{type variables}, \term{type constants} such as $Int$ and $String$, and \term{type constructors} acting on type expressions.  For each type constructor, e.g. $\to$ and $[\space]$, we have companion constructors on the level of type expressions, e.g., $\rArr$ and $List$.  Thus $\alpha \rArr \beta$, $\alpha \rArr Int$ and $List\space \alpha$  are all type expressions.  Something like $\beta \rArr Int = Int \rArr Int$ is a type equation.  It has $\beta = Int$ as solution.
+
+We derive type equations from the typing rules of Haskell.  In the case at hand, we use the rule APP twice.  The first instance is for the application $map\ inc$.  In that case, APP reads as follows:
+
+\begin{equation}
+\frac{map : (a \to b) \to [a] \to [b] \qquad inc :: Int \to Int }{map\ inc :: [a] \to [b]}
+\end{equation}
+
+Since $a \to b$ must match $Int \to Int$, we have the type equation
+
+\begin{equation}
+\alpha \rArr \beta = Int \rArr Int
+\end{equation}
+
+The second instance of APP is 
+
+\begin{equation}
+\frac{map\ inc :: [a] \to [b] \qquad foo :: [Int]}{(map\ inc)\ foo :: [b]}
+\end{equation}
+
+For this to be a vailid rule, the constraint 
+
+\begin{equation}
+List\space \beta = List\ Int
+\end{equation}
+
+
+ must be satisfied.  Thus we have equations
+
+\begin{equation}
+S_1 = [\alpha \rArr \beta = Int \rArr Int, \quad List\space \beta = List\ Int]
+\end{equation}
+
+
+
+
 \bigskip
 
 
