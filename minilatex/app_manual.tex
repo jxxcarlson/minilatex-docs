@@ -1,0 +1,143 @@
+beginMetadata:
+{
+    "id": "53b10ece-c011-4f40-83c9-7207a474db11",
+    "documentNumber": 90,
+    "author": "jxxcarlson",
+    "title": "App Manual",
+    "path": "minilatex/app_manual.tex",
+    "tags": [
+        "minilatex",
+        "manual"
+    ],
+    "keyString": "app manual a=jxxcarlson minilatex/app_manual.tex t=minilatex t=manual",
+    "timeCreated": 1597355235869,
+    "timeModified": 1607061302956,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 4,
+    "versionDate": 1598635648353
+}
+endMetadata
+
+\title{App Manual}
+
+\maketitle
+
+\tableofcontents
+
+\section{Keyboard shortcuts}
+
+
+\begin{indent}
+\begin{tabular}{ll}
+control-B & Browse mode \\
+control-C & Toggle chat \\
+control-D & Toggle display mode: normal or presentation \\
+control-E & Edit mode \\
+control-S & Focus on search box: type search terms, then ENTER \\
+control-M & Show the manuals \\
+control-N & New document \\
+control-R & Toggle recent docs \\
+control-T & Toggle the table of contents (TOC) and documents found \\
+control-U & Toggle the Doc Tools panel \\
+control-V & New Github version \\
+control-] & Go to next item in index of a multi-section document\\
+control-[ & Go to previous item in index of a multi-section document \\
+\end{tabular}
+\end{indent}
+
+\strong{Note:} type ENTER in the search box to carry out the search.  
+
+\section{Home Page}
+
+To turn one of your public documents into a home page, click on \blue{Doc Tools} in the footer, then click on \blue{Set as Home}.  To send someone a link to your home page, send them text like the following: \blue{https://minilatex.lamdera.app/h/jxxcarlson}.  This is a good way to notify students in a class.
+
+\strong{Internal links.} To put a link to one of your documents in the app, use this model: 
+
+\begin{verbatim}
+    \xlink{UUID}{My Document}
+\end{verbatim}
+
+The UUID is a long string that identifies your document.  To get the UUID of the current document, click on \blue{Doc Tools} and copy it from there. You will see it if in fine print near the top of the  Doc Tools panel.  Triple-click oin it to copy it.
+
+\strong{Images.} To put an image on your home page, follow this example:
+
+\begin{verbatim}
+    \image{IMAGE ADDRESS}{CAPTION}{width: 500}
+\end{verbatim}
+
+You can put whatever positive integer you like for the width.  To get the image address of an image that is on the web, right-click on it and select \blue{Copy Image Address}.  We plan to add an image uploader to the app so that you can use images from your computer.
+
+\section{Search}
+
+Search on parts of words, tags, authors.  A search on \italic{man} will yield this manual.  A search on \italic{man app} will yield this document, the \strong{App Manual}, as opposed to the \strong{Language Manual}.  These searches are on fragments of words in the title.  
+
+The search \italic{t=logic} will retrieve documents tagged with the word \italic{logic}.  Use \italic{t= logic a=aristotle} to find documents tagged as logic written by aristotle.
+
+
+
+\section{Github Integration}
+
+\subsection{Setting up}
+
+With Github integration, you can save versions of your files on GitHub and also restore such file to this app.  To do so you need
+
+\begin{enumerate}
+
+\item A Github account with a designated repository.  Let's suppose you have set up  repository called \code{minilatex-docs}
+
+\item Your username
+
+\item A  \italic{personal access token}.  Create one using \href{https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token}{these directions}, and guard it careflly.
+
+\end{enumerate}
+
+Enter this information in the form below and then press \italic{Set Github Repo}.
+
+\image{https://vschool.s3.amazonaws.com/minilatex/github_setup.png}{Doc Tools/GitHub Settings}{width: 400}
+
+\subsection{Making a first version}
+
+Click on \blue{Doc Tools} in the footer (left), then click on \blue{Github Settings}.  Check to see that the document path is correct.  The document path determines where your file is stored.  In the example above, the document \italic{language-manual.tex} is stored in the folder \italic{manuals} of the repository  \italic{minilatex-docs} which belongs to user \italic{joseph.foobar}.  If you need to change the path, do so at this time.
+
+To make a first version, click on the button \blue{New Github Version}. Enter a message like "Initial commit" in the field at the bottom of the screen then click \blue{New  Version}.
+
+
+\image{https://vschool.s3.amazonaws.com/minilatex/new_github_version.png}{New Version}{width: 400}
+
+\subsection{Subsequent version}
+
+Repeat the previous instructions, or just type \blue{control-V}.
+
+\section{Collaboration}
+
+\subsection{Adding and removing collaborators}
+
+Press the \blue{Collaborators} button in the footer to raise the collaborators popup list.  Enter collaborators by user name one per line.
+
+
+\subsection{Notes to collaborators}
+
+If you say this:
+
+\begin{verbatim}
+\note{Hey John!}{This is a good first draft.
+But we should refer to Blowenpuff's article on
+quantum computing in the introduction. — Fred}
+\end{verbatim}
+
+It is rendered like this:
+
+\note{Hey John!}{This is a good first draft.
+But we should refer to Blowenpuff's article on
+quantum computing in the introduction. — Fred}
+
+You can use the \bs{note} macro any way you wish.  Its form is \bs{note}\texarg{title}\texarg{body}, where the title is rendered in blue and the body is highlighted.
+
+\section{Exporting to LaTeX}
+
+Use the \blue{Export} button in the footer.  The exported document will be saved in the Downloads folder unless you tell your computer otherwise.  If your document has images, a button \blue{Images} will appear to the right of \blue{Export}.  Click on that button to bring up a window that lists the images in your document.  Right-click on these images to download them.  They should be stored in folder \blue{image} in the same place as your exported document.
+
+
+
