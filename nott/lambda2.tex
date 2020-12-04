@@ -1,0 +1,126 @@
+beginMetadata:
+{
+    "id": "9b3f6d2c-0d65-4eb9-a994-79a66a2b79e8",
+    "documentNumber": 15,
+    "author": "locus",
+    "title": "Lambda Calculus",
+    "path": "nott/lambda2.tex",
+    "tags": [],
+    "keyString": "lambda calculus a=locus nott/lambda2.tex ",
+    "timeCreated": 1606927978966,
+    "timeModified": 1606927978966,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
+
+\setcounter{section}{4}
+
+\section{Lambda Calculus}
+
+\italic{(( Work in progress ))}
+
+\innertableofcontents
+
+The lambda calculus was invented in 1932 by Alonzo Church as a way to establish the foundations of logic.  With it he gave a proof of the \italic{Entscheidungsproblem}, also proved independently by quite different means by Alan Turing.  The lambda calculus provides a language for defining functions and applying them to expressions to obtain other expressions. It  provides the theoretical foundation of functional programming.
+
+Here give a brief introduction two flavors of the lambda calculus, the original untyped version and the smply-typed version.  The \href{https://en.wikipedia.org/wiki/Lambda_calculus}{Wikipedia article} on the subject is quite good.  
+
+\subsection{Syntax}
+
+The syntax of the lambda calculus consists of three rules:
+
+\begin{enumerate}
+
+\item There are variables $x$, $y$, ...  These are terms.
+
+\item If $t$ is a term and $x$ is a variable, then $\lambda x.t$ is a term
+
+\item If $t$ and $s$ are terms, then so is $ts$.
+
+\end{enumerate}
+
+Rule 2 is meant to show how to form (anonymous) functions.  Rule 3 is meant to show how to apply functions.  
+
+\subsection{Semantics}
+
+To explain what is meant, we use and extended lambda calculus in which terms can be built using both the rules above and ordinary algebraic expressions. It is easy to give a formal syntax for such an extension, but we shall not do so now.  Consider, therefore, the expression $\lambda x.(x^2 + 3)$.  It has the correct form, $\lambda x.t$ with $t = x^2  + 3$, and it is noteworthy that the variable $x$ appears in $t$.  We say that \italic{$x$ is bound in $t$.}. That is, it is a \term{bound} variable.  Variables that are not bound are \term{free}.  Thus, in the expression $\lambda x. (x^2 + y)$, the variable $x$ is bound, but the variable $y$ is free.
+
+Next, consider the expression $\lambda x.(x^2 + 3) 2$.  According to the syntax rules, we have applied the lambda term of the previous paragraph to the term $2$.  This expression can be reduced to a simpler form by replacing every occurrence of $x$ in $t$ by the term $3$.  In more formal terms, we apply the transformation
+
+\begin{equation}
+\lambda x.t\ s \to t[x/s]
+\end{equation}
+
+where $t[x/s]$ means exactly what was said before: replace every occurence of $x$ by $s$.  In the case at hand, we have
+
+\begin{equation}
+\lambda x.(x^2 + 3) 2 \to 2^2 + 3 = 7
+\end{equation}
+
+Let's lookat a few examples in the pure lambda calculus.  Consder first the expression $\lambda x.x$.  Then
+
+$$
+\lambda x.x \ e \to e
+$$
+
+Thus $\lambda x.x$ is the identity function.  Consider next $\lambda x.e$ where $e$ does not contain $x$.  Then $\lambda x.e\ e' \to e$.  That is, $\lambda x.e$ is the constant function with constant value $e$.  Accordingly, $\lambda x.\lambda y.y$ is the constant function whose value is the identity function. 
+
+Consider next the following sequence of operations, which goes by the name of \term{beta reduction}:
+
+$$
+(\lambda x.x)\underbrace{(\lambda y.9)5}_{redex} \to \underbrace{(\lambda x.x)9}_{redex} \to 5
+$$
+
+A \term{redex} is an expression that can be immediately reduced using the substitution rule. In the case at hand, the two reductions lead to a term which cannot be reduced further. Such a term is said to be in \term{normal form}. Normal forms are also called \term{values}. As the next example shows.Normal forms do not always exist,  
+
+$$
+\Omega = \lambda x. x\ x
+$$
+
+Then one has 
+
+$$
+\Omega \Omega \to \Omega \Omega \to \Omega \Omega \to  \cdots
+$$
+
+That is, beta-reduction is said to \term{diverge}.
+
+\subsection{The Simply-Typed Lambda Calculus}
+
+We now describe the simply-typed lambda calculus (SLTC), which has the pleasant property that all terms have a unique normal form.  In particular, the pathology of the last section, which is a consequence of self-application, cannot occur.  The SLTC operates with a typed variant of the three rules of the untyped lambda calculus:
+
+\begin{enumerate}
+
+\item There are typed variables $x^\sigma$, $y^\tau$, ...  The superscript denotes the type. These are terms.
+
+\item If $t^\tau$ is a term and $x^\sigma$ is a variable, then $(\lambda x^\sigma.t^\tau)^{\sigma \to \tau}$ is a term
+
+\item If $t^{\sigma \to \tau}$ and $s^\sigma$ are terms, then so is $(t^{\sigma \to \tau} s^\sigma)^\tau$.
+
+\end{enumerate}
+
+The function $inc$ considered above is defined in the SLTC and has type ${\tt Int} \to {\tt Int}$.  By contrast, suppose that $x$ has type $\sigma$ in the definition of $\Omega$ above.  The expression $x^\sigma x^\sigma$ is not typable, and so neither is $\Omega$.
+
+As in life, so in computer science: there is no free lunch.  In the current context, the pleasant property of having normal forms is balanced by the unfortunate property of not being Turing complete.  On the one hand, in a Turing-complete language, the halting problem is undecidable.  On the other hand, in the SLTC, all computations halt: a computation is a sequence of reductions to normal form.
+
+\bigskip
+
+\begin{thebibliography}
+
+
+\bibitem{CO} \href{https://www.cs.cornell.edu/courses/cs312/2008sp/recitations/rec26.html}{Cornell, Notes on the Lambda Calculus}
+
+\bibitem{GR} \href{https://homes.cs.washington.edu/~djg/2011sp/lec9.pdf}{Grossman, Simply-Typed Lambda Calculus}
+
+\bibitem{JA} \href{http://therisingsea.org/notes/talk-james-simplytyped.pdf}{James, SLTC}. \highlight{Quite interesting}
+
+\bibitem{SE} \href{https://www.irif.fr/~mellies/mpri/mpri-ens/biblio/Selinger-Lambda-Calculus-Notes.pdf}{Selinger, Lambda Caclulus}
+
+\bibitem{RO} \href{https://www.inf.fu-berlin.de/lehre/WS03/alpi/lambda.pdf}{Rojas, a Tutorial Introduction to the Lambda Calculus}
+
+\end{thebibliography}
