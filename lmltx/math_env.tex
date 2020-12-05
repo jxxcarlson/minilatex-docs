@@ -1,0 +1,164 @@
+beginMetadata:
+{
+    "id": "850f0594-d77c-4b5d-ad7b-82103a4fa7e9",
+    "documentNumber": 284,
+    "author": "jxxcarlson",
+    "title": "Math Environments",
+    "path": "lmltx/math_env.tex",
+    "tags": [
+        "minieditor"
+    ],
+    "keyString": "math environments a=jxxcarlson lmltx/math_env.tex t=minieditor",
+    "timeCreated": 1604078670514,
+    "timeModified": 1604083846395,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{Learning LaTeX}
+
+
+\setcounter{section}{2}
+
+\section{Math Environments}
+
+\innertableofcontents
+
+An \term{environment} in LaTeX has the form
+
+\begin{verbatim}
+\begin{ENV}
+...
+...
+\end{ENV}
+\end{verbatim}
+
+The begin and end tags match, as they must.   Here is an example:
+
+\begin{verbatim}
+\begin{bmatrix}
+   a & b \\
+   c & d
+\end{bmatrix}
+\end{verbatim}
+
+When enclosed by double dollar signs (because it is math-mode LaTeX), we get this:
+
+$$
+\begin{bmatrix}
+   a & b \\
+   c & d
+\end{bmatrix}
+$$
+
+\subsection{Matrices}
+
+\strong{Exercise.} Write source text for what you see below:
+
+$$
+\begin{bmatrix}
+   1 & 0 \\
+   1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+   1 & 1 \\
+   0 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+   1 & 1 \\
+   1 & 2
+\end{bmatrix}
+$$
+
+\strong{Exercise.}. Multiply a matrix times a vector:
+
+$$
+\begin{bmatrix}
+   2 & 1 \\
+   1 & 2
+\end{bmatrix}
+\begin{bmatrix}
+    -1 \\
+   \phantom{-} 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+   -1 \\
+   1
+\end{bmatrix}
+$$
+
+If you put \bs{phantom}\texarg{-} before the  1 in the right-hand vector, that vector will look better.
+
+\strong{Exercise.} Multiply a row and a colum vector:
+
+$$
+\begin{bmatrix}
+   2 & 1 \\    
+\end{bmatrix}
+\begin{bmatrix}
+    -1 \\
+    \phantom{-}1
+\end{bmatrix}
+=
+-1
+$$
+
+
+\strong{Exercise.}  Multiply a column and a row vector:
+
+$$
+\begin{bmatrix}
+    1 \\
+    2
+\end{bmatrix}
+\begin{bmatrix}
+   2 & 1 \\    
+\end{bmatrix}
+=
+\begin{bmatrix}
+   2 & 1 \\
+   4 & 2
+\end{bmatrix}
+$$
+
+
+
+\strong{Exercise.} The examples above use just one of several matrix environments in LaTeX. Experiment with \code{\bs{matrix}}, \code{\bs{pmatrix}}, \code{\bs{Bmatrix}}, \code{\bs{vmatrix}} and \code{\bs{Vmatrix}}.
+
+
+
+\subsection{Alignments}
+
+Use the \code{align} environment when the mathematical text has more than one lines and the lines need to be "lined up" in some way.  In the example below, the alignment is with respect to the equal signs:
+
+\begin{align}
+   a &= b+c \\
+   d+e &= f
+\end{align}
+
+Here is how it is done:
+
+\begin{verbatim}
+\begin{align}
+   a &= b+c \\
+   d+e &= f
+\end{align}
+\end{verbatim}
+
+Alignment is done on whater comes after the &, and lines are separated by double forward slashes.
+
+\strong{Exercise.} Write source text for this series of equations:
+
+\begin{align}
+x &= ab \\
+a &= u + v \\
+b &= u - v \\
+x &= u^2 - v^2
+\end{align}
+
+
