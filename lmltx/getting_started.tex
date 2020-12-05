@@ -1,0 +1,137 @@
+beginMetadata:
+{
+    "id": "fd6755f5-4134-4a84-8d46-2955e8f6eeb3",
+    "documentNumber": 363,
+    "author": "jxxcarlson",
+    "title": "Getting Started",
+    "path": "lmltx/getting_started.tex",
+    "tags": [
+        "minieditor"
+    ],
+    "keyString": "getting started a=jxxcarlson lmltx/getting_started.tex t=minieditor",
+    "timeCreated": 1607205963224,
+    "timeModified": 1607205963224,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{Learning LaTeX}
+
+\section{Getting Started}
+
+\innertableofcontents
+
+
+
+\subsection{Directions}
+
+Each lesson presents some part of LaTeX, along with exercises that you will do as you read the text.  To do the exercises, you will use the \italic{MiniEditor}.  Open the MiniEditor by clicking on the blue \blue{MiniEditor} button in the footer,  To close the editor, click on the button again.  \highlight{You must be signed in as a regular user to use the MiniEditor.}
+
+\subsection{MiniEditor}
+
+Let's use the MiniEdtior to write our first sentence in LaTeX:
+
+\begin{enumerate}
+
+\item Click on the \blue{MiniEditor} button. (Footer, right half).
+
+\item Type the following in the upper window of the editor: \italic{The number \dollar\bs{sqrt 2}\dollar is irrational.}
+
+\item What do you see in the lower window?   Is it what you expected?
+
+\end{enumerate}
+
+The upper window is for the \blue{Source text}.  The lower window is for the \blue{Rendered text}.   Some observations:
+
+\begin{itemize}
+
+\item We put \emph{inline math text} between dollar signs.  
+
+\item The text \code{\bs{sqrt}} is a \term{macro} which is used for making square roots.  
+The number 2 following the macro is its \term{argument}.
+
+\item We often write arguments with curly braces, e.g. \code{\bs{sqrt}\texarg{2}}.  Curly braces are mandatory if the argument contains spaces, e.g., \code{\bs{sqrt}\texarg{a + b}}
+
+\end{itemize}
+
+\strong{Exercise.}. Write \code{\bs{sqrt}\texarg{a + b}} in the source window of the MiniEditor.  What do you see in the RenderedText window?
+
+\subsection{More Examples} 
+
+Type the text below into the source text window (top):
+
+\begin{indent}
+Pythagoras said that \dollar a^2 + b^2 = c^2 \dollar
+\end{indent}
+
+What do you see in the rendered text window (bottom)
+
+Now write this in the source window:
+
+\begin{indent}
+\dollar\dollar\smallskip \bs{int_0^1 x^n dx = } \bs{frac}\texarg{1}\texarg{n+1}\smallskip\dollar\dollar
+\end{indent}
+
+So far we have learned that we can write formulas by writing the mathematical text between dollar signs or double dollar signs.  The first way is called \term{inline math mode} and the second is called \term{display math mode}.
+
+\subsection{Comments}
+
+If we look back at our examples, we see that we have learned quite a lot:
+
+\begin{enumerate}
+
+\item We write subscripts using an underscore (_) and superscripts with a caret (^).
+
+\item We use \term{macro expression} to do integrals and fractions.  A macro expression begins with the macro itself, which has the form \code{\bs{MACRO_NAME}}.  Thus \code{\bs{int}} is a macro.  The macro is followd by zero or more \term{arguments} enclosed in curly braces.  The \code{\bs{frac}} macro has two arguments: first the numerator, then the denominator.
+
+\end{enumerate}
+
+Keep thse points in mind as you continue the lessons.  Note that \bs{int} is a macro with zero arguments.  Other zero-argument macros are \bs{alpha}, \bs{beta}, \bs{gamma}, etc, which give you $\alpha, \beta, \gamma, \text{etc.}$.  The macros \bs{Gamma} and \bs{Delta} do what you expect: $\Gamma, \Delta$.
+
+\subsection{Practice}
+
+Write source text for the formulas below:
+
+\begin{itemize}
+
+\item $ a^{10} + b^{10} = c^{10} $
+
+\item $ \delta = a_1b_2c_3 $ (See coment below)
+
+\item $\Phi = \alpha + \beta + \gamma$.
+
+\end{itemize}
+
+There are many macros for mathematical symbols.  You can expect yourself to know them all, so \href{https://katex.org/docs/supported.html}{here is a handy table}.  Use it (or some other source) whenever you need to a new symbol.
+
+\subsection{More Practice}
+
+Write source text for this formula:
+
+$$
+\sum_{n=1}^\infty \frac{1}{n} = \infty
+$$
+
+Here is some info you will need:
+
+\begin{itemize}
+
+\item This problem is like the example of the integral, except that you use the macro 
+\code{\bs{sum}} instead of \code{\bs{int}}.
+
+\item When a subscript or superscript has more than one character, you must enclose it in curly braces, e.g., \texarg{n=1}.
+
+\item The macro for $\infty$ is \code{\bs{infty}}. (You will find this in the \href{https://katex.org/docs/supported.html}{TABLE}.
+
+\end{itemize}
+
+When you are finished with this lesson, which we will call lesson 0, you should take a break before going on to lesson 1.  This way you will learn faster, better, and enjoy yourself more.
+
+\medskip
+
+\highlight{NOTE.} \italic{In the menu bar, top left, you see a button labeled \blue{Source}.  If you click on it, you can view the source text of this document.  To get back to the usual view, click on \blue{Browse}.  The \blue{Source} text button is available for any public document that someone else wrote.}
+
+\end{enumerate}
