@@ -1,0 +1,234 @@
+beginMetadata:
+{
+    "id": "8a47f429-e221-43c8-8a6a-7ee9e0027d00",
+    "documentNumber": 276,
+    "author": "jxxcarlson",
+    "title": "Text Mode LaTeX",
+    "path": "lmltx/text_mode.tex",
+    "tags": [
+        "minieditor"
+    ],
+    "keyString": "text mode latex a=jxxcarlson lmltx/text_mode.tex t=minieditor",
+    "timeCreated": 1603917082658,
+    "timeModified": 1603927121210,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{LearningLaTeX}
+
+\setcounter{section}{3}
+
+\section{Text Mode LaTeX}
+
+\innertableofcontents
+
+As we mentioned in the introduction, text mode is what you use to alter the style, e.g., \strong{bold}, \italic{italic} or \blue{blue} text.  It is also what you use to give a document structure: titles, sections, subsections, cross-references, tables of contents, etc. That is what we will learn now.
+
+
+\subsection{Text style}
+
+First off, text style.  To make italic text, we use the \code{\bs{emph}} macro, \emph{like this}.   To make \textbf{bold text}, we use the \code{\bs{textbf}} macro.   
+
+NOTE: the macros \bs{italic} and \bs{strong} for italic an bold text also work.
+
+\textbf{Exercise.} Write source text for this sentence: 
+
+\begin{indent}
+Mr. Rigley, running for a fourth time for Congrees said that his policies represented a \textbf{bold and daring step forward}. Nonetheless, the reaction to his pronouncement was notably weak, and \emph{the subject of widespread derision}.
+\end{indent}
+
+\textbf{Exercise.} Use the MiniEditor to compose a small document with both bold and italic text.
+
+\subheading{Colors, highlight, and strike}
+
+Text can be colored, e.g., use \bs{blue} for \blue{blue text} and \bs{red} for \red{red text}. \highlight{Text can be highlighted} using the \bs{highlight} macro.  And to make corrections, as in this \strike{very} redundant \strike{repetitious wordy mishmash of a} sentence, use \bs{strike}.
+
+\textbf{Exercise.} Use the MiniEditor to compose a small document using \bs{red}, \bs{blue}, \bs{highlight} and \bs{strike}.
+
+NOTE: Not all macros mentioned here, e.g., \bs{red}, \bs{blue}, \bs{highlight} and \bs{strike} are part of basic "standard" LaTeX.  However, in LaTeX there are many packages that give added functionality, e.g. colored text.  If you export a MiniLaTeX document to standard LaTeX, those packages will be referenced and any needed macros or commands will be added to the exported file.  Therefore the exported file can be processed with standard LaTeX tools, e.g., \code{pdflatex}.
+
+
+
+\subsection{Sections}
+
+A document is given structure by headings such as \code{\bs{section}}, \code{\bs{subsection}}, \code{\bs{subsubsection}}, and \code{\bs{subheading}}.  All but the last are automatically numbered.  In this document, we use sections and subsections, as in this skeleton:
+
+\begin{verbatim}
+\section{Text Mode LaTeX}
+...
+\subsection{Sections}
+...
+\end{verbatim}
+
+Macros like \code{\bs{section}} and \code{\bs{subsection}} take a single \term{argument}: the text between curly braces.  If you do not want sections be numbered, use \code{\bs{section*}}, \code{\bs{subsection*}}, \code{\bs{subsubsection*}}, etc.
+
+\textbf{Exercise.} Use the MiniEditor to compose a small document with sections and subsections.
+
+
+\subsection{Lists}
+
+Here is a short to-do list:
+
+\begin{itemize}
+
+\item Take the kids to school
+
+\item Buy groceries
+
+\begin{itemize}
+
+\item Eggs
+
+\item Cabbage
+
+\item Apples
+
+\end{itemize}
+
+\item See how Mom is doing
+
+\item Take the overdue books back to the library
+
+
+
+\end{itemize}
+
+Here is how we made it:
+
+\begin{verbatim}
+\begin{itemize}
+
+\item Take the kids to school
+
+\item Buy groceries
+
+\begin{itemize}
+
+\item Eggs
+
+\item Cabbage
+
+\item Apples
+
+\end{itemize}
+
+\item See how Mom is doing
+
+\item Take the overdue books back to the library
+
+
+\end{itemize}
+\end{verbatim}
+
+Worth of note is the \code{\bs{begin{ itemize}}}\code{\bs{end{ itemize}}} pair.  The tags, in this case \code{itemize}, have to be match.  What you see here is an example of an \emph{environment}.  We will meet many more of these.  Notice also that environments can be nested.
+
+\textbf{Exercise.} Use the MiniEditor to write a to-do list.  Then replace \code{itemize} by \code{enumerate}.  What happened?  Now you know two environments.
+
+
+
+\subsection{Images}
+
+There are various ways of inserting images in a LaTeX document.  We will show how it is done in MiniLaTeX.  If you export a MiniLaTeX document to a LaTeX environment on your computer, any MiniLaTeX-specific syntax will be converted to standard LaTeX.
+
+\image{https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhTEk3hMB28W40f0teqomW5zc0aU9WUsP1mQ&usqp=CAU}{Ruby-throated Hummingbird}{width: 500}
+
+Here is how it was done:
+
+\begin{verbatim}
+\image{URL}{Ruby-throated Hummingbird}{width: 500}
+\end{verbatim}
+
+The URL is the "image address" of the image, and looks like this
+
+\begin{verbatim}
+https://encrypted-tbn0.gstatic.com/images?q=tbn%3...
+\end{verbatim}
+
+You find the the image address by control-clicking or right-clicking on the image.
+
+Note that \code{\bs{image}} is a macro with three arguments: first the URL, second the caption, and third some information about size and placement, e.g., 
+
+\begin{verbatim}
+{width: 400}
+{align: center}
+{float: left, width: 200}
+{float: right, width: 20}
+\end{verbatim}
+
+
+\strong{Exercise.} Use Google or some other search engine to find an image you like.  Copy its address aka URL.  Use it to place an image in the MiniEditor.
+
+
+\subsection{Verbatim, Verse, Indent}
+
+\subheading{Verbatim}
+
+Sometimes we don't want any formatting applied text, and we want line endings respected.  Code is one kind of text that can be handled by a verbatim environment.  Poetry is another.  Here is some code:
+
+\begin{verbatim}
+def generate(initial_value, n):
+    x = initial_value
+    k = 0
+    output = [x]
+    while x > 0 and k < n:
+        k = k + 1
+        x = x + 2*random.randint(0,1) - 1
+        output.append(x)
+    return output
+\end{verbatim}
+
+We wrote this by enclosing the text between the lines \code{\bs{begin}\texarg{verbatim}} and 
+\code{\bs{end}\texarg{verbatim}}.  This is the verbatim environment.
+
+\strong{Exercise.} Write some code in the MiniEditor using the verbatim environment.
+
+\subheading{Verse}
+
+Here is the verse environment, which is better for poetry:
+
+\begin{verse}
+Twas brillig, and the slithy toves
+Did gyre and gimble in the wabe;
+All mimsy were the borogoves,
+And the mome raths outgrabe.
+
+"Beware the Jabberwock, my son!
+The jaws that bite, the claws that catch!
+Beware the Jubjub bird, and shun
+The frumious Bandersnatch!"
+...
+\end{verse}
+
+
+The syntax is the same as with the verbatim environment: enclose the text with the markers 
+\code{\bs{begin}\texarg{verse}} and 
+\code{\bs{end}\texarg{verse}}. 
+
+\strong{Exercise.} Find a poem (or write one).  Use the MiniEditor to render it.
+
+
+\subheading{Indent}
+
+As an example of nesting, we can put our poem inside the \code{indent} environment:
+
+\begin{indent}
+\begin{verse}
+Twas brillig, and the slithy toves
+Did gyre and gimble in the wabe;
+All mimsy were the borogoves,
+And the mome raths outgrabe.
+
+"Beware the Jabberwock, my son!
+The jaws that bite, the claws that catch!
+Beware the Jubjub bird, and shun
+The frumious Bandersnatch!"
+...
+\end{verse}
+\end{indent}
+
+\strong{Exercise.} Modify what you did in the previous exercise so as to indent the text.
+
