@@ -1,0 +1,70 @@
+beginMetadata:
+{
+    "id": "f1f22387-7bb7-446e-9806-0ea09446fcd1",
+    "documentNumber": 278,
+    "author": "jxxcarlson",
+    "title": "MiniLaTeX versus LaTeX",
+    "path": "lmltx/minilatex_v_latex.tex",
+    "tags": [],
+    "keyString": "minilatex versus latex a=jxxcarlson lmltx/minilatex_v_latex.tex ",
+    "timeCreated": 1603939626495,
+    "timeModified": 1603939626495,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{LearningLaTeX}
+
+\setcounter{section}{4}
+
+\section{MiniLaTeX versus LaTeX}
+
+
+
+You are reading this document on an app that uses MiniLaTeX,  a subset of LaTeX designed for the web.  It features 
+
+\begin{itemize}
+
+\item No setup, no-hassle: just click control-N for a new document and start typing.  \emph{Listerally!}
+
+\item Almost instantaneous rendering
+
+\item Real-time, in-line error messages displayed in the rendered text, no log scrolling off the screen in another window.
+
+\item Export to standard LaTeX and to PDF.  Your data is \emph{not} prisoner to the app.
+
+\end{itemize}
+
+The current subset is designed to handle common cases, e.g., writing problem sets, class handouts, and class notes in math and physics courses, computer science, etc.  The notes can eaily approach the size and complexity of a book.  See for example, \href{uuid:6f5a573d-5603-4470-8dc9-b0972997a6e6}{these  notes on quantum physics}.  Together with feedback from the community, we will continue to expand the subset that MiniLaTeX can handle.
+
+\subsection*{Design of MiniLaTeX}
+
+Our goal is to convert LaTeX source text to HTML so that it can be displayed in the browse; we require in addition that this conversion to be FAST.  In technical terminology, wuch a converter is a LaTeX to HTML compiler.  To build one, we have first to write a parser tha reads LaTeX source code and produces an abstract syntax tree (AST for short).  This tree encodes an understanding of the grammatical structure of the source, where by grammar, we mean "LaTeX grammar."  But LaTeX has no publlished grammar, so this is problematic and requires some reverse engneering.
+
+Our approach is to first identify a subset of the most commonly used LaTeX constructs, then devise an AST and parser which can handle them.  With this bit of reverse engineering in hand,  we construct a function
+
+$$
+parse : Source Text \to AST
+$$
+
+The renderer will be a function 
+
+$$
+render : AST \to HTML
+$$
+
+and the compiler is the composition of these two functions:
+
+$$ 
+compile = render \circ parse
+$$
+
+The renderer passes all math-mode text to MathJax or KaTeX in the final stage of the compilation process.
+
+
+
+
+
