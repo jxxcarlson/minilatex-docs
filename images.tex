@@ -1,0 +1,54 @@
+beginMetadata:
+{
+    "id": "47a38f1e-9446-4e51-845a-cce1ed7b4077",
+    "documentNumber": 365,
+    "author": "jxxcarlson",
+    "title": "Images",
+    "path": "images.tex",
+    "tags": [
+        "minieditor"
+    ],
+    "keyString": "images a=jxxcarlson images.tex t=minieditor",
+    "timeCreated": 1607270345882,
+    "timeModified": 1607270364880,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{Learning MiniLaTeX}
+
+
+\setcounter{section}{7}
+
+\section{Images}
+
+You can place an image in a MiniLaTeX document if it it exists somewhere on the internet and you have its "location" or URL.  The URL for the image below is
+
+\begin{verbatim}
+https://psurl.s3.amazonaws.com/images/jc/beats-eca1.png
+\end{verbatim}
+
+You place an image like this:
+
+\begin{verbatim}
+\image{URL}{Caption}{Format}
+\end{verbatim}
+
+The caption and format are optional.  The format has two parts, both of which are optional: the \blue{width} and the \blue{placement}. The width is a fragment like \blue{width: 350}, where the units are pixels.  Placement can be one of the following:
+
+\begin{verbatim}
+align: center
+float: left
+float: right
+\end{verbatim}
+
+\image{https://psurl.s3.amazonaws.com/images/jc/beats-eca1.png}{Figure 1. Two-frequency beats}{width: 350, align: center}
+
+
+
+\strong{Exercise.} Write source text for the \italic{Two-frequency beats} in the MiniEditor.
+
+\strong{Exercise.} Find an image on the internet and place it  in the MiniEditor.
