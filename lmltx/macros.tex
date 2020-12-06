@@ -1,0 +1,63 @@
+beginMetadata:
+{
+    "id": "ec24173c-ad9b-4596-85e2-ceb70373351d",
+    "documentNumber": 283,
+    "author": "jxxcarlson",
+    "title": "Macros",
+    "path": "lmltx/macros.tex",
+    "tags": [
+        "minieditor"
+    ],
+    "keyString": "macros a=jxxcarlson lmltx/macros.tex t=minieditor",
+    "timeCreated": 1604076644977,
+    "timeModified": 1604076644977,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{Learning LaTeX}
+
+\setcounter{section}{8}
+
+\section{Macros}
+
+\innertableofcontents
+
+
+\subsection{Math mode}
+
+We first encountered macro definitions in the section on theorem environments:
+
+
+
+\begin{verbatim}
+\begin{mathmacro}
+\newcommand{\mod}[0]{\space\text{mod}\space}
+\end{mathmacro}
+\end{verbatim}
+
+In MiniLaTeX, math-mode macro definitions are listed in the \code{mathmacro} environment.
+Macro definitions have the form
+
+ \begin{verbatim}
+\newcommand{MACRO-NAME}[N]{BODY}\end{verbatim}
+
+where 
+
+
+\begin{enumerate}
+
+\item MACRO-NAME begins with a backslash.
+
+\item  $N$ is the number of arguments of the macro
+
+\item BODY gives  the text to be used wherever the macro is used.
+
+\end{enumerate}
+. 
+\subsection{Text mode}
+
+NOTE. If a MiniLaTeX document is exported  to standard LaTeX, the macro definitions are exported as standard LaTeX.
