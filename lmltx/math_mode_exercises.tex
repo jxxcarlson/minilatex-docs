@@ -1,0 +1,122 @@
+beginMetadata:
+{
+    "id": "6a90de6a-0a10-4788-ae2b-2b78130211cc",
+    "documentNumber": 274,
+    "author": "jxxcarlson",
+    "title": "Math Mode Exercises",
+    "path": "lmltx/math_mode_exercises.tex",
+    "tags": [
+        "minieditor"
+    ],
+    "keyString": "math mode exercises a=jxxcarlson lmltx/math_mode_exercises.tex t=minieditor",
+    "timeCreated": 1603901186530,
+    "timeModified": 1603918291673,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 1,
+    "versionDate": 1607212010781
+}
+endMetadata
+\xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{LearningLaTeX}
+
+\setcounter{section}{3}
+
+\section{Math Mode Exercises}
+
+\innertableofcontents
+
+
+In this lesson we will not introduce new things, but rather exercise ourselves with more complex problems using what we already know.
+
+
+\subsection{Nesting and combining}
+
+Superscripts can be nested: $a^{b^c}$
+
+To do this, we wrote 
+
+\begin{verbatim}
+$ a^{b^c} $
+\end{verbatim}
+
+\subsection*{Problems}
+
+Write source text for the following:
+
+\begin{enumerate}
+
+\item $2^{3^4}$
+
+\item $2^{3^{4^5}}$
+
+\item $\lambda(k) = \sum_{j=1}^n \mu_j^k$
+
+\item Complicated subscripts: $ A_i = \sum_{j=1}^n a_{i,j}  $
+
+\item More complicated: $ A_i = \sum_{j=1}^n a_{i_j}  $
+
+\end{enumerate}
+
+For still more fun, evaluate the expressions (1) and (2) above. Pencil and paper allowed and even recommended!
+
+\subsection{Calculus}
+
+Let's look at this equation.
+
+ $$ \frac{dy}{dx} = y $$
+
+You can write source text for it using \code{\bs{frac}}.  \blue{Do this now.}
+
+For something a bit harder, let's do something with second derivatives:
+
+$$
+  \frac{d^2y}{dx^2} = - y
+$$
+
+You have all the elements at hand: the \code{\bs{frac}} macro, and superscripts.  \blue{Write source code for this now}.
+
+Let's move on to multi-variable calculus with this equation (the one-dimensional wave equation):
+
+$$
+\frac{\partial^2 u}{\partial t^2} =  c^2 \frac{\partial^2 u}{\partial x^2}
+$$
+
+You need one more piece of information: the macro for the partial derivative symbol is \code{\bs{partial}}. 
+
+\subsection{Symbol Table}
+
+There are many, many symbols in LaTeX.  As noted previously, you can look them up in various online references, e.g,
+
+% \begin{center}
+% \href{https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols}{LaTeX Mathematical Symbols}
+% \end{center}
+
+\begin{center}
+\href{https://katex.org/docs/supported.html}{KaTeX Supported Symbols}
+\end{center}
+
+Take a look at this now, then work on reproducing the examples below.
+
+\strong{Sets}
+
+$$
+A \cap (B \cup C) = (A \cap B) \cup (A \cap C)
+$$
+
+\strong{Logic}
+
+$$
+\forall x \in A : \exists y \in B\space \text{ such that } y > x
+$$
+
+Here we used the \code{\bs{text}} macro for the phrase  "such that;"   We also wrote a \code{\bs{space}} to separate it from $\exists y \in B$.
+
+
+
+\subsection{Making up your own exercises}
+
+As with learning a musical instrument or French or Chinese or any other human language, it is important to practice, practice practice.  Especially valuable is the exercise of making up your own exercises.   
+
+\blue{Do this now.  You can practice using the mini-editor}.  If at the moment you happen to be short on inspiration, open up a book that has a lot of mathematics in it and see if you can reproduce some of it.
+
