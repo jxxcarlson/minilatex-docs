@@ -11,24 +11,24 @@ beginMetadata:
     "keyString": "getting started a=jxxcarlson lmltx/getting_started.tex t=minieditor",
     "timeCreated": 1607205963224,
     "timeModified": 1607205963224,
-    "public": false,
+    "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 0,
-    "versionDate": 0
+    "versionNumber": 1,
+    "versionDate": 1607211904782
 }
 endMetadata
 \xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{Learning LaTeX}
+
+\setcounter{section}{2}
 
 \section{Getting Started}
 
 \innertableofcontents
 
-
-
 \subsection{Directions}
 
-Each lesson presents some part of LaTeX, along with exercises that you will do as you read the text.  To do the exercises, you will use the \italic{MiniEditor}.  Open the MiniEditor by clicking on the blue \blue{MiniEditor} button in the footer,  To close the editor, click on the button again.  \highlight{You must be signed in as a regular user to use the MiniEditor.}
+Each lesson presents some part of LaTeX, along with exercises that you will do as you read the text.  To do the exercises, you will use the \italic{MiniEditor}.  Open the MiniEditor by clicking on the blue \blue{MiniEditor} button in the footer,  To close the editor, click on the button again.  
 
 \subsection{MiniEditor}
 
@@ -67,7 +67,7 @@ Type the text below into the source text window (top):
 Pythagoras said that \dollar a^2 + b^2 = c^2 \dollar
 \end{indent}
 
-What do you see in the rendered text window (bottom)
+What do you see in the rendered text window (bottom)?
 
 Now write this in the source window:
 
@@ -103,9 +103,19 @@ Write source text for the formulas below:
 
 \item $\Phi = \alpha + \beta + \gamma$.
 
+\item $\frac{1}{5}$
+
+\item $\frac{1}{3} + \frac{1}{4} = \frac{7}{12}$
+
+\item $\int e^{-x} dx = -e^{-x} + C$
+
+\item $\int_0^\infty e^{-x} dx = 1$
+
 \end{itemize}
 
-There are many macros for mathematical symbols.  You can expect yourself to know them all, so \href{https://katex.org/docs/supported.html}{here is a handy table}.  Use it (or some other source) whenever you need to a new symbol.
+The macro for $\infty$ is \code{\bs{infty}}. (You will find this in the \href{https://katex.org/docs/supported.html}{TABLE}.)
+
+
 
 \subsection{More Practice}
 
@@ -124,14 +134,16 @@ Here is some info you will need:
 
 \item When a subscript or superscript has more than one character, you must enclose it in curly braces, e.g., \texarg{n=1}.
 
-\item The macro for $\infty$ is \code{\bs{infty}}. (You will find this in the \href{https://katex.org/docs/supported.html}{TABLE}.
+
 
 \end{itemize}
 
-When you are finished with this lesson, which we will call lesson 0, you should take a break before going on to lesson 1.  This way you will learn faster, better, and enjoy yourself more.
+When you are finished with this lesson, you should take a break before going on to lesson 1.  This way you will learn faster, better, and enjoy yourself more. 
+
+ \italic{If you have a regular account and are signed into it, you already know enough to write simple documents.  Remember: control-N to make a new document.}
 
 \medskip
 
-\highlight{NOTE.} \italic{In the menu bar, top left, you see a button labeled \blue{Source}.  If you click on it, you can view the source text of this document.  To get back to the usual view, click on \blue{Browse}.  The \blue{Source} text button is available for any public document that someone else wrote.}
+\strong{\highlight{NOTE.}} In the menu bar, top left, you see a button labeled \blue{Source}.  If you click on it, you can view the source text of this document.  To get back to the usual view, click on \blue{Browse}.  The \blue{Source} text button is available for any public document that someone else wrote.  Studying source text is a good way to learn how to write LaTeX documents.
 
 \end{enumerate}
