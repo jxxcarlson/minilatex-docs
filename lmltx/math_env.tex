@@ -11,17 +11,17 @@ beginMetadata:
     "keyString": "math environments a=jxxcarlson lmltx/math_env.tex t=minieditor",
     "timeCreated": 1604078670514,
     "timeModified": 1604083846395,
-    "public": false,
+    "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 0,
-    "versionDate": 0
+    "versionNumber": 1,
+    "versionDate": 1607212049779
 }
 endMetadata
 \xlink{uuid:f8e68aa3-429a-4030-83a8-328ecb41126d}{Learning LaTeX}
 
 
-\setcounter{section}{2}
+\setcounter{section}{4}
 
 \section{Math Environments}
 
@@ -161,4 +161,68 @@ b &= u - v \\
 x &= u^2 - v^2
 \end{align}
 
+Notice that the \code{align} environment produces automatically generated equation numbers.
 
+\subsection{Equations}
+
+The equation environment offers more than the double-dolllar-sign method of writing displayed mathematical text:
+
+\begin{equation}
+\label{pythagoras}
+a^2 + b^2 = c^2
+\end{equation}
+
+Note that the equation was given a number, just as with the \code{align} environment above.  Here is how it was done:
+
+\begin{verbatim}
+\begin{equation}
+\label{pythagoras}
+a^2 + b^2 = c^2
+\end{equation}
+\end{verbatim}
+
+The \code{\bs{label}} macro is used for cross-references: elsewhere we can say \code{\bs{eqref}\texarg{pythagoras}} to get this: In \eqref{pythagoras} we introduce the Pythagorean formula.
+
+
+\subsection{Theorems}
+
+The next construct is the \term{theorem} environment, as illustrated below
+
+\begin{theorem}
+\label{primes4}
+There are infinitely many prime numbers $p$ 
+such that $p \equiv 1 \space\text{mod}\space 4$
+\end{theorem}
+
+Here is how it was done:
+
+\begin{verbatim}
+\begin{theorem}
+\label{primes4}
+There are infinitely many prime numbers $p$ 
+such that $p \equiv 1 \space\text{mod}\space 4$
+\end{theorem}
+\end{verbatim}
+
+The \code{\bs{space}} macro ensures that there is space before and after the text \code{mod}.
+We say \code{\bs{text}\texarg{mod}} instead of just \code{mod} so that the typeface will be that of ordinary text, not the slanted text of equations.  
+
+It is awkard to repeatadly type \code{\bs{space}\bs{text}\texarg{mod}\bs{space}}.  Instead, we defin our own math-mode macro, like this:
+
+\begin{verbatim}
+\begin{mathmacro}
+\newcommand{\mod}[0]{\space\text{mod}\space}
+\end{mathmacro}
+\end{verbatim}
+
+
+
+
+\begin{mathmacro}
+\newcommand{\mod}[0]{\space\text{mod}\space}
+\end{mathmacro}
+
+\begin{theorem}
+\label{primes8}
+There are also infinitely many prime numbers $p$ such that $p \equiv 1 \mod 8$
+\end{theorem}
