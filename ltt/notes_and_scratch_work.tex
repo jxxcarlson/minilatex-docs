@@ -1,0 +1,299 @@
+beginMetadata:
+{
+    "id": "923fc688-f130-4a84-9e35-657835547e35",
+    "documentNumber": 116,
+    "author": "jxxcarlson",
+    "title": "Notes and Scratch Work",
+    "path": "ltt/notes_and_scratch_work.tex",
+    "tags": [
+        "logic"
+    ],
+    "keyString": "notes and scratch work a=jxxcarlson ltt/notes_and_scratch_work.tex t=logic",
+    "timeCreated": 1598841918347,
+    "timeModified": 1598841920347,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+ \section{Notes} 
+
+ \strong{Recall} a \term{lattice} is a partially ordered set 
+$ (L, \le) $ 
+ such that for any two elements 
+$ x $ 
+ and 
+$ y $ 
+, there is (i) a supremum 
+$ x \lor y $ 
+, (ii) an infimum 
+$ x \land y $ 
+.  Such a lattice is \term{bounded} if it has a least element 
+$ \bot $ 
+ and a greatest element 
+$ \top $ 
+.  It is \term{distributive} if 
+$ \land $ 
+ distributes over 
+$ \lor $ 
+, and 
+$ \lor $ 
+ distributes over 
+$ \land $ 
+.  It is \term{complemnted} if for every 
+$ a $ 
+ there is a 
+$ b $ 
+ such that 
+$ a \lor b  = \top $ 
+ and 
+$ a \land b = \bot $ 
+. A Boolean algebra is a complemented bounded distributive lattice.
+
+
+ \subheading{Boolean algebras} 
+
+ See \cite{BT} . An \term{atom} is a least nontrivial element: an element 
+$ x $ 
+ such that if 
+$ y \le x $ 
+, then 
+$ y = x $ 
+ or 
+$ y = \bot $ 
+.
+
+
+ \strong{Finite Boolean algebras.}  Power sets, 
+$ 2^X $ 
+.  The singletons 
+$ \set{x} $ 
+ for 
+$ x \in X $ 
+ are its atoms,  Every finite boolean algebra has the form 
+$ 2^X $ 
+.
+
+
+ \strong{Finite and cofinite subsets}.  Let 
+$ B $ 
+ be the set of subsets of the integers which are either finite or cofinie (have finite complement).  Then 
+$ B $ 
+ is Boolean algebra whose atoms are the singletons.
+
+
+ \strong{Free boolean algebras.} . Consider a countable set of generator 
+$ G = \set{g_1, g_2, \ldots } $ 
+. Consider the set of terms that ccan be built from then using 
+$ \lor $ 
+, 
+$ \land $ 
+, and 
+$ \neg $ 
+, as well as 
+$ \top $ 
+ and 
+$ \bot $ 
+. Identify 
+$ x\land y $ 
+ and 
+$ y \land x $ 
+, etc. The free boolean algebra 
+$ F $ 
+ is atomless.  Consider a term 
+$ x $ 
+ and a variable 
+$ v $ 
+ that does not occur in 
+$ x $ 
+ Then 
+$ v \land x \le x $ 
+, etc.  Every countable, atomless boolean algebra is isomorphic to a free boolean algebra.
+
+
+ \subheading{Types} 
+
+$$
+\frac{}{\heartsuit : Suit} \quad
+ \frac{}{\diamondsuit : Suit} \quad
+ \frac{}{\spadesuit : Suit} \quad
+ \frac{}{\clubsuit : Suit} \quad
+$$
+
+
+\subsection{Formation of new types}
+
+So far we have discussed four types: $Suit$, $SuitPair$, $\nat$, $\nat \to \nat$..  The first type was introduced by (a) naming it, (b) listing its four terms $\diamondsuit$, $\heartsuit$, $\clubsuit$, and $\spadesuit$, (c) defining equality for this type.  In general, one introduces a type by making certain \term{judgements}.  The $Suit$ type is introduced by positing the rule
+
+$$
+\frac{}{Suit : Type}
+$$
+
+In effect, we introduce a name, and declare that it is the name of type.  If we were to stop here (as we may), we would have a type with no terms.  This is a useful thing to have, an example of which is the type $\bot$.  But we go further, saying
+
+$$
+\frac{}{\diamondsuit : Suit} \quad
+\frac{}{\heartsuit : Suit} \quad
+\frac{}{\clubsuit : Suit} \quad
+\frac{}{\spadesuit : Suit} \quad
+$$
+
+These are the rules for constructing terms.  Our type is now "inhabited."
+Notice that the statement $0 : Suit$  is neither true nor false: it makes no sense, as it is not derivable from the rules of the type. Adjunction of the rule
+
+$$
+\frac{a : Suit}{a = a : Suit}
+$$
+
+completes the formation of the Suit type.
+
+The $SuitPair$ type is an instance of the Cartesian product type, whch is formed by the rule
+
+\begin{equation}
+\frac{A : Type \quad B : Type}{A\times B : Type}
+\end{equation}
+
+
+\subsubsection{Functions}
+
+Formation:
+
+\begin{equation}
+\frac{A : Type \quad B : Type }{A \to B : Type}
+\end{equation}
+
+
+Introduction:
+
+\begin{equation}
+\frac{x :  A \vdash b : B}{ \lambda x. b : A \to B}
+\end{equation}
+
+Elimination:
+
+\begin{equation}
+\frac{a : A \quad f : A \to B }{ f \,a : B}
+\end{equation}
+
+Computation:
+
+\begin{equation}
+\frac{x :  A \vdash b : B \quad a: A }{(\lambda x. b)(a) \to_\beta b[x/a]}
+\end{equation}
+
+
+Uniqueness:
+
+
+\subsubsection{Cartesian products}
+
+The formation rule for the $Suit$ type had no antecedent, while formation of  Cartesian products depends on two antecedent types, $A$  and $B$. Terms of $A\times B$ are introduced by the rule
+
+\begin{equation}
+\frac{a : A \quad b : B}{(a,b) : A \times B}
+\end{equation}
+
+The term $(a,b)$ is an atomic notion. To have access to what in set theory we think of as its components, we need the projections functions
+
+\begin{align}
+pr_1 : A \times B \to A \\
+pr_2 : A \times B \to B \\
+\end{align}
+
+To define them, it is enough to say how a function $g : A \to B \to C$ defines a function $f: A\times B \to C$ namely,
+
+\begin{equation}
+f((a,b)) =_{def} g(a)(b)
+\end{equation}
+
+
+With $g =\lambda a.\lambda b . a$ this construction yields $pr_1$, and with
+$g =\lambda a.\lambda b . b$, it yields $pr_2$.
+
+
+
+
+
+\subsection{Curry-Howard Isomorphism}
+
+\strong{Example.} The formula $A \to (B \to A)$ can be viewed as a type.  Then a proof, if there is one, is an inhabitant $p$ of that type. It must have the form $\lambda a: A.f:B \to A$.  For $f$ we can take $\lambda b.a$ so the expression $p = \lambda a.(\lambda b.a)$ has the correct type.
+
+
+
+
+\strong{Example.} The formula $A \to \neg \neg A$ corresponds to the type $A \to ((A \to \bot) \to \bot)$.  Let $f : A \to \bot$. If $a:A$, then $\lambda f . f(a)$ has type $((A \to \bot) \to \bot)$ and so $\lambda a. \lambda f . f(a)$ has type  $A \to ((A \to \bot) \to \bot)$.
+
+
+
+
+\strong{Example.}. Consider the law of contraposition,
+
+$$
+(A \to B) \to (\neg B \to \neg A)
+$$
+
+It is a type.  Viewed as a proposition, to provide a proof is to exhibit an inhabitant.  Suppose give $f : A \to B$ and $g : \neg B$, that is,
+$g : B \to \bot$.  Then $g\circ f : A \to \bot$.  The task, then, is to write down a lambda expression for the function $\rho =  f \mapsto (g \mapsto g\circ f)$.  We proced in stages:
+
+\begin{align}
+f \mapsto (g \mapsto g\circ f) & = \lambda f .(g \mapsto g\circ f)\\
+ & = \lambda f . \lambda g . (g\circ f) \\
+& = \lambda f . \lambda g . (\lambda a. g(f(a))) \\
+\end{align}
+
+\subsection{References}
+
+\href{http://www.cse.chalmers.se/~smith/handbook.pdf}{Martin-Löf's Type Theory}
+
+\href{http://staff.math.su.se/palmgren/lecturenotesTT.pdf}{Lecture Notes on Type Theory} — Palmgren
+
+\href{https://home.sandiego.edu/~shulman/hottseminar2012/02typetheory-handout2up.pdf}{Basics of type theory and Coq} — Shulman
+
+\href{http://www.cs.nott.ac.uk/~psztxa/talks/fmv18.pdf}{Altenkirch}, Introduction to (Homotopy) Type Theory
+
+\href{http://www.cs.nott.ac.uk/~psztxa/talks/bristol-16.pdf}{Altenkirch}, Bristol talk
+
+\href{http://philsci-archive.pitt.edu/12824/1/A.Meaning.Explanation.for.HoTT.pdf}{Dimitris Tsementzis}, A Meaning Explanation of HoTT (2017)
+
+
+
+\section{Notes and Scratch Work}
+
+\strong{Formation rule.}  Given $A:\mathcal{U}$, $a, b:A$, there is a type $\text{Id}_A(a,b)$.
+
+\strong{Introduction rule.} Given $A: \mathcal{U}$, there is an element 
+
+$$
+\text{refl}: \prod (a:A),\text{Id}_A(a,a)
+$$
+
+\strong{Elimination rule.}  Suppose given
+
+$$
+C: \prod(a,b:A), \text{ Id}_A(a,b), \mathcal{U}
+$$
+
+and 
+
+$$
+c : \prod (a:A), C(a,a,\text{refl}(x)),
+$$
+
+there is an element
+
+$$
+J: \prod (a,b:A), \prod (p: \text{ Id}_A(a,b)), C(a,b,p)
+$$
+
+such that
+
+$$
+J(a,a,\text{refl}(a)) = c(x)
+$$
+
+
+\strong{Leibnitz's principle.}  Equals can be substituted for equals. 
+
+\strong{Proof.} Let $F$ be a formula with variables $x$ and $y$.  Suppose that $F[a/x, a/y]$ holds for all $a:A$. Let $C(a,b,p) = (F[a/x, b/y], p)$. Then 
