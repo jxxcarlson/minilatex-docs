@@ -12,27 +12,19 @@ beginMetadata:
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 0,
-    "versionDate": 0
+    "versionNumber": 1,
+    "versionDate": 1607014512284
 }
 endMetadata
+\setcounter{section}{1}
+
 \xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
 
-\begin{mathmacro}
-\newcommand{\bbN}[0]{\mathbb{N}}
-\newcommand{\blah}[0]{\text{\textunderscore}}
-\newcommand{\sp}[0]{\space}
-\newcommand{\refl}[0]{\mathop{\text{refl}}}
-\newcommand{\lhs}[0]{\mathop{\text{LHS}}}
-\newcommand{\rhs}[0]{\mathop{\text{RHS}}}
-\newcommand{\suc}[0]{\blue{succ}\space}
-\newcommand{\zero}[0]{\blue{zero}\space}
-\newcommand{\add}[0]{\blue{add}\space}
-\newcommand{\vec}[0]{\mathop{\text{Vec}}}
-\newcommand{\Set}[0]{\mathop{\text{Set}}}
-\newcommand{\mod2}[0]{\text{mod2}}
-\end{mathmacro}
+\include{435}
 
+\begin{textmacro}
+\newcommand{\xcode}[1]{\blue{#1}}
+\end{textmacro}
 
 \section{Introduction}
 
@@ -44,23 +36,37 @@ endMetadata
 
 Set theory provides a language in which we can formulate and work with mathematical ideas such as the set of natural numbers $\bbN = \{ 0, 1, 2, \ldots \}$, statements such as $5 \in \bbN$, $7/2 \not\in \bbN$,  etc.  The goal of these notes is to explain an alternative language, the \term{type theory} of Per Martin-Löf (MLTT).  The purely theoretical discussion is complemented by code examples in the programming language Agda, which implements MLTT.  See \href{https://plfa.github.io/}{Wadler} for much more on Agda as well as an introduction to type theory.
 
-As a general matter,  to define a type we must (a) give it a name, (b) describe how to construct elements of it, and (c) describe how to determine whether two elements are equal.  When we say \italic{construct} and \italic{determine} in this context, we mean a procedure or set of rules that can be carried out by machine or, given enough time and patience, with pencil and paper.  For (a), we say this:
+As a general matter,  to define a type we must (a) give it a name, (b) describe how to construct elements of it, and (c) describe how to determine whether two elements are equal, and (d) describe how to define functions from the given type to another type. In this context, \italic{to construct} is to give a procedure or set of rules that can be carried out by human or machine that "build" elements of the given type.  
+
+To understand these rules, we study how they apply to defining the type of natural numbers. For (a), we say this:
 
 \begin{equation}
 \label{nat:intro}
 \bbN: \mathcal{U}
 \end{equation} 
 
-where $\mathcal{U}$ is some universe of types.  Universes are arranged in a chain $\mathcal{U_0} \subset \mathcal{U_1} \subset \mathcal{U_2} \subset \cdots$ where $\mathcal{U}$ may be used as a shorthand for $\mathcal{U_\ell}$, often with $\ell = 0$.  In the programming language Agda, which implements MLTT, this hierarchy is written $\Set_0 \subset \Set_1 \subset \Set_2 \subset \cdots$ where $\Set$ is shorthand for $\Set_0$.  One must take care with this terminology because types are not sets.  More on this later.
+where $\mathcal{U}$ is some universe of types.  This is a so-called \term{formation rule}.  It simply announces that a certain symbol will be the name of a new a type. It gives no information on what the elements or \term{terms} of that type may be or what we may do with them.
 
-For (b), construction of elements, we posit two rules.  The first tells us how to construct an element or \term{term} of the given type:
+
+\strong{A remark on universes.} Universes are arranged in a chain $\mathcal{U_0} \subset \mathcal{U_1} \subset \mathcal{U_2} \subset \cdots$ where $\mathcal{U}$ may be used as a shorthand for $\mathcal{U_\ell}$, often with $\ell = 0$.  In the programming language Agda, which implements MLTT, this hierarchy is written $\Set_0 \subset \Set_1 \subset \Set_2 \subset \cdots$ where $\Set$ is shorthand for $\Set_0$.  One must take care with this terminology because types are not sets.  More on this later. 
+
+The need for a hierarchy of type universes goes back to Bertrand Russell and his work on avoiding paradoxes in set theory.  Consider the set
+
+\begin{equation}
+\label{russell:set}
+R = \{ a\ |\space a \not\in R \}
+\end{equation}
+
+The question \italic{is $R$ and element of itself?} has no resolution.  If one assumes that $\R \in R$, one concludes $\R \not\in R$.  If one assumes $R \not\in R$, one concludes $R \in R$
+
+For (b), construction of elements, we posit two rules for the type $\bbN$.  The first tells us how to construct a single term:
 
 \begin{equation}
 \label{construct-zero}
 \zero : \bbN
 \end{equation} 
 
-The second rule says that if \code{k} is an element of $\bbN$, then so is an element called $\suc k$.  We write the rule as a "fraction," where the numerator is the \term{premise} and the denominator is the \term{conclusion}.
+The second rule says that if \code{k} is a term of $\bbN$, then so is $\suc k$, the "succesor", or next element.  We write the rule as a "fraction," where the numerator is the \term{premise} and the denominator is the \term{conclusion}.
 
 \begin{equation}
 \label{construct-succ}
@@ -74,21 +80,20 @@ The first rule can be written in the same form, but with an empty premise:
 \frac{}{\text{zero}\space : \mathbb{N}}
 \end{equation} 
 
-Rules with empty premises are called \term{axioms}, and are usually written as \eqref{construct-zero}.  One can construct arbitrarily many elements of the type of natural numbers by with applying \eqref{construct-succ} again and again to \eqref{construct-zero}.
+Rules with empty premises are called \term{axioms}, and are usually written in the form \eqref{construct-zero}.  One can construct arbitrarily many elements of the type of natural numbers by with applying \eqref{construct-succ} again and again to \eqref{construct-zero}.  Doing so yields an infnite sequence of terms:
 
 \begin{align}
 & \zero \\
-& \zero \to \suc \zero \\
-& \zero \to \suc \zero \to \suc \suc \zero \\
+& \suc \zero \\
+& \suc \suc \zero \\
 & etc.
 \end{align}
 
+If we wish, we may introduce the aliases $0, 1, 2, etc.$, etc. for these terms, so that $\suc\ 0 = 1$, $\suc 1 = 2$, etc.
 
-If we wish, we may introduce the aliases $0 = \zero$, $1 = \suc \zero$, $2 = \suc \suc \zero$, etc., so that the above reads $\suc 0 = 1$, etc.  
+The rules \eqref{nat:intro}, \eqref{construct-zero} and \eqref{construct-succ} are called \term{judgements}. Judgement \eqref{nat:intro} is a \term{formation rule}.  It announces a new type. Judgements \eqref{construct-zero} and \eqref{construct-succ} are \term{introduction rules}.  They provide \term{constructors} which tell us how to fabricate terms of the given type.  
 
-The rules \eqref{nat:intro}, \eqref{construct-zero} and \eqref{construct-succ} are called \term{judgements}. Judgement \eqref{nat:intro} is a \term{formation rule}.  It announces a new type. Judgements \eqref{construct-zero} and \eqref{construct-succ} are \term{introduction rules}.  They furnape with a singl ish \term{constructors} which tell us how to fabricates terms of the given type.  One can imagine a simple two-tape Turing machine which reads the first tape with the symbols $\suc, \suc, \suc, \zero$ printed on it and which leaves the second tape with single printed $\blue{3}$.
-
-The first of the above rules is a \term{literal constructor}: what does $\zero$ construct?  Answer: the term $\zero$ itself.  (The Turing machine writes a $\blue{0}$ on the tape.) The second introduction rule provides a constructor $\suc$ which we may view as a function $\suc : \bbN \to \bbN$.  We can think of it as instruting the Turing machine to move the tape one square to the right and write the word \blue{suc} on the tape.
+The first of the above rules is a \term{literal constructor}: what does $\zero$ construct?  Answer: the term $\zero$ itself. The second introduction rule provides a constructor $\suc$ which we may view as a function $\suc : \bbN \to \bbN$. 
 
 Everything that we have said so far can be implemented in Agda in three lines of code.
 
@@ -98,7 +103,17 @@ data ℕ : Set where
   suc  : ℕ → ℕ
 \end{verbatim}
 
-The code announces the type (a), then exhibits the constructors (b).  
+Thinking back to the rules mentioned above, the Agda code announces the type (Rule a, formation), then exhibits the constructors (Rule b, introduction).    Notice the sequence: types first, then terms.  There is no such thing in MLTT as a "disembodied term," one that exists apart from a type: it is the rules of the type that provides the means to construct its terms. 
+
+As an illustration of the general method, consider the the type of Booleans, which we define this way:
+
+\begin{verbatim}
+data Bool  : Set where
+  true  : Bool
+  false : Bool
+\end{verbatim}
+
+The type of Booleans is inhabited by just two terms, \blue{true} and \blue{false}.  Below we we learn how to define the usual logical operations on Booleans.
 
 \subheading{Sets vs Types}
 
@@ -113,7 +128,44 @@ In defining the natural numbers, we introduced the constructors $\zero$ and $\su
 \end{equation}
 
 Construction of function types can be iterated.  Thus, given a third type $C$, one can form the type  $A \to (B \to C)$.  It is the type of functions from $A$ to functions from $B$ to $C$.  
-We write it as $A \to B \to C$. Thus construction of function types associates to the right.
+By convention, construnction of functions types associates to the right, so we can write  $A \to B \to C$ for $A \to (B \to C)$ 
+
+The introduction rule for the function type is stated in terms of the lambda calculus.  Suppose given types $A$ and $B$, a variable $x$ of type $A$, and an expression $e$ of type $B$.  Then $\lambda x.e$ is a function from $A$ to $B$.  In symbols, we have the introduction rule
+
+\begin{equation}
+\frac{x : A \quad e: B}{\lambda (x).e : A \to B}
+\end{equation}
+
+The meaning of a funciton $f : A \to B$ is given by the corresponding \term{elimination rule},  which tells us that there is a way of applying $f$ to terms of $A$ to produce terms of $B$:
+
+\begin{equation}
+\frac{f: A \to B\quad a : A}{f(a):B}
+\end{equation}
+
+That is, $f$ applied to $a$, a term of type $A$, is a term of type $B$.  The meaning of function application for the funciton $\lambda\thinspace x.e$ is given by the \term{computation rule}
+
+\begin{equation}
+(\lambda\thinspace x.e) a = e[x := a]
+\end{equation}
+
+where the expression $e[x := a]$ means: replace all occurrences of $x$ in $e$ by $a$.  A computation rule tells us what happens when we follow construction by elimination.
+
+By way of example, consider the expression $\lambda\thinspace x.x$. Then $(\lambda\thinspace x.x)a = a$.  In other words, $\lambda\thinspace x.x$ is the identity function $A \to A$.  Just as simple is the function $\lambda\thinspace x.a$.  If $b: A$, then $(\lambda\thinspace x.a)b = a$.  This is the constant function $A \to A$ that has constant value $b: A$.
+
+Let's look at a few more examples. Consider $\lambda x.\lambda y.x$, where $x: A$ and $y: A$.  If $a : A$, then $(\lambda x.\lambda y.x)\thinspace a= \lambda y.a: A \to A$.  In other words,
+$\lambda x.\lambda y.y$ is a function $A \to A \to A$; when we apply it to $a : A$, the resulting value is the constant function $\lambda y.a : A \to A$.  Finally, $(\lambda x.\lambda y.y)\thinspace a\thinspace b = a$. Is a kind of projection onto the first argument.
+
+ More generally, suppose given
+
+$$
+f : A \to B \to C.
+$$
+
+We read this as "the function type $A \to B \to C$ has a term $f$."  Then $f\ a : B \to C$ for any term $a : A$, and $(f\ a)\ b : C$ for terms $a: A$ and $b: B$.  To avoid writing unnecessary, parentheses, we take application of a function to arguments as associating to the left, so that we may write $(f\ a)\ b$  as $f\ a\ b$.
+
+In type theory, Agda, Haskell, Elm, etc., functions are always functions of one variable.  As a consequence, functions $f$ and $g$ can always be composed as $g\circ f$, so long as the type of the codomain of $f$ is the same as the type of the domain of $g$.
+
+\href{https://www.quora.com/In-type-theory-what-is-an-eliminator-and-what-is-its-opposite}{Conor McBride on eliminators}
 
 As an example, define the function 
 
@@ -122,15 +174,12 @@ As an example, define the function
 & add\ x\ y = x + y
 \end{align}
 
-so that, for example, $add\ 1\ 2$ has value 3. This uses the convention common to both type theory and  to functional languages such as Agda, Elm, and Haskell: we write $add\ 1\ 2$ rather than $add(1,2)$.  The partial function appication $add\ 1$  makes sense as the function of type $\bbN \to \bbN$ which adds 1 to its argument.  More generally, suppose given
+so that, for example, $add\ 1\ 2$ has value 3. Here we use the convention common to both type theory and  to functional languages such as Agda, Elm, and Haskell, writing $add\ 1\ 2$ rather than $add(1,2)$. 
 
-$$
-f : A \to B \to C.
-$$
 
-We read this as "the function type $A \to B \to C$ has a term $f$."  Then $f\ a : B \to C$ for any term $a : A$, and $(f\ a)\ b : C$ for terms $a: A$ and $b: B$.  We take application of a function to arguments as associating to the left, so that we may write $(f\ a)\ b : C$  as $f\ a\ b$.
+Consider now the expression $add\ 1$.  It makes perfect sense as the function of type $\bbN \to \bbN$ which adds 1 to its argument. 
 
-All functions in type theory, Agda, Haskell, Elm, etc. are functions of one variable.  This means that functions $f$ and $g$ can always be composed as $g\circ f$, sol log as the type of the codomain of $f$ is the same as the type of the domain of $g$.
+
 
 \subsection{Addition, etc.}
 
@@ -159,6 +208,7 @@ Then we have equations
 \end{align}
 
 Each line  follows for the one preceeding from one of the  equations defining addition.  In each case  we determine the rule to use, (base) or (ind), by matching rules with the expression to be transformed.  For  line $(a)$, the rule that matches is  (ind) with $m = suc\  zero$ and $n = suc\ suc\ suc\ zero$. Therefore the transform of line $(a)$ is line $(b)$.  Line $(c)$ is obtained inthe same way.  However, On the other hand, the "inside" of line $(c)$ matches (base) with $n = suc\ suc\ suc\ zero$, and so line $(d)$ follows form line $(c)$.  This form of inference is called \term{pattern matching}.  The pattern-matching definition of addition is said to be \term{recursive} because the definition refers to itself.  
+
 
 
 \subsection{Definitional equality}
