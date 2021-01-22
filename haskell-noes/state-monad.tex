@@ -1,0 +1,150 @@
+beginMetadata:
+{
+    "id": "fc3d0cf0-2b87-402e-a0f6-e883d258d349",
+    "documentNumber": 205,
+    "author": "jxxcarlson",
+    "title": "The State Monad",
+    "path": "haskell-noes/state-monad.tex",
+    "tags": [],
+    "keyString": "the state monad a=jxxcarlson haskell-noes/state-monad.tex ",
+    "timeCreated": 1602192263582,
+    "timeModified": 1611320028708,
+    "public": true,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\setcounter{section}{4}
+
+\section{The State Monad}
+
+\innertableofcontents
+
+A \term{stateful computation} is a function of type $s \to (a,s)$, where $s$ is the \term{state} and $a$ is the value of the computation.  As an example, consider a stack, defined by
+
+\begin{verbatim}
+type Stack = [Int]
+
+push : Int -> Stack -> ((), Stack)
+push k ks = ((), k:ks)
+
+pop : Stack -> (Int, Stack)
+pop (k:ks) = (k, ks)
+\end{verbatim}
+
+Thus both \code{push 5} and \code{pop} are examples of stateful computations:
+
+\begin{verbatim}
+> push 3  []
+((), [3])
+
+> pop [3, 2, 1]
+(3, [2,1])
+\end{verbatim}
+
+
+\subsection{Chaining computations}
+
+We cannot chain stateful computations as is, since the domain and the codomain of successive functions do not match.  The chaining problem is solved by wrapping stateful computations in the \term{State monad}, \code{State s a}.  In our discussion we shall use home-brew version of this monad, \code{ST s a} for which we build everything from scratch so as to better understand its operation.
+
+Using monadic versions of \code{push} and \code{pull}, computations can be chained like this:
+
+
+\begin{verbatim}
+ > app (push 1 >> push 2 >> push 3 >> pop) []
+(3,[2,1])
+\end{verbatim}
+
+An expressiion like \code{(push 1 >> push 2 >> push 3 >> pop)} has the type of the last term, in this case \code{ST Stack Int}. The function \code{app} has type \code{ST s a -> s -> (a, s)}.   The role of \code{app} is to extract the stateful computation (a function) wrapped by the monad so that it can be applied to an ordinary non-monadic argument, in this case the empty list.  Here is how the stack operations function individually:
+
+\begin{verbatim}
+> app (push 5) [1,2,3]
+((),[5,1,2,3])
+
+> app pop [1,2,3]
+(1,[2,3])
+\end{verbatim}
+
+\strong{Note.} In the "real" \code{State} monad, onr sas \code{runState}, not \code{app}.
+
+\subsection{Making ST into a monad}
+
+
+We now show how the homebrew version of \code{State} can be made into a monad, thereby making it possible to chain operations like \code{push} and \code{pop} with the operator \code{>>}.  The first step is to make the definition
+
+\begin{verbatim}
+newType ST s a = ST { app :: s -> (a, s) }
+\end{verbatim}
+
+The construct \code{ST}  wraps a stateful computation in the state type \code{ST}, which is record with one field..  Monadic versions of \code{push} and \code{pop}  are now defined by applying this  constructor to a lambda function:
+
+\begin{verbatim}
+push k = ST (\s -> ((), k::s)
+
+pop = ST (\(k:ks) -> (k, ks))
+\end{verbatim}
+
+To make \code{ST} into a monad, we first make it into a functor:
+
+\begin{verbatim}
+instance Functor (ST s) where
+    fmap f s = ST $ \t -> let (a,s') = app s t
+                          in ( f a, s')
+\end{verbatim}
+
+Note that the right-hand side of the definition begins with \code{ST} applied to a stateful computation \code{\bs{t }-> ... }, as the definition of \code{ST} instructs us. Further inside the right-hand side, the code \code{let (a, s') = app s t} unwraps the stateful computation \code{s}, producing the result \code{a} and the new state \code{s'}.  Applying \code{f} to the result yields the transformed result, as required.
+
+
+To make \code{ST} into an applicative functor, we define the operation of \code{(<*>)}:
+
+\begin{verbatim}
+instance Applicative (ST s) where
+stf <*> stx = ST (\s ->
+  let (f, s') = app stf s
+      (x,s'') = app stx s'
+  in (f x', s'')
+\end{verbatim}
+
+Finally, to make  \code{ST} into a monad, we define the return and bind operators:
+
+\begin{verbatim}
+instance Monad (ST s) where
+   return a = ST $ \s -> (a, s)
+   m >>= k = ST $ \s -> let (a, s') = app m s
+                           in app (k a) s'
+\end{verbatim}
+
+
+\subsection{More examples}
+
+Here is an example in which we pop an element off the stack, increment it, and push it back:
+
+\begin{verbatim}
+> app (pop >>= (\n -> push (n + 1))) [1,0]
+((),[2,0])
+\end{verbatim}
+
+We can also use do-notation to chain computations:
+
+\begin{verbatim}
+foo :: ST Stack Int
+foo  = do
+        push 2
+        push 3
+        push 8
+        pop >>= (\n -> push (2 * n ))
+        pop
+\end{verbatim}
+
+Then one has
+
+\begin{verbatim}
+> app foo []
+(16,  [3, 2])
+\end{verbatim}
+
+\bigskip
+\italic{Draft,  October 8, 2020}
+
