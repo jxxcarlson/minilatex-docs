@@ -12,8 +12,8 @@ beginMetadata:
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 5,
-    "versionDate": 1611957109878
+    "versionNumber": 6,
+    "versionDate": 1611962237859
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -258,6 +258,20 @@ For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc
 \begin{colored}[elm]
 le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
 \end{colored}
+
+As usual, we show that this type is inhabited via an inductive construction.  The base case is 
+
+\begin{colored}[elm]
+ from(inc <>) ≡ suc(from <>)
+\end{colored}
+
+Applying the rules for \ccode{inc} and \ccode{from}, one transforms this type to an equal type 
+
+begin{colored}[elm]
+suc 0 ≡ suc 0
+\end{colored}
+
+Therefore \ccode{le-from-inc <>,} which is type, is inhabited by \ccode{refl.}
 
 \subsection{Using rewrite}
 
