@@ -12,8 +12,8 @@ beginMetadata:
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 2,
-    "versionDate": 1611945989482
+    "versionNumber": 3,
+    "versionDate": 1611946368547
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -116,11 +116,11 @@ from (x O) = double (from x)
 from (x I) = suc (double  (from x))
 \end{colored}
 
-\subsubsection{Testing}
+\subsubsection{Tests}
 
 If all the code to this point is correct, we should be able to show that 
 \ccode{from(to n)) = n} for all \code{n}, and also that \ccode{to(from b)) = b} for all
-\ccode{b.}. Instead of computing individual cases iike \ccode{from(to 5)} for individual numbers, our goal is to apply this computation to a whole list of numbers.  The first task, then, is to define the type of lists:
+\ccode{b.}. However, instead of computing individual cases iike \ccode{from(to 5)} for individual numbers, we will apply this computation to a whole list of numbers.  Much more efficient! The first task, then, is to define the type of lists:
 
 \begin{colored}[elm]
 data List (A : Set) : Set where
@@ -130,23 +130,32 @@ data List (A : Set) : Set where
 infixr 5 _∷_
 \end{colored}
 
+Here \ccode{[]} is the empty list, and \ccode{a::list}  tacks the element \ccode{a} onto the head of list \ccode{list.}  To write \ccode{::} in emacs, we write \code{\bs{::}} so as to get a single unicode synbol.  The next task is to craft a function \ccode{range} for creating lists of consecutive numbers.  Our aim is to be able to say \ccode{range 2} to produce the list \ccode{2 :: 1 :: 0 :: [].} The code for this is, once agiain, an exercise in pattern-matching and recursion:
+
 \begin{colored}[elm]
 range : ℕ → List ℕ
 range 0 = 0 ∷ []
 range (suc n) = (suc n) ∷ range n
+\end{colored}
 
+Finally, as in all functional languages, we want a function \ccode{map} that applies a given function of type \ccode{A → A} to the elements of a list of type \ccode{A}.  Then we can say \ccode{map inc (range 2)} to obtain \ccode{ 3 :: 2 :: 1 :: []. }. Here is the code for \ccode{map:}
+
+
+\begin{colored}[elm]
 map : ∀ {A : Set} → (A → A) → List A → List A
 map f [] = []
 map f (x ∷ xs) = (f x) ∷ map f xs
 \end{colored}
 
-Then
+With all this in hand, our test is easy to write.  Note the use of lambda.  It gives a way of converting an expression into a function:
 
 \begin{colored}[elm]
 map (λ x → (from (to x))) (range 10)
 -- produces the below
 10 ∷ 9 ∷ 8 ∷ 7 ∷ 6 ∷ 5 ∷ 4 ∷ 3 ∷ 2 ∷ 1 ∷ 0 ∷ []
 \end{colored}
+
+\subsubsection{Proofs}
 
 Of course proofs are better than tests.  We first aim to prove the proposition that \colored{elm}{from} is a left inverse of \colored{elm}{to}:
 
@@ -199,14 +208,6 @@ The first step is to show that \colored{elm}{suc} and \colored{elm}{inc} are int
 ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
 
 \end{colored}
-
-That is, the diagram below commutes, where we have written \colored{elm}{s} for \colored{elm}{suc} and \colored{elm}{i} for \colored{elm}{inc}
-
-\begin{CD}
-ℕ @>s>>ℕ\\
-@VVtoV @VVtoV\\
-\text{Bin} @>i>> \text{Bin}
-\end{CD}
 
 The proof is elementary:
 
