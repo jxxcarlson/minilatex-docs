@@ -8,37 +8,260 @@ beginMetadata:
     "tags": [],
     "keyString": "agda a=jxxcarlson nott/agda.tex ",
     "timeCreated": 1604284514165,
-    "timeModified": 1606456451240,
+    "timeModified": 1611849255412,
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 0,
-    "versionDate": 0
+    "versionNumber": 1,
+    "versionDate": 1607014651283
 }
 endMetadata
+\include{type-macros-jxxcarlson}
+
 \xlink{uuid:defbbdbb-d45d-46d1-96b0-371a7048ba41}{Notes on Type Theory}
 
 \setcounter{section}{3}
 
 \section{Agda}
 
+\innertableofcontents
+
+
 \italic{WIP: More focused on Agda than type theory per se in this section.}
 
-\begin{mathmacro}
-\newcommand{\bbN}[0]{\mathbb{N}}
-\newcommand{\blah}[0]{\text{\textunderscore}}
-\newcommand{\sp}[0]{\space}
-\newcommand{\refl}[0]{\mathop{\text{refl}}}
-\newcommand{\lhs}[0]{\mathop{\text{LHS}}}
-\newcommand{\rhs}[0]{\mathop{\text{RHS}}}
-\end{mathmacro}
+Below we collect some information on running Agda, e.g., emacs commands, as well as some examples.  All this is explained carefully in PLFA.
 
-\innertableofcontents
+\subsection{Command summary}
+
+\begin{colored}[bash]
+C-c C-l: Load and type-check the file
+C-c C-n expr: normalize expr
+
+C-c C-c x: case split on variable x
+C-c C-f move into the next hole.
+C-c C-space: fill in hole
+C-c C-r: refine with constructor
+C-c C-a: automatically fill in hole
+C-c C-,: goal type and context
+C-c C-.: goal type, context, and inferred type
+\end{colored}
+
+
+\subsection{Example: the Natural Numbers}
+
+The type of natural numbers is defined in the code below.  We put it in a file \code{nat.agda}.
+
+\begin{colored}[elm]
+data ℕ : Set where
+    zero : ℕ
+    suc  : ℕ → ℕ
+  
+{-# BUILTIN NATURAL ℕ #-}
+\end{colored}
+
+The first line corresponds to the formation rule: it announces the fact that \ccode{ℕ} is a type in the universe \ccode{Set.} The next two lines correspond to the introduction rules.  They announce the constructors.
+The last line, in effect, sets up the definitions \colored{elm}{0 = zero,} \colored{elm}{1 = suc 0,} \colored{elm}{2 = suc (suc zero),} etc.  
+
+In Emacs, type \code{C-c C-l} to load and type-check the file. Type \code{C-c C-n}, then \ccode{suc (suc 0)} to evaluate (normalize or simplify) the latter expression.  Did you get what you expected? Now add the code below.  It gives an inductive defnition of a function which adds to numbers together:
+
+\begin{colored}[elm]
+add : ℕ → ℕ → ℕ
+add zero m = m
+add (suc m) n = suc (add m n)
+\end{colored}
+
+
+Type \code{C-c C-l} to type check, then \code{C-c C-n} and \ccode{add 1 2} followed by  \ccode{add 1 2}.  The expression evaluates to \ccode{3}  Finally, add the code
+
+\begin{colored}[elm]
+_+_ : ℕ → ℕ → ℕ
+_+_ zero m = m
+_+_ (suc m) n = suc (add m n)
+\end{colored}
+
+Here \code{_+_} is an \term{infix operator}, so we can say \code{C-c C-n}, then \ccode{1 + 2} to obtain \ccode{3} as before.
+
+
+\subsection{Binary representation of numbers}
+
+The type \colored{elm}{Bin} given below defines a binary representation of the natural numbers.  In it, 5 is represented as \code{((<> I) O) I}, which we think of as 101.  The definition is somewhat similar to the definition of $\bbN$.  The term \ccode{<>} plays the role of zero.  The postfix operator \ccode{_O} is the binary operator "shift left."  The postfix operator \ccode{_I} is the binary operator "shift left, than add 1." 
+
+\begin{colored}[elm]
+data Bin : Set where
+  <> : Bin
+  _O : Bin → Bin
+  _I : Bin → Bin
+\end{colored}
+
+Using pattern-matching and recursion, we define \ccode{inc}, the operator which increases the value of a binary number by 1.  There is one base case and \italic{two} recursive clauses.
+
+\begin{colored}[elm]
+inc : Bin → Bin
+inc <> = <> I          -- base case
+inc (x O) = x I        -- recursion, A
+inc (x I) = (inc x) O  -- recursion, B
+\end{colored}
+
+If we have two ways of representing natural numbers — unary and binary — we shoud have a way of converting from one to another.  That is what \ccode{to : ℕ → Bin} and 
+\ccode{from : Bin → ℕ} do.
+
+\begin{colored}[elm]
+to : ℕ → Bin
+to 0 = <> O
+to (suc n) = inc (to n)
+
+from : Bin → ℕ
+from <> = 0
+from (x O) = double (from x)
+from (x I) = suc (double  (from x))
+\end{colored}
+
+\subsubsection{Testingt}
+
+If all the code to this point is correct, we should be able to show that 
+\code{from(to n} = n} for all \code{n}.
+
+\begin{colored}[elm]
+data List (A : Set) : Set where
+  []  : List A
+  _∷_ : A → List A → List A
+
+infixr 5 _∷_
+
+range : ℕ → List ℕ
+range 0 = 0 ∷ []
+range (suc n) = (suc n) ∷ range n
+
+map : ∀ {A : Set} → (A → A) → List A → List A
+map f [] = []
+map f (x ∷ xs) = (f x) ∷ map f xs
+\end{colored}
+
+Then
+
+\begin{colored}[elm]
+map (λ x → (from (to x))) (range 10)
+-- produces the below
+10 ∷ 9 ∷ 8 ∷ 7 ∷ 6 ∷ 5 ∷ 4 ∷ 3 ∷ 2 ∷ 1 ∷ 0 ∷ []
+\end{colored}
+
+Of course proofs are better than tests.  We first aim to prove the proposition that \colored{elm}{from} is a left inverse of \colored{elm}{to}:
+
+\begin{colored}[elm]
+id-from-to : ∀ (n : ℕ) → from(to n) ≡ n
+\end{colored}
+
+We prove this by induction, addressing first the type
+
+\begin{colored}[elm]
+id-from-to 0 = from(to 0) ≡ 0
+\end{colored}
+
+The left-and side reduces as follows
+
+\begin{colored}[elm]
+from(to 0)
+from(<> O)
+double(from <>)
+double 0
+0
+\end{colored}
+
+Thus the type \colored{elm}{from(to 0) ≡ 0} is the same as the type \colored{elm}{0 ≡ 0}.  Consequently, this type is inhabited by \colored{elm}{refl}. Consider next the inductive case,
+
+\begin{colored}[elm]
+id-from-to (suc n) = from(to (suc n)) ≡ suc n
+\end{colored}
+
+We claim that the following transformations are possible, obtained by rewriting rules, which we will explain momentarily:
+
+\begin{colored}[elm]
+from(to (suc n))
+from(inc(to n))  -- p-to-suc
+suc(from(to n))  -- p-from-inc-to
+\end{colored}
+
+If this is so, then \colored{elm}{from(to (suc n)) ≡ suc n} is the same type as \colored{elm}{suc(from(to n) ≡ suc n}. But the congruence principle says that the type
+\colored{elm}{cong suc ((from(to n) ≡ n)} is inhabited if the type \colored{elm}{from(to n) ≡ n}
+But that is so by the inductive hypothesis.
+
+
+
+\bigskip
+
+
+The first step is to show that \colored{elm}{suc} and \colored{elm}{inc} are intertwined by \colored{elm}{to}:
+
+\begin{colored}[elm]
+∀ (n : ℕ) → to(suc n) ≡ inc(to n)
+
+\end{colored}
+
+That is, the diagram below commutes, where we have written \colored{elm}{s} for \colored{elm}{suc} and \colored{elm}{i} for \colored{elm}{inc}
+
+\begin{CD}
+ℕ @>s>>ℕ\\
+@VVtoV @VVtoV\\
+\text{Bin} @>i>> \text{Bin}
+\end{CD}
+
+The proof is elementary:
+
+\begin{colored}[elm]
+p-to : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
+p-to n = refl
+\end{colored}
+
+In essence, the left and right-hand sides simplify to the same thing.
+
+The proposition \code{id-from-to} is a type, and the code below, which leads off with a sequence of lemmas, shows it is inhabited:
+
+\begin{colored}[elm]
+-- ℕ LEMMAS
+
+double : ℕ → ℕ
+double 0 = 0
+double (suc m) = suc (suc (double m))
+
+p-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
+p-double n = refl
+\end{colored}
+
+\begin{colored}[elm]
+-- BIN LEMMAS
+
+p-fromO : ∀ (b : Bin) → from(b O) ≡ double(from b)
+p-fromO b = refl
+
+p-bO : ∀ (b : Bin) → from (b O) ≡ double (from b)
+p-bO <> = refl
+p-bO (b O) = refl
+p-bO (b I) = refl
+
+p-bI : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
+p-bI <> = refl
+p-bI (b O) = refl
+p-bI (b I) = refl
+
+p-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
+p-from-inc <> = refl
+p-from-inc (b O)  rewrite pbO b = refl
+p-from-inc (b I) rewrite pbI b | pdouble (from b) | 
+      p-from-inc b | pdouble (from b) = refl
+
+pfi-n : ∀ (n : ℕ) → from(inc(to n)) ≡ suc(from(to n))
+pfi-n n = p-from-inc(to n)
+
+id-from-to : ∀ (n : ℕ) → from(to n) ≡ n
+id-from-to 0 = refl
+id-from-to (suc n) rewrite pto n | pfi-n n | 
+    cong suc (id-from-to n) = refl
+\end{colored}
 
 \subsection{Using rewrite}
 
 
-Another way to do the inductive proof is to use \term{rewrite}.  To explain, consider once again \eqref{pencil:paper}, focusing on the last line:
+Another way to do the inductive proof is to use \term{rewrite}.  To explain, consider this step in the proof of the associative law:
 
 $$
  suc ((m + n) + p) \equiv suc (m + (n + p))
