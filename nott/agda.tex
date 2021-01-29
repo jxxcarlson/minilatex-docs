@@ -12,8 +12,8 @@ beginMetadata:
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 4,
-    "versionDate": 1611947484544
+    "versionNumber": 5,
+    "versionDate": 1611957109878
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -185,12 +185,12 @@ Thus the type \colored{elm}{from(to 0) ≡ 0} is the same as the type \colored{e
 id-from-to (suc n) = from(to (suc n)) ≡ suc n
 \end{colored}
 
-We claim that the following transformations are possible, obtained by rewriting rules, which we will explain momentarily:
+We claim that the following transformations of the left-hand side are possible, each obtained by rewriting rules, which we will explain momentarily:
 
 \begin{colored}[elm]
 from(to (suc n))
-from(inc(to n))  -- le-to-suc
-suc(from(to n))  -- le-from-inc-to
+from(inc(to n))  -- le-to-suc: to suc => inc to
+suc(from(to n))  -- le-from-inc-to: from inc => suc from
 \end{colored}
 
 If this is so, then \colored{elm}{from(to (suc n)) ≡ suc n} is the same type as \colored{elm}{suc(from(to n) ≡ suc n}.  Recall the congruence principle from the previous section:
@@ -200,73 +200,63 @@ If $e : x \equiv y$ then $cong\ f\ e: f\ x \equiv f\ y$
 \end{indent}
 
 The principle asserts the existence of a function \ccode{cong} that maps terms of type  \ccode{x ≡ y} to terms of type \ccode{f x ≡ f y}.   That is, if the type \ccode{x ≡ y}  is inhabited by some term \ccode{e}, then the type \ccode{f x ≡ f y} is inhabited by a term \ccode{cong f e}
-By induction, we suppose that \ccode{from(to n) ≡ n} is inhabited.  By the congruence princple, we conclude that \ccode{suc(from(to n))  ≡ suc n} is in inhabited.
+By induction, we suppose that \ccode{from(to n) ≡ n} is inhabited.  By the congruence principle, we conclude that \ccode{suc(from(to n))  ≡ suc n} is in inhabited.
 
 This concludes the proof, modulo a proof of the lemmas \ccode{le-to-suc} and \ccode{le-from-inc-to} that justify the transformations above.
 
 
+\subsubsection{Elementary lemmas}
 
-\bigskip
+The first step is to observe that we have a set of elementary lemmas that follow immediately from the definitions.  Consider, the function \ccode{le-from-shift,} applied  to \ccode{b O} (third clause of \ccode{le-from-shift} below). This is the type
 
-
-The first step is to show that \colored{elm}{suc} and \colored{elm}{inc} are intertwined by \colored{elm}{to}:
-
-\begin{colored}[elm]
-∀ (n : ℕ) → to(suc n) ≡ inc(to n)
-
-\end{colored}
-
-The proof is elementary:
 
 \begin{colored}[elm]
-p-to : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
-p-to n = refl
+from ((b O) O) ≡ double(from (b O))
 \end{colored}
 
-In essence, the left and right-hand sides simplify to the same thing.
+By the defining equations for \ccode{from,} we have
 
-The proposition \code{id-from-to} is a type, and the code below, which leads off with a sequence of lemmas, shows it is inhabited:
+\begin{colored}[elm]
+from ((b O) O) ≡ double(from (b O))
+\end{colored}
+
+Therefore the type in question is the same as the type
+
+\begin{colored}[elm]
+double(from (b O)) ≡ double(from (b O))
+\end{colored}
+
+This type is inhabited by \ccode{refl.}  All the other proofs are the same.  To summarize: the lemmas below simply express elementary facts about the constructors.
 
 \begin{colored}[elm]
 -- ℕ LEMMAS
 
-double : ℕ → ℕ
-double 0 = 0
-double (suc m) = suc (suc (double m))
+le-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
+le-double n = refl
 
-p-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
-p-double n = refl
-\end{colored}
+le-to-suc : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
+le-to-suc n = refl
 
-\begin{colored}[elm]
 -- BIN LEMMAS
 
-p-fromO : ∀ (b : Bin) → from(b O) ≡ double(from b)
-p-fromO b = refl
+le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
+le-from-shift <> = refl
+le-from-shift (b O) = refl
+le-from-shift (b I) = refl
 
-p-bO : ∀ (b : Bin) → from (b O) ≡ double (from b)
-p-bO <> = refl
-p-bO (b O) = refl
-p-bO (b I) = refl
+le-from-shift2 : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
+le-from-shift2 <> = refl
+le-from-shift2 (b O) = refl
+le-from-shift2 (b I) = refl
+\end{colored}
 
-p-bI : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
-p-bI <> = refl
-p-bI (b O) = refl
-p-bI (b I) = refl
 
-p-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
-p-from-inc <> = refl
-p-from-inc (b O)  rewrite pbO b = refl
-p-from-inc (b I) rewrite pbI b | pdouble (from b) | 
-      p-from-inc b | pdouble (from b) = refl
+\subsubsection{Lemmas with rewrite}
 
-pfi-n : ∀ (n : ℕ) → from(inc(to n)) ≡ suc(from(to n))
-pfi-n n = p-from-inc(to n)
+For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc} and \ccode{le-from-inc-to.}. The first of these is proved.  The statement of the second is
 
-id-from-to : ∀ (n : ℕ) → from(to n) ≡ n
-id-from-to 0 = refl
-id-from-to (suc n) rewrite pto n | pfi-n n | 
-    cong suc (id-from-to n) = refl
+\begin{colored}[elm]
+le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
 \end{colored}
 
 \subsection{Using rewrite}
