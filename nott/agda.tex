@@ -12,8 +12,8 @@ beginMetadata:
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 1,
-    "versionDate": 1607014651283
+    "versionNumber": 2,
+    "versionDate": 1611945989482
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -116,10 +116,11 @@ from (x O) = double (from x)
 from (x I) = suc (double  (from x))
 \end{colored}
 
-\subsubsection{Testingt}
+\subsubsection{Testing}
 
 If all the code to this point is correct, we should be able to show that 
-\code{from(to n} = n} for all \code{n}.
+\ccode{from(to n)) = n} for all \code{n}, and also that \ccode{to(from b)) = b} for all
+\ccode{b.}. Instead of computing individual cases iike \ccode{from(to 5)} for individual numbers, our goal is to apply this computation to a whole list of numbers.  The first task, then, is to define the type of lists:
 
 \begin{colored}[elm]
 data List (A : Set) : Set where
@@ -127,7 +128,9 @@ data List (A : Set) : Set where
   _∷_ : A → List A → List A
 
 infixr 5 _∷_
+\end{colored}
 
+\begin{colored}[elm]
 range : ℕ → List ℕ
 range 0 = 0 ∷ []
 range (suc n) = (suc n) ∷ range n
