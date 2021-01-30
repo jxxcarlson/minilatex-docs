@@ -1,0 +1,66 @@
+beginMetadata:
+{
+    "id": "c4546131-1b4c-49ad-9001-2480e947c465",
+    "documentNumber": 480,
+    "author": "jxxcarlson",
+    "title": "Home Page",
+    "path": "app-manual/home_page.tex",
+    "tags": [],
+    "keyString": "home page a=jxxcarlson app-manual/home_page.tex ",
+    "timeCreated": 1611643524352,
+    "timeModified": 1611982735868,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\setcounter{section}{3}
+
+\xlink{uuid:53b10ece-c011-4f40-83c9-7207a474db11}{App Manual}
+
+
+\section{Home Page}
+
+You can make any one of your documents into a home page, e.g., \homepagelink{jxxcarlson}{this one} or \homepagelink{aristotle}{that one}.  To make a home, click on \strong{Doc Tools} in the footer, then click on \strong{Set as Home}.  The page you are will now be your home page.  It ill be listed in the \strong{Home pages tab} in the header.
+
+\subsection{External links to your home page}
+
+To send someone a link to your home page, send them text like the following: \italic{https://minilatex.lamdera.app/h/jxxcarlson}.  You can use this to notify students in a class by email or by putting this link on your university homepage. 
+
+
+\subsection{Internal links to home pages}
+
+To make a link on this app to your or another user's home page, say 
+
+\begin{indent}
+\code{\bs{homepagelink}\texarg{USERNAME}\texarg{LINK TEXT}}, 
+\end{indent}
+
+e.g., 
+
+\begin{indent}
+\code{\bs{homepagelink}\texarg{jxxcarlson}\texarg{my home page}}} 
+\end{indent}
+
+to produce the link \homepagelink{jxxcarlson}{my home page}.
+
+
+\subsection{Internal links to other pages} To put a link in one of your documents to another, use one of these models: 
+
+\begin{verbatim}
+   (a)  \publiclink{ID}{My Document}
+   (b) publiclink{uuid:UUID}{My Document}
+\end{verbatim}
+
+The ID is the document's numerical ID; the UUID — a 36-character string that uniquely identifies your document.   The numerical ID is displayed in the footer.  The numerical ID of this document is 480.  For\ the UUID of the current document, click on \strong{Doc Tools} and copy it from there. You will see it if in fine print near the top of the  Doc Tools panel.  Triple-click on it to copy it.
+
+\subsection{Images} To put an image on your home page, follow this example:
+
+\begin{verbatim}
+    \image{IMAGE ADDRESS}{CAPTION}{width: 500}
+\end{verbatim}
+
+You can put whatever positive integer you like for the width.  To get the image address of an image that is on the web, right-click on it and select \strong{Copy Image Address}.  We plan to add an image uploader to the app so that you can use images from your computer.
+
