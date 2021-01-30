@@ -8,12 +8,12 @@ beginMetadata:
     "tags": [],
     "keyString": "agda a=jxxcarlson nott/agda.tex ",
     "timeCreated": 1604284514165,
-    "timeModified": 1611849255412,
+    "timeModified": 1611966040006,
     "public": true,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 6,
-    "versionDate": 1611962237859
+    "versionNumber": 4,
+    "versionDate": 1611947484544
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -102,6 +102,9 @@ inc (x O) = x I        -- recursion, A
 inc (x I) = (inc x) O  -- recursion, B
 \end{colored}
 
+
+\subsubsection{Conversion}
+
 If we have two ways of representing natural numbers — unary and binary — we shoud have a way of converting from one to another.  That is what \ccode{to : ℕ → Bin} and 
 \ccode{from : Bin → ℕ} do.
 
@@ -116,11 +119,22 @@ from (x O) = double (from x)
 from (x I) = suc (double  (from x))
 \end{colored}
 
+We expect that if we conver from \ccode{ ℕ } to \ccode{Bin} and back that obtain what we started with.  This expectation can be formulated as a type, that is, as a proposition:
+
+\begin{colored}[elm]
+id-from-to : ∀ (n : ℕ) → from(to n) ≡ n
+\end{colored}
+
+To prove this proposition is to construct an inhabitant.  Once we do so, we can stat that \ccode{from} is a \term{left-inverse} for \ccode{to.}. We also expect that it be a right inverse:
+
+\begin{colored}[elm]
+id-to-from : ∀ (b : Bin) → to(from b) ≡ b
+\end{colored}
+
+
 \subsubsection{Tests}
 
-If all the code to this point is correct, we should be able to show that 
-\ccode{from(to n)) = n} for all \code{n}, and also that \ccode{to(from b)) = b} for all
-\ccode{b.}. However, instead of computing individual cases iike \ccode{from(to 5)} for individual numbers, we will apply this computation to a whole list of numbers.  Much more efficient! The first task, then, is to define the type of lists:
+Before proving the preceding propositions, we test to see if they hold.  Thus, we compute \ccode{from(to 5)}, which has value 5.  This is reassuring. Better would be to apply the function  \ccode{λ x → (from (to x))} to a list of numbers.  To do this, we begin by defining the type of lists:
 
 \begin{colored}[elm]
 data List (A : Set) : Set where
@@ -157,13 +171,7 @@ map (λ x → (from (to x))) (range 10)
 
 \subsubsection{Proofs}
 
-Of course proofs are better than tests.  We first aim to prove the proposition that \colored{elm}{from} is a left inverse of \colored{elm}{to}:
-
-\begin{colored}[elm]
-id-from-to : ∀ (n : ℕ) → from(to n) ≡ n
-\end{colored}
-
-To do so, we must show that the type \ccode{id-from-to} is inhabited.  This we do by constructing, via induction, a function of that type.  In the base case of \ccode{n = 0}, the type is
+We now set about showing that the type \ccode{id-from-to} is inhabited.  This we do by constructing, via induction, a function of that type.  In the base case of \ccode{n = 0}, the type is
 
 \begin{colored}[elm]
 id-from-to 0 = from(to 0) ≡ 0
@@ -179,7 +187,7 @@ double 0
 0
 \end{colored}
 
-Thus the type \colored{elm}{from(to 0) ≡ 0} is the same as the type \colored{elm}{0 ≡ 0}.  Consequently it is inhabited by \colored{elm}{refl}. In the inductive case, the type is
+Thus the type \colored{elm}{from(to 0) ≡ 0} is the same as the type \colored{elm}{0 ≡ 0}.  Consequently it is inhabited by \colored{elm}{refl.} In the inductive case, the type is
 
 \begin{colored}[elm]
 id-from-to (suc n) = from(to (suc n)) ≡ suc n
@@ -207,8 +215,25 @@ This concludes the proof, modulo a proof of the lemmas \ccode{le-to-suc} and \cc
 
 \subsubsection{Elementary lemmas}
 
-The first step is to observe that we have a set of elementary lemmas that follow immediately from the definitions.  Consider, the function \ccode{le-from-shift,} applied  to \ccode{b O} (third clause of \ccode{le-from-shift} below). This is the type
+The first step is to observe that we have a set of elementary lemmas that follow immediately from the definitions.  
 
+\begin{colored}[elm]
+le-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
+le-to-suc : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
+le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
+le-from-shift2 : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
+\end{colored}
+
+As an example, we prove the third lemma:
+
+\begin{colored}[elm]
+le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
+le-from-shift <> = refl
+le-from-shift (b O) = refl
+le-from-shift (b I) = refl
+\end{colored}
+
+Since all clauses are proved in the same way, we consider only the third, the function \ccode{le-from-shift,} applied  to \ccode{b O}. This function value is the type
 
 \begin{colored}[elm]
 from ((b O) O) ≡ double(from (b O))
@@ -226,52 +251,37 @@ Therefore the type in question is the same as the type
 double(from (b O)) ≡ double(from (b O))
 \end{colored}
 
-This type is inhabited by \ccode{refl.}  All the other proofs are the same.  To summarize: the lemmas below simply express elementary facts about the constructors.
-
-\begin{colored}[elm]
--- ℕ LEMMAS
-
-le-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
-le-double n = refl
-
-le-to-suc : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
-le-to-suc n = refl
-
--- BIN LEMMAS
-
-le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
-le-from-shift <> = refl
-le-from-shift (b O) = refl
-le-from-shift (b I) = refl
-
-le-from-shift2 : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
-le-from-shift2 <> = refl
-le-from-shift2 (b O) = refl
-le-from-shift2 (b I) = refl
-\end{colored}
-
+This type is inhabited by \ccode{refl,}  and so we are done.
 
 \subsubsection{Lemmas with rewrite}
 
-For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc} and \ccode{le-from-inc-to.}. The first of these is proved.  The statement of the second is
+For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc} and \ccode{le-from-inc-to.} The first of these is proved. For the second, we first show the following:
 
 \begin{colored}[elm]
 le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
 \end{colored}
 
-As usual, we show that this type is inhabited via an inductive construction.  The base case is 
+
+\subheading{Base case}
+The base case is \ccode{from(inc <>) ≡ suc(from <>).} Applying the rules for \ccode{inc} and \ccode{from}, one transforms this type to an equal type \ccode{suc 0 ≡ suc 0.} Therefore the type \ccode{le-from-inc <>} is inhabited by \ccode{refl.}
+
+\subheading{First inductive case}
+
+The type in question is
 
 \begin{colored}[elm]
- from(inc <>) ≡ suc(from <>)
+le-from-inc (b O) = from(inc(b O))  ≡ suc(from (b O))
 \end{colored}
 
-Applying the rules for \ccode{inc} and \ccode{from}, one transforms this type to an equal type 
+The left-hand side is definitionally equal to \ccode{suc(double(from b)),} so
 
-begin{colored}[elm]
-suc 0 ≡ suc 0
+\begin{colored}[elm]
+le-from-inc (b O) = suc(double(from b)) ≡ suc(from (b O))
 \end{colored}
 
-Therefore \ccode{le-from-inc <>,} which is type, is inhabited by \ccode{refl.}
+The lemma \ccode{le-from-shift} tells us that the type 
+
+
 
 \subsection{Using rewrite}
 
