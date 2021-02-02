@@ -12,8 +12,8 @@ beginMetadata:
     "public": false,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 5,
-    "versionDate": 1611981276871
+    "versionNumber": 6,
+    "versionDate": 1612298913180
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -261,86 +261,8 @@ The principle asserts the existence of a function \ccode{cong} that maps terms o
 By induction, we suppose that \ccode{from(to n) ≡ n} is inhabited.  By the congruence principle, we conclude that \ccode{suc(from(to n))  ≡ suc n} is in inhabited. Thus, assuming proofs of the lemmas \ccode{le-to-suc} and \ccode{le-from-inc-to}above, we have a proof of \ccode{id-from-to}.
 
 
-\subsubsection{Elementary lemmas}
 
-The first step is to observe a set of elementary lemmas that follow immediately from the definitions.  
-
-\begin{colored}[elm]
-le-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
-le-to-suc : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
-le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
-le-from-shift2 : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
-\end{colored}
-
-As an example, we claim the following proof of the third lemma:
-
-\begin{colored}[elm]
-le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
-le-from-shift <> = refl
-le-from-shift (b O) = refl
-le-from-shift (b I) = refl
-\end{colored}
-
-Since all clauses are proved in the same way, let consider only the third, which treats the case of the function \ccode{le-from-shift,} applied  to \ccode{b O}. The function value is the type
-
-\begin{colored}[elm]
-from ((b O) O) ≡ double(from (b O))
-\end{colored}
-
-By the defining equations for \ccode{from,} we have
-
-\begin{colored}[elm]
-from ((b O) O) ≡ double(from (b O))
-\end{colored}
-
-Therefore the type in question is the same as the type
-
-\begin{colored}[elm]
-double(from (b O)) ≡ double(from (b O))
-\end{colored}
-
-This type is inhabited by \ccode{refl,}  and so we are done.
-
-\subsubsection{Lemmas with rewrite}
-
-\begin{colored}[elm]
-le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
-le-from-inc <> = refl
-le-from-inc (b O)  rewrite le-from-shift b = refl 
-le-from-inc (b I) rewrite le-from-shift2 b | 
-   le-double (from b) | le-from-inc b | 
-   le-double (from b) = refl
-\end{colored}
-
-For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc} and \ccode{le-from-inc-to.} The first of these id one of the elementary lemmas above. For the second, we first show the following:
-
-\begin{colored}[elm]
-le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
-\end{colored}
-
-
-\subheading{Base case}
-The base case is \ccode{from(inc <>) ≡ suc(from <>).} Applying the rules for \ccode{inc} and \ccode{from,} one transforms this type to the equal type \ccode{suc 0 ≡ suc 0.} Therefore the type \ccode{le-from-inc <>} is inhabited by \ccode{refl.}
-
-\subheading{First inductive case}
-
-The type in question is
-
-\begin{colored}[elm]
-le-from-inc (b O) = from(inc(b O))  ≡ suc(from (b O))
-\end{colored}
-
-The left-hand side is definitionally equal to \ccode{suc(double(from b)),} so
-
-\begin{colored}[elm]
-le-from-inc (b O) = suc(double(from b)) ≡ suc(from (b O))
-\end{colored}
-
-The lemma \ccode{le-from-shift} tells us that the type 
-
-
-
-\subsection{Using rewrite}
+\subsection{Associativity of addition with rewrite}
 
 
 Another way to do the inductive proof is to use \term{rewrite}.  To explain, consider this step in the proof of the associative law:
