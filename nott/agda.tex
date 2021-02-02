@@ -8,12 +8,12 @@ beginMetadata:
     "tags": [],
     "keyString": "agda a=jxxcarlson nott/agda.tex ",
     "timeCreated": 1604284514165,
-    "timeModified": 1611966040006,
-    "public": true,
+    "timeModified": 1612296380227,
+    "public": false,
     "collaborators": [],
     "docType": "miniLaTeX",
-    "versionNumber": 4,
-    "versionDate": 1611947484544
+    "versionNumber": 5,
+    "versionDate": 1611981276871
 }
 endMetadata
 \include{type-macros-jxxcarlson}
@@ -119,57 +119,107 @@ from (x O) = double (from x)
 from (x I) = suc (double  (from x))
 \end{colored}
 
-We expect that if we conver from \ccode{ ℕ } to \ccode{Bin} and back that obtain what we started with.  This expectation can be formulated as a type, that is, as a proposition:
+We expect that if we convert from \ccode{ ℕ } to \ccode{Bin} and back that obtain what we started with.  This expectation can be formulated as a type, that is, as a proposition:
 
 \begin{colored}[elm]
-id-from-to : ∀ (n : ℕ) → from(to n) ≡ n
+from-to : ∀ (n : ℕ) → from(to n) ≡ n
 \end{colored}
 
-To prove this proposition is to construct an inhabitant.  Once we do so, we can stat that \ccode{from} is a \term{left-inverse} for \ccode{to.}. We also expect that it be a right inverse:
+To prove this proposition is to construct an inhabitant.  Then we know that \ccode{from} is a \term{left-inverse} of \ccode{to.} We also expect that it be a right inverse:
 
 \begin{colored}[elm]
-id-to-from : ∀ (b : Bin) → to(from b) ≡ b
+to-from : ∀ (b : Bin) → to(from b) ≡ b
 \end{colored}
 
 
-\subsubsection{Tests}
+\subsubsection{Proof}
 
-Before proving the preceding propositions, we test to see if they hold.  Thus, we compute \ccode{from(to 5)}, which has value 5.  This is reassuring. Better would be to apply the function  \ccode{λ x → (from (to x))} to a list of numbers.  To do this, we begin by defining the type of lists:
+Consider first the base case, 
 
 \begin{colored}[elm]
-data List (A : Set) : Set where
-  []  : List A
-  _∷_ : A → List A → List A
-
-infixr 5 _∷_
+from-to 0 = from(to 0) ≡ 0
 \end{colored}
 
-Here \ccode{[]} is the empty list, and \ccode{a::list}  tacks the element \ccode{a} onto the head of list \ccode{list.}  To write \ccode{::} in emacs, we write \code{\bs{::}} so as to get a single unicode synbol.  The next task is to craft a function \ccode{range} for creating lists of consecutive numbers.  Our aim is to be able to say \ccode{range 2} to produce the list \ccode{2 :: 1 :: 0 :: [].} The code for this is, once agiain, an exercise in pattern-matching and recursion:
+The expression \ccode{from(to 0)} normalizes to \ccode{0,} so the right-hand side is equal to \ccode{0 ≡ 0.} This type is inhabited by \ccode{refl.} For the inductive case, we have 
 
 \begin{colored}[elm]
-range : ℕ → List ℕ
-range 0 = 0 ∷ []
-range (suc n) = (suc n) ∷ range n
+from-to (suc n) = from(to(suc n)) ≡ suc n
 \end{colored}
 
-Finally, as in all functional languages, we want a function \ccode{map} that applies a given function of type \ccode{A → A} to the elements of a list of type \ccode{A}.  Then we can say \ccode{map inc (range 2)} to obtain \ccode{ 3 :: 2 :: 1 :: []. }. Here is the code for \ccode{map:}
-
+We claim that the following transformations of the left-hand side are possible, where each line follows from the one above by some as-yet-undefined rule:
 
 \begin{colored}[elm]
-map : ∀ {A : Set} → (A → A) → List A → List A
-map f [] = []
-map f (x ∷ xs) = (f x) ∷ map f xs
+from(to(suc n)) 
+from(inc(to n)) -- bring out suc: need a lemma
+suc(from(to n)) -- bring out inc: need a lemma 
 \end{colored}
 
-With all this in hand, our test is easy to write.  Note the use of lambda.  It gives a way of converting an expression into a function:
+Here is the first lemma:
 
 \begin{colored}[elm]
-map (λ x → (from (to x))) (range 10)
--- produces the below
-10 ∷ 9 ∷ 8 ∷ 7 ∷ 6 ∷ 5 ∷ 4 ∷ 3 ∷ 2 ∷ 1 ∷ 0 ∷ []
+to-suc : ∀ (n : ℕ) → to(suc n) ≡ inc(to n)
+to-suc n = refl
 \end{colored}
 
-\subsubsection{Proofs}
+Apply the defintion of \ccode{to} to the left-hand side of the type \ccode{ to(suc n) ≡ inc(to n)} to obtain \ccode{inc(to n) ≡ inc(to n).} This type is inhabited by \ccode{refl}. 
+
+For the second transformation, we need the lemma
+
+\begin{colored}[elm]
+from-inc-to : ∀ (n : ℕ) → from(inc(to n)) ≡ suc(from(to n))
+\end{colored}
+
+Because of the inner part \ccode{to n} which is common the left and right-hand sides of the type, it is enough to prove
+
+\begin{colored}[elm]
+from-inc-to : ∀ (b : Bin) → from(inc b) ≡ suc(from b)
+\end{colored}
+
+\subheading{Proof of from-inc}
+
+The base case is \ccode{from-inc <> = from(inc <>) ≡ suc(from <>).}  It is inhabited by  \ccode{repl}, as is the first inductive case 
+\ccode{from(b O) ≡ from(inc(b O)) ≡ suc(from(b O)).}  For the second inductive case,  the type is
+
+\begin{colored}[elm]
+from(b I) ≡ from(inc(b I)) ≡ suc(from(b I))
+\end{colored}
+
+Our strategy is to first apply obvioius tranformations to bring both left and right-hand sides to a state in which \ccode{b}, not \ccode{b O} or \ccode{b I} is the argument.  Doing this, we find that that 
+
+\begin{colored}[elm]
+from(b I) ≡ double(suc(from(inc b))) ≡ suc(suc(double(from b))) 
+\end{colored}
+
+We can use the lemma to be proved to rewrite the expression \ccode{from(inc b)} in the left-hand side of the equality type.  Doing so, we find that
+
+\begin{colored}[elm]
+from(b I) ≡ double(suc(from b)) ≡ suc(suc(double(from b))) 
+\end{colored}
+
+The type in question has the form \ccode{2(x + 1) ≡ 2 + 2x}, where \ccode{x = from b}.  Therefore this type has the form \ccode{y ≡ y.}  It is inhabited by \ccode{refl.}. In conclusion, we have 
+
+\begin{colored}[elm]
+from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
+from-inc <> = refl
+from-inc (b O)  = refl
+from-inc(b I) rewrite from-inc b = refl
+\end{colored}
+
+EXPLANATION ....
+
+\subsubsection{Completing the proof}
+
+\begin{colored}[elm]
+from-to : ∀ (n : ℕ) → from(to n) ≡ n
+from-to 0 = refl
+from-to (suc n) rewrite to-suc n | from-inc-to n | 
+    cong suc (from-to-id n) = refl
+
+\end{colored}
+
+
+
+
 
 We now set about showing that the type \ccode{id-from-to} is inhabited.  This we do by constructing, via induction, a function of that type.  In the base case of \ccode{n = 0}, the type is
 
@@ -208,14 +258,12 @@ If $e : x \equiv y$ then $cong\ f\ e: f\ x \equiv f\ y$
 \end{indent}
 
 The principle asserts the existence of a function \ccode{cong} that maps terms of type  \ccode{x ≡ y} to terms of type \ccode{f x ≡ f y}.   That is, if the type \ccode{x ≡ y}  is inhabited by some term \ccode{e}, then the type \ccode{f x ≡ f y} is inhabited by a term \ccode{cong f e}
-By induction, we suppose that \ccode{from(to n) ≡ n} is inhabited.  By the congruence principle, we conclude that \ccode{suc(from(to n))  ≡ suc n} is in inhabited.
-
-This concludes the proof, modulo a proof of the lemmas \ccode{le-to-suc} and \ccode{le-from-inc-to} that justify the transformations above.
+By induction, we suppose that \ccode{from(to n) ≡ n} is inhabited.  By the congruence principle, we conclude that \ccode{suc(from(to n))  ≡ suc n} is in inhabited. Thus, assuming proofs of the lemmas \ccode{le-to-suc} and \ccode{le-from-inc-to}above, we have a proof of \ccode{id-from-to}.
 
 
 \subsubsection{Elementary lemmas}
 
-The first step is to observe that we have a set of elementary lemmas that follow immediately from the definitions.  
+The first step is to observe a set of elementary lemmas that follow immediately from the definitions.  
 
 \begin{colored}[elm]
 le-double : ∀ (n : ℕ) → double(suc n) ≡ suc(suc(double n))
@@ -224,7 +272,7 @@ le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
 le-from-shift2 : ∀ (b : Bin) → from (b I) ≡ suc (double (from b))
 \end{colored}
 
-As an example, we prove the third lemma:
+As an example, we claim the following proof of the third lemma:
 
 \begin{colored}[elm]
 le-from-shift : ∀ (b : Bin) → from (b O) ≡ double (from b)
@@ -233,7 +281,7 @@ le-from-shift (b O) = refl
 le-from-shift (b I) = refl
 \end{colored}
 
-Since all clauses are proved in the same way, we consider only the third, the function \ccode{le-from-shift,} applied  to \ccode{b O}. This function value is the type
+Since all clauses are proved in the same way, let consider only the third, which treats the case of the function \ccode{le-from-shift,} applied  to \ccode{b O}. The function value is the type
 
 \begin{colored}[elm]
 from ((b O) O) ≡ double(from (b O))
@@ -255,7 +303,16 @@ This type is inhabited by \ccode{refl,}  and so we are done.
 
 \subsubsection{Lemmas with rewrite}
 
-For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc} and \ccode{le-from-inc-to.} The first of these is proved. For the second, we first show the following:
+\begin{colored}[elm]
+le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
+le-from-inc <> = refl
+le-from-inc (b O)  rewrite le-from-shift b = refl 
+le-from-inc (b I) rewrite le-from-shift2 b | 
+   le-double (from b) | le-from-inc b | 
+   le-double (from b) = refl
+\end{colored}
+
+For the proof of the main proposition, two lemmas are required, \ccode{le-to-suc} and \ccode{le-from-inc-to.} The first of these id one of the elementary lemmas above. For the second, we first show the following:
 
 \begin{colored}[elm]
 le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
@@ -263,7 +320,7 @@ le-from-inc : ∀ ( b : Bin ) → from(inc b) ≡ suc(from b)
 
 
 \subheading{Base case}
-The base case is \ccode{from(inc <>) ≡ suc(from <>).} Applying the rules for \ccode{inc} and \ccode{from}, one transforms this type to an equal type \ccode{suc 0 ≡ suc 0.} Therefore the type \ccode{le-from-inc <>} is inhabited by \ccode{refl.}
+The base case is \ccode{from(inc <>) ≡ suc(from <>).} Applying the rules for \ccode{inc} and \ccode{from,} one transforms this type to the equal type \ccode{suc 0 ≡ suc 0.} Therefore the type \ccode{le-from-inc <>} is inhabited by \ccode{refl.}
 
 \subheading{First inductive case}
 
@@ -308,3 +365,43 @@ The full sequence of simplifications need for the proof then go as follows: (a) 
 \end{align}
 
 Note that congruence and rewrite, while achieving the same ends, operate in different ways.   Congruence tells us that if we have evidence for $e \equiv e'$, then we also have evidence for $suc\ e \equiv suc\ e'$.  Rewrite tells us that $suc\ e \equiv suc\ e'$ reduces to $suc\ e' \equiv suc\ e'$, provided that we know (by the inductive hypothesis) that $e \equiv e'$.  Finally, $suc\ e' \equiv suc\ e'$ is inhabited by $\refl$.
+
+
+\subsection{Appendix: Tests}
+
+While proofs are the goal, texts are sometimes usefl.  A cheap and unsuccessufl test can tell us that looking for a proof is futile, so we need to rethink things.
+
+The obvious test is for whether \ccode{from} is the left inverse of \ccode{to} is to compute, say, \ccode{from(to 5)}.  It has value 5, thereby confirming the propostion in one case. This is reassuring. Better would be to check a buch of cases.  We can do this by applying the function  \ccode{λ x → (from (to x))} to a list of numbers.  To do end, let us define the type of lists of terms of type \code{A}:
+
+\begin{colored}[elm]
+data List (A : Set) : Set where
+  []  : List A
+  _∷_ : A → List A → List A
+
+infixr 5 _∷_
+\end{colored}
+
+Here \ccode{[]} is the empty list, and \ccode{a::list}  tacks the element \ccode{a} onto the head of list \ccode{list.}  To write \ccode{::} in emacs, we write \code{\bs{::}} so as to get a single unicode synbol.  The next task is to craft a function \ccode{range} for creating lists of consecutive numbers.  Our aim is to be able to say \ccode{range 2} to produce the list \ccode{2 :: 1 :: 0 :: [].} The code for this is, once agiain, an exercise in pattern-matching and recursion:
+
+\begin{colored}[elm]
+range : ℕ → List ℕ
+range 0 = 0 ∷ []
+range (suc n) = (suc n) ∷ range n
+\end{colored}
+
+Finally, as in all functional languages, we want a function \ccode{map} that applies a given function of type \ccode{A → A} to the elements of a list of type \ccode{A}.  Then we can say \ccode{map inc (range 2)} to obtain \ccode{ 3 :: 2 :: 1 :: []. }. Here is the code for \ccode{map:}
+
+
+\begin{colored}[elm]
+map : ∀ {A : Set} → (A → A) → List A → List A
+map f [] = []
+map f (x ∷ xs) = (f x) ∷ map f xs
+\end{colored}
+
+With all this in hand, our test is easy to write.  Note the use of lambda.  It gives a way of converting an expression into a function:
+
+\begin{colored}[elm]
+map (λ x → (from (to x))) (range 10)
+-- produces the below
+10 ∷ 9 ∷ 8 ∷ 7 ∷ 6 ∷ 5 ∷ 4 ∷ 3 ∷ 2 ∷ 1 ∷ 0 ∷ []
+\end{colored}
