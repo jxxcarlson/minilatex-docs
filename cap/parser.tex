@@ -1,0 +1,112 @@
+beginMetadata:
+{
+    "id": "5ecba0eb-57c7-4cdf-a905-669468ba7b62",
+    "documentNumber": 478,
+    "author": "jxxcarlson",
+    "title": "Parser",
+    "path": "cap/parser.tex",
+    "tags": [],
+    "keyString": "parser a=jxxcarlson cap/parser.tex ",
+    "timeCreated": 1611620652891,
+    "timeModified": 1612750791725,
+    "public": false,
+    "collaborators": [],
+    "docType": "miniLaTeX",
+    "versionNumber": 0,
+    "versionDate": 0
+}
+endMetadata
+\xlink{uuid:20d52083-a29e-434a-a255-78a9cc9c69f2}{Notes on Crafting an Interpreter}
+
+\include{435}
+
+\section{Parser}
+
+
+\innertableofcontents
+
+\subsection{Grammars for Lox Expressions}
+
+\begin{colored}[elm]
+expression     → literal
+               | unary
+               | binary
+               | grouping ;
+
+literal        → NUMBER | STRING | "true" | "false" | "nil" ;
+grouping       → "(" expression ")" ;
+unary          → ( "-" | "!" ) expression ;
+binary         → expression operator expression ;
+operator       → "==" | "!=" | "<" | "<=" | ">" | ">="
+               | "+"  | "-"  | "*" | "/" ;
+\end{colored}
+
+A more elaborate grammar that takes into account precedence.
+
+\begin{colored}[elm]
+expression     → equality ;
+equality       → comparison ( ( "!=" | "==" ) comparison )* ;
+comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+term           → factor ( ( "-" | "+" ) factor )* ;
+factor         → unary ( ( "/" | "*" ) unary )* ;
+unary          → ( "!" | "-" ) unary
+               | primary ;
+primary        → NUMBER | STRING | "true" | "false" | "nil"
+               | "(" expression ")" ;
+\end{colored}
+
+\subsection{Parser helpers}
+
+The function \ccode{applyMany} below is useful in implementing parsers like \ccode{term} and \ccode{factor.}  This function has the signature
+
+\begin{colored}[elm]
+applyMany :: Parser a -> (a -> Parser a) -> Parser a
+applyMany p fp = ...
+\end{colored}
+
+It operates by first running the parser \ccode{p.}  If that succeeds, it runs \ccode{fp} on the result as many times as it can (zero or more).  Thus it is useful in constructing parsers for productions of the form
+
+\begin{colored}[elm]
+a -> b c*
+\end{colored}
+
+
+By way of example, 
+
+\begin{colored}[elm]
+term :: Parser Expression
+term = applyMany factor termWith
+\end{colored}
+
+where
+
+\begin{colored}[elm]
+termWith :: Expression -> Parser Expression
+termWith expr = do
+    op <- termOp
+    u <- factor
+    return (Binary $ BinaryValue {leftExpr = expr, binop = binaryOpOfToken op, rightExpr = u})
+\end{colored}
+
+and
+
+\begin{colored}[elm]
+termOp :: Parser Token
+termOp = TokenParser.choice "expecting  termOp" [ plus, minus]
+\end{colored}
+
+\begin{colored}[elm]
+applyMany :: Parser a -> (a -> Parser a) -> Parser a
+applyMany p fp =
+  Parser $ \s -> case runParser p s of 
+    (s1, Left err) -> (s, Left err)
+    (s2, Right a) -> runParser (applyMany1 a fp) s2
+\end{colored}
+
+\begin{colored}[elm]
+applyMany1 :: a -> (a -> Parser a) -> Parser a
+applyMany1 a fp = 
+  Parser $ \s -> case runParser (fp a) s of
+        (s1, Left err) -> (s, Right a)
+        (s2, Right a2) -> runParser (applyMany1 a2 fp) s2
+\end{colored}
